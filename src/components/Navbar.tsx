@@ -36,7 +36,7 @@ const Navbar = () => {
     >
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center">
-          <img src={logo} alt="Logo" className="h-9 w-9 rounded-lg" />
+          <img src={logo} alt="Logo" className="h-12 w-12 rounded-lg" />
         </button>
 
         {/* Desktop */}
