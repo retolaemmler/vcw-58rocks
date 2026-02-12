@@ -21,6 +21,13 @@ const steps = [
   },
 ];
 
+const schedule = [
+  { time: "9:00 – 12:00", label: "Keynotes incl. Guest Speakers" },
+  { time: "12:00 – 13:00", label: "Lunch" },
+  { time: "13:00 – 16:00", label: "Hands-On App Development" },
+  { time: "16:00 – 17:00", label: "Award & Next Steps" },
+];
+
 const AgendaSection = () => {
   return (
     <section id="agenda" className="py-20 px-4 bg-background">
@@ -42,6 +49,26 @@ const AgendaSection = () => {
                   <h3 className="font-display font-semibold text-lg sm:text-xl mb-2">{step.title}</h3>
                   <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{step.description}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Schedule */}
+        <div className="mt-14">
+          <h3 className="font-display text-xl sm:text-2xl font-semibold text-center mb-6">
+            Daily <span className="gradient-text">Schedule</span>
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            {schedule.map((item) => (
+              <div
+                key={item.time}
+                className="flex items-center gap-4 bg-card rounded-xl p-4 border border-border/50 shadow-sm"
+              >
+                <span className="font-display font-bold text-sm sm:text-base text-primary whitespace-nowrap">
+                  {item.time}
+                </span>
+                <span className="text-sm sm:text-base text-muted-foreground">{item.label}</span>
               </div>
             ))}
           </div>
