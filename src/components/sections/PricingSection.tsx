@@ -1,0 +1,67 @@
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Ticket, Star } from "lucide-react";
+
+const tiers = [
+  { name: "Super Early Bird", price: "524", discount: "25% off", highlight: true },
+  { name: "Early Bird", price: "559", discount: "20% off", highlight: false },
+  { name: "Promo", price: "594", discount: "15% off", highlight: false },
+];
+
+const PricingSection = () => {
+  return (
+    <section id="pricing" className="py-20 px-4 bg-background">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+          <span className="gradient-text">Pricing</span> & Tickets
+        </h2>
+        <p className="text-muted-foreground mb-12">
+          Full-day workshop — Base price <span className="font-semibold text-foreground">CHF 699</span>
+        </p>
+
+        <div className="grid sm:grid-cols-3 gap-6 mb-10">
+          {tiers.map((tier) => (
+            <div
+              key={tier.name}
+              className={`relative rounded-xl p-6 border shadow-sm transition-all hover:shadow-md hover:-translate-y-1 ${
+                tier.highlight
+                  ? "gradient-bg text-white border-transparent shadow-lg"
+                  : "bg-card border-border/50"
+              }`}
+            >
+              {tier.highlight && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge className="bg-white text-foreground shadow-md border-0 px-3">
+                    <Star className="w-3 h-3 mr-1" /> Best Deal
+                  </Badge>
+                </div>
+              )}
+              <h3 className={`font-display font-semibold text-lg mb-1 ${tier.highlight ? "" : ""}`}>
+                {tier.name}
+              </h3>
+              <p className={`text-sm mb-4 ${tier.highlight ? "text-white/80" : "text-muted-foreground"}`}>
+                {tier.discount}
+              </p>
+              <p className="font-display text-4xl font-bold mb-1">
+                CHF {tier.price}
+              </p>
+              <p className={`text-xs ${tier.highlight ? "text-white/70" : "text-muted-foreground"}`}>
+                per person
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <Button
+          size="lg"
+          className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+        >
+          <Ticket className="w-5 h-5 mr-2" />
+          Get Your Ticket
+        </Button>
+      </div>
+    </section>
+  );
+};
+
+export default PricingSection;
