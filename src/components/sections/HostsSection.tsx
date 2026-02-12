@@ -1,10 +1,13 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import valentinImg from "@/assets/Valentin.jpeg";
+import retoImg from "@/assets/Reto.jpeg";
+import remyImg from "@/assets/Remy.jpeg";
 
 const hosts = [
-  { name: "Valentin Binnendijk", role: "Product Expert", initials: "VB" },
-  { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL" },
-  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB" },
+  { name: "Valentin Binnendijk", role: "Product Expert", initials: "VB", image: valentinImg },
+  { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg },
+  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg },
 ];
 
 const HostsSection = () => {
@@ -26,6 +29,7 @@ const HostsSection = () => {
               className="bg-card rounded-xl p-8 border border-border/50 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
             >
               <Avatar className="w-20 h-20 mx-auto mb-5">
+                <AvatarImage src={host.image} alt={host.name} className="object-cover" />
                 <AvatarFallback className="gradient-bg text-white font-display text-xl font-bold">
                   {host.initials}
                 </AvatarFallback>
