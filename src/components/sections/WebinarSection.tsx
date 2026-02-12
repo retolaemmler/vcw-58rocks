@@ -19,7 +19,7 @@ const WebinarSection = () => {
             </h2>
             <p className="text-white/80 mb-2 flex items-center justify-center gap-2">
               <Calendar className="w-4 h-4" />
-              March 26, 2026 — with Marc Gasser
+              March 26, 2026 — with Marc Gasser, Valentin Binnendijk and Reto Lämmler
             </p>
             <p className="text-white/70 mb-8 text-sm">
               A free teaser session before the workshop. See what's possible with Lovable.dev.
