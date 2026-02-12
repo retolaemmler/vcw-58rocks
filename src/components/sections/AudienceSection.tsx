@@ -14,7 +14,7 @@ const audiences = [
 
 const AudienceSection = () => {
   return (
-    <section className="py-20 px-4 bg-section-alt">
+    <section id="audience" className="py-20 px-4 bg-section-alt">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-10">
           Who Is This <span className="gradient-text">For</span>?

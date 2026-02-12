@@ -23,7 +23,7 @@ const steps = [
 
 const AgendaSection = () => {
   return (
-    <section className="py-20 px-4 bg-background">
+    <section id="agenda" className="py-20 px-4 bg-background">
       <div className="max-w-4xl mx-auto">
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-14">
           What You'll <span className="gradient-text">Experience</span>
