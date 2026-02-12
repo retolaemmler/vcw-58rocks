@@ -1,28 +1,16 @@
-import { Mail, Phone, Globe } from "lucide-react";
+import { Globe } from "lucide-react";
 
 const FooterSection = () => {
   return (
     <footer className="py-16 px-4 bg-foreground text-primary-foreground">
       <div className="max-w-5xl mx-auto">
-        <div className="grid sm:grid-cols-3 gap-10 mb-12">
+        <div className="grid sm:grid-cols-2 gap-10 mb-12">
           <div>
             <h3 className="font-display font-bold text-lg mb-4">Vibe Coding Workshop</h3>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">58rocks GmbH<br />
               Rotachstrasse<br />
               8003 Zürich
             </p>
-          </div>
-          <div>
-            <h3 className="font-display font-bold text-lg mb-4">Contact</h3>
-            <div className="space-y-2 text-sm text-primary-foreground/70">
-              <p>Valentin Binnendijk</p>
-              <a href="mailto:valentin.binnendijk@pedalix.com" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
-                <Mail className="w-4 h-4" /> valentin.binnendijk@pedalix.com
-              </a>
-              <a href="tel:+41786878157" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
-                <Phone className="w-4 h-4" /> +41 78 687 81 57
-              </a>
-            </div>
           </div>
           <div>
             <h3 className="font-display font-bold text-lg mb-4">Links</h3>
