@@ -11,8 +11,8 @@ const HeroSection = () => {
       <div className="absolute -bottom-20 left-1/3 w-96 h-96 rounded-full bg-blue/8 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
-          Vibe Coding Workshop
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">Vibe Code Workshop
+Build a Real App in One Day
           <span className="block gradient-text mt-2">Build a Real App in One Day</span>
         </h1>
 
@@ -38,8 +38,8 @@ const HeroSection = () => {
           <Button
             size="lg"
             className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-            onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
-          >
+            onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}>
+
             <Sparkles className="w-5 h-5 mr-2" />
             Secure Your Spot
           </Button>
@@ -50,8 +50,8 @@ const HeroSection = () => {
           </Badge>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default HeroSection;
