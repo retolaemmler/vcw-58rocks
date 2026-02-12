@@ -8,9 +8,9 @@ const FooterSection = () => {
           <div>
             <h3 className="font-display font-bold text-lg mb-4">Vibe Coding Workshop</h3>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
-              Organized by Pedalix GmbH<br />
-              General-Wille-Strasse 19<br />
-              8002 Zürich, Switzerland
+              Organized by 58rocks GmbH<br />
+              Rotachstrasse 30<br />
+              8003 Zürich
             </p>
           </div>
           <div>
