@@ -6,7 +6,7 @@ import RequirementsSection from "@/components/sections/RequirementsSection";
 import HostsSection from "@/components/sections/HostsSection";
 import PricingSection from "@/components/sections/PricingSection";
 import WebinarSection from "@/components/sections/WebinarSection";
-import SocialProofSection from "@/components/sections/SocialProofSection";
+
 import FooterSection from "@/components/sections/FooterSection";
 
 const Index = () => {
@@ -20,7 +20,7 @@ const Index = () => {
       <HostsSection />
       <PricingSection />
       <WebinarSection />
-      <SocialProofSection />
+      
       <FooterSection />
     </main>
   );
