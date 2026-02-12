@@ -34,19 +34,21 @@ const HeroSection = () => {
           </span>
         </div>
 
-        <Button
-          size="lg"
-          className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
-        >
-          <Sparkles className="w-5 h-5 mr-2" />
-          Secure Your Spot
-        </Button>
+        <div className="flex flex-col items-center gap-6">
+          <Button
+            size="lg"
+            className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+            onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            <Sparkles className="w-5 h-5 mr-2" />
+            Secure Your Spot
+          </Button>
 
-        <Badge className="mt-6 px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 inline-flex">
-          <Users className="w-3.5 h-3.5 mr-1.5" />
-          Limited to 25 participants
-        </Badge>
+          <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
+            <Users className="w-3.5 h-3.5 mr-1.5" />
+            Limited to 25 participants
+          </Badge>
+        </div>
       </div>
     </section>
   );
