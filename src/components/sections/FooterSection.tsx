@@ -25,7 +25,7 @@ const FooterSection = () => {
           </div>
         </div>
         <div className="border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/40">
-          © 2026 Pedalix GmbH. All rights reserved.
+          © 2026 58rocks GmbH. All rights reserved.
         </div>
       </div>
     </footer>);
