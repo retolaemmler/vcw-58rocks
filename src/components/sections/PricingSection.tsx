@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Ticket, Star } from "lucide-react";
 
 const tiers = [
-{ name: "Early Bird", price: "639", discount: "20% off", highlight: true },
-{ name: "Late Bird", price: "719", discount: "10% off", highlight: false },
+{ name: "Early Bird", price: "599", discount: "25% off", highlight: true },
+{ name: "Late Bird", price: "679", discount: "15% off", highlight: false },
 { name: "Regular", price: "799", discount: "Base price", highlight: false }];
 
 
