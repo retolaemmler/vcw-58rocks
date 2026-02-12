@@ -1,4 +1,4 @@
-import { Mail, Phone, Linkedin, Globe } from "lucide-react";
+import { Mail, Phone, Globe } from "lucide-react";
 
 const FooterSection = () => {
   return (
@@ -32,9 +32,6 @@ const FooterSection = () => {
               </a>
               <a href="https://vibehunt.me" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 <Globe className="w-4 h-4" /> vibehunt.me
-              </a>
-              <a href="#" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                <Linkedin className="w-4 h-4" /> LinkedIn
               </a>
             </div>
           </div>
