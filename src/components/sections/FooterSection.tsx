@@ -7,8 +7,9 @@ const FooterSection = () => {
         <div className="grid sm:grid-cols-3 gap-10 mb-12">
           <div>
             <h3 className="font-display font-bold text-lg mb-4">Vibe Coding Workshop</h3>
-            <p className="text-primary-foreground/60 text-sm leading-relaxed">
-              Organized by 58rocks GmbH<br />
+            <p className="text-primary-foreground/60 text-sm leading-relaxed">58rocks GmbH
+Rotachstrasse 30
+8003 Zürich<br />
               Rotachstrasse 30<br />
               8003 Zürich
             </p>
@@ -44,8 +45,7 @@ const FooterSection = () => {
           © 2026 Pedalix GmbH. All rights reserved.
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
 };
 
 export default FooterSection;
