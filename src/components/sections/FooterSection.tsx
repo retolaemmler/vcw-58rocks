@@ -31,8 +31,8 @@ const FooterSection = () => {
               <a href="https://vibecodefest.ch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 <Globe className="w-4 h-4" /> vibecodefest.ch
               </a>
-              <a href="https://vibeshop.ch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                <Globe className="w-4 h-4" /> vibeshop.ch
+              <a href="https://vibehunt.me" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Globe className="w-4 h-4" /> vibehunt.me
               </a>
               <a href="#" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 <Linkedin className="w-4 h-4" /> LinkedIn
