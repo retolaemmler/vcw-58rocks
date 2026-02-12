@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge";
 
 const hosts = [
   { name: "Valentin Binnendijk", role: "Product Expert", initials: "VB" },
-  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB" },
   { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL" },
+  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB" },
 ];
 
 const HostsSection = () => {
