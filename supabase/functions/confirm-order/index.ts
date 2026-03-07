@@ -110,7 +110,7 @@ Deno.serve(async (req) => {
         "BEGIN:VEVENT",
         "DTSTART:20260416T070000Z",
         "DTEND:20260416T150000Z",
-        "SUMMARY:Vibe Code Workshop – Build a Real App in One Day",
+        "SUMMARY:Vibe Code Workshop - Build a Real App in One Day",
         "DESCRIPTION:Full-day hands-on bootcamp. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
         "LOCATION:Zurich\\, Switzerland (exact location TBD)",
         "STATUS:CONFIRMED",
@@ -119,8 +119,8 @@ Deno.serve(async (req) => {
         "END:VCALENDAR",
       ].join("\r\n");
 
-      // Base64 encode the ICS content
-      const icsBase64 = btoa(icsContent);
+      // Base64 encode the ICS content using TextEncoder for safety
+      const icsBase64 = btoa(String.fromCharCode(...new TextEncoder().encode(icsContent)));
 
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
