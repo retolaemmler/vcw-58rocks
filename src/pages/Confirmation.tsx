@@ -13,8 +13,8 @@ const Confirmation = () => {
           <CheckCircle className="w-10 h-10 text-primary" />
         </div>
 
-        <h1 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-          You're In! 🎉
+        <h1 className="font-display text-3xl sm:text-4xl font-bold mb-4">Thank you! 🙏
+
         </h1>
 
         <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
@@ -40,8 +40,8 @@ const Confirmation = () => {
           </Link>
         </Button>
       </div>
-    </main>
-  );
+    </main>);
+
 };
 
 export default Confirmation;
