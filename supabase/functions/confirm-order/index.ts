@@ -92,7 +92,7 @@ Deno.serve(async (req) => {
     // Only send email for new orders (not on page refresh)
     if (isNewOrder && customerEmail) {
       const amountFormatted = (session.amount_total / 100).toFixed(2);
-      const displayName = customerName ?? "there";
+      const displayName = customerFirstName ?? "there";
 
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
