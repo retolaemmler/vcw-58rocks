@@ -30,7 +30,7 @@ const HeroSection = () => {
           <span className="hidden sm:inline text-border">|</span>
           <span className="flex items-center gap-1.5">
             <MapPin className="w-4 h-4 text-primary" />
-            Zurich, Switzerland
+            Zurich, Switzerland (exact location TBA)
           </span>
         </div>
 
