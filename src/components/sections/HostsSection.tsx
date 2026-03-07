@@ -6,7 +6,7 @@ import remyImg from "@/assets/Remy.jpeg";
 import marcusImg from "@/assets/Marcus.jpeg";
 
 const hostsRow1 = [
-  { name: "Valentin Binnendijk", role: "Product Expert", initials: "VB", image: valentinImg },
+  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg },
   { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg },
 ];
 
