@@ -68,6 +68,7 @@ const PricingSection = () => {
             Min. 10 participants required.
           </Badge>
         </div>
+      </div>
     </section>);
 
 };
