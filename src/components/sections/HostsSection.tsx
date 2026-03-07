@@ -7,7 +7,7 @@ import remyImg from "@/assets/Remy.jpeg";
 import marcusImg from "@/assets/Marcus.jpeg";
 
 const hostsRow1 = [
-  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/" },
+  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
   { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/" },
 ];
 
