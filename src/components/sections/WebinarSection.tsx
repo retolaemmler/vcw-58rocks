@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Video, Calendar } from "lucide-react";
+import { Video } from "lucide-react";
 
 const WebinarSection = () => {
   return (
@@ -17,8 +17,7 @@ const WebinarSection = () => {
             <h2 className="font-display text-2xl sm:text-3xl font-bold mb-3">
               Get a 30-Min Intro to Vibe Coding
             </h2>
-            <p className="text-white/80 mb-2 flex items-center justify-center gap-2">
-              <Calendar className="w-4 h-4" />
+            <p className="text-white/80 mb-2">
               March 26, 2026 — with Marc Gasser, Valentin Binnendijk and Reto Lämmler
             </p>
             <p className="text-white/70 mb-8 text-sm">
