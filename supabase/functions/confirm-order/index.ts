@@ -46,9 +46,6 @@ Deno.serve(async (req) => {
 
     const session = await stripeRes.json();
 
-    // Debug: log custom fields to see what Stripe returns
-    console.log("Stripe session custom_fields:", JSON.stringify(session.custom_fields));
-    console.log("Stripe session customer_details:", JSON.stringify(session.customer_details));
 
     if (session.payment_status !== "paid") {
       return new Response(
