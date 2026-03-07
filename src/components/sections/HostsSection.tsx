@@ -7,13 +7,13 @@ import remyImg from "@/assets/Remy.jpeg";
 import marcusImg from "@/assets/Marcus.jpeg";
 
 const hostsRow1 = [
-  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/" },
-  { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/" },
+  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
+  { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: false },
 ];
 
 const hostsRow2 = [
-  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg, linkedin: "https://www.linkedin.com/in/marcuskuhn/" },
-  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/" },
+  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg, linkedin: "https://www.linkedin.com/in/marcuskuhn/", ambassador: false },
+  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
 ];
 
 const HostsSection = () => {
@@ -42,6 +42,11 @@ const HostsSection = () => {
                   </AvatarFallback>
                 </Avatar>
                 <h3 className="font-display font-semibold text-lg">{host.name}</h3>
+                {host.ambassador && (
+                  <Badge className="mt-2 px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 text-xs">
+                    Official Lovable Ambassador
+                  </Badge>
+                )}
                 <p className="text-sm text-muted-foreground mt-1">{host.role}</p>
                 <a href={host.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:text-primary/80 mt-2 text-sm transition-colors">
                   <Linkedin className="w-4 h-4" />
