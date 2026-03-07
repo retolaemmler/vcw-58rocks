@@ -43,6 +43,10 @@ const HostsSection = () => {
                 </Avatar>
                 <h3 className="font-display font-semibold text-lg">{host.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{host.role}</p>
+                <a href={host.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:text-primary/80 mt-2 text-sm transition-colors">
+                  <Linkedin className="w-4 h-4" />
+                  LinkedIn
+                </a>
               </div>
             ))}
           </div>
