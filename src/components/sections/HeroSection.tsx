@@ -30,11 +30,11 @@ const HeroSection = () => {
           <span className="hidden sm:inline text-border">|</span>
           <span className="flex items-center gap-1.5">
             <MapPin className="w-4 h-4 text-primary" />
-            Zurich, Switzerland (exact location TBA)
+            Zurich, Switzerland
           </span>
         </div>
 
-        <div className="flex flex-col items-center gap-6">
+        <div className="items-center gap-6 flex flex-col">
           <Button
             size="lg"
             className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
@@ -47,7 +47,7 @@ const HeroSection = () => {
 
           <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
             <Users className="w-3.5 h-3.5 mr-1.5" />
-            Min. 10 participants required.
+            Limited to 25 participants
           </Badge>
         </div>
       </div>
