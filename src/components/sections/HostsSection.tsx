@@ -35,7 +35,7 @@ const HostsSection = () => {
                 className="bg-card rounded-xl p-8 border border-border/50 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
               >
                 <Avatar className="w-20 h-20 mx-auto mb-5">
-                  <AvatarImage src={host.image} alt={host.name} className="object-cover" />
+                  <AvatarImage src={host.image} alt={host.name} className={`object-cover ${host.name === "Marcus Kuhn" ? "scale-150" : ""}`} />
                   <AvatarFallback className="gradient-bg text-white font-display text-xl font-bold">
                     {host.initials}
                   </AvatarFallback>
