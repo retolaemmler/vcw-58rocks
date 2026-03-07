@@ -74,7 +74,7 @@ const Confirmation = () => {
               {order?.customer_email &&
             <> A confirmation email has been sent to <span className="font-medium text-foreground">{order.customer_email}</span>.</>
             }
-              {" "}If the min. of 10 participants is not reached, the money will be refunded to you.
+              {" "}If the minimum of 10 participants is not reached, the money will be refunded to you.
             </p>
 
             
