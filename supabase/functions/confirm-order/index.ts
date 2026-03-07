@@ -77,7 +77,7 @@ Deno.serve(async (req) => {
       const { error: dbError } = await supabase.from("orders").insert({
         stripe_session_id: session.id,
         customer_email: customerEmail,
-        customer_name: customerName,
+        customer_name: customerFullName,
         amount_total: session.amount_total,
         currency: session.currency ?? "chf",
         status: "completed",
