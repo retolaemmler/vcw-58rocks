@@ -100,6 +100,28 @@ Deno.serve(async (req) => {
       const amountFormatted = (session.amount_total / 100).toFixed(2);
       const displayName = contactFirstName ?? "there";
 
+      // Generate ICS calendar invite
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Vibe Code Workshop//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        "DTSTART:20260416T070000Z",
+        "DTEND:20260416T150000Z",
+        "SUMMARY:Vibe Code Workshop – Build a Real App in One Day",
+        "DESCRIPTION:Full-day hands-on bootcamp. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
+        "LOCATION:Zurich\\, Switzerland (exact location TBD)",
+        "STATUS:CONFIRMED",
+        "UID:vibe-code-workshop-2026-04-16@vibecodeworkshop.ch",
+        "END:VEVENT",
+        "END:VCALENDAR",
+      ].join("\r\n");
+
+      // Base64 encode the ICS content
+      const icsBase64 = btoa(icsContent);
+
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -110,6 +132,13 @@ Deno.serve(async (req) => {
           from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
           to: [customerEmail],
           subject: "🎉 Your Vibe Code Workshop Ticket is Reserved!",
+          attachments: [
+            {
+              filename: "vibe-code-workshop.ics",
+              content: icsBase64,
+              type: "text/calendar",
+            },
+          ],
           html: `
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
               <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 40px 30px; text-align: center;">
