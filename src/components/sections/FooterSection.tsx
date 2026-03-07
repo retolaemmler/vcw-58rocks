@@ -7,7 +7,9 @@ const FooterSection = () => {
         <div className="grid sm:grid-cols-2 gap-10 mb-12">
           <div>
             <h3 className="font-display font-bold text-lg mb-4">Vibe Code Workshop</h3>
-            <p className="text-primary-foreground/60 text-sm leading-relaxed">58rocks GmbH<br />
+            <p className="text-primary-foreground/60 text-sm leading-relaxed">58rocks GmbH
+Letzigraben 102
+8047 Zürich<br />
               Rotachstrasse<br />
               8003 Zürich
             </p>
@@ -28,7 +30,5 @@ const FooterSection = () => {
           © 2026 58rocks GmbH. All rights reserved.
         </div>
       </div>
-    </footer>);
-};
-
+    </footer>);};
 export default FooterSection;
