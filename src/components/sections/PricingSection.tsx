@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Ticket, Star } from "lucide-react";
+import { Ticket, Star, Users } from "lucide-react";
 
 const tiers = [
 { name: "Early Bird", price: "599", discount: "25% off", highlight: true },
@@ -61,6 +61,11 @@ const PricingSection = () => {
             Get Your Ticket
           </a>
         </Button>
+
+        <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
+          <Users className="w-3.5 h-3.5 mr-1.5" />
+          Min. 10 participants required.
+        </Badge>
       </div>
     </section>);
 
