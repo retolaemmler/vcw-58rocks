@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/vcw-logo.png";
 
 const navLinks = [
   { label: "Why", id: "why" },
