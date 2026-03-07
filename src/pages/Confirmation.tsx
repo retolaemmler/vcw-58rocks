@@ -17,7 +17,7 @@ const Confirmation = () => {
 
         </h1>
 
-        <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Your spot at the Vibe Code Workshop is reserved. If the min. of 10 participants is not reached, the money will be refunded to you. Check your email for your ticket and further details.</p>
+        <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Your spot at the Vibe Code Workshop is reserved. If the min. of 10 participants is not reached, the money will be refunded to you. </p>
 
         <div className="rounded-xl border border-border/50 bg-card p-6 mb-8 text-left space-y-3">
           <h2 className="font-display font-semibold text-lg mb-4">Event Details</h2>
