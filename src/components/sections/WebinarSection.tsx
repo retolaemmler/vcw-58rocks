@@ -17,7 +17,7 @@ const WebinarSection = () => {
             <h2 className="font-display text-2xl sm:text-3xl font-bold mb-3">
               Get a 30-Min Intro to Vibe Coding
             </h2>
-            <p className="text-white/80 mb-2 flex items-center justify-center gap-2">
+            <p className="text-white/80 mb-2 flex items-center justify-center gap-2">March 26, 2026 — with Valentin Binnendijk, Reto Lämmler and Marc Gasser
               <Calendar className="w-4 h-4" />
               March 26, 2026 — with Marc Gasser, Valentin Binnendijk and Reto Lämmler
             </p>
@@ -26,15 +26,15 @@ const WebinarSection = () => {
             </p>
             <Button
               size="lg"
-              className="bg-white text-foreground font-semibold hover:bg-white/90 rounded-xl px-8 py-5"
-            >
+              className="bg-white text-foreground font-semibold hover:bg-white/90 rounded-xl px-8 py-5">
+              
               Register for Free
             </Button>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default WebinarSection;
