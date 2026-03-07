@@ -60,7 +60,9 @@ Deno.serve(async (req) => {
     );
 
     const customerEmail = session.customer_details?.email ?? session.customer_email;
-    const customerName = session.customer_details?.name ?? null;
+    const customerFullName = session.customer_details?.name ?? null;
+    // Extract first name only (before any space)
+    const customerFirstName = customerFullName ? customerFullName.split(" ")[0] : null;
 
     const { data: existingOrder } = await supabase
       .from("orders")
@@ -75,7 +77,7 @@ Deno.serve(async (req) => {
       const { error: dbError } = await supabase.from("orders").insert({
         stripe_session_id: session.id,
         customer_email: customerEmail,
-        customer_name: customerName,
+        customer_name: customerFullName,
         amount_total: session.amount_total,
         currency: session.currency ?? "chf",
         status: "completed",
@@ -90,7 +92,7 @@ Deno.serve(async (req) => {
     // Only send email for new orders (not on page refresh)
     if (isNewOrder && customerEmail) {
       const amountFormatted = (session.amount_total / 100).toFixed(2);
-      const displayName = customerName ?? "there";
+      const displayName = customerFirstName ?? "there";
 
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -109,7 +111,7 @@ Deno.serve(async (req) => {
                 <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real App in One Day</p>
               </div>
               <div style="padding: 30px;">
-                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Hey ${displayName}! 👋</p>
+                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${displayName} 👋</p>
                 <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
                   Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.
                 </p>
@@ -147,7 +149,7 @@ Deno.serve(async (req) => {
         success: true,
         order: {
           customer_email: customerEmail,
-          customer_name: customerName,
+          customer_name: customerFullName,
           amount_total: session.amount_total,
           currency: session.currency,
         },
