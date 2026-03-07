@@ -12,7 +12,7 @@ const hostsRow1 = [
 ];
 
 const hostsRow2 = [
-  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg, linkedin: "https://www.linkedin.com/in/marcuskuhn/", ambassador: true },
+  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg, linkedin: "https://www.linkedin.com/in/marcuskuhn/", ambassador: false },
   { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
 ];
 
