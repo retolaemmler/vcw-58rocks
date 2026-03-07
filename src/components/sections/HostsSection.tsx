@@ -1,18 +1,19 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Linkedin } from "lucide-react";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
 import marcusImg from "@/assets/Marcus.jpeg";
 
 const hostsRow1 = [
-  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg },
-  { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg },
+  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/" },
+  { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/" },
 ];
 
 const hostsRow2 = [
-  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg },
-  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg },
+  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg, linkedin: "https://www.linkedin.com/in/marcuskuhn/" },
+  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/" },
 ];
 
 const HostsSection = () => {
