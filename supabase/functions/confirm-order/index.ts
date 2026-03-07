@@ -60,9 +60,14 @@ Deno.serve(async (req) => {
     );
 
     const customerEmail = session.customer_details?.email ?? session.customer_email;
-    const customerFullName = session.customer_details?.name ?? null;
-    // Extract first name only (before any space)
-    const customerFirstName = customerFullName ? customerFullName.split(" ")[0] : null;
+    const customerCompanyName = session.customer_details?.name ?? null;
+
+    // Get the "Full Name" custom field from Stripe checkout
+    const fullNameField = session.custom_fields?.find(
+      (f: any) => f.key === "full_name" || f.key === "fullname"
+    );
+    const contactName = fullNameField?.text?.value ?? null;
+    const contactFirstName = contactName ? contactName.split(" ")[0] : null;
 
     const { data: existingOrder } = await supabase
       .from("orders")
@@ -77,7 +82,8 @@ Deno.serve(async (req) => {
       const { error: dbError } = await supabase.from("orders").insert({
         stripe_session_id: session.id,
         customer_email: customerEmail,
-        customer_name: customerFullName,
+        customer_name: customerCompanyName,
+        contact_name: contactName,
         amount_total: session.amount_total,
         currency: session.currency ?? "chf",
         status: "completed",
@@ -92,7 +98,7 @@ Deno.serve(async (req) => {
     // Only send email for new orders (not on page refresh)
     if (isNewOrder && customerEmail) {
       const amountFormatted = (session.amount_total / 100).toFixed(2);
-      const displayName = customerFirstName ?? "there";
+      const displayName = contactFirstName ?? "there";
 
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -149,7 +155,8 @@ Deno.serve(async (req) => {
         success: true,
         order: {
           customer_email: customerEmail,
-          customer_name: customerFullName,
+          customer_name: customerCompanyName,
+          contact_name: contactName,
           amount_total: session.amount_total,
           currency: session.currency,
         },
