@@ -99,7 +99,7 @@ Deno.serve(async (req) => {
           Authorization: `Bearer ${RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: "Vibe Code Workshop <onboarding@resend.dev>",
+          from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
           to: [customerEmail],
           subject: "🎉 Your Vibe Code Workshop Ticket is Confirmed!",
           html: `
