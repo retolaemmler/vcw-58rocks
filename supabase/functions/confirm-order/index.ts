@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, stripe-signature",
+    "authorization, x-client-info, apikey, content-type",
 };
 
 Deno.serve(async (req) => {
@@ -12,12 +12,15 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const signature = req.headers.get("stripe-signature");
-    const body = await req.text();
+    const { session_id } = await req.json();
 
-    const STRIPE_WEBHOOK_SECRET = Deno.env.get("STRIPE_WEBHOOK_SECRET");
-    if (!STRIPE_WEBHOOK_SECRET) {
-      throw new Error("STRIPE_WEBHOOK_SECRET is not configured");
+    if (!session_id) {
+      throw new Error("Missing session_id");
+    }
+
+    const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!STRIPE_SECRET_KEY) {
+      throw new Error("STRIPE_SECRET_KEY is not configured");
     }
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
@@ -25,56 +28,54 @@ Deno.serve(async (req) => {
       throw new Error("RESEND_API_KEY is not configured");
     }
 
-    // Verify Stripe signature using Web Crypto API
-    const encoder = new TextEncoder();
-    const parts = signature?.split(",") ?? [];
-    const timestamp = parts.find((p) => p.startsWith("t="))?.split("=")[1];
-    const sig = parts.find((p) => p.startsWith("v1="))?.split("=")[1];
+    // Fetch checkout session from Stripe API
+    const stripeRes = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${session_id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
+        },
+      }
+    );
 
-    if (!timestamp || !sig) {
-      throw new Error("Invalid Stripe signature format");
+    if (!stripeRes.ok) {
+      const err = await stripeRes.text();
+      console.error("Stripe API error:", err);
+      throw new Error("Failed to fetch Stripe session");
     }
 
-    const signedPayload = `${timestamp}.${body}`;
-    const key = await crypto.subtle.importKey(
-      "raw",
-      encoder.encode(STRIPE_WEBHOOK_SECRET),
-      { name: "HMAC", hash: "SHA-256" },
-      false,
-      ["sign"]
-    );
-    const signatureBytes = await crypto.subtle.sign(
-      "HMAC",
-      key,
-      encoder.encode(signedPayload)
-    );
-    const expectedSig = Array.from(new Uint8Array(signatureBytes))
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
+    const session = await stripeRes.json();
 
-    if (expectedSig !== sig) {
-      console.error("Signature mismatch");
-      return new Response(JSON.stringify({ error: "Invalid signature" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
-    const event = JSON.parse(body);
-
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object;
-
-      // Save order to database
-      const supabase = createClient(
-        Deno.env.get("SUPABASE_URL")!,
-        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    if (session.payment_status !== "paid") {
+      return new Response(
+        JSON.stringify({ error: "Payment not completed" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
 
+    // Save order to database (upsert to handle page refreshes)
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
+
+    const customerEmail = session.customer_details?.email ?? session.customer_email;
+    const customerName = session.customer_details?.name ?? null;
+
+    const { data: existingOrder } = await supabase
+      .from("orders")
+      .select("id")
+      .eq("stripe_session_id", session.id)
+      .maybeSingle();
+
+    let isNewOrder = false;
+
+    if (!existingOrder) {
+      isNewOrder = true;
       const { error: dbError } = await supabase.from("orders").insert({
         stripe_session_id: session.id,
-        customer_email: session.customer_details?.email ?? session.customer_email,
-        customer_name: session.customer_details?.name ?? null,
+        customer_email: customerEmail,
+        customer_name: customerName,
         amount_total: session.amount_total,
         currency: session.currency ?? "chf",
         status: "completed",
@@ -84,11 +85,12 @@ Deno.serve(async (req) => {
         console.error("Database insert error:", dbError);
         throw new Error(`Failed to save order: ${dbError.message}`);
       }
+    }
 
-      // Send confirmation email via Resend
-      const customerEmail = session.customer_details?.email ?? session.customer_email;
-      const customerName = session.customer_details?.name ?? "there";
+    // Only send email for new orders (not on page refresh)
+    if (isNewOrder && customerEmail) {
       const amountFormatted = (session.amount_total / 100).toFixed(2);
+      const displayName = customerName ?? "there";
 
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -107,7 +109,7 @@ Deno.serve(async (req) => {
                 <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real App in One Day</p>
               </div>
               <div style="padding: 30px;">
-                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Hey ${customerName}! 👋</p>
+                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Hey ${displayName}! 👋</p>
                 <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
                   Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.
                 </p>
@@ -135,18 +137,25 @@ Deno.serve(async (req) => {
       if (!emailRes.ok) {
         const emailError = await emailRes.text();
         console.error("Resend API error:", emailError);
-        // Don't throw - order is saved, email failure is non-critical
+      } else {
+        console.log(`Confirmation email sent to ${customerEmail}`);
       }
-
-      console.log(`Order saved and email sent for session ${session.id}`);
     }
 
-    return new Response(JSON.stringify({ received: true }), {
-      status: 200,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        order: {
+          customer_email: customerEmail,
+          customer_name: customerName,
+          amount_total: session.amount_total,
+          currency: session.currency,
+        },
+      }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   } catch (error: unknown) {
-    console.error("Webhook error:", error);
+    console.error("Error:", error);
     const message = error instanceof Error ? error.message : "Unknown error";
     return new Response(JSON.stringify({ error: message }), {
       status: 400,
