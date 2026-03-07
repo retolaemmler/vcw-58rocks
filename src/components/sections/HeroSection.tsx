@@ -12,6 +12,10 @@ const HeroSection = () => {
       <div className="absolute -bottom-20 left-1/3 w-96 h-96 rounded-full bg-blue/8 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <div className="flex items-center justify-center mb-6">
+          <img src={lovableLogo} alt="Lovable" className="w-10 h-10 rounded-lg" />
+        </div>
+
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
           Vibe Code Workshop
           <span className="block gradient-text mt-2">Build a Real App in One Day</span>
