@@ -149,7 +149,7 @@ Deno.serve(async (req) => {
         success: true,
         order: {
           customer_email: customerEmail,
-          customer_name: customerName,
+          customer_name: customerFullName,
           amount_total: session.amount_total,
           currency: session.currency,
         },
