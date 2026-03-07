@@ -60,7 +60,9 @@ Deno.serve(async (req) => {
     );
 
     const customerEmail = session.customer_details?.email ?? session.customer_email;
-    const customerName = session.customer_details?.name ?? null;
+    const customerFullName = session.customer_details?.name ?? null;
+    // Extract first name only (before any space)
+    const customerFirstName = customerFullName ? customerFullName.split(" ")[0] : null;
 
     const { data: existingOrder } = await supabase
       .from("orders")
