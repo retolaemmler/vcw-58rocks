@@ -46,9 +46,6 @@ Deno.serve(async (req) => {
 
     const session = await stripeRes.json();
 
-    // Debug: log custom fields to see what Stripe returns
-    console.log("Stripe session custom_fields:", JSON.stringify(session.custom_fields));
-    console.log("Stripe session customer_details:", JSON.stringify(session.customer_details));
 
     if (session.payment_status !== "paid") {
       return new Response(
@@ -64,15 +61,9 @@ Deno.serve(async (req) => {
     );
 
     const customerEmail = session.customer_details?.email ?? session.customer_email;
-    const customerCompanyName = session.customer_details?.name ?? null;
-
-    // Get the "Full Name" custom field from Stripe checkout - try multiple possible keys
-    const fullNameField = session.custom_fields?.find(
-      (f: any) => f.key === "full_name" || f.key === "fullname" || f.key === "name"
-    );
-    const contactName = fullNameField?.text?.value ?? fullNameField?.dropdown?.value ?? null;
+    const customerCompanyName = session.customer_details?.business_name ?? session.customer_details?.name ?? null;
+    const contactName = session.customer_details?.individual_name ?? null;
     const contactFirstName = contactName ? contactName.split(" ")[0] : null;
-    console.log("Resolved contactName:", contactName, "from field:", JSON.stringify(fullNameField));
 
     const { data: existingOrder } = await supabase
       .from("orders")
