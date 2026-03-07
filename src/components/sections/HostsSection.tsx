@@ -20,9 +20,6 @@ const HostsSection = () => {
   return (
     <section id="hosts" className="py-20 px-4 bg-section-alt">
       <div className="max-w-4xl mx-auto text-center">
-        <Badge className="mb-4 px-4 py-1.5 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
-          Official Lovable Ambassadors
-        </Badge>
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
           Your <span className="gradient-text">Workshop Hosts</span>
         </h2>
