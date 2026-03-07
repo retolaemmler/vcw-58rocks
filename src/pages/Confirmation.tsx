@@ -17,11 +17,11 @@ const Confirmation = () => {
 
         </h1>
 
-        <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Your spot at the Vibe Code Workshop is reserved.
-Check your email for your confirmation. 
+        <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Your spot at the Vibe Code Workshop is reserved. Check your email for your confirmation.  
 
 Important:
-If the minimum of 10 participants is not reached, the money will be refunded to you.  <span className="font-semibold text-foreground">Vibe Code Workshop</span> is reserved. Check your email for your ticket and further details.
+If the minimum of 10 participants is not reached, the money will be refunded to you.  
+          <span className="font-semibold text-foreground">Vibe Code Workshop</span> is reserved. Check your email for your ticket and further details.
         </p>
 
         <div className="rounded-xl border border-border/50 bg-card p-6 mb-8 text-left space-y-3">
