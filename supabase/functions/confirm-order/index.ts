@@ -109,7 +109,7 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
           to: [customerEmail],
-          subject: "🎉 Your Vibe Code Workshop Ticket is Confirmed!",
+          subject: "🎉 Your Vibe Code Workshop Ticket is Reserved!",
           html: `
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
               <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 40px 30px; text-align: center;">
