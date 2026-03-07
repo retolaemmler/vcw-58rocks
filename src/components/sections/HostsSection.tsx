@@ -40,15 +40,17 @@ const HostsSection = () => {
                 </Avatar>
                 <h3 className="font-display font-semibold text-lg">{host.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{host.role}</p>
-                {host.ambassador && (
-                  <Badge className="mt-2 px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 text-xs">
-                    Official Lovable Ambassador
-                  </Badge>
-                )}
-                <a href={host.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:text-primary/80 mt-2 text-sm transition-colors">
-                  <Linkedin className="w-4 h-4" />
-                  LinkedIn
-                </a>
+                <div className="flex flex-col items-center gap-2 mt-2">
+                  {host.ambassador && (
+                    <Badge className="px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 text-xs">
+                      Official Lovable Ambassador
+                    </Badge>
+                  )}
+                  <a href={host.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:text-primary/80 text-sm transition-colors">
+                    <Linkedin className="w-4 h-4" />
+                    LinkedIn
+                  </a>
+                </div>
               </div>
             ))}
           </div>
