@@ -111,7 +111,7 @@ Deno.serve(async (req) => {
                 <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real App in One Day</p>
               </div>
               <div style="padding: 30px;">
-                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Hey ${displayName}! 👋</p>
+                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${displayName} 👋</p>
                 <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
                   Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.
                 </p>
