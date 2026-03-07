@@ -60,9 +60,14 @@ Deno.serve(async (req) => {
     );
 
     const customerEmail = session.customer_details?.email ?? session.customer_email;
-    const customerFullName = session.customer_details?.name ?? null;
-    // Extract first name only (before any space)
-    const customerFirstName = customerFullName ? customerFullName.split(" ")[0] : null;
+    const customerCompanyName = session.customer_details?.name ?? null;
+
+    // Get the "Full Name" custom field from Stripe checkout
+    const fullNameField = session.custom_fields?.find(
+      (f: any) => f.key === "full_name" || f.key === "fullname"
+    );
+    const contactName = fullNameField?.text?.value ?? null;
+    const contactFirstName = contactName ? contactName.split(" ")[0] : null;
 
     const { data: existingOrder } = await supabase
       .from("orders")
