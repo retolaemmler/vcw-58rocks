@@ -57,7 +57,7 @@ const PricingSection = () => {
             size="lg"
             className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
             asChild>
-            <a href="https://buy.stripe.com/fZu4gzcOhfW5g4Y09ifIs0h" target="_blank" rel="noopener noreferrer">
+            <a href="https://buy.stripe.com/fZu4gzcOhfW5g4Y09ifIs0h">
               <Ticket className="w-5 h-5 mr-2" />
               Get Your Ticket
             </a>
