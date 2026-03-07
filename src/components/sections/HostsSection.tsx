@@ -3,10 +3,15 @@ import { Badge } from "@/components/ui/badge";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
+import marcusImg from "@/assets/Marcus.jpeg";
 
-const hosts = [
+const hostsRow1 = [
   { name: "Valentin Binnendijk", role: "Product Expert", initials: "VB", image: valentinImg },
   { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg },
+];
+
+const hostsRow2 = [
+  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg },
   { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg },
 ];
 
