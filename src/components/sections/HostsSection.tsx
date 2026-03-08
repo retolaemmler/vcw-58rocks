@@ -23,7 +23,7 @@ const HostsSection = () => {
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
           Your <span className="gradient-text">Workshop Coaches</span>
         </h2>
-        <p className="text-muted-foreground mb-12">Your Vibe Coding Specialists</p>
+        <p className="text-muted-foreground mb-12">Coaches with vast experiences and backgrounds in Product Management, User Experience, Software Engineering and Entrepreneurship.</p>
 
         {[coachesRow1, coachesRow2].map((row, i) => (
           <div key={i} className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-8 last:mb-0">
