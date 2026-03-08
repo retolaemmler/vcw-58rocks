@@ -18,7 +18,7 @@ const WebinarSection = () => {
               Get a 30-Min Intro to Vibe Coding
             </h2>
             <p className="text-white/80 mb-2">
-              March 26, 2026 — with Marc Gasser, Valentin Binnendijk and Reto Lämmler
+              March 26, 2026 — with Valentin Binnendijk, Reto Lämmler and Marc Gasser
             </p>
             <p className="text-white/70 mb-8 text-sm">
               A free teaser session before the workshop. See what's possible with Lovable.dev.
