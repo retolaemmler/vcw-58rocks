@@ -6,26 +6,26 @@ import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
 import marcusImg from "@/assets/Marcus.jpeg";
 
-const hostsRow1 = [
+const coachesRow1 = [
   { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
   { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: false },
 ];
 
-const hostsRow2 = [
+const coachesRow2 = [
   { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg, linkedin: "https://www.linkedin.com/in/marcuskuhn/", ambassador: false },
   { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
 ];
 
 const HostsSection = () => {
   return (
-    <section id="hosts" className="py-20 px-4 bg-section-alt">
+    <section id="coaches" className="py-20 px-4 bg-section-alt">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-          Your <span className="gradient-text">Workshop Hosts</span>
+          Your <span className="gradient-text">Workshop Coaches</span>
         </h2>
         <p className="text-muted-foreground mb-12">Your Vibe Coding Specialists</p>
 
-        {[hostsRow1, hostsRow2].map((row, i) => (
+        {[coachesRow1, coachesRow2].map((row, i) => (
           <div key={i} className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-8 last:mb-0">
             {row.map((host) => (
               <div
