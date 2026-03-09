@@ -25,9 +25,11 @@ const WebinarSection = () => {
             </p>
             <Button
               size="lg"
-              className="bg-white text-foreground font-semibold hover:bg-white/90 rounded-xl px-8 py-5">
-              
-              Register for Free
+              className="bg-white text-foreground font-semibold hover:bg-white/90 rounded-xl px-8 py-5"
+              asChild>
+              <a href="https://www.linkedin.com/events/vibecodingwithlovable7436768523835691008/" target="_blank" rel="noopener noreferrer">
+                Register for Free
+              </a>
             </Button>
           </div>
         </div>
