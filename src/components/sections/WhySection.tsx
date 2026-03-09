@@ -1,4 +1,4 @@
-import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText } from "lucide-react";
+import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText, ExternalLink } from "lucide-react";
 
 const examples = [
   {
@@ -56,6 +56,18 @@ const WhySection = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">{v.description}</p>
             </div>
           ))}
+        </div>
+        <div className="mt-10 text-center">
+          <a
+            href="https://vibehunt.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+          >
+            <Sparkles className="w-4 h-4" />
+            Get inspired — see what others build with Vibe Coding
+            <ExternalLink className="w-4 h-4" />
+          </a>
         </div>
       </div>
     </section>
