@@ -35,15 +35,26 @@ const HeroSection = () => {
         </div>
 
         <div className="items-center gap-6 flex flex-col">
-          <Button
-            size="lg"
-            className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-            asChild>
-            <a href="#pricing" onClick={(e) => { e.preventDefault(); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }}>
-              <Sparkles className="w-5 h-5 mr-2" />
-              Secure Your Spot
-            </a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <Button
+              size="lg"
+              className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              asChild>
+              <a href="#pricing" onClick={(e) => { e.preventDefault(); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }}>
+                <Sparkles className="w-5 h-5 mr-2" />
+                Secure Your Spot
+              </a>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="font-semibold text-lg px-8 py-6 rounded-xl transition-all hover:scale-105"
+              asChild>
+              <a href="mailto:hello@vibecodeworkshop.ch">
+                Get in Touch
+              </a>
+            </Button>
+          </div>
 
           <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
             <Users className="w-3.5 h-3.5 mr-1.5" />
