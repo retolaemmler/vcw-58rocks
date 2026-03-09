@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/vcw-logo.png";
 
 const navLinks = [
-  { label: "Build", id: "why" },
+  { label: "Build", id: "why", highlight: true },
   { label: "Schedule", id: "agenda" },
   { label: "Participants", id: "audience" },
   { label: "Requirements", id: "requirements" },
