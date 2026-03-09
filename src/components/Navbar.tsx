@@ -5,7 +5,7 @@ import logo from "@/assets/vcw-logo.png";
 const navLinks = [
   { label: "Ideas", id: "why" },
   { label: "Schedule", id: "agenda" },
-  { label: "Who", id: "audience" },
+  { label: "Participants", id: "audience" },
   { label: "Requirements", id: "requirements" },
   { label: "Coaches", id: "coaches" },
   { label: "Tickets", id: "pricing" },
