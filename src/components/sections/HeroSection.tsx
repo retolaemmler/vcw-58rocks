@@ -17,7 +17,7 @@ const HeroSection = () => {
           <span className="block gradient-text mt-2">Build a Real App in One Day</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-tight">
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
           A full-day hands-on bootcamp where you'll go from idea to working app using <a href="https://www.lovable.dev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center align-middle"><img src={lovableLogo} alt="Lovable.dev" className="h-14 sm:h-16 inline-block" /></a> — the platform that turns natural language into functional code. No coding experience required.
         </p>
 
