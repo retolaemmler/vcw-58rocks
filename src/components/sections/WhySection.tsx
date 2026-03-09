@@ -41,7 +41,7 @@ const WhySection = () => {
           What You will <span className="gradient-text">Build with Vibe Coding</span>
         </h2>
         <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-14 leading-relaxed">
-          Lovable.dev lets anyone build real, functional applications using just natural language. Here are just a few things you'll be able to create after this workshop:
+          Lovable.dev lets anyone build real, functional applications using just natural language. Here are just a few things you'll be able to create in this workshop:
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {examples.map((v) => (
