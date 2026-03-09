@@ -53,15 +53,26 @@ const PricingSection = () => {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <Button
-            size="lg"
-            className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-            asChild>
-            <a href="https://buy.stripe.com/fZu4gzcOhfW5g4Y09ifIs0h">
-              <Ticket className="w-5 h-5 mr-2" />
-              Get Your Ticket
-            </a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <Button
+              size="lg"
+              className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              asChild>
+              <a href="https://buy.stripe.com/fZu4gzcOhfW5g4Y09ifIs0h">
+                <Ticket className="w-5 h-5 mr-2" />
+                Get Your Ticket
+              </a>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="font-semibold text-lg px-8 py-6 rounded-xl transition-all hover:scale-105"
+              asChild>
+              <a href="mailto:hello@vibecodeworkshop.ch">
+                Get in Touch
+              </a>
+            </Button>
+          </div>
 
           <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
             <Users className="w-3.5 h-3.5 mr-1.5" />
