@@ -18,7 +18,7 @@ const HeroSection = () => {
         </h1>
 
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-tight">
-          A full-day hands-on workshop where you'll go from idea to working app using <a href="https://www.lovable.dev" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80">Lovable</a> — the platform that turns natural language into functional code. No coding experience required.
+          A full-day hands-on workshop where you'll go from idea to working app using <a href="https://www.lovable.dev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center align-middle"><img src={lovableLogo} alt="Lovable.dev" className="h-14 sm:h-16 inline-block -my-4 -mx-1" /></a> — the platform that turns natural language into functional code. No coding experience required.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-10">
