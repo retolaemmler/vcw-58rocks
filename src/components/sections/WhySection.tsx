@@ -38,7 +38,7 @@ const WhySection = () => {
     <section id="why" className="py-20 px-4 bg-section-alt">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-6">
-          What You will Build with <span className="gradient-text">Vibe Coding</span>
+          What You will <span className="gradient-text">Build with Vibe Coding</span>
         </h2>
         <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-14 leading-relaxed">
           Lovable.dev lets anyone build real, functional applications using just natural language. Here are just a few things you'll be able to create after this workshop:
