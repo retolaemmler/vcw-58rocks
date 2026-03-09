@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/vcw-logo.png";
 
 const navLinks = [
-  { label: "Build", id: "why" },
+  { label: "Build", id: "why", highlight: true },
   { label: "Schedule", id: "agenda" },
   { label: "Participants", id: "audience" },
   { label: "Requirements", id: "requirements" },
@@ -45,7 +45,11 @@ const Navbar = () => {
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className={`text-sm font-medium transition-colors ${
+                link.highlight
+                  ? "gradient-text hover:opacity-80"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {link.label}
             </button>
