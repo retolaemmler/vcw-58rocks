@@ -6,7 +6,7 @@ const steps = [
   },
   {
     num: "02",
-    title: "Lovable.dev Onboarding",
+    title: "Lovable.dev Introduction",
     description: "As official Lovable ambassadors, we'll professionally onboard you to the platform and show you how to get the best results.",
   },
   {
