@@ -5,12 +5,9 @@ import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
 
-const coachesRow1 = [
+const coaches = [
   { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
   { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: false },
-];
-
-const coachesRow2 = [
   { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
 ];
 
