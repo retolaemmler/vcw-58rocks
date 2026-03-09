@@ -20,36 +20,34 @@ const HostsSection = () => {
         </h2>
         <p className="text-muted-foreground mb-12">Coaches with vast experiences and backgrounds in Product Management, User Experience, Software Engineering and Entrepreneurship.</p>
 
-        {[coachesRow1, coachesRow2].map((row, i) => (
-          <div key={i} className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-8 last:mb-0">
-            {row.map((host) => (
-              <div
-                key={host.name}
-                className="bg-card rounded-xl p-8 border border-border/50 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
-              >
-                <Avatar className="w-20 h-20 mx-auto mb-5">
-                  <AvatarImage src={host.image} alt={host.name} className="object-cover" />
-                  <AvatarFallback className="gradient-bg text-white font-display text-xl font-bold">
-                    {host.initials}
-                  </AvatarFallback>
-                </Avatar>
-                <h3 className="font-display font-semibold text-lg">{host.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{host.role}</p>
-                <div className="flex flex-col items-center gap-2 mt-2">
-                  {host.ambassador && (
-                    <Badge className="px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 text-xs">
-                      Official Lovable Ambassador
-                    </Badge>
-                  )}
-                  <a href={host.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:text-primary/80 text-sm transition-colors">
-                    <Linkedin className="w-4 h-4" />
-                    LinkedIn
-                  </a>
-                </div>
+        <div className="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          {coaches.map((host) => (
+            <div
+              key={host.name}
+              className="bg-card rounded-xl p-8 border border-border/50 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+            >
+              <Avatar className="w-20 h-20 mx-auto mb-5">
+                <AvatarImage src={host.image} alt={host.name} className="object-cover" />
+                <AvatarFallback className="gradient-bg text-white font-display text-xl font-bold">
+                  {host.initials}
+                </AvatarFallback>
+              </Avatar>
+              <h3 className="font-display font-semibold text-lg">{host.name}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{host.role}</p>
+              <div className="flex flex-col items-center gap-2 mt-2">
+                {host.ambassador && (
+                  <Badge className="px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 text-xs">
+                    Official Lovable Ambassador
+                  </Badge>
+                )}
+                <a href={host.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:text-primary/80 text-sm transition-colors">
+                  <Linkedin className="w-4 h-4" />
+                  LinkedIn
+                </a>
               </div>
-            ))}
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
