@@ -5,7 +5,7 @@ import lovableLogo from "@/assets/lovable-logo.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-4 pt-20 pb-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-4 pt-20 pb-8">
       {/* Background blobs */}
       <div className="absolute top-20 -left-32 w-72 h-72 rounded-full bg-teal/10 blur-3xl animate-blob" />
       <div className="absolute top-40 -right-32 w-80 h-80 rounded-full bg-purple/10 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
