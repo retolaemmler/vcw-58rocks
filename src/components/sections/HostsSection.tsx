@@ -4,7 +4,6 @@ import { Linkedin } from "lucide-react";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
-import marcusImg from "@/assets/Marcus.jpeg";
 
 const coachesRow1 = [
   { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
@@ -12,7 +11,6 @@ const coachesRow1 = [
 ];
 
 const coachesRow2 = [
-  { name: "Marcus Kuhn", role: "Product Expert & Consultant", initials: "MK", image: marcusImg, linkedin: "https://www.linkedin.com/in/marcuskuhn/", ambassador: false },
   { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
 ];
 
@@ -33,7 +31,7 @@ const HostsSection = () => {
                 className="bg-card rounded-xl p-8 border border-border/50 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
               >
                 <Avatar className="w-20 h-20 mx-auto mb-5">
-                  <AvatarImage src={host.image} alt={host.name} className={`object-cover ${host.name === "Marcus Kuhn" ? "scale-150" : ""}`} />
+                  <AvatarImage src={host.image} alt={host.name} className="object-cover" />
                   <AvatarFallback className="gradient-bg text-white font-display text-xl font-bold">
                     {host.initials}
                   </AvatarFallback>
