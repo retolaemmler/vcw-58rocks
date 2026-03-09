@@ -1,4 +1,4 @@
-import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText } from "lucide-react";
+import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText, ExternalLink } from "lucide-react";
 
 const examples = [
   {
