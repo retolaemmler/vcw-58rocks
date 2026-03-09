@@ -153,7 +153,7 @@ Deno.serve(async (req) => {
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 CHF ${amountFormatted} paid</p>
                 </div>
                 <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
-                  If the minimum of 15 participants is not reached, the money will be refunded to you.
+                  If the minimum of 10 participants is not reached, the money will be refunded to you.
                 </p>
                 <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
                   We'll send you more details as the event gets closer. See you there! 🚀
