@@ -1,25 +1,35 @@
-import { Lightbulb, Users, Handshake, Wrench } from "lucide-react";
+import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText } from "lucide-react";
 
-const values = [
+const examples = [
   {
-    icon: Lightbulb,
-    title: "Real Learning Experience",
-    description: "You'll walk away with a functioning app you built yourself.",
+    icon: BarChart3,
+    title: "Excel → Live Dashboard",
+    description: "Turn your manual Excel reports into interactive, real-time dashboards your whole team can access.",
   },
   {
-    icon: Users,
-    title: "Expert Guidance",
-    description: "Official Lovable ambassadors guide you through every step.",
-  },
-  {
-    icon: Handshake,
-    title: "Teambuilding Effect",
-    description: "Discover Lovable together with your peers — it's fun.",
+    icon: Zap,
+    title: "Automate Manual Workflows",
+    description: "Replace repetitive, error-prone processes with smart automations — no developer needed.",
   },
   {
     icon: Wrench,
-    title: "Practical Skills",
-    description: "Actionable knowledge you can apply in your daily work.",
+    title: "Build Internal Tools",
+    description: "Create that one little app your team has been wishing for — in hours, not months.",
+  },
+  {
+    icon: Globe,
+    title: "Launch a Landing Page",
+    description: "Go from idea to a polished, published website in a single afternoon.",
+  },
+  {
+    icon: FileText,
+    title: "Custom Client Portals",
+    description: "Build tailored portals and forms for your clients — professional and fully branded.",
+  },
+  {
+    icon: Sparkles,
+    title: "And So Much More…",
+    description: "CRM tools, booking systems, calculators, onboarding flows — if you can describe it, you can build it.",
   },
 ];
 
@@ -28,13 +38,13 @@ const WhySection = () => {
     <section id="why" className="py-20 px-4 bg-section-alt">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-6">
-          Why <span className="gradient-text">Vibe Coding</span>?
+          What You Can Do with <span className="gradient-text">Vibe Coding</span>
         </h2>
         <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-14 leading-relaxed">
-          Modern software development is being democratized by Lovable.dev. Whether you're a designer, product manager, consultant, or simply tech-curious — you can now build functional applications quickly and intuitively using just natural language. This workshop is more than a training. It's a journey into the future of software development, powered by the simplest programming language in the world: your own words.
+          Lovable.dev lets anyone build real, functional applications using just natural language. Here are just a few things you'll be able to create after this workshop:
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {values.map((v) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {examples.map((v) => (
             <div
               key={v.title}
               className="bg-card rounded-xl p-6 shadow-sm border border-border/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
