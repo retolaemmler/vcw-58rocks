@@ -63,7 +63,7 @@ const PricingSection = () => {
           </p>
         </div>
 
-
+        <div className="flex flex-col items-center gap-4">
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
             <Button
               size="lg"
