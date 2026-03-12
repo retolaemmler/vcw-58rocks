@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Ticket, Star, Users } from "lucide-react";
+import { Ticket, Star, Users, Gift } from "lucide-react";
 
 const tiers = [
 { name: "Early Bird", price: "599", discount: "25% off", highlight: true },
@@ -50,6 +50,17 @@ const PricingSection = () => {
               </p>
             </div>
           )}
+        </div>
+
+        <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 mb-8 flex items-center gap-3 max-w-lg mx-auto">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+            <Gift className="w-5 h-5 text-primary-foreground" />
+          </div>
+          <p className="text-sm text-left">
+            Buy a ticket until <span className="font-semibold">Fr. March 20</span> and receive a{" "}
+            <span className="font-bold gradient-text">Free Vibe Code Fest Ticket</span>{" "}
+            <span className="text-muted-foreground">(CHF 75 Value)</span>
+          </p>
         </div>
 
         <div className="flex flex-col items-center gap-4">
