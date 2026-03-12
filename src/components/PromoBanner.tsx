@@ -7,7 +7,7 @@ const PromoBanner = () => {
         <Gift className="w-4 h-4 flex-shrink-0" />
         <p>
           Buy a ticket until <span className="font-semibold">Fr. March 20</span> and receive a{" "}
-          <span className="font-bold">Free Vibe Code Fest Ticket</span>{" "}
+          <a href="https://www.vibecodefest.ch" target="_blank" rel="noopener noreferrer" className="font-bold underline underline-offset-2 hover:opacity-80 transition-opacity">Free Vibe Code Fest Ticket</a>{" "}
           <span className="opacity-80">(CHF 75 Value)</span>
         </p>
       </div>
