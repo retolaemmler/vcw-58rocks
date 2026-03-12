@@ -57,7 +57,7 @@ const PricingSection = () => {
             <Gift className="w-5 h-5 text-primary-foreground" />
           </div>
           <p className="text-sm text-left">
-            Buy a ticket until <span className="font-semibold">Fr. March 20</span> and receive a{" "}
+            Buy a ticket until <span className="font-semibold">March 20</span> and receive a{" "}
             <span className="font-bold gradient-text">Free Vibe Code Fest Ticket</span>{" "}
             <span className="text-muted-foreground">(CHF 75 Value)</span>
           </p>
