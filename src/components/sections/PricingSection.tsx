@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Ticket, Star, Users } from "lucide-react";
+import { Ticket, Star, Users, Gift } from "lucide-react";
 
 const tiers = [
 { name: "Early Bird", price: "599", discount: "25% off", highlight: true },
