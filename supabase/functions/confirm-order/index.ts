@@ -106,7 +106,7 @@ Deno.serve(async (req) => {
         "BEGIN:VEVENT",
         "DTSTART:20260416T070000Z",
         "DTEND:20260416T150000Z",
-        "SUMMARY:Vibe Code Workshop - Build a Real App in One Day",
+        "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Day",
         "DESCRIPTION:Full-day hands-on bootcamp. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
         "LOCATION:Zurich\\, Switzerland (exact location TBD)",
         "STATUS:CONFIRMED",
@@ -139,7 +139,7 @@ Deno.serve(async (req) => {
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
               <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 40px 30px; text-align: center;">
                 <h1 style="color: #ffffff; font-size: 28px; margin: 0;">Vibe Code Workshop</h1>
-                <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real App in One Day</p>
+                <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Day</p>
               </div>
               <div style="padding: 30px;">
                 <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${displayName} 👋</p>
