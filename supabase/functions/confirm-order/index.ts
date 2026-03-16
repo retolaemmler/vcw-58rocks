@@ -106,7 +106,7 @@ Deno.serve(async (req) => {
         "BEGIN:VEVENT",
         "DTSTART:20260416T070000Z",
         "DTEND:20260416T150000Z",
-        "SUMMARY:Vibe Code Workshop - Build a Real App in One Day",
+        "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Day",
         "DESCRIPTION:Full-day hands-on bootcamp. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
         "LOCATION:Zurich\\, Switzerland (exact location TBD)",
         "STATUS:CONFIRMED",
