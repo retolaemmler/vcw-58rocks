@@ -1,0 +1,1 @@
+ALTER TABLE public.orders ADD COLUMN free_vcf_ticket boolean NOT NULL DEFAULT false;
