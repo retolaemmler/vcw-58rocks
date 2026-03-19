@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, LogOut, DollarSign, ShoppingCart, ArrowLeft } from "lucide-react";
+import { Loader2, LogOut, DollarSign, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/vcw-logo.png";
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
@@ -23,31 +24,36 @@ interface Order {
   created_at: string;
 }
 
+type AuthState = "loading" | "unauthenticated" | "checking" | "authorized" | "denied";
+
 const Admin = () => {
   const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
+  const [authState, setAuthState] = useState<AuthState>("loading");
   const [orders, setOrders] = useState<Order[]>([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (!session) {
+        setAuthState("unauthenticated");
+      }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      setLoading(false);
+      if (!session) {
+        setAuthState("unauthenticated");
+      }
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
-    if (!session?.user?.email) {
-      setAuthorized(false);
-      return;
-    }
+    if (!session?.user?.email) return;
+
+    setAuthState("checking");
 
     const checkAccess = async () => {
       const { data } = await supabase
@@ -55,11 +61,12 @@ const Admin = () => {
         .select("id")
         .eq("email", session.user.email!)
         .maybeSingle();
-      
-      setAuthorized(!!data);
-      
+
       if (data) {
+        setAuthState("authorized");
         fetchOrders();
+      } else {
+        setAuthState("denied");
       }
     };
 
@@ -72,8 +79,11 @@ const Admin = () => {
       .from("orders")
       .select("*")
       .order("created_at", { ascending: false });
-    
-    if (!error && data) {
+
+    if (error) {
+      console.error("Error fetching orders:", error);
+    }
+    if (data) {
       setOrders(data as Order[]);
     }
     setOrdersLoading(false);
@@ -88,81 +98,92 @@ const Admin = () => {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setSession(null);
-    setAuthorized(false);
+    setAuthState("unauthenticated");
     setOrders([]);
   };
 
   const totalRevenue = orders.reduce((sum, o) => sum + o.amount_total, 0) / 100;
   const totalOrders = orders.length;
 
-  if (loading) {
+  const NavBar = ({ children }: { children?: React.ReactNode }) => (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-sm border-b border-border/50">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="Logo" className="h-12 w-12" />
+        </Link>
+        {children}
+      </div>
+    </nav>
+  );
+
+  if (authState === "loading" || authState === "checking") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      <main className="min-h-screen bg-background">
+        <NavBar />
+        <div className="flex items-center justify-center pt-32">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
       </main>
     );
   }
 
-  if (!session) {
+  if (authState === "unauthenticated") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-background px-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-display">Admin Login</CardTitle>
-            <p className="text-muted-foreground mt-2">Sign in with your Google account to access the admin dashboard.</p>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-4">
-            <Button onClick={handleSignIn} className="w-full" size="lg">
-              Sign in with Google
-            </Button>
-            <Button variant="ghost" asChild size="sm">
-              <Link to="/"><ArrowLeft className="w-4 h-4 mr-2" />Back to Homepage</Link>
-            </Button>
-          </CardContent>
-        </Card>
+      <main className="min-h-screen bg-background">
+        <NavBar />
+        <div className="flex items-center justify-center pt-32 px-4">
+          <Card className="w-full max-w-md">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-display">Admin Login</CardTitle>
+              <p className="text-muted-foreground mt-2">Sign in with your Google account to access the admin dashboard.</p>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={handleSignIn} className="w-full" size="lg">
+                Sign in with Google
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </main>
     );
   }
 
-  if (!authorized) {
+  if (authState === "denied") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-background px-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="text-xl text-destructive">Access Denied</CardTitle>
-            <p className="text-muted-foreground mt-2">
-              Your account ({session.user.email}) is not authorized to access the admin dashboard.
-            </p>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-3">
-            <Button variant="outline" onClick={handleSignOut}><LogOut className="w-4 h-4 mr-2" />Sign Out</Button>
-            <Button variant="ghost" asChild size="sm">
-              <Link to="/"><ArrowLeft className="w-4 h-4 mr-2" />Back to Homepage</Link>
-            </Button>
-          </CardContent>
-        </Card>
+      <main className="min-h-screen bg-background">
+        <NavBar>
+          <Button variant="outline" size="sm" onClick={handleSignOut}>
+            <LogOut className="w-4 h-4 mr-2" />Sign Out
+          </Button>
+        </NavBar>
+        <div className="flex items-center justify-center pt-32 px-4">
+          <Card className="w-full max-w-md">
+            <CardHeader className="text-center">
+              <CardTitle className="text-xl text-destructive">Access Denied</CardTitle>
+              <p className="text-muted-foreground mt-2">
+                Your account ({session?.user.email}) is not authorized.
+              </p>
+            </CardHeader>
+          </Card>
+        </div>
       </main>
     );
   }
 
   return (
     <main className="min-h-screen bg-background">
-      <header className="border-b border-border px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-          </Link>
-          <h1 className="font-display text-xl font-bold">Admin Dashboard</h1>
-        </div>
+      <NavBar>
         <div className="flex items-center gap-3">
-          <span className="text-sm text-muted-foreground">{session.user.email}</span>
+          <span className="text-sm text-muted-foreground hidden sm:inline">{session?.user.email}</span>
           <Button variant="outline" size="sm" onClick={handleSignOut}>
             <LogOut className="w-4 h-4 mr-2" />Sign Out
           </Button>
         </div>
-      </header>
+      </NavBar>
 
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 pt-24 pb-8">
+        <h1 className="font-display text-2xl font-bold mb-6">Admin Dashboard</h1>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
