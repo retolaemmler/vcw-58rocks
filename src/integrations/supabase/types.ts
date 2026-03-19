@@ -22,6 +22,7 @@ export type Database = {
           currency: string
           customer_email: string
           customer_name: string | null
+          free_vcf_ticket: boolean
           id: string
           status: string
           stripe_session_id: string
@@ -34,6 +35,7 @@ export type Database = {
           currency?: string
           customer_email: string
           customer_name?: string | null
+          free_vcf_ticket?: boolean
           id?: string
           status?: string
           stripe_session_id: string
@@ -46,6 +48,7 @@ export type Database = {
           currency?: string
           customer_email?: string
           customer_name?: string | null
+          free_vcf_ticket?: boolean
           id?: string
           status?: string
           stripe_session_id?: string
