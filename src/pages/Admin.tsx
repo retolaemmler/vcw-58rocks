@@ -223,7 +223,6 @@ const Admin = () => {
                       <TableHead>Contact</TableHead>
                       <TableHead>Email</TableHead>
                       <TableHead>Company</TableHead>
-                      <TableHead>Tier</TableHead>
                       <TableHead>Amount</TableHead>
                       <TableHead>VCF Ticket</TableHead>
                       <TableHead>Status</TableHead>
@@ -238,9 +237,6 @@ const Admin = () => {
                         <TableCell>{order.contact_name ?? "—"}</TableCell>
                         <TableCell className="text-sm">{order.customer_email}</TableCell>
                         <TableCell>{order.customer_name ?? "—"}</TableCell>
-                        <TableCell>
-                          {order.tier ? <Badge variant="secondary">{order.tier}</Badge> : "—"}
-                        </TableCell>
                         <TableCell className="whitespace-nowrap font-medium">
                           CHF {(order.amount_total / 100).toFixed(2)}
                         </TableCell>
