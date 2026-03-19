@@ -223,7 +223,6 @@ const Admin = () => {
                       <TableHead>Contact</TableHead>
                       <TableHead>Email</TableHead>
                       <TableHead>Company</TableHead>
-                      <TableHead>Tier</TableHead>
                       <TableHead>Amount</TableHead>
                       <TableHead>VCF Ticket</TableHead>
                       <TableHead>Status</TableHead>
