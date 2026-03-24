@@ -69,7 +69,7 @@ const PricingSection = () => {
               variant="outline"
               className="font-semibold text-lg px-8 py-6 rounded-xl transition-all hover:scale-105"
               asChild>
-              <a href="mailto:hello@vibecodeworkshop.ch">
+              <a href="mailto:rlaemmler@gmail.com">
                 Get in Touch
               </a>
             </Button>
