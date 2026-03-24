@@ -115,9 +115,9 @@ Deno.serve(async (req) => {
         "END:VCALENDAR",
       ].join("\r\n");
 
-      // Base64 encode the ICS content using TextEncoder for safety
       const icsBase64 = btoa(String.fromCharCode(...new TextEncoder().encode(icsContent)));
 
+      // Send confirmation to customer
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -169,9 +169,46 @@ Deno.serve(async (req) => {
 
       if (!emailRes.ok) {
         const emailError = await emailRes.text();
-        console.error("Resend API error:", emailError);
+        console.error("Resend API error (customer):", emailError);
       } else {
         console.log(`Confirmation email sent to ${customerEmail}`);
+      }
+
+      // Send notification to organizer
+      const notifyRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
+          to: ["hello@vibecodeworkshop.ch"],
+          subject: `🎟️ New Ticket Sold – ${customerEmail}`,
+          html: `
+            <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
+              <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 30px; text-align: center;">
+                <h1 style="color: #ffffff; font-size: 24px; margin: 0;">🎟️ New Ticket Sold!</h1>
+              </div>
+              <div style="padding: 30px;">
+                <p style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 16px;"><strong>New order received:</strong></p>
+                <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 0 0 16px;">
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📧 <strong>Email:</strong> ${customerEmail}</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">🏢 <strong>Company:</strong> ${customerCompanyName ?? "N/A"}</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">👤 <strong>Contact:</strong> ${contactName ?? "N/A"}</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 <strong>Amount:</strong> CHF ${amountFormatted}</p>
+                </div>
+              </div>
+            </div>
+          `,
+        }),
+      });
+
+      if (!notifyRes.ok) {
+        const notifyError = await notifyRes.text();
+        console.error("Resend API error (organizer notification):", notifyError);
+      } else {
+        console.log("Organizer notification sent to hello@vibecodeworkshop.ch");
       }
     }
 
