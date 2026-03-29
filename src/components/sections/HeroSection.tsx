@@ -56,6 +56,9 @@ const HeroSection = () => {
               </a>
             </Button>
           </div>
+          <p className="text-sm text-destructive font-medium animate-pulse">
+            🔥 Early Bird Sold Out. Limited availability.
+          </p>
 
         </div>
       </div>
