@@ -4,8 +4,8 @@ import { Ticket, Star, Users, Gift } from "lucide-react";
 
 const tiers = [
 { name: "Early Bird", price: "599", discount: "25% off", highlight: true },
-{ name: "Late Bird", price: "679", discount: "15% off", highlight: false },
-{ name: "Regular", price: "799", discount: "Base price", highlight: false }];
+{ name: "Regular", price: "679", discount: "15% off", highlight: false },
+{ name: "Late Bird", price: "799", discount: "Base price", highlight: false }];
 
 
 const PricingSection = () => {
