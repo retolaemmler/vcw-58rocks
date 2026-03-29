@@ -33,8 +33,8 @@ const PricingSection = () => {
 
               {tier.soldOut &&
             <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge variant="secondary" className="shadow-md px-3">
-                    Sold Out
+                  <Badge className="bg-destructive text-destructive-foreground shadow-lg px-3 animate-pulse border-0">
+                    🔥 Sold Out
                   </Badge>
                 </div>
             }
