@@ -3,9 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Ticket, Star, Users, Gift } from "lucide-react";
 
 const tiers = [
-{ name: "Early Bird", price: "599", discount: "25% off", highlight: true },
-{ name: "Regular", price: "679", discount: "15% off", highlight: false },
-{ name: "Late Bird", price: "799", discount: "Base price", highlight: false }];
+{ name: "Early Bird", price: "599", discount: "25% off", highlight: false, soldOut: true },
+{ name: "Regular", price: "679", discount: "15% off", highlight: true, soldOut: false },
+{ name: "Late Bird", price: "799", discount: "Base price", highlight: false, soldOut: false }];
 
 
 const PricingSection = () => {
@@ -23,12 +23,21 @@ const PricingSection = () => {
           {tiers.map((tier) =>
           <div
             key={tier.name}
-            className={`relative rounded-xl p-6 border shadow-sm transition-all hover:shadow-md hover:-translate-y-1 ${
-            tier.highlight ?
-            "gradient-bg text-white border-transparent shadow-lg" :
-            "bg-card border-border/50"}`
+            className={`relative rounded-xl p-6 border shadow-sm transition-all ${
+            tier.soldOut
+            ? "bg-muted/50 border-border/30 opacity-60"
+            : tier.highlight
+            ? "gradient-bg text-white border-transparent shadow-lg hover:shadow-md hover:-translate-y-1"
+            : "bg-card border-border/50 hover:shadow-md hover:-translate-y-1"}`
             }>
 
+              {tier.soldOut &&
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge variant="secondary" className="shadow-md px-3">
+                    Sold Out
+                  </Badge>
+                </div>
+            }
               {tier.highlight &&
             <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <Badge className="bg-white text-foreground shadow-md border-0 px-3">
@@ -36,16 +45,16 @@ const PricingSection = () => {
                   </Badge>
                 </div>
             }
-              <h3 className={`font-display font-semibold text-lg mb-1 ${tier.highlight ? "" : ""}`}>
+              <h3 className={`font-display font-semibold text-lg mb-1 ${tier.soldOut ? "line-through" : ""}`}>
                 {tier.name}
               </h3>
-              <p className={`text-sm mb-4 ${tier.highlight ? "text-white/80" : "text-muted-foreground"}`}>
+              <p className={`text-sm mb-4 ${tier.soldOut ? "line-through text-muted-foreground" : tier.highlight ? "text-white/80" : "text-muted-foreground"}`}>
                 {tier.discount}
               </p>
-              <p className="font-display text-4xl font-bold mb-1">
+              <p className={`font-display text-4xl font-bold mb-1 ${tier.soldOut ? "line-through" : ""}`}>
                 CHF {tier.price}
               </p>
-              <p className={`text-xs ${tier.highlight ? "text-white/70" : "text-muted-foreground"}`}>
+              <p className={`text-xs ${tier.soldOut ? "text-muted-foreground" : tier.highlight ? "text-white/70" : "text-muted-foreground"}`}>
                 per person
               </p>
             </div>
