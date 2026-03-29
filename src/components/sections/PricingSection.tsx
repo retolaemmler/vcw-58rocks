@@ -86,7 +86,7 @@ const PricingSection = () => {
 
           <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
             <Users className="w-3.5 h-3.5 mr-1.5" />
-            Min. 10 participants required.
+            10 Tickets left for grab.
           </Badge>
         </div>
       </div>
