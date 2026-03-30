@@ -503,7 +503,7 @@ const Survey = () => {
                         <FormItem>
                           <FormLabel className="text-base">💡 Got an app idea already?</FormLabel>
                           <FormControl>
-                            <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
+                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="yes" id="idea-yes" />
                                 <Label htmlFor="idea-yes">Yes, ready to roll!</Label>
