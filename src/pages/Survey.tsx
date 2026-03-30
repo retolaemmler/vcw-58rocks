@@ -644,7 +644,7 @@ const Survey = () => {
                           <FormControl>
                               <div className="flex items-start gap-1">
                                 <div className="relative flex-1">
-                                  <Textarea {...field} placeholder="Allergies, accessibility needs, fun facts about you…" rows={2} className="pr-8" />
+                                  <Textarea {...field} placeholder="Add anything else..." rows={2} className="pr-8" />
                                   {field.value && (
                                     <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
                                       <X className="w-4 h-4" />
