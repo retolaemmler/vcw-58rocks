@@ -136,10 +136,9 @@ const Survey = () => {
   }, [selectedGoals]);
 
   useEffect(() => {
-    const custom = form.getValues("success_criteria");
-    const chipText = selectedSuccess.join(", ");
-    const hasCustom = custom && !SUCCESS_CHIPS.some((c) => custom.includes(c)) && custom !== chipText;
-    form.setValue("success_criteria", hasCustom ? `${chipText}; ${custom}` : chipText, { shouldValidate: true });
+    const chips = selectedSuccess.join(", ");
+    const details = form.getValues("success_criteria_details") || "";
+    form.setValue("success_criteria", chips && details ? `${chips}; ${details}` : chips || details, { shouldValidate: true });
   }, [selectedSuccess]);
 
   useEffect(() => {
