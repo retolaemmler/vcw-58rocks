@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Link2, Copy, ClipboardCheck, FileText } from "lucide-react";
+import { Loader2, Link2, Copy, ClipboardCheck, FileText, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface SurveyResponse {
@@ -118,6 +118,16 @@ const SurveyAdmin = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const deleteResponse = async (id: string) => {
+    const { error } = await supabase.from("survey_responses").delete().eq("id", id);
+    if (error) {
+      toast({ title: "Error", description: "Failed to delete response", variant: "destructive" });
+    } else {
+      setResponses((prev) => prev.filter((r) => r.id !== id));
+      toast({ title: "Deleted", description: "Response removed" });
+    }
+  };
+
   const respondedEmails = new Set(responses.map((r) => r.email?.toLowerCase()).filter(Boolean));
   const pendingEmails = orderEmails.filter(
     (o) => !respondedEmails.has(o.customer_email.toLowerCase())
@@ -216,9 +226,19 @@ const SurveyAdmin = () => {
                       </TableCell>
                       <TableCell className="capitalize">{r.dietary === "none" ? "—" : r.dietary || "—"}</TableCell>
                       <TableCell>
-                        <Button variant="ghost" size="sm">
-                          {expandedRow === r.id ? "Hide" : "Show"}
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <Button variant="ghost" size="sm">
+                            {expandedRow === r.id ? "Hide" : "Show"}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => { e.stopPropagation(); deleteResponse(r.id); }}
+                            className="text-destructive hover:text-destructive"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                     {expandedRow === r.id && (
