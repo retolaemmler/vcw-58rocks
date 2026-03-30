@@ -76,7 +76,7 @@ const ChipSelect = ({
   </div>
 );
 
-const AI_EXPERIENCE_OPTIONS = ["Never tried it", "ChatGPT / Copilot curious", "Use AI tools weekly", "AI power user 🚀"];
+const AI_EXPERIENCE_OPTIONS = ["Never tried it", "Fiddled around, nothing serious", "Built and deployed an app before"];
 const LOVABLE_EXPERIENCE_OPTIONS = ["Never heard of it", "Watched a demo", "Played around with it", "Built something real"];
 const GOAL_CHIPS = ["Build my first app", "Prototype an idea fast", "Learn AI-assisted coding", "Understand what's possible", "Network with builders", "Have fun 🎉"];
 const SUCCESS_CHIPS = ["Walk out with a working app", "Know how to use Lovable solo", "Clear roadmap for my project", "New connections made", "Mindset shift about coding"];
