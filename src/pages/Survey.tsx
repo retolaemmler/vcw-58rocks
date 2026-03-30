@@ -369,18 +369,13 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
                             <FormControl>
-                              <div className="flex items-center gap-1">
-                                <ClearableInput
-                                  placeholder="Add details if you like…"
-                                  className="text-sm"
-                                  value={successDetails}
-                                  onChange={(e) => setSuccessDetails((e.target as HTMLInputElement).value)}
-                                  onClear={() => setSuccessDetails("")}
-                                />
-                                <MicrophoneButton onTranscript={(text) => {
-                                  setSuccessDetails(prev => prev ? `${prev} ${text}` : text);
-                                }} />
-                              </div>
+                              <ClearableInput
+                                placeholder="Add details if you like…"
+                                className="text-sm"
+                                value={successDetails}
+                                onChange={(e) => setSuccessDetails((e.target as HTMLInputElement).value)}
+                                onClear={() => setSuccessDetails("")}
+                              />
                             </FormControl>
                           </div>
                           <FormMessage />
