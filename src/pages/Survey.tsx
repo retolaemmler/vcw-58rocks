@@ -580,7 +580,7 @@ const Survey = () => {
                             <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
                             <FormControl>
                               <div className="flex items-center gap-1">
-                                <Input
+                                <ClearableInput
                                   placeholder="Remove Type and press Enter"
                                   className="text-sm"
                                   onKeyDown={(e) => {
@@ -594,6 +594,7 @@ const Survey = () => {
                                       }
                                     }
                                   }}
+                                  onClear={() => {}}
                                 />
                                 <MicrophoneButton onTranscript={(text) => {
                                   const current = field.value || "";
