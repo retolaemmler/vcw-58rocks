@@ -226,9 +226,19 @@ const SurveyAdmin = () => {
                       </TableCell>
                       <TableCell className="capitalize">{r.dietary === "none" ? "—" : r.dietary || "—"}</TableCell>
                       <TableCell>
-                        <Button variant="ghost" size="sm">
-                          {expandedRow === r.id ? "Hide" : "Show"}
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <Button variant="ghost" size="sm">
+                            {expandedRow === r.id ? "Hide" : "Show"}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => { e.stopPropagation(); deleteResponse(r.id); }}
+                            className="text-destructive hover:text-destructive"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                     {expandedRow === r.id && (
