@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Link2, Copy, ClipboardCheck, FileText, Trash2 } from "lucide-react";
+import { Loader2, Link2, Copy, ClipboardCheck, FileText, Trash2, UserPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface SurveyResponse {
