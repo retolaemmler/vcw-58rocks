@@ -131,6 +131,19 @@ const SurveyAdmin = () => {
     }
   };
 
+  const assignEmail = async (id: string) => {
+    const email = editingEmailValue.trim().toLowerCase();
+    if (!email) return;
+    const { error } = await supabase.from("survey_responses").update({ email }).eq("id", id);
+    if (error) {
+      toast({ title: "Error", description: "Failed to assign email", variant: "destructive" });
+    } else {
+      setResponses((prev) => prev.map((r) => r.id === id ? { ...r, email } : r));
+      setEditingEmailId(null);
+      toast({ title: "Assigned", description: `Email set to ${email}` });
+    }
+  };
+
   const respondedEmails = new Set(responses.map((r) => r.email?.toLowerCase()).filter(Boolean));
   const pendingEmails = orderEmails.filter(
     (o) => !respondedEmails.has(o.customer_email.toLowerCase())
