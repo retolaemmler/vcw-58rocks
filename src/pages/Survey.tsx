@@ -275,22 +275,16 @@ const Survey = () => {
                                 multiple={false}
                               />
                               <FormControl>
-                                <div className="flex items-center gap-1">
-                                  <ClearableInput
-                                    value={detailsValue}
-                                    onChange={(e) => {
-                                      const details = (e.target as HTMLInputElement).value;
-                                      field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
-                                    }}
-                                    onClear={() => field.onChange(chipValue || "")}
-                                    placeholder="Add details if you like…"
-                                    className="text-sm"
-                                  />
-                                  <MicrophoneButton onTranscript={(text) => {
-                                    const newDetails = detailsValue ? `${detailsValue} ${text}` : text;
-                                    field.onChange(chipValue && newDetails ? `${chipValue}; ${newDetails}` : chipValue || newDetails);
-                                  }} />
-                                </div>
+                                <ClearableInput
+                                  value={detailsValue}
+                                  onChange={(e) => {
+                                    const details = (e.target as HTMLInputElement).value;
+                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                  }}
+                                  onClear={() => field.onChange(chipValue || "")}
+                                  placeholder="Add details if you like…"
+                                  className="text-sm"
+                                />
                               </FormControl>
                             </div>
                             <FormMessage />
@@ -321,22 +315,16 @@ const Survey = () => {
                                 multiple={false}
                               />
                               <FormControl>
-                                <div className="flex items-center gap-1">
-                                  <ClearableInput
-                                    value={detailsValue}
-                                    onChange={(e) => {
-                                      const details = (e.target as HTMLInputElement).value;
-                                      field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
-                                    }}
-                                    onClear={() => field.onChange(chipValue || "")}
-                                    placeholder="Add details if you like…"
-                                    className="text-sm"
-                                  />
-                                  <MicrophoneButton onTranscript={(text) => {
-                                    const newDetails = detailsValue ? `${detailsValue} ${text}` : text;
-                                    field.onChange(chipValue && newDetails ? `${chipValue}; ${newDetails}` : chipValue || newDetails);
-                                  }} />
-                                </div>
+                                <ClearableInput
+                                  value={detailsValue}
+                                  onChange={(e) => {
+                                    const details = (e.target as HTMLInputElement).value;
+                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                  }}
+                                  onClear={() => field.onChange(chipValue || "")}
+                                  placeholder="Add details if you like…"
+                                  className="text-sm"
+                                />
                               </FormControl>
                             </div>
                             <FormMessage />
@@ -356,18 +344,13 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={GOAL_CHIPS} selected={selectedGoals} onChange={setSelectedGoals} />
                             <FormControl>
-                              <div className="flex items-center gap-1">
-                                <ClearableInput
-                                  value={goalDetails}
-                                  onChange={(e) => setGoalDetails((e.target as HTMLInputElement).value)}
-                                  onClear={() => setGoalDetails("")}
-                                  placeholder="Add something else…"
-                                  className="text-sm"
-                                />
-                                <MicrophoneButton onTranscript={(text) => {
-                                  setGoalDetails((prev) => prev ? `${prev} ${text}` : text);
-                                }} />
-                              </div>
+                              <ClearableInput
+                                value={goalDetails}
+                                onChange={(e) => setGoalDetails((e.target as HTMLInputElement).value)}
+                                onClear={() => setGoalDetails("")}
+                                placeholder="Add something else…"
+                                className="text-sm"
+                              />
                             </FormControl>
                           </div>
                           <FormMessage />
@@ -386,18 +369,13 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
                             <FormControl>
-                              <div className="flex items-center gap-1">
-                                <ClearableInput
-                                  placeholder="Add details if you like…"
-                                  className="text-sm"
-                                  value={successDetails}
-                                  onChange={(e) => setSuccessDetails((e.target as HTMLInputElement).value)}
-                                  onClear={() => setSuccessDetails("")}
-                                />
-                                <MicrophoneButton onTranscript={(text) => {
-                                  setSuccessDetails(prev => prev ? `${prev} ${text}` : text);
-                                }} />
-                              </div>
+                              <ClearableInput
+                                placeholder="Add details if you like…"
+                                className="text-sm"
+                                value={successDetails}
+                                onChange={(e) => setSuccessDetails((e.target as HTMLInputElement).value)}
+                                onClear={() => setSuccessDetails("")}
+                              />
                             </FormControl>
                           </div>
                           <FormMessage />
@@ -438,18 +416,13 @@ const Survey = () => {
                             <FormItem>
                               <FormLabel className="text-base">📝 Tell us about it! What should the app do?</FormLabel>
                               <FormControl>
-                              <div className="flex items-start gap-1">
-                                <div className="relative flex-1">
-                                  <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="pr-8" />
-                                  {field.value && (
-                                    <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
-                                      <X className="w-4 h-4" />
-                                    </button>
-                                  )}
-                                </div>
-                                <MicrophoneButton onTranscript={(text) => {
-                                  field.onChange(field.value ? `${field.value} ${text}` : text);
-                                }} className="mt-1" />
+                              <div className="relative flex-1">
+                                <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="pr-8" />
+                                {field.value && (
+                                  <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
+                                    <X className="w-4 h-4" />
+                                  </button>
+                                )}
                               </div>
                               </FormControl>
                               <FormMessage />
@@ -493,18 +466,13 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
                             <FormControl>
-                              <div className="flex items-center gap-1">
-                                <ClearableInput
-                                  value={blockDetails}
-                                  onChange={(e) => setBlockDetails((e.target as HTMLInputElement).value)}
-                                  onClear={() => setBlockDetails("")}
-                                  placeholder="Add something else..."
-                                  className="text-sm"
-                                />
-                                <MicrophoneButton onTranscript={(text) => {
-                                  setBlockDetails((prev) => prev ? `${prev} ${text}` : text);
-                                }} />
-                              </div>
+                              <ClearableInput
+                                value={blockDetails}
+                                onChange={(e) => setBlockDetails((e.target as HTMLInputElement).value)}
+                                onClear={() => setBlockDetails("")}
+                                placeholder="Add something else..."
+                                className="text-sm"
+                              />
                             </FormControl>
                           </div>
                           <FormMessage />
