@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Loader2, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Sparkles, X } from "lucide-react";
 import MicrophoneButton from "@/components/MicrophoneButton";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
