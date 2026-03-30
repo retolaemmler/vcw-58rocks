@@ -524,7 +524,14 @@ const Survey = () => {
                               <FormLabel className="text-base">📝 Tell us about it! What should the app do?</FormLabel>
                               <FormControl>
                               <div className="flex items-start gap-1">
-                                <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="flex-1" />
+                                <div className="relative flex-1">
+                                  <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="pr-8" />
+                                  {field.value && (
+                                    <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  )}
+                                </div>
                                 <MicrophoneButton onTranscript={(text) => {
                                   field.onChange(field.value ? `${field.value} ${text}` : text);
                                 }} className="mt-1" />
