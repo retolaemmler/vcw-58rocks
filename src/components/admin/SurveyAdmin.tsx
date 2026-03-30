@@ -191,7 +191,7 @@ const SurveyAdmin = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Date</TableHead>
-                  <TableHead>Email</TableHead>
+                  <TableHead>Participant</TableHead>
                   <TableHead>App Idea</TableHead>
                   <TableHead>Drink</TableHead>
                   <TableHead>Dietary</TableHead>
