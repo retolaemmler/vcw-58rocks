@@ -74,6 +74,86 @@ export type Database = {
         }
         Relationships: []
       }
+      survey_responses: {
+        Row: {
+          ai_coding_experience: string
+          anything_else: string | null
+          app_audience: string | null
+          app_idea_description: string | null
+          building_blocks: string
+          created_at: string
+          dietary: string
+          drink_preference: string
+          email: string
+          has_app_idea: boolean
+          id: string
+          lovable_experience: string
+          success_criteria: string
+          token_id: string
+          workshop_goals: string
+        }
+        Insert: {
+          ai_coding_experience: string
+          anything_else?: string | null
+          app_audience?: string | null
+          app_idea_description?: string | null
+          building_blocks: string
+          created_at?: string
+          dietary: string
+          drink_preference: string
+          email: string
+          has_app_idea?: boolean
+          id?: string
+          lovable_experience: string
+          success_criteria: string
+          token_id: string
+          workshop_goals: string
+        }
+        Update: {
+          ai_coding_experience?: string
+          anything_else?: string | null
+          app_audience?: string | null
+          app_idea_description?: string | null
+          building_blocks?: string
+          created_at?: string
+          dietary?: string
+          drink_preference?: string
+          email?: string
+          has_app_idea?: boolean
+          id?: string
+          lovable_experience?: string
+          success_criteria?: string
+          token_id?: string
+          workshop_goals?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_responses_token_id_fkey"
+            columns: ["token_id"]
+            isOneToOne: false
+            referencedRelation: "survey_tokens"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_tokens: {
+        Row: {
+          created_at: string
+          id: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          token?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          token?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
