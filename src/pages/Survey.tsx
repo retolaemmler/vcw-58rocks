@@ -192,7 +192,7 @@ const Survey = () => {
       app_idea_description: values.has_app_idea === "yes" ? values.app_idea_description || null : null,
       app_audience: values.has_app_idea === "yes" ? values.app_audience || null : null,
       building_blocks: values.building_blocks,
-      drink_preference: values.drink_preference,
+      drink_preference: values.drink_preference || "coffee",
       dietary: values.dietary,
       anything_else: values.anything_else || null,
     });
