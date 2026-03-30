@@ -204,7 +204,12 @@ const Survey = () => {
 
     if (error) {
       console.error("Survey submit error:", error);
-      toast({ title: "Error", description: "Failed to submit. Please try again.", variant: "destructive" });
+      if (error.code === "23505") {
+        toast({ title: "Already submitted", description: "You've already submitted a response. Thank you!", variant: "default" });
+        setPageState("submitted");
+      } else {
+        toast({ title: "Error", description: "Failed to submit. Please try again.", variant: "destructive" });
+      }
     } else {
       setPageState("submitted");
     }
