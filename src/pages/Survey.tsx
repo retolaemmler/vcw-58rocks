@@ -288,7 +288,12 @@ const Survey = () => {
                             </button>
                           </div>
                         )}
-                        {emailValidated && <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>}
+                         {emailValidated && (
+                           <div className="flex items-center gap-2">
+                             <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>
+                             <button type="button" onClick={() => { setEmailValidated(false); setEmailError(null); }} className="text-xs text-muted-foreground underline hover:text-primary">Edit</button>
+                           </div>
+                         )}
                         {!emailError && !emailChecking && !emailValidated && (
                           <button type="button" onClick={handleNoEmail} className="text-sm text-muted-foreground underline hover:text-primary">
                             I don't remember my email
@@ -320,7 +325,13 @@ const Survey = () => {
                             )}
                           </div>
                         </FormControl>
-                        {nameValidated && <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>}
+                         {nameValidated && (
+                           <div className="flex items-center gap-2">
+                             <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>
+                             <button type="button" onClick={() => setNameValidated(false)} className="text-xs text-muted-foreground underline hover:text-primary">Edit</button>
+                             <button type="button" onClick={() => { setNoEmail(false); setNameValidated(false); form.setValue("no_email", false); }} className="text-xs text-muted-foreground underline hover:text-primary">Use email instead</button>
+                           </div>
+                         )}
                         <FormMessage />
                       </FormItem>
                     )}
