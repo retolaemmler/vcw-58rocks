@@ -227,19 +227,6 @@ const Survey = () => {
                 <div className="space-y-4">
                   <FormField
                     control={form.control}
-                    name="participant_name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>👋 What's your name?</FormLabel>
-                        <FormControl>
-                          <Input {...field} placeholder="Your name" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
                     name="email"
                     render={({ field }) => (
                       <FormItem>
