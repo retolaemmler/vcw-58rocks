@@ -271,12 +271,12 @@ const Survey = () => {
                       <FormItem>
                         <FormLabel>What's your email? (the one you registered with)</FormLabel>
                         <FormControl>
-                          <Input
+                           <Input
                             {...field}
                             type="email"
                             placeholder="your@email.com"
                             onBlur={(e) => { field.onBlur(); validateEmail(e.target.value); }}
-                            disabled={emailValidated}
+                            onChange={(e) => { field.onChange(e); if (emailValidated) { setEmailValidated(false); setEmailError(null); } }}
                           />
                         </FormControl>
                         {emailChecking && <p className="text-sm text-muted-foreground flex items-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> Checking…</p>}
@@ -288,12 +288,7 @@ const Survey = () => {
                             </button>
                           </div>
                         )}
-                         {emailValidated && (
-                           <div className="flex items-center gap-2">
-                             <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>
-                             <button type="button" onClick={() => { setEmailValidated(false); setEmailError(null); }} className="text-xs text-muted-foreground underline hover:text-primary">Edit</button>
-                           </div>
-                         )}
+                        {emailValidated && <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>}
                         {!emailError && !emailChecking && !emailValidated && (
                           <button type="button" onClick={handleNoEmail} className="text-sm text-muted-foreground underline hover:text-primary">
                             I don't remember my email
@@ -315,7 +310,7 @@ const Survey = () => {
                             <Input
                               {...field}
                               placeholder="Your full name"
-                              disabled={nameValidated}
+                              onChange={(e) => { field.onChange(e); if (nameValidated) setNameValidated(false); }}
                               onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleNameContinue(); } }}
                             />
                             {!nameValidated && (
@@ -325,13 +320,12 @@ const Survey = () => {
                             )}
                           </div>
                         </FormControl>
-                         {nameValidated && (
-                           <div className="flex items-center gap-2">
-                             <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>
-                             <button type="button" onClick={() => setNameValidated(false)} className="text-xs text-muted-foreground underline hover:text-primary">Edit</button>
-                             <button type="button" onClick={() => { setNoEmail(false); setNameValidated(false); form.setValue("no_email", false); }} className="text-xs text-muted-foreground underline hover:text-primary">Use email instead</button>
-                           </div>
-                         )}
+                        {nameValidated && (
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>
+                            <button type="button" onClick={() => { setNoEmail(false); setNameValidated(false); form.setValue("no_email", false); }} className="text-xs text-muted-foreground underline hover:text-primary">Use email instead</button>
+                          </div>
+                        )}
                         <FormMessage />
                       </FormItem>
                     )}
