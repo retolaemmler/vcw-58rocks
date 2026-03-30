@@ -443,23 +443,13 @@ const Survey = () => {
                           <FormLabel className="text-base">🏆 What would make this day a WIN for you?</FormLabel>
                           <p className="text-sm text-muted-foreground">And what would feel like a miss?</p>
                           <div className="space-y-3">
-                            <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={(sel) => {
-                              setSelectedSuccess(sel);
-                              const chips = sel.join(", ");
-                              const details = form.getValues("success_criteria_details") || "";
-                              field.onChange(chips && details ? `${chips}; ${details}` : chips || details);
-                            }} />
+                            <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
                             <FormControl>
                               <Input
                                 placeholder="Add details if you like…"
                                 className="text-sm"
-                                value={form.watch("success_criteria_details") || ""}
-                                onChange={(e) => {
-                                  const details = e.target.value;
-                                  form.setValue("success_criteria_details" as any, details);
-                                  const chips = selectedSuccess.join(", ");
-                                  field.onChange(chips && details ? `${chips}; ${details}` : chips || details);
-                                }}
+                                value={successDetails}
+                                onChange={(e) => setSuccessDetails(e.target.value)}
                               />
                             </FormControl>
                           </div>
