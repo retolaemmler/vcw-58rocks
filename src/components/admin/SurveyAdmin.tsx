@@ -39,6 +39,8 @@ const SurveyAdmin = () => {
   const [generating, setGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [editingEmailId, setEditingEmailId] = useState<string | null>(null);
+  const [editingEmailValue, setEditingEmailValue] = useState("");
   const { toast } = useToast();
 
   useEffect(() => {
