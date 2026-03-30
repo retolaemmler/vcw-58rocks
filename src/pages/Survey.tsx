@@ -346,15 +346,21 @@ const Survey = () => {
                                 multiple={false}
                               />
                               <FormControl>
-                                <Input
-                                  value={detailsValue}
-                                  onChange={(e) => {
-                                    const details = e.target.value;
-                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
-                                  }}
-                                  placeholder="Add details if you like…"
-                                  className="text-sm"
-                                />
+                                <div className="flex items-center gap-1">
+                                  <Input
+                                    value={detailsValue}
+                                    onChange={(e) => {
+                                      const details = e.target.value;
+                                      field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                    }}
+                                    placeholder="Add details if you like…"
+                                    className="text-sm"
+                                  />
+                                  <MicrophoneButton onTranscript={(text) => {
+                                    const newDetails = detailsValue ? `${detailsValue} ${text}` : text;
+                                    field.onChange(chipValue && newDetails ? `${chipValue}; ${newDetails}` : chipValue || newDetails);
+                                  }} />
+                                </div>
                               </FormControl>
                             </div>
                             <FormMessage />
