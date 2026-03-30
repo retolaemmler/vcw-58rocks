@@ -134,11 +134,9 @@ const Survey = () => {
 
   // Sync chip selections into form fields
   useEffect(() => {
-    const custom = form.getValues("workshop_goals");
-    const chipText = selectedGoals.join(", ");
-    const hasCustom = custom && !GOAL_CHIPS.some((c) => custom.includes(c)) && custom !== chipText;
-    form.setValue("workshop_goals", hasCustom ? `${chipText}; ${custom}` : chipText, { shouldValidate: true });
-  }, [selectedGoals]);
+    const chips = selectedGoals.join(", ");
+    form.setValue("workshop_goals", chips && goalDetails ? `${chips}; ${goalDetails}` : chips || goalDetails, { shouldValidate: true });
+  }, [selectedGoals, goalDetails]);
 
   useEffect(() => {
     const chips = selectedSuccess.join(", ");
