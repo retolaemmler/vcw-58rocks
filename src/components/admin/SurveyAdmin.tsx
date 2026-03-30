@@ -192,8 +192,9 @@ const SurveyAdmin = () => {
                 <TableRow>
                   <TableHead>Date</TableHead>
                   <TableHead>Participant</TableHead>
+                  <TableHead>AI Experience</TableHead>
+                  <TableHead>Lovable Experience</TableHead>
                   <TableHead>App Idea</TableHead>
-                  <TableHead>Drink</TableHead>
                   <TableHead>Dietary</TableHead>
                   <TableHead>Details</TableHead>
                 </TableRow>
@@ -206,13 +207,14 @@ const SurveyAdmin = () => {
                         {new Date(r.created_at).toLocaleDateString("de-CH")}
                       </TableCell>
                       <TableCell className="text-sm">{r.email || r.participant_name || "—"}</TableCell>
+                      <TableCell className="text-sm max-w-[150px] truncate">{r.ai_coding_experience || "—"}</TableCell>
+                      <TableCell className="text-sm max-w-[150px] truncate">{r.lovable_experience || "—"}</TableCell>
                       <TableCell>
                         <Badge variant={r.has_app_idea ? "default" : "outline"}>
                           {r.has_app_idea ? "Yes" : "No"}
                         </Badge>
                       </TableCell>
-                      <TableCell className="capitalize">{r.drink_preference}</TableCell>
-                      <TableCell className="capitalize">{r.dietary === "none" ? "—" : r.dietary}</TableCell>
+                      <TableCell className="capitalize">{r.dietary === "none" ? "—" : r.dietary || "—"}</TableCell>
                       <TableCell>
                         <Button variant="ghost" size="sm">
                           {expandedRow === r.id ? "Hide" : "Show"}
@@ -221,19 +223,17 @@ const SurveyAdmin = () => {
                     </TableRow>
                     {expandedRow === r.id && (
                       <TableRow key={`${r.id}-detail`}>
-                        <TableCell colSpan={6}>
+                        <TableCell colSpan={7}>
                           <div className="grid gap-3 p-4 bg-muted/50 rounded-lg text-sm">
-                            <div><strong>AI Coding Experience:</strong> {r.ai_coding_experience}</div>
-                            <div><strong>Lovable Experience:</strong> {r.lovable_experience}</div>
-                            <div><strong>Workshop Goals:</strong> {r.workshop_goals}</div>
-                            <div><strong>Success Criteria:</strong> {r.success_criteria}</div>
+                            <div><strong>Workshop Goals:</strong> {r.workshop_goals || "—"}</div>
+                            <div><strong>Success Criteria:</strong> {r.success_criteria || "—"}</div>
                             {r.has_app_idea && (
                               <>
                                 <div><strong>App Idea:</strong> {r.app_idea_description || "—"}</div>
                                 <div><strong>Audience:</strong> {r.app_audience || "—"}</div>
                               </>
                             )}
-                            <div><strong>Building Blocks:</strong> {r.building_blocks}</div>
+                            <div><strong>Building Blocks:</strong> {r.building_blocks || "—"}</div>
                             {r.anything_else && <div><strong>Other:</strong> {r.anything_else}</div>}
                           </div>
                         </TableCell>
@@ -243,7 +243,7 @@ const SurveyAdmin = () => {
                 ))}
                 {responses.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                       No responses yet.
                     </TableCell>
                   </TableRow>
