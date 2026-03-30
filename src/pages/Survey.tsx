@@ -230,7 +230,7 @@ const Survey = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>📧 Email (optional)</FormLabel>
+                        <FormLabel>📧 Your Email</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" placeholder="your@email.com" />
                         </FormControl>
