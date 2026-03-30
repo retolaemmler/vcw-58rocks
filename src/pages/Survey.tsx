@@ -310,7 +310,7 @@ const Survey = () => {
                             <Input
                               {...field}
                               placeholder="Your full name"
-                              disabled={nameValidated}
+                              onChange={(e) => { field.onChange(e); if (nameValidated) setNameValidated(false); }}
                               onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleNameContinue(); } }}
                             />
                             {!nameValidated && (
@@ -320,13 +320,12 @@ const Survey = () => {
                             )}
                           </div>
                         </FormControl>
-                         {nameValidated && (
-                           <div className="flex items-center gap-2">
-                             <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>
-                             <button type="button" onClick={() => setNameValidated(false)} className="text-xs text-muted-foreground underline hover:text-primary">Edit</button>
-                             <button type="button" onClick={() => { setNoEmail(false); setNameValidated(false); form.setValue("no_email", false); }} className="text-xs text-muted-foreground underline hover:text-primary">Use email instead</button>
-                           </div>
-                         )}
+                        {nameValidated && (
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>
+                            <button type="button" onClick={() => { setNoEmail(false); setNameValidated(false); form.setValue("no_email", false); }} className="text-xs text-muted-foreground underline hover:text-primary">Use email instead</button>
+                          </div>
+                        )}
                         <FormMessage />
                       </FormItem>
                     )}
