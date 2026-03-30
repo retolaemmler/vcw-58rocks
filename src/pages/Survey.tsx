@@ -138,9 +138,8 @@ const Survey = () => {
 
   useEffect(() => {
     const chips = selectedSuccess.join(", ");
-    const details = form.getValues("success_criteria_details") || "";
-    form.setValue("success_criteria", chips && details ? `${chips}; ${details}` : chips || details, { shouldValidate: true });
-  }, [selectedSuccess]);
+    form.setValue("success_criteria", chips && successDetails ? `${chips}; ${successDetails}` : chips || successDetails, { shouldValidate: true });
+  }, [selectedSuccess, successDetails]);
 
   useEffect(() => {
     const custom = form.getValues("building_blocks");
