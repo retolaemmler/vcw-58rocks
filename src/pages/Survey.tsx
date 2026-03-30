@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Loader2, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
+import MicrophoneButton from "@/components/MicrophoneButton";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
 
@@ -345,15 +346,21 @@ const Survey = () => {
                                 multiple={false}
                               />
                               <FormControl>
-                                <Input
-                                  value={detailsValue}
-                                  onChange={(e) => {
-                                    const details = e.target.value;
-                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
-                                  }}
-                                  placeholder="Add details if you like…"
-                                  className="text-sm"
-                                />
+                                <div className="flex items-center gap-1">
+                                  <Input
+                                    value={detailsValue}
+                                    onChange={(e) => {
+                                      const details = e.target.value;
+                                      field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                    }}
+                                    placeholder="Add details if you like…"
+                                    className="text-sm"
+                                  />
+                                  <MicrophoneButton onTranscript={(text) => {
+                                    const newDetails = detailsValue ? `${detailsValue} ${text}` : text;
+                                    field.onChange(chipValue && newDetails ? `${chipValue}; ${newDetails}` : chipValue || newDetails);
+                                  }} />
+                                </div>
                               </FormControl>
                             </div>
                             <FormMessage />
@@ -384,15 +391,21 @@ const Survey = () => {
                                 multiple={false}
                               />
                               <FormControl>
-                                <Input
-                                  value={detailsValue}
-                                  onChange={(e) => {
-                                    const details = e.target.value;
-                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
-                                  }}
-                                  placeholder="Add details if you like…"
-                                  className="text-sm"
-                                />
+                                <div className="flex items-center gap-1">
+                                  <Input
+                                    value={detailsValue}
+                                    onChange={(e) => {
+                                      const details = e.target.value;
+                                      field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                    }}
+                                    placeholder="Add details if you like…"
+                                    className="text-sm"
+                                  />
+                                  <MicrophoneButton onTranscript={(text) => {
+                                    const newDetails = detailsValue ? `${detailsValue} ${text}` : text;
+                                    field.onChange(chipValue && newDetails ? `${chipValue}; ${newDetails}` : chipValue || newDetails);
+                                  }} />
+                                </div>
                               </FormControl>
                             </div>
                             <FormMessage />
@@ -412,21 +425,27 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={GOAL_CHIPS} selected={selectedGoals} onChange={setSelectedGoals} />
                             <FormControl>
-                              <Input
-                                placeholder="Add something else…"
-                                className="text-sm"
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") {
-                                    e.preventDefault();
-                                    const val = (e.target as HTMLInputElement).value.trim();
-                                    if (val) {
-                                      const current = field.value || "";
-                                      field.onChange(current ? `${current}, ${val}` : val);
-                                      (e.target as HTMLInputElement).value = "";
+                              <div className="flex items-center gap-1">
+                                <Input
+                                  placeholder="Add something else…"
+                                  className="text-sm"
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault();
+                                      const val = (e.target as HTMLInputElement).value.trim();
+                                      if (val) {
+                                        const current = field.value || "";
+                                        field.onChange(current ? `${current}, ${val}` : val);
+                                        (e.target as HTMLInputElement).value = "";
+                                      }
                                     }
-                                  }
-                                }}
-                              />
+                                  }}
+                                />
+                                <MicrophoneButton onTranscript={(text) => {
+                                  const current = field.value || "";
+                                  field.onChange(current ? `${current}, ${text}` : text);
+                                }} />
+                              </div>
                             </FormControl>
                           </div>
                           <FormMessage />
@@ -445,12 +464,17 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
                             <FormControl>
-                              <Input
-                                placeholder="Add details if you like…"
-                                className="text-sm"
-                                value={successDetails}
-                                onChange={(e) => setSuccessDetails(e.target.value)}
-                              />
+                              <div className="flex items-center gap-1">
+                                <Input
+                                  placeholder="Add details if you like…"
+                                  className="text-sm"
+                                  value={successDetails}
+                                  onChange={(e) => setSuccessDetails(e.target.value)}
+                                />
+                                <MicrophoneButton onTranscript={(text) => {
+                                  setSuccessDetails(prev => prev ? `${prev} ${text}` : text);
+                                }} />
+                              </div>
                             </FormControl>
                           </div>
                           <FormMessage />
@@ -491,7 +515,12 @@ const Survey = () => {
                             <FormItem>
                               <FormLabel className="text-base">📝 Tell us about it! What should the app do?</FormLabel>
                               <FormControl>
-                                <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} />
+                              <div className="flex items-start gap-1">
+                                <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="flex-1" />
+                                <MicrophoneButton onTranscript={(text) => {
+                                  field.onChange(field.value ? `${field.value} ${text}` : text);
+                                }} className="mt-1" />
+                              </div>
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -534,21 +563,27 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
                             <FormControl>
-                              <Input
-                                placeholder="Remove Type and press Enter"
-                                className="text-sm"
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") {
-                                    e.preventDefault();
-                                    const val = (e.target as HTMLInputElement).value.trim();
-                                    if (val) {
-                                      const current = field.value || "";
-                                      field.onChange(current ? `${current}, ${val}` : val);
-                                      (e.target as HTMLInputElement).value = "";
+                              <div className="flex items-center gap-1">
+                                <Input
+                                  placeholder="Remove Type and press Enter"
+                                  className="text-sm"
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault();
+                                      const val = (e.target as HTMLInputElement).value.trim();
+                                      if (val) {
+                                        const current = field.value || "";
+                                        field.onChange(current ? `${current}, ${val}` : val);
+                                        (e.target as HTMLInputElement).value = "";
+                                      }
                                     }
-                                  }
-                                }}
-                              />
+                                  }}
+                                />
+                                <MicrophoneButton onTranscript={(text) => {
+                                  const current = field.value || "";
+                                  field.onChange(current ? `${current}, ${text}` : text);
+                                }} />
+                              </div>
                             </FormControl>
                           </div>
                           <FormMessage />
@@ -592,7 +627,12 @@ const Survey = () => {
                         <FormItem>
                           <FormLabel className="text-base">💬 Anything else we should know?</FormLabel>
                           <FormControl>
-                            <Textarea {...field} placeholder="Allergies, accessibility needs, fun facts about you…" rows={2} />
+                              <div className="flex items-start gap-1">
+                                <Textarea {...field} placeholder="Allergies, accessibility needs, fun facts about you…" rows={2} className="flex-1" />
+                                <MicrophoneButton onTranscript={(text) => {
+                                  field.onChange(field.value ? `${field.value} ${text}` : text);
+                                }} className="mt-1" />
+                              </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
