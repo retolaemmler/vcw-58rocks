@@ -6,12 +6,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ClearableInput } from "@/components/ClearableInput";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Loader2, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Sparkles, X } from "lucide-react";
 import MicrophoneButton from "@/components/MicrophoneButton";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
@@ -351,12 +352,13 @@ const Survey = () => {
                               />
                               <FormControl>
                                 <div className="flex items-center gap-1">
-                                  <Input
+                                  <ClearableInput
                                     value={detailsValue}
                                     onChange={(e) => {
-                                      const details = e.target.value;
+                                      const details = (e.target as HTMLInputElement).value;
                                       field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
                                     }}
+                                    onClear={() => field.onChange(chipValue || "")}
                                     placeholder="Add details if you like…"
                                     className="text-sm"
                                   />
@@ -396,12 +398,13 @@ const Survey = () => {
                               />
                               <FormControl>
                                 <div className="flex items-center gap-1">
-                                  <Input
+                                  <ClearableInput
                                     value={detailsValue}
                                     onChange={(e) => {
-                                      const details = e.target.value;
+                                      const details = (e.target as HTMLInputElement).value;
                                       field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
                                     }}
+                                    onClear={() => field.onChange(chipValue || "")}
                                     placeholder="Add details if you like…"
                                     className="text-sm"
                                   />
@@ -469,11 +472,12 @@ const Survey = () => {
                             <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
                             <FormControl>
                               <div className="flex items-center gap-1">
-                                <Input
+                                <ClearableInput
                                   placeholder="Add details if you like…"
                                   className="text-sm"
                                   value={successDetails}
-                                  onChange={(e) => setSuccessDetails(e.target.value)}
+                                  onChange={(e) => setSuccessDetails((e.target as HTMLInputElement).value)}
+                                  onClear={() => setSuccessDetails("")}
                                 />
                                 <MicrophoneButton onTranscript={(text) => {
                                   setSuccessDetails(prev => prev ? `${prev} ${text}` : text);
@@ -520,7 +524,14 @@ const Survey = () => {
                               <FormLabel className="text-base">📝 Tell us about it! What should the app do?</FormLabel>
                               <FormControl>
                               <div className="flex items-start gap-1">
-                                <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="flex-1" />
+                                <div className="relative flex-1">
+                                  <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="pr-8" />
+                                  {field.value && (
+                                    <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  )}
+                                </div>
                                 <MicrophoneButton onTranscript={(text) => {
                                   field.onChange(field.value ? `${field.value} ${text}` : text);
                                 }} className="mt-1" />
@@ -632,7 +643,14 @@ const Survey = () => {
                           <FormLabel className="text-base">💬 Anything else we should know?</FormLabel>
                           <FormControl>
                               <div className="flex items-start gap-1">
-                                <Textarea {...field} placeholder="Allergies, accessibility needs, fun facts about you…" rows={2} className="flex-1" />
+                                <div className="relative flex-1">
+                                  <Textarea {...field} placeholder="Allergies, accessibility needs, fun facts about you…" rows={2} className="pr-8" />
+                                  {field.value && (
+                                    <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  )}
+                                </div>
                                 <MicrophoneButton onTranscript={(text) => {
                                   field.onChange(field.value ? `${field.value} ${text}` : text);
                                 }} className="mt-1" />
