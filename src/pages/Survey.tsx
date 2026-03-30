@@ -76,7 +76,7 @@ const ChipSelect = ({
   </div>
 );
 
-const AI_EXPERIENCE_OPTIONS = ["Never tried it", "ChatGPT / Copilot curious", "Use AI tools weekly", "AI power user 🚀"];
+const AI_EXPERIENCE_OPTIONS = ["Never tried it", "Fiddled around, nothing serious", "Built and deployed an app before"];
 const LOVABLE_EXPERIENCE_OPTIONS = ["Never heard of it", "Watched a demo", "Played around with it", "Built something real"];
 const GOAL_CHIPS = ["Build my first app", "Prototype an idea fast", "Learn AI-assisted coding", "Understand what's possible", "Network with builders", "Have fun 🎉"];
 const SUCCESS_CHIPS = ["Walk out with a working app", "Know how to use Lovable solo", "Clear roadmap for my project", "New connections made", "Mindset shift about coding"];
@@ -328,23 +328,39 @@ const Survey = () => {
                     <FormField
                       control={form.control}
                       name="ai_coding_experience"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base">🤖 How's your AI coding journey so far?</FormLabel>
-                          <div className="space-y-3">
-                            <ChipSelect
-                              options={AI_EXPERIENCE_OPTIONS}
-                              selected={field.value ? AI_EXPERIENCE_OPTIONS.filter((o) => field.value.includes(o)) : []}
-                              onChange={(sel) => field.onChange(sel.join(", "))}
-                              multiple={false}
-                            />
-                            <FormControl>
-                              <Input {...field} placeholder="Or tell us more in your own words…" className="text-sm" />
-                            </FormControl>
-                          </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                      render={({ field }) => {
+                        const chipValue = AI_EXPERIENCE_OPTIONS.find((o) => field.value?.startsWith(o)) || "";
+                        const detailsValue = chipValue && field.value ? field.value.slice(chipValue.length).replace(/^;\s*/, "") : (AI_EXPERIENCE_OPTIONS.includes(field.value || "") ? "" : field.value || "");
+                        return (
+                          <FormItem>
+                            <FormLabel className="text-base">🤖 Have you built a website using AI tools prior to this workshop?</FormLabel>
+                            <div className="space-y-3">
+                              <ChipSelect
+                                options={AI_EXPERIENCE_OPTIONS}
+                                selected={chipValue ? [chipValue] : []}
+                                onChange={(sel) => {
+                                  const chip = sel[0] || "";
+                                  const details = detailsValue;
+                                  field.onChange(chip && details ? `${chip}; ${details}` : chip || details);
+                                }}
+                                multiple={false}
+                              />
+                              <FormControl>
+                                <Input
+                                  value={detailsValue}
+                                  onChange={(e) => {
+                                    const details = e.target.value;
+                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                  }}
+                                  placeholder="Add details if you like…"
+                                  className="text-sm"
+                                />
+                              </FormControl>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
                     />
 
                     {/* Q2: Lovable experience */}
