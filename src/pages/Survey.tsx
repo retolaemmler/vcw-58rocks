@@ -95,6 +95,7 @@ const Survey = () => {
   const [submitting, setSubmitting] = useState(false);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [selectedSuccess, setSelectedSuccess] = useState<string[]>([]);
+  const [successDetails, setSuccessDetails] = useState("");
   const [selectedBlocks, setSelectedBlocks] = useState<string[]>([]);
   const { toast } = useToast();
 
@@ -136,11 +137,9 @@ const Survey = () => {
   }, [selectedGoals]);
 
   useEffect(() => {
-    const custom = form.getValues("success_criteria");
-    const chipText = selectedSuccess.join(", ");
-    const hasCustom = custom && !SUCCESS_CHIPS.some((c) => custom.includes(c)) && custom !== chipText;
-    form.setValue("success_criteria", hasCustom ? `${chipText}; ${custom}` : chipText, { shouldValidate: true });
-  }, [selectedSuccess]);
+    const chips = selectedSuccess.join(", ");
+    form.setValue("success_criteria", chips && successDetails ? `${chips}; ${successDetails}` : chips || successDetails, { shouldValidate: true });
+  }, [selectedSuccess, successDetails]);
 
   useEffect(() => {
     const custom = form.getValues("building_blocks");
@@ -446,7 +445,12 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
                             <FormControl>
-                              <Textarea {...field} placeholder="Or describe your personal success / fail scenario…" rows={2} className="text-sm" />
+                              <Input
+                                placeholder="Add details if you like…"
+                                className="text-sm"
+                                value={successDetails}
+                                onChange={(e) => setSuccessDetails(e.target.value)}
+                              />
                             </FormControl>
                           </div>
                           <FormMessage />
