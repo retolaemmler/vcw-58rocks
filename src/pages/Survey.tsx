@@ -535,7 +535,7 @@ const Survey = () => {
                             <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
                             <FormControl>
                               <Input
-                                placeholder="Something else? Type and press Enter…"
+                                placeholder="Remove Type and press Enter"
                                 className="text-sm"
                                 onKeyDown={(e) => {
                                   if (e.key === "Enter") {
