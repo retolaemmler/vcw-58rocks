@@ -398,12 +398,13 @@ const Survey = () => {
                               />
                               <FormControl>
                                 <div className="flex items-center gap-1">
-                                  <Input
+                                  <ClearableInput
                                     value={detailsValue}
                                     onChange={(e) => {
-                                      const details = e.target.value;
+                                      const details = (e.target as HTMLInputElement).value;
                                       field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
                                     }}
+                                    onClear={() => field.onChange(chipValue || "")}
                                     placeholder="Add details if you like…"
                                     className="text-sm"
                                   />
