@@ -275,22 +275,16 @@ const Survey = () => {
                                 multiple={false}
                               />
                               <FormControl>
-                                <div className="flex items-center gap-1">
-                                  <ClearableInput
-                                    value={detailsValue}
-                                    onChange={(e) => {
-                                      const details = (e.target as HTMLInputElement).value;
-                                      field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
-                                    }}
-                                    onClear={() => field.onChange(chipValue || "")}
-                                    placeholder="Add details if you like…"
-                                    className="text-sm"
-                                  />
-                                  <MicrophoneButton onTranscript={(text) => {
-                                    const newDetails = detailsValue ? `${detailsValue} ${text}` : text;
-                                    field.onChange(chipValue && newDetails ? `${chipValue}; ${newDetails}` : chipValue || newDetails);
-                                  }} />
-                                </div>
+                                <ClearableInput
+                                  value={detailsValue}
+                                  onChange={(e) => {
+                                    const details = (e.target as HTMLInputElement).value;
+                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                  }}
+                                  onClear={() => field.onChange(chipValue || "")}
+                                  placeholder="Add details if you like…"
+                                  className="text-sm"
+                                />
                               </FormControl>
                             </div>
                             <FormMessage />
