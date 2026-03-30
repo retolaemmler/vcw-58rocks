@@ -1,0 +1,1 @@
+DROP INDEX public.survey_responses_unique_identity;
