@@ -466,18 +466,13 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
                             <FormControl>
-                              <div className="flex items-center gap-1">
-                                <ClearableInput
-                                  value={blockDetails}
-                                  onChange={(e) => setBlockDetails((e.target as HTMLInputElement).value)}
-                                  onClear={() => setBlockDetails("")}
-                                  placeholder="Add something else..."
-                                  className="text-sm"
-                                />
-                                <MicrophoneButton onTranscript={(text) => {
-                                  setBlockDetails((prev) => prev ? `${prev} ${text}` : text);
-                                }} />
-                              </div>
+                              <ClearableInput
+                                value={blockDetails}
+                                onChange={(e) => setBlockDetails((e.target as HTMLInputElement).value)}
+                                onClear={() => setBlockDetails("")}
+                                placeholder="Add something else..."
+                                className="text-sm"
+                              />
                             </FormControl>
                           </div>
                           <FormMessage />
