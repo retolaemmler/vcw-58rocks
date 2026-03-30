@@ -78,7 +78,7 @@ const ChipSelect = ({
 
 const AI_EXPERIENCE_OPTIONS = ["Never tried it", "Fiddled around, nothing serious", "Built and deployed an app before"];
 const LOVABLE_EXPERIENCE_OPTIONS = ["Heard about it", "Watched a demo", "Played around with it", "Built something real"];
-const GOAL_CHIPS = ["Build my first app", "Prototype an idea fast", "Learn AI-assisted coding", "Understand what's possible", "Network with builders", "Have fun 🎉"];
+const GOAL_CHIPS = ["Build my first app", "Prototype an idea fast", "Understand what's possible", "Network with builders", "Have fun 🎉"];
 const SUCCESS_CHIPS = ["Walk out with a working app", "Know how to use Lovable solo", "Clear roadmap for my project", "New connections made", "Mindset shift about coding"];
 const BUILDING_BLOCK_CHIPS = ["Email / notifications", "Stripe payments", "User login / auth", "HubSpot CRM", "Bexio", "Database / storage", "File uploads", "Maps / location", "Calendar", "Analytics", "API integrations", "AI features"];
 
