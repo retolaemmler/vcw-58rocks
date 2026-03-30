@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
 
 const surveySchema = z.object({
-  email: z.string().optional(),
+  email: z.string().trim().email({ message: "Please enter a valid email address" }),
   participant_name: z.string().optional(),
   ai_coding_experience: z.string().optional(),
   lovable_experience: z.string().optional(),
