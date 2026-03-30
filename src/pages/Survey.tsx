@@ -574,8 +574,8 @@ const Survey = () => {
                         <><Sparkles className="w-4 h-4 mr-2" /> Submit & Get ready! 🚀</>
                       )}
                     </Button>
-                  </>
-                )}
+
+
               </form>
             </Form>
           </CardContent>
