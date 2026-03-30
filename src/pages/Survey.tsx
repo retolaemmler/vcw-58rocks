@@ -20,7 +20,6 @@ import logo from "@/assets/vcw-logo.png";
 const surveySchema = z.object({
   email: z.string().optional(),
   participant_name: z.string().optional(),
-  no_email: z.boolean().default(false),
   ai_coding_experience: z.string().optional(),
   lovable_experience: z.string().optional(),
   workshop_goals: z.string().optional(),
@@ -32,10 +31,7 @@ const surveySchema = z.object({
   drink_preference: z.enum(["coffee", "tea", "both"]).optional(),
   dietary: z.enum(["none", "vegetarian", "vegan"]).optional(),
   anything_else: z.string().optional(),
-}).refine(
-  (data) => data.no_email ? (data.participant_name && data.participant_name.trim().length > 0) : (data.email && data.email.trim().length > 0),
-  { message: "Please provide your email or name", path: ["email"] }
-);
+});
 
 type SurveyFormValues = z.infer<typeof surveySchema>;
 
@@ -89,11 +85,6 @@ const Survey = () => {
   const token = searchParams.get("token");
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
-  const [emailValidated, setEmailValidated] = useState(false);
-  const [emailChecking, setEmailChecking] = useState(false);
-  const [emailError, setEmailError] = useState<string | null>(null);
-  const [noEmail, setNoEmail] = useState(false);
-  const [nameValidated, setNameValidated] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [goalDetails, setGoalDetails] = useState("");
@@ -108,7 +99,6 @@ const Survey = () => {
     defaultValues: {
       email: "",
       participant_name: "",
-      no_email: false,
       ai_coding_experience: "",
       lovable_experience: "",
       workshop_goals: "",
@@ -124,7 +114,6 @@ const Survey = () => {
   });
 
   const hasAppIdea = form.watch("has_app_idea");
-  const identityReady = noEmail ? nameValidated : emailValidated;
 
   useEffect(() => {
     if (!token) { setPageState("invalid"); return; }
@@ -148,46 +137,15 @@ const Survey = () => {
     form.setValue("building_blocks", chips && blockDetails ? `${chips}; ${blockDetails}` : chips || blockDetails, { shouldValidate: true });
   }, [selectedBlocks, blockDetails]);
 
-  const validateEmail = async (email: string) => {
-    if (!email || !tokenId) return;
-    setEmailChecking(true);
-    setEmailError(null);
-    setEmailValidated(false);
-
-    const { data: existing } = await supabase.from("survey_responses").select("id")
-      .eq("token_id", tokenId).eq("email", email.trim().toLowerCase()).maybeSingle();
-    if (existing) { setEmailError("You've already submitted a response."); setEmailChecking(false); return; }
-
-    const { data } = await supabase.functions.invoke("validate-survey-email", { body: { email: email.trim().toLowerCase() } });
-    if (data?.valid) { setEmailValidated(true); } else {
-      setEmailError("This email doesn't match any order. Please use your registration email, or click \"I don't remember\" below.");
-    }
-    setEmailChecking(false);
-  };
-
-  const handleNoEmail = () => {
-    setNoEmail(true);
-    form.setValue("no_email", true);
-    setEmailError(null);
-    setTimeout(() => {
-      const nameInput = document.querySelector<HTMLInputElement>('input[name="participant_name"], input[placeholder*="name" i]');
-      if (nameInput) nameInput.focus();
-    }, 100);
-  };
-
-  const handleNameContinue = () => {
-    const name = form.getValues("participant_name");
-    if (name && name.trim().length > 0) setNameValidated(true);
-  };
 
   const onSubmit = async (values: SurveyFormValues) => {
-    if (!tokenId || !identityReady) return;
+    if (!tokenId) return;
     setSubmitting(true);
 
     const { error } = await supabase.from("survey_responses").insert({
       token_id: tokenId,
-      email: noEmail ? null : values.email!.trim().toLowerCase(),
-      participant_name: noEmail ? values.participant_name!.trim() : null,
+      email: values.email?.trim().toLowerCase() || null,
+      participant_name: values.participant_name?.trim() || null,
       ai_coding_experience: values.ai_coding_experience || "",
       lovable_experience: values.lovable_experience || "",
       workshop_goals: values.workshop_goals || "",
@@ -266,77 +224,35 @@ const Survey = () => {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-16">
 
                 {/* Identity Section */}
-                {!noEmail ? (
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>What's your email? (the one you registered with)</FormLabel>
-                        <FormControl>
-                           <Input
-                            {...field}
-                            type="email"
-                            placeholder="your@email.com"
-                            onBlur={(e) => { field.onBlur(); validateEmail(e.target.value); }}
-                            onChange={(e) => { field.onChange(e); if (emailValidated) { setEmailValidated(false); setEmailError(null); } }}
-                          />
-                        </FormControl>
-                        {emailChecking && <p className="text-sm text-muted-foreground flex items-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> Checking…</p>}
-                        {emailError && (
-                          <div>
-                            <p className="text-sm text-destructive">{emailError}</p>
-                            <button type="button" onClick={handleNoEmail} className="text-sm text-primary underline mt-1 hover:text-primary/80">
-                              I don't remember my email →
-                            </button>
-                          </div>
-                        )}
-                        {emailValidated && <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>}
-                        {!emailError && !emailChecking && !emailValidated && (
-                          <button type="button" onClick={handleNoEmail} className="text-sm text-muted-foreground underline hover:text-primary">
-                            I don't remember my email
-                          </button>
-                        )}
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                ) : (
+                <div className="space-y-4">
                   <FormField
                     control={form.control}
                     name="participant_name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>No worries! What's your name?</FormLabel>
+                        <FormLabel>👋 What's your name?</FormLabel>
                         <FormControl>
-                          <div className="flex gap-2">
-                            <Input
-                              {...field}
-                              placeholder="Your full name"
-                              onChange={(e) => { field.onChange(e); if (nameValidated) setNameValidated(false); }}
-                              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleNameContinue(); } }}
-                            />
-                            {!nameValidated && (
-                              <Button type="button" onClick={handleNameContinue} disabled={!field.value?.trim()}>
-                                Continue
-                              </Button>
-                            )}
-                          </div>
+                          <Input {...field} placeholder="Your name" />
                         </FormControl>
-                        {nameValidated && (
-                          <div className="flex items-center gap-2">
-                            <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>
-                            <button type="button" onClick={() => { setNoEmail(false); setNameValidated(false); form.setValue("no_email", false); }} className="text-xs text-muted-foreground underline hover:text-primary">Use email instead</button>
-                          </div>
-                        )}
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                )}
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>📧 Email (optional)</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="email" placeholder="your@email.com" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-                {identityReady && (
-                  <>
                     {/* Q1: AI coding experience */}
                     <FormField
                       control={form.control}
@@ -658,8 +574,8 @@ const Survey = () => {
                         <><Sparkles className="w-4 h-4 mr-2" /> Submit & Get ready! 🚀</>
                       )}
                     </Button>
-                  </>
-                )}
+
+
               </form>
             </Form>
           </CardContent>
