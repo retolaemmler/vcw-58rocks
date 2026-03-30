@@ -99,6 +99,7 @@ const Survey = () => {
   const [selectedSuccess, setSelectedSuccess] = useState<string[]>([]);
   const [successDetails, setSuccessDetails] = useState("");
   const [selectedBlocks, setSelectedBlocks] = useState<string[]>([]);
+  const [blockDetails, setBlockDetails] = useState("");
   const { toast } = useToast();
 
   const form = useForm<SurveyFormValues>({
