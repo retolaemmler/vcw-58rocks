@@ -20,7 +20,6 @@ import logo from "@/assets/vcw-logo.png";
 const surveySchema = z.object({
   email: z.string().optional(),
   participant_name: z.string().optional(),
-  no_email: z.boolean().default(false),
   ai_coding_experience: z.string().optional(),
   lovable_experience: z.string().optional(),
   workshop_goals: z.string().optional(),
@@ -32,10 +31,7 @@ const surveySchema = z.object({
   drink_preference: z.enum(["coffee", "tea", "both"]).optional(),
   dietary: z.enum(["none", "vegetarian", "vegan"]).optional(),
   anything_else: z.string().optional(),
-}).refine(
-  (data) => data.no_email ? (data.participant_name && data.participant_name.trim().length > 0) : (data.email && data.email.trim().length > 0),
-  { message: "Please provide your email or name", path: ["email"] }
-);
+});
 
 type SurveyFormValues = z.infer<typeof surveySchema>;
 
