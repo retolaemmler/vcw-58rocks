@@ -170,6 +170,10 @@ const Survey = () => {
     setNoEmail(true);
     form.setValue("no_email", true);
     setEmailError(null);
+    setTimeout(() => {
+      const nameInput = document.querySelector<HTMLInputElement>('input[name="participant_name"], input[placeholder*="name" i]');
+      if (nameInput) nameInput.focus();
+    }, 100);
   };
 
   const handleNameContinue = () => {
