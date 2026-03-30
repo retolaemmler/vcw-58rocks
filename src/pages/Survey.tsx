@@ -461,7 +461,7 @@ const Survey = () => {
                       name="building_blocks"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base">🧱 What building blocks might you need?</FormLabel>
+                          <FormLabel className="text-base">🔗 Would you like to integrate your web app into other systems?</FormLabel>
                           <p className="text-sm text-muted-foreground">Tap all that apply — helps us prepare examples</p>
                           <div className="space-y-3">
                             <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
