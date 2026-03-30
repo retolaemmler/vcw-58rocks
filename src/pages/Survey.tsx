@@ -224,77 +224,35 @@ const Survey = () => {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-16">
 
                 {/* Identity Section */}
-                {!noEmail ? (
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>What's your email? (the one you registered with)</FormLabel>
-                        <FormControl>
-                           <Input
-                            {...field}
-                            type="email"
-                            placeholder="your@email.com"
-                            onBlur={(e) => { field.onBlur(); validateEmail(e.target.value); }}
-                            onChange={(e) => { field.onChange(e); if (emailValidated) { setEmailValidated(false); setEmailError(null); } }}
-                          />
-                        </FormControl>
-                        {emailChecking && <p className="text-sm text-muted-foreground flex items-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> Checking…</p>}
-                        {emailError && (
-                          <div>
-                            <p className="text-sm text-destructive">{emailError}</p>
-                            <button type="button" onClick={handleNoEmail} className="text-sm text-primary underline mt-1 hover:text-primary/80">
-                              I don't remember my email →
-                            </button>
-                          </div>
-                        )}
-                        {emailValidated && <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>}
-                        {!emailError && !emailChecking && !emailValidated && (
-                          <button type="button" onClick={handleNoEmail} className="text-sm text-muted-foreground underline hover:text-primary">
-                            I don't remember my email
-                          </button>
-                        )}
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                ) : (
+                <div className="space-y-4">
                   <FormField
                     control={form.control}
                     name="participant_name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>No worries! What's your name?</FormLabel>
+                        <FormLabel>👋 What's your name?</FormLabel>
                         <FormControl>
-                          <div className="flex gap-2">
-                            <Input
-                              {...field}
-                              placeholder="Your full name"
-                              onChange={(e) => { field.onChange(e); if (nameValidated) setNameValidated(false); }}
-                              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleNameContinue(); } }}
-                            />
-                            {!nameValidated && (
-                              <Button type="button" onClick={handleNameContinue} disabled={!field.value?.trim()}>
-                                Continue
-                              </Button>
-                            )}
-                          </div>
+                          <Input {...field} placeholder="Your name" />
                         </FormControl>
-                        {nameValidated && (
-                          <div className="flex items-center gap-2">
-                            <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Welcome, {field.value}! 👋</p>
-                            <button type="button" onClick={() => { setNoEmail(false); setNameValidated(false); form.setValue("no_email", false); }} className="text-xs text-muted-foreground underline hover:text-primary">Use email instead</button>
-                          </div>
-                        )}
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                )}
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>📧 Email (optional)</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="email" placeholder="your@email.com" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-                {identityReady && (
-                  <>
                     {/* Q1: AI coding experience */}
                     <FormField
                       control={form.control}
