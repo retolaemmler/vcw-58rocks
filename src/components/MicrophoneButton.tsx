@@ -1,70 +1,81 @@
-import { useState, useRef, useCallback } from "react";
+import { useCallback, forwardRef } from "react";
+import { useScribe } from "@elevenlabs/react";
 import { Mic, MicOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface MicrophoneButtonProps {
   onTranscript: (text: string) => void;
   className?: string;
 }
 
-const MicrophoneButton = ({ onTranscript, className }: MicrophoneButtonProps) => {
-  const [isListening, setIsListening] = useState(false);
-  const recognitionRef = useRef<any>(null);
-  const { toast } = useToast();
+const MicrophoneButton = forwardRef<HTMLButtonElement, MicrophoneButtonProps>(
+  ({ onTranscript, className }, ref) => {
+    const { toast } = useToast();
 
-  const toggleListening = useCallback(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const scribe = useScribe({
+      modelId: "scribe_v2_realtime",
+      commitStrategy: "vad",
+      onCommittedTranscript: (data) => {
+        if (data.text?.trim()) {
+          onTranscript(data.text.trim());
+        }
+      },
+    });
 
-    if (!SpeechRecognition) {
-      toast({ title: "Not supported", description: "Speech recognition is not supported in this browser.", variant: "destructive" });
-      return;
-    }
-
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    recognition.continuous = false;
-    recognitionRef.current = recognition;
-
-    recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      onTranscript(transcript);
-      setIsListening(false);
-    };
-
-    recognition.onerror = (event: any) => {
-      console.error("Speech recognition error:", event.error);
-      if (event.error !== "aborted") {
-        toast({ title: "Mic error", description: `Could not recognize speech: ${event.error}`, variant: "destructive" });
+    const toggleListening = useCallback(async () => {
+      if (scribe.isConnected) {
+        scribe.disconnect();
+        return;
       }
-      setIsListening(false);
-    };
 
-    recognition.onend = () => setIsListening(false);
+      try {
+        const { data, error } = await supabase.functions.invoke(
+          "elevenlabs-scribe-token"
+        );
 
-    recognition.start();
-    setIsListening(true);
-  }, [isListening, onTranscript, toast]);
+        if (error || !data?.token) {
+          throw new Error("Failed to get transcription token");
+        }
 
-  return (
-    <Button
-      type="button"
-      variant={isListening ? "destructive" : "default"}
-      size="icon"
-      onClick={toggleListening}
-      className={`h-8 w-8 shrink-0 ${isListening ? "animate-pulse" : ""} ${className || ""}`}
-      title={isListening ? "Stop recording" : "Voice input"}
-    >
-      {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-    </Button>
-  );
-};
+        await scribe.connect({
+          token: data.token,
+          microphone: {
+            echoCancellation: true,
+            noiseSuppression: true,
+          },
+        });
+      } catch (err) {
+        console.error("Speech-to-text error:", err);
+        toast({
+          title: "Mic error",
+          description: "Could not start speech recognition. Please try again.",
+          variant: "destructive",
+        });
+      }
+    }, [scribe, toast]);
+
+    return (
+      <Button
+        ref={ref}
+        type="button"
+        variant={scribe.isConnected ? "destructive" : "default"}
+        size="icon"
+        onClick={toggleListening}
+        className={`h-8 w-8 shrink-0 ${scribe.isConnected ? "animate-pulse" : ""} ${className || ""}`}
+        title={scribe.isConnected ? "Stop recording" : "Voice input"}
+      >
+        {scribe.isConnected ? (
+          <MicOff className="h-4 w-4" />
+        ) : (
+          <Mic className="h-4 w-4" />
+        )}
+      </Button>
+    );
+  }
+);
+
+MicrophoneButton.displayName = "MicrophoneButton";
 
 export default MicrophoneButton;
