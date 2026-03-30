@@ -556,34 +556,6 @@ const Survey = () => {
                       )}
                     />
 
-                    {/* Q9: Drink preference */}
-                    <FormField
-                      control={form.control}
-                      name="drink_preference"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base">☕ Coffee or tea?</FormLabel>
-                          <FormControl>
-                            <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="coffee" id="drink-coffee" />
-                                <Label htmlFor="drink-coffee">☕ Coffee</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="tea" id="drink-tea" />
-                                <Label htmlFor="drink-tea">🍵 Tea</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="both" id="drink-both" />
-                                <Label htmlFor="drink-both">🤝 Both!</Label>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
                     {/* Q10: Dietary */}
                     <FormField
                       control={form.control}
