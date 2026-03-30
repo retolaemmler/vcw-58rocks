@@ -27,7 +27,7 @@ const surveySchema = z.object({
   app_idea_description: z.string().optional(),
   app_audience: z.enum(["public", "internal"]).optional(),
   building_blocks: z.string().min(1, "Please select or type at least one"),
-  drink_preference: z.enum(["coffee", "tea", "both"]),
+  drink_preference: z.enum(["coffee", "tea", "both"]).optional(),
   dietary: z.enum(["none", "vegetarian", "vegan"]),
   anything_else: z.string().optional(),
 }).refine(
@@ -113,7 +113,7 @@ const Survey = () => {
       app_idea_description: "",
       app_audience: undefined,
       building_blocks: "",
-      drink_preference: "coffee",
+      drink_preference: undefined,
       dietary: "none",
       anything_else: "",
     },
@@ -192,7 +192,7 @@ const Survey = () => {
       app_idea_description: values.has_app_idea === "yes" ? values.app_idea_description || null : null,
       app_audience: values.has_app_idea === "yes" ? values.app_audience || null : null,
       building_blocks: values.building_blocks,
-      drink_preference: values.drink_preference,
+      drink_preference: values.drink_preference || "coffee",
       dietary: values.dietary,
       anything_else: values.anything_else || null,
     });
@@ -551,34 +551,6 @@ const Survey = () => {
                               />
                             </FormControl>
                           </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    {/* Q9: Drink preference */}
-                    <FormField
-                      control={form.control}
-                      name="drink_preference"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base">☕ Coffee or tea?</FormLabel>
-                          <FormControl>
-                            <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="coffee" id="drink-coffee" />
-                                <Label htmlFor="drink-coffee">☕ Coffee</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="tea" id="drink-tea" />
-                                <Label htmlFor="drink-tea">🍵 Tea</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="both" id="drink-both" />
-                                <Label htmlFor="drink-both">🤝 Both!</Label>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
