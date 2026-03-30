@@ -581,7 +581,7 @@ const Survey = () => {
                             <FormControl>
                               <div className="flex items-center gap-1">
                                 <ClearableInput
-                                  placeholder="Remove Type and press Enter"
+                                  placeholder="Add something else..."
                                   className="text-sm"
                                   onKeyDown={(e) => {
                                     if (e.key === "Enter") {
