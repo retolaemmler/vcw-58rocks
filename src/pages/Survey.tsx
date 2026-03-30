@@ -144,8 +144,8 @@ const Survey = () => {
 
     const { error } = await supabase.from("survey_responses").insert({
       token_id: tokenId,
-      email: noEmail ? null : values.email!.trim().toLowerCase(),
-      participant_name: noEmail ? values.participant_name!.trim() : null,
+      email: values.email?.trim().toLowerCase() || null,
+      participant_name: values.participant_name?.trim() || null,
       ai_coding_experience: values.ai_coding_experience || "",
       lovable_experience: values.lovable_experience || "",
       workshop_goals: values.workshop_goals || "",
