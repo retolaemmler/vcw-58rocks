@@ -122,6 +122,7 @@ const SurveyAdmin = () => {
   };
 
   const deleteResponse = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this response?")) return;
     const { error } = await supabase.from("survey_responses").delete().eq("id", id);
     if (error) {
       toast({ title: "Error", description: "Failed to delete response", variant: "destructive" });
