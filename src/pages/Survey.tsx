@@ -585,24 +585,14 @@ const Survey = () => {
                             <FormControl>
                               <div className="flex items-center gap-1">
                                 <ClearableInput
+                                  value={blockDetails}
+                                  onChange={(e) => setBlockDetails((e.target as HTMLInputElement).value)}
+                                  onClear={() => setBlockDetails("")}
                                   placeholder="Add something else..."
                                   className="text-sm"
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                      e.preventDefault();
-                                      const val = (e.target as HTMLInputElement).value.trim();
-                                      if (val) {
-                                        const current = field.value || "";
-                                        field.onChange(current ? `${current}, ${val}` : val);
-                                        (e.target as HTMLInputElement).value = "";
-                                      }
-                                    }
-                                  }}
-                                  onClear={() => {}}
                                 />
                                 <MicrophoneButton onTranscript={(text) => {
-                                  const current = field.value || "";
-                                  field.onChange(current ? `${current}, ${text}` : text);
+                                  setBlockDetails((prev) => prev ? `${prev} ${text}` : text);
                                 }} />
                               </div>
                             </FormControl>
