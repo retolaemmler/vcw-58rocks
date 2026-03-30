@@ -145,11 +145,9 @@ const Survey = () => {
   }, [selectedSuccess, successDetails]);
 
   useEffect(() => {
-    const custom = form.getValues("building_blocks");
-    const chipText = selectedBlocks.join(", ");
-    const hasCustom = custom && !BUILDING_BLOCK_CHIPS.some((c) => custom.includes(c)) && custom !== chipText;
-    form.setValue("building_blocks", hasCustom ? `${chipText}; ${custom}` : chipText, { shouldValidate: true });
-  }, [selectedBlocks]);
+    const chips = selectedBlocks.join(", ");
+    form.setValue("building_blocks", chips && blockDetails ? `${chips}; ${blockDetails}` : chips || blockDetails, { shouldValidate: true });
+  }, [selectedBlocks, blockDetails]);
 
   const validateEmail = async (email: string) => {
     if (!email || !tokenId) return;
