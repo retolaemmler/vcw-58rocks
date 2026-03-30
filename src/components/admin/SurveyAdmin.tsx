@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Link2, Copy, ClipboardCheck, FileText } from "lucide-react";
+import { Loader2, Link2, Copy, ClipboardCheck, FileText, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface SurveyResponse {
