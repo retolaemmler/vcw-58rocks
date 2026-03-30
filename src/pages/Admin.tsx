@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, LogOut, DollarSign, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
+import SurveyAdmin from "@/components/admin/SurveyAdmin";
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
@@ -184,87 +186,100 @@ const Admin = () => {
       <div className="max-w-6xl mx-auto px-4 pt-24 pb-8">
         <h1 className="font-display text-2xl font-bold mb-6">Admin Dashboard</h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Total Revenue</CardTitle>
-              <DollarSign className="w-4 h-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold font-display">CHF {totalRevenue.toLocaleString("de-CH", { minimumFractionDigits: 2 })}</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Total Orders</CardTitle>
-              <ShoppingCart className="w-4 h-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold font-display">{totalOrders}</p>
-            </CardContent>
-          </Card>
-        </div>
+        <Tabs defaultValue="orders" className="space-y-6">
+          <TabsList>
+            <TabsTrigger value="orders">Orders</TabsTrigger>
+            <TabsTrigger value="survey">Survey</TabsTrigger>
+          </TabsList>
 
-        {ordersLoading ? (
-          <div className="flex justify-center py-12">
-            <Loader2 className="w-6 h-6 animate-spin text-primary" />
-          </div>
-        ) : (
-          <Card>
-            <CardHeader>
-              <CardTitle>Orders</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Contact</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Company</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead>VCF Ticket</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {orders.map((order) => (
-                      <TableRow key={order.id}>
-                        <TableCell className="whitespace-nowrap text-sm">
-                          {new Date(order.created_at).toLocaleDateString("de-CH")}
-                        </TableCell>
-                        <TableCell>{order.contact_name ?? "—"}</TableCell>
-                        <TableCell className="text-sm">{order.customer_email}</TableCell>
-                        <TableCell>{order.customer_name ?? "—"}</TableCell>
-                        <TableCell className="whitespace-nowrap font-medium">
-                          CHF {(order.amount_total / 100).toFixed(2)}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={order.free_vcf_ticket === "no" ? "outline" : order.free_vcf_ticket === "offered" ? "secondary" : "default"}>
-                            {order.free_vcf_ticket}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={order.status === "completed" ? "default" : "outline"}>
-                            {order.status}
-                          </Badge>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                    {orders.length === 0 && (
-                      <TableRow>
-                        <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
-                          No orders yet.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
+          <TabsContent value="orders">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Revenue</CardTitle>
+                  <DollarSign className="w-4 h-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold font-display">CHF {totalRevenue.toLocaleString("de-CH", { minimumFractionDigits: 2 })}</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Orders</CardTitle>
+                  <ShoppingCart className="w-4 h-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold font-display">{totalOrders}</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {ordersLoading ? (
+              <div className="flex justify-center py-12">
+                <Loader2 className="w-6 h-6 animate-spin text-primary" />
               </div>
-            </CardContent>
-          </Card>
-        )}
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Orders</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Date</TableHead>
+                          <TableHead>Contact</TableHead>
+                          <TableHead>Email</TableHead>
+                          <TableHead>Company</TableHead>
+                          <TableHead>Amount</TableHead>
+                          <TableHead>VCF Ticket</TableHead>
+                          <TableHead>Status</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {orders.map((order) => (
+                          <TableRow key={order.id}>
+                            <TableCell className="whitespace-nowrap text-sm">
+                              {new Date(order.created_at).toLocaleDateString("de-CH")}
+                            </TableCell>
+                            <TableCell>{order.contact_name ?? "—"}</TableCell>
+                            <TableCell className="text-sm">{order.customer_email}</TableCell>
+                            <TableCell>{order.customer_name ?? "—"}</TableCell>
+                            <TableCell className="whitespace-nowrap font-medium">
+                              CHF {(order.amount_total / 100).toFixed(2)}
+                            </TableCell>
+                            <TableCell>
+                              <Badge variant={order.free_vcf_ticket === "no" ? "outline" : order.free_vcf_ticket === "offered" ? "secondary" : "default"}>
+                                {order.free_vcf_ticket}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Badge variant={order.status === "completed" ? "default" : "outline"}>
+                                {order.status}
+                              </Badge>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                        {orders.length === 0 && (
+                          <TableRow>
+                            <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                              No orders yet.
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </TabsContent>
+
+          <TabsContent value="survey">
+            <SurveyAdmin />
+          </TabsContent>
+        </Tabs>
       </div>
     </main>
   );
