@@ -96,6 +96,7 @@ const Survey = () => {
   const [nameValidated, setNameValidated] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
+  const [goalDetails, setGoalDetails] = useState("");
   const [selectedSuccess, setSelectedSuccess] = useState<string[]>([]);
   const [successDetails, setSuccessDetails] = useState("");
   const [selectedBlocks, setSelectedBlocks] = useState<string[]>([]);
