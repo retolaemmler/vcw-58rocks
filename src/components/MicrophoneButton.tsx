@@ -56,10 +56,10 @@ const MicrophoneButton = ({ onTranscript, className }: MicrophoneButtonProps) =>
   return (
     <Button
       type="button"
-      variant="ghost"
+      variant={isListening ? "destructive" : "default"}
       size="icon"
       onClick={toggleListening}
-      className={`h-8 w-8 shrink-0 ${isListening ? "text-destructive animate-pulse" : "text-muted-foreground hover:text-primary"} ${className || ""}`}
+      className={`h-8 w-8 shrink-0 ${isListening ? "animate-pulse" : ""} ${className || ""}`}
       title={isListening ? "Stop recording" : "Voice input"}
     >
       {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
