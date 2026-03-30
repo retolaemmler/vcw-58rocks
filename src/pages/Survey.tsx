@@ -139,7 +139,7 @@ const Survey = () => {
 
 
   const onSubmit = async (values: SurveyFormValues) => {
-    if (!tokenId || !identityReady) return;
+    if (!tokenId) return;
     setSubmitting(true);
 
     const { error } = await supabase.from("survey_responses").insert({
