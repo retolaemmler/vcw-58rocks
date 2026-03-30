@@ -99,6 +99,7 @@ const Survey = () => {
   const [selectedSuccess, setSelectedSuccess] = useState<string[]>([]);
   const [successDetails, setSuccessDetails] = useState("");
   const [selectedBlocks, setSelectedBlocks] = useState<string[]>([]);
+  const [blockDetails, setBlockDetails] = useState("");
   const { toast } = useToast();
 
   const form = useForm<SurveyFormValues>({
@@ -144,11 +145,9 @@ const Survey = () => {
   }, [selectedSuccess, successDetails]);
 
   useEffect(() => {
-    const custom = form.getValues("building_blocks");
-    const chipText = selectedBlocks.join(", ");
-    const hasCustom = custom && !BUILDING_BLOCK_CHIPS.some((c) => custom.includes(c)) && custom !== chipText;
-    form.setValue("building_blocks", hasCustom ? `${chipText}; ${custom}` : chipText, { shouldValidate: true });
-  }, [selectedBlocks]);
+    const chips = selectedBlocks.join(", ");
+    form.setValue("building_blocks", chips && blockDetails ? `${chips}; ${blockDetails}` : chips || blockDetails, { shouldValidate: true });
+  }, [selectedBlocks, blockDetails]);
 
   const validateEmail = async (email: string) => {
     if (!email || !tokenId) return;
@@ -586,24 +585,14 @@ const Survey = () => {
                             <FormControl>
                               <div className="flex items-center gap-1">
                                 <ClearableInput
+                                  value={blockDetails}
+                                  onChange={(e) => setBlockDetails((e.target as HTMLInputElement).value)}
+                                  onClear={() => setBlockDetails("")}
                                   placeholder="Add something else..."
                                   className="text-sm"
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                      e.preventDefault();
-                                      const val = (e.target as HTMLInputElement).value.trim();
-                                      if (val) {
-                                        const current = field.value || "";
-                                        field.onChange(current ? `${current}, ${val}` : val);
-                                        (e.target as HTMLInputElement).value = "";
-                                      }
-                                    }
-                                  }}
-                                  onClear={() => {}}
                                 />
                                 <MicrophoneButton onTranscript={(text) => {
-                                  const current = field.value || "";
-                                  field.onChange(current ? `${current}, ${text}` : text);
+                                  setBlockDetails((prev) => prev ? `${prev} ${text}` : text);
                                 }} />
                               </div>
                             </FormControl>
