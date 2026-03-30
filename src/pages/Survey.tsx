@@ -96,6 +96,7 @@ const Survey = () => {
   const [nameValidated, setNameValidated] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
+  const [goalDetails, setGoalDetails] = useState("");
   const [selectedSuccess, setSelectedSuccess] = useState<string[]>([]);
   const [successDetails, setSuccessDetails] = useState("");
   const [selectedBlocks, setSelectedBlocks] = useState<string[]>([]);
@@ -133,11 +134,9 @@ const Survey = () => {
 
   // Sync chip selections into form fields
   useEffect(() => {
-    const custom = form.getValues("workshop_goals");
-    const chipText = selectedGoals.join(", ");
-    const hasCustom = custom && !GOAL_CHIPS.some((c) => custom.includes(c)) && custom !== chipText;
-    form.setValue("workshop_goals", hasCustom ? `${chipText}; ${custom}` : chipText, { shouldValidate: true });
-  }, [selectedGoals]);
+    const chips = selectedGoals.join(", ");
+    form.setValue("workshop_goals", chips && goalDetails ? `${chips}; ${goalDetails}` : chips || goalDetails, { shouldValidate: true });
+  }, [selectedGoals, goalDetails]);
 
   useEffect(() => {
     const chips = selectedSuccess.join(", ");
@@ -443,24 +442,14 @@ const Survey = () => {
                             <FormControl>
                               <div className="flex items-center gap-1">
                                 <ClearableInput
+                                  value={goalDetails}
+                                  onChange={(e) => setGoalDetails((e.target as HTMLInputElement).value)}
+                                  onClear={() => setGoalDetails("")}
                                   placeholder="Add something else…"
                                   className="text-sm"
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                      e.preventDefault();
-                                      const val = (e.target as HTMLInputElement).value.trim();
-                                      if (val) {
-                                        const current = field.value || "";
-                                        field.onChange(current ? `${current}, ${val}` : val);
-                                        (e.target as HTMLInputElement).value = "";
-                                      }
-                                    }
-                                  }}
-                                  onClear={() => {}}
                                 />
                                 <MicrophoneButton onTranscript={(text) => {
-                                  const current = field.value || "";
-                                  field.onChange(current ? `${current}, ${text}` : text);
+                                  setGoalDetails((prev) => prev ? `${prev} ${text}` : text);
                                 }} />
                               </div>
                             </FormControl>
