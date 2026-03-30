@@ -85,11 +85,6 @@ const Survey = () => {
   const token = searchParams.get("token");
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
-  const [emailValidated, setEmailValidated] = useState(false);
-  const [emailChecking, setEmailChecking] = useState(false);
-  const [emailError, setEmailError] = useState<string | null>(null);
-  const [noEmail, setNoEmail] = useState(false);
-  const [nameValidated, setNameValidated] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [goalDetails, setGoalDetails] = useState("");
@@ -104,7 +99,6 @@ const Survey = () => {
     defaultValues: {
       email: "",
       participant_name: "",
-      no_email: false,
       ai_coding_experience: "",
       lovable_experience: "",
       workshop_goals: "",
@@ -120,7 +114,6 @@ const Survey = () => {
   });
 
   const hasAppIdea = form.watch("has_app_idea");
-  const identityReady = noEmail ? nameValidated : emailValidated;
 
   useEffect(() => {
     if (!token) { setPageState("invalid"); return; }
