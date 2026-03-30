@@ -27,7 +27,7 @@ const surveySchema = z.object({
   app_idea_description: z.string().optional(),
   app_audience: z.enum(["public", "internal"]).optional(),
   building_blocks: z.string().min(1, "Please select or type at least one"),
-  drink_preference: z.enum(["coffee", "tea", "both"]),
+  drink_preference: z.enum(["coffee", "tea", "both"]).optional(),
   dietary: z.enum(["none", "vegetarian", "vegan"]),
   anything_else: z.string().optional(),
 }).refine(
