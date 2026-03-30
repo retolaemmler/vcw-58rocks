@@ -276,10 +276,9 @@ const SurveyAdmin = () => {
                             {expandedRow === r.id ? "Hide" : "Show"}
                           </Button>
                           <Button
-                            variant="ghost"
+                            variant="destructive"
                             size="sm"
                             onClick={(e) => { e.stopPropagation(); deleteResponse(r.id); }}
-                            className="text-destructive hover:text-destructive"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
