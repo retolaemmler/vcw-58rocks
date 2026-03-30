@@ -118,7 +118,7 @@ const SurveyAdmin = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const respondedEmails = new Set(responses.map((r) => r.email.toLowerCase()));
+  const respondedEmails = new Set(responses.map((r) => r.email?.toLowerCase()).filter(Boolean));
   const pendingEmails = orderEmails.filter(
     (o) => !respondedEmails.has(o.customer_email.toLowerCase())
   );
