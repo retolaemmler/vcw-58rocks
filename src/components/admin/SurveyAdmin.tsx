@@ -91,28 +91,19 @@ const SurveyAdmin = () => {
       return;
     }
 
-    // Create new token via service role (use edge function)
+    // Create token via edge function (uses service role)
     const { data, error } = await supabase.functions.invoke("validate-survey-email", {
       body: { action: "create-token" },
     });
 
-    // Fallback: insert directly (anon can't insert due to RLS, so we use a simple approach)
-    // Actually, let's create a dedicated approach - insert with the authenticated user
-    // Since admin is authenticated, we need an insert policy for authenticated admins
-    // For now, reload to check
     if (error) {
       toast({ title: "Error", description: "Failed to generate link", variant: "destructive" });
+      setGenerating(false);
+      return;
     }
 
-    // Reload
-    const { data: newToken } = await supabase
-      .from("survey_tokens")
-      .select("token")
-      .limit(1)
-      .maybeSingle();
-
-    if (newToken) {
-      setSurveyLink(`${window.location.origin}/survey?token=${newToken.token}`);
+    if (data?.token) {
+      setSurveyLink(`${window.location.origin}/survey?token=${data.token}`);
     }
 
     setGenerating(false);
