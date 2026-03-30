@@ -503,7 +503,7 @@ const Survey = () => {
                         <FormItem>
                           <FormLabel className="text-base">💡 Got an app idea already?</FormLabel>
                           <FormControl>
-                            <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
+                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="yes" id="idea-yes" />
                                 <Label htmlFor="idea-yes">Yes, ready to roll!</Label>
@@ -554,7 +554,7 @@ const Survey = () => {
                             <FormItem>
                               <FormLabel className="text-base">🌍 Who is it for?</FormLabel>
                               <FormControl>
-                                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
+                                <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="public" id="audience-public" />
                                     <Label htmlFor="audience-public">Public / customers</Label>
@@ -610,7 +610,7 @@ const Survey = () => {
                         <FormItem>
                           <FormLabel className="text-base">🥗 Any dietary preferences?</FormLabel>
                           <FormControl>
-                            <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
+                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="none" id="diet-none" />
                                 <Label htmlFor="diet-none">I eat everything</Label>
