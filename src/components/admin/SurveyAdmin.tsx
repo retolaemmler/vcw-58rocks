@@ -118,6 +118,16 @@ const SurveyAdmin = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const deleteResponse = async (id: string) => {
+    const { error } = await supabase.from("survey_responses").delete().eq("id", id);
+    if (error) {
+      toast({ title: "Error", description: "Failed to delete response", variant: "destructive" });
+    } else {
+      setResponses((prev) => prev.filter((r) => r.id !== id));
+      toast({ title: "Deleted", description: "Response removed" });
+    }
+  };
+
   const respondedEmails = new Set(responses.map((r) => r.email?.toLowerCase()).filter(Boolean));
   const pendingEmails = orderEmails.filter(
     (o) => !respondedEmails.has(o.customer_email.toLowerCase())
