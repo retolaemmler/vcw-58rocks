@@ -563,21 +563,27 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
                             <FormControl>
-                              <Input
-                                placeholder="Remove Type and press Enter"
-                                className="text-sm"
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") {
-                                    e.preventDefault();
-                                    const val = (e.target as HTMLInputElement).value.trim();
-                                    if (val) {
-                                      const current = field.value || "";
-                                      field.onChange(current ? `${current}, ${val}` : val);
-                                      (e.target as HTMLInputElement).value = "";
+                              <div className="flex items-center gap-1">
+                                <Input
+                                  placeholder="Remove Type and press Enter"
+                                  className="text-sm"
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault();
+                                      const val = (e.target as HTMLInputElement).value.trim();
+                                      if (val) {
+                                        const current = field.value || "";
+                                        field.onChange(current ? `${current}, ${val}` : val);
+                                        (e.target as HTMLInputElement).value = "";
+                                      }
                                     }
-                                  }
-                                }}
-                              />
+                                  }}
+                                />
+                                <MicrophoneButton onTranscript={(text) => {
+                                  const current = field.value || "";
+                                  field.onChange(current ? `${current}, ${text}` : text);
+                                }} />
+                              </div>
                             </FormControl>
                           </div>
                           <FormMessage />
