@@ -271,12 +271,12 @@ const Survey = () => {
                       <FormItem>
                         <FormLabel>What's your email? (the one you registered with)</FormLabel>
                         <FormControl>
-                          <Input
+                           <Input
                             {...field}
                             type="email"
                             placeholder="your@email.com"
                             onBlur={(e) => { field.onBlur(); validateEmail(e.target.value); }}
-                            disabled={emailValidated}
+                            onChange={(e) => { field.onChange(e); if (emailValidated) { setEmailValidated(false); setEmailError(null); } }}
                           />
                         </FormControl>
                         {emailChecking && <p className="text-sm text-muted-foreground flex items-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> Checking…</p>}
@@ -288,12 +288,7 @@ const Survey = () => {
                             </button>
                           </div>
                         )}
-                         {emailValidated && (
-                           <div className="flex items-center gap-2">
-                             <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>
-                             <button type="button" onClick={() => { setEmailValidated(false); setEmailError(null); }} className="text-xs text-muted-foreground underline hover:text-primary">Edit</button>
-                           </div>
-                         )}
+                        {emailValidated && <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>}
                         {!emailError && !emailChecking && !emailValidated && (
                           <button type="button" onClick={handleNoEmail} className="text-sm text-muted-foreground underline hover:text-primary">
                             I don't remember my email
