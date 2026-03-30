@@ -84,10 +84,11 @@ export type Database = {
           created_at: string
           dietary: string
           drink_preference: string
-          email: string
+          email: string | null
           has_app_idea: boolean
           id: string
           lovable_experience: string
+          participant_name: string | null
           success_criteria: string
           token_id: string
           workshop_goals: string
@@ -101,10 +102,11 @@ export type Database = {
           created_at?: string
           dietary: string
           drink_preference: string
-          email: string
+          email?: string | null
           has_app_idea?: boolean
           id?: string
           lovable_experience: string
+          participant_name?: string | null
           success_criteria: string
           token_id: string
           workshop_goals: string
@@ -118,10 +120,11 @@ export type Database = {
           created_at?: string
           dietary?: string
           drink_preference?: string
-          email?: string
+          email?: string | null
           has_app_idea?: boolean
           id?: string
           lovable_experience?: string
+          participant_name?: string | null
           success_criteria?: string
           token_id?: string
           workshop_goals?: string

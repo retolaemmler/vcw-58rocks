@@ -9,7 +9,8 @@ import { useToast } from "@/hooks/use-toast";
 
 interface SurveyResponse {
   id: string;
-  email: string;
+  email: string | null;
+  participant_name: string | null;
   ai_coding_experience: string;
   lovable_experience: string;
   workshop_goals: string;
@@ -190,7 +191,7 @@ const SurveyAdmin = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Date</TableHead>
-                  <TableHead>Email</TableHead>
+                  <TableHead>Participant</TableHead>
                   <TableHead>App Idea</TableHead>
                   <TableHead>Drink</TableHead>
                   <TableHead>Dietary</TableHead>
@@ -204,7 +205,7 @@ const SurveyAdmin = () => {
                       <TableCell className="whitespace-nowrap text-sm">
                         {new Date(r.created_at).toLocaleDateString("de-CH")}
                       </TableCell>
-                      <TableCell className="text-sm">{r.email}</TableCell>
+                      <TableCell className="text-sm">{r.email || r.participant_name || "—"}</TableCell>
                       <TableCell>
                         <Badge variant={r.has_app_idea ? "default" : "outline"}>
                           {r.has_app_idea ? "Yes" : "No"}
