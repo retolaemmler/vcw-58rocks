@@ -205,7 +205,7 @@ const SurveyAdmin = () => {
                       <TableCell className="whitespace-nowrap text-sm">
                         {new Date(r.created_at).toLocaleDateString("de-CH")}
                       </TableCell>
-                      <TableCell className="text-sm">{r.email}</TableCell>
+                      <TableCell className="text-sm">{r.email || r.participant_name || "—"}</TableCell>
                       <TableCell>
                         <Badge variant={r.has_app_idea ? "default" : "outline"}>
                           {r.has_app_idea ? "Yes" : "No"}
