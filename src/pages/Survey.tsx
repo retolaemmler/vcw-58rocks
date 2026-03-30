@@ -473,7 +473,7 @@ const Survey = () => {
                               </div>
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="no" id="idea-no" />
-                                <Label htmlFor="idea-no">Not yet, I'm open</Label>
+                                <Label htmlFor="idea-no">Not yet, still exploring</Label>
                               </div>
                             </RadioGroup>
                           </FormControl>
