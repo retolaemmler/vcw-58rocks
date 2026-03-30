@@ -137,37 +137,6 @@ const Survey = () => {
     form.setValue("building_blocks", chips && blockDetails ? `${chips}; ${blockDetails}` : chips || blockDetails, { shouldValidate: true });
   }, [selectedBlocks, blockDetails]);
 
-  const validateEmail = async (email: string) => {
-    if (!email || !tokenId) return;
-    setEmailChecking(true);
-    setEmailError(null);
-    setEmailValidated(false);
-
-    const { data: existing } = await supabase.from("survey_responses").select("id")
-      .eq("token_id", tokenId).eq("email", email.trim().toLowerCase()).maybeSingle();
-    if (existing) { setEmailError("You've already submitted a response."); setEmailChecking(false); return; }
-
-    const { data } = await supabase.functions.invoke("validate-survey-email", { body: { email: email.trim().toLowerCase() } });
-    if (data?.valid) { setEmailValidated(true); } else {
-      setEmailError("This email doesn't match any order. Please use your registration email, or click \"I don't remember\" below.");
-    }
-    setEmailChecking(false);
-  };
-
-  const handleNoEmail = () => {
-    setNoEmail(true);
-    form.setValue("no_email", true);
-    setEmailError(null);
-    setTimeout(() => {
-      const nameInput = document.querySelector<HTMLInputElement>('input[name="participant_name"], input[placeholder*="name" i]');
-      if (nameInput) nameInput.focus();
-    }, 100);
-  };
-
-  const handleNameContinue = () => {
-    const name = form.getValues("participant_name");
-    if (name && name.trim().length > 0) setNameValidated(true);
-  };
 
   const onSubmit = async (values: SurveyFormValues) => {
     if (!tokenId || !identityReady) return;
