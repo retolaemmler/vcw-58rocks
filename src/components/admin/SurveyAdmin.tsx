@@ -9,7 +9,8 @@ import { useToast } from "@/hooks/use-toast";
 
 interface SurveyResponse {
   id: string;
-  email: string;
+  email: string | null;
+  participant_name: string | null;
   ai_coding_experience: string;
   lovable_experience: string;
   workshop_goals: string;
