@@ -77,7 +77,7 @@ const ChipSelect = ({
 );
 
 const AI_EXPERIENCE_OPTIONS = ["Never tried it", "Fiddled around, nothing serious", "Built and deployed an app before"];
-const LOVABLE_EXPERIENCE_OPTIONS = ["Never heard of it", "Watched a demo", "Played around with it", "Built something real"];
+const LOVABLE_EXPERIENCE_OPTIONS = ["Heard about it", "Watched a demo", "Played around with it", "Built something real"];
 const GOAL_CHIPS = ["Build my first app", "Prototype an idea fast", "Learn AI-assisted coding", "Understand what's possible", "Network with builders", "Have fun 🎉"];
 const SUCCESS_CHIPS = ["Walk out with a working app", "Know how to use Lovable solo", "Clear roadmap for my project", "New connections made", "Mindset shift about coding"];
 const BUILDING_BLOCK_CHIPS = ["Email / notifications", "Stripe payments", "User login / auth", "HubSpot CRM", "Bexio", "Database / storage", "File uploads", "Maps / location", "Calendar", "Analytics", "API integrations", "AI features"];
@@ -367,23 +367,39 @@ const Survey = () => {
                     <FormField
                       control={form.control}
                       name="lovable_experience"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base">💜 What's your relationship with Lovable.dev?</FormLabel>
-                          <div className="space-y-3">
-                            <ChipSelect
-                              options={LOVABLE_EXPERIENCE_OPTIONS}
-                              selected={field.value ? LOVABLE_EXPERIENCE_OPTIONS.filter((o) => field.value.includes(o)) : []}
-                              onChange={(sel) => field.onChange(sel.join(", "))}
-                              multiple={false}
-                            />
-                            <FormControl>
-                              <Input {...field} placeholder="Or share details…" className="text-sm" />
-                            </FormControl>
-                          </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                      render={({ field }) => {
+                        const chipValue = LOVABLE_EXPERIENCE_OPTIONS.find((o) => field.value?.startsWith(o)) || "";
+                        const detailsValue = chipValue && field.value ? field.value.slice(chipValue.length).replace(/^;\s*/, "") : (LOVABLE_EXPERIENCE_OPTIONS.includes(field.value || "") ? "" : field.value || "");
+                        return (
+                          <FormItem>
+                            <FormLabel className="text-base">💜 What's your experience with Lovable.dev?</FormLabel>
+                            <div className="space-y-3">
+                              <ChipSelect
+                                options={LOVABLE_EXPERIENCE_OPTIONS}
+                                selected={chipValue ? [chipValue] : []}
+                                onChange={(sel) => {
+                                  const chip = sel[0] || "";
+                                  const details = detailsValue;
+                                  field.onChange(chip && details ? `${chip}; ${details}` : chip || details);
+                                }}
+                                multiple={false}
+                              />
+                              <FormControl>
+                                <Input
+                                  value={detailsValue}
+                                  onChange={(e) => {
+                                    const details = e.target.value;
+                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                  }}
+                                  placeholder="Add details if you like…"
+                                  className="text-sm"
+                                />
+                              </FormControl>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
                     />
 
                     {/* Q3: Workshop goals */}
