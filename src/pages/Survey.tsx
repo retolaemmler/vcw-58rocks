@@ -288,7 +288,12 @@ const Survey = () => {
                             </button>
                           </div>
                         )}
-                        {emailValidated && <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>}
+                         {emailValidated && (
+                           <div className="flex items-center gap-2">
+                             <p className="text-sm text-primary flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Found you! ✨</p>
+                             <button type="button" onClick={() => { setEmailValidated(false); setEmailError(null); }} className="text-xs text-muted-foreground underline hover:text-primary">Edit</button>
+                           </div>
+                         )}
                         {!emailError && !emailChecking && !emailValidated && (
                           <button type="button" onClick={handleNoEmail} className="text-sm text-muted-foreground underline hover:text-primary">
                             I don't remember my email
