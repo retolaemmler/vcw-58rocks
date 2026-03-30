@@ -260,7 +260,7 @@ const Survey = () => {
         <Card>
           <CardContent className="pt-6">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-16">
 
                 {/* Identity Section */}
                 {!noEmail ? (
