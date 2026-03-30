@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Link2, Copy, ClipboardCheck, FileText, Trash2 } from "lucide-react";
+import { Loader2, Link2, Copy, ClipboardCheck, FileText, Trash2, UserPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface SurveyResponse {
@@ -38,6 +39,8 @@ const SurveyAdmin = () => {
   const [generating, setGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [editingEmailId, setEditingEmailId] = useState<string | null>(null);
+  const [editingEmailValue, setEditingEmailValue] = useState("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -125,6 +128,19 @@ const SurveyAdmin = () => {
     } else {
       setResponses((prev) => prev.filter((r) => r.id !== id));
       toast({ title: "Deleted", description: "Response removed" });
+    }
+  };
+
+  const assignEmail = async (id: string) => {
+    const email = editingEmailValue.trim().toLowerCase();
+    if (!email) return;
+    const { error } = await supabase.from("survey_responses").update({ email }).eq("id", id);
+    if (error) {
+      toast({ title: "Error", description: "Failed to assign email", variant: "destructive" });
+    } else {
+      setResponses((prev) => prev.map((r) => r.id === id ? { ...r, email } : r));
+      setEditingEmailId(null);
+      toast({ title: "Assigned", description: `Email set to ${email}` });
     }
   };
 
@@ -216,7 +232,36 @@ const SurveyAdmin = () => {
                       <TableCell className="whitespace-nowrap text-sm">
                         {new Date(r.created_at).toLocaleDateString("de-CH")}
                       </TableCell>
-                      <TableCell className="text-sm">{r.email || r.participant_name || "—"}</TableCell>
+                      <TableCell className="text-sm">
+                        {r.email ? (
+                          r.email
+                        ) : editingEmailId === r.id ? (
+                          <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                            <Input
+                              value={editingEmailValue}
+                              onChange={(e) => setEditingEmailValue(e.target.value)}
+                              placeholder="email@example.com"
+                              className="h-7 text-xs w-40"
+                              onKeyDown={(e) => { if (e.key === "Enter") assignEmail(r.id); if (e.key === "Escape") setEditingEmailId(null); }}
+                              autoFocus
+                            />
+                            <Button size="sm" variant="ghost" className="h-7 px-2 text-xs" onClick={() => assignEmail(r.id)}>Save</Button>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-1">
+                            <span>{r.participant_name || "—"}</span>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0"
+                              onClick={(e) => { e.stopPropagation(); setEditingEmailId(r.id); setEditingEmailValue(""); }}
+                              title="Assign email"
+                            >
+                              <UserPlus className="w-3 h-3" />
+                            </Button>
+                          </div>
+                        )}
+                      </TableCell>
                       <TableCell className="text-sm max-w-[150px] truncate">{r.ai_coding_experience || "—"}</TableCell>
                       <TableCell className="text-sm max-w-[150px] truncate">{r.lovable_experience || "—"}</TableCell>
                       <TableCell>
