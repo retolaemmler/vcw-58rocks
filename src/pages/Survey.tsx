@@ -603,7 +603,7 @@ const Survey = () => {
                       {submitting ? (
                         <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Submitting…</>
                       ) : (
-                        <><Sparkles className="w-4 h-4 mr-2" /> Submit & Let's Build! 🚀</>
+                        <><Sparkles className="w-4 h-4 mr-2" /> Submit & Getready! 🚀</>
                       )}
                     </Button>
                   </>
