@@ -367,23 +367,39 @@ const Survey = () => {
                     <FormField
                       control={form.control}
                       name="lovable_experience"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base">💜 What's your relationship with Lovable.dev?</FormLabel>
-                          <div className="space-y-3">
-                            <ChipSelect
-                              options={LOVABLE_EXPERIENCE_OPTIONS}
-                              selected={field.value ? LOVABLE_EXPERIENCE_OPTIONS.filter((o) => field.value.includes(o)) : []}
-                              onChange={(sel) => field.onChange(sel.join(", "))}
-                              multiple={false}
-                            />
-                            <FormControl>
-                              <Input {...field} placeholder="Or share details…" className="text-sm" />
-                            </FormControl>
-                          </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                      render={({ field }) => {
+                        const chipValue = LOVABLE_EXPERIENCE_OPTIONS.find((o) => field.value?.startsWith(o)) || "";
+                        const detailsValue = chipValue && field.value ? field.value.slice(chipValue.length).replace(/^;\s*/, "") : (LOVABLE_EXPERIENCE_OPTIONS.includes(field.value || "") ? "" : field.value || "");
+                        return (
+                          <FormItem>
+                            <FormLabel className="text-base">💜 What's your experience with Lovable.dev?</FormLabel>
+                            <div className="space-y-3">
+                              <ChipSelect
+                                options={LOVABLE_EXPERIENCE_OPTIONS}
+                                selected={chipValue ? [chipValue] : []}
+                                onChange={(sel) => {
+                                  const chip = sel[0] || "";
+                                  const details = detailsValue;
+                                  field.onChange(chip && details ? `${chip}; ${details}` : chip || details);
+                                }}
+                                multiple={false}
+                              />
+                              <FormControl>
+                                <Input
+                                  value={detailsValue}
+                                  onChange={(e) => {
+                                    const details = e.target.value;
+                                    field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                                  }}
+                                  placeholder="Add details if you like…"
+                                  className="text-sm"
+                                />
+                              </FormControl>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
                     />
 
                     {/* Q3: Workshop goals */}
