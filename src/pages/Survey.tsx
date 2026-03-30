@@ -515,7 +515,12 @@ const Survey = () => {
                             <FormItem>
                               <FormLabel className="text-base">📝 Tell us about it! What should the app do?</FormLabel>
                               <FormControl>
-                                <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} />
+                              <div className="flex items-start gap-1">
+                                <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="flex-1" />
+                                <MicrophoneButton onTranscript={(text) => {
+                                  field.onChange(field.value ? `${field.value} ${text}` : text);
+                                }} className="mt-1" />
+                              </div>
                               </FormControl>
                               <FormMessage />
                             </FormItem>
