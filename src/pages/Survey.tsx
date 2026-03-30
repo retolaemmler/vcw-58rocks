@@ -344,18 +344,13 @@ const Survey = () => {
                           <div className="space-y-3">
                             <ChipSelect options={GOAL_CHIPS} selected={selectedGoals} onChange={setSelectedGoals} />
                             <FormControl>
-                              <div className="flex items-center gap-1">
-                                <ClearableInput
-                                  value={goalDetails}
-                                  onChange={(e) => setGoalDetails((e.target as HTMLInputElement).value)}
-                                  onClear={() => setGoalDetails("")}
-                                  placeholder="Add something else…"
-                                  className="text-sm"
-                                />
-                                <MicrophoneButton onTranscript={(text) => {
-                                  setGoalDetails((prev) => prev ? `${prev} ${text}` : text);
-                                }} />
-                              </div>
+                              <ClearableInput
+                                value={goalDetails}
+                                onChange={(e) => setGoalDetails((e.target as HTMLInputElement).value)}
+                                onClear={() => setGoalDetails("")}
+                                placeholder="Add something else…"
+                                className="text-sm"
+                              />
                             </FormControl>
                           </div>
                           <FormMessage />
