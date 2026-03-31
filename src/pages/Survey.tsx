@@ -527,6 +527,47 @@ const Survey = () => {
                       )}
                     />
 
+                    {/* Moderation language */}
+                    <FormField
+                      control={form.control}
+                      name="moderation_language"
+                      render={({ field }) => {
+                        const options = ["Deutsch", "English", "Both are OK"];
+                        const selected = field.value ? field.value.split(", ").filter(Boolean) : [];
+                        const toggleOption = (opt: string) => {
+                          const newSelected = selected.includes(opt)
+                            ? selected.filter((s) => s !== opt)
+                            : [...selected, opt];
+                          field.onChange(newSelected.join(", "));
+                        };
+                        return (
+                          <FormItem>
+                            <FormLabel className="text-base">🗣️ Preferred moderation language?</FormLabel>
+                            <p className="text-sm text-muted-foreground">Select all that apply</p>
+                            <FormControl>
+                              <div className="flex flex-wrap gap-2">
+                                {options.map((opt) => (
+                                  <button
+                                    key={opt}
+                                    type="button"
+                                    onClick={() => toggleOption(opt)}
+                                    className={`px-3 py-1.5 rounded-full border text-sm transition-colors ${
+                                      selected.includes(opt)
+                                        ? "bg-primary text-primary-foreground border-primary"
+                                        : "bg-muted/50 text-foreground border-border hover:bg-muted"
+                                    }`}
+                                  >
+                                    {opt}
+                                  </button>
+                                ))}
+                              </div>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    />
+
                     {/* Q11: Anything else */}
                     <FormField
                       control={form.control}
