@@ -57,28 +57,21 @@ const MicrophoneButton = forwardRef<HTMLButtonElement, MicrophoneButtonProps>(
     }, [scribe, toast]);
 
     return (
-      <div className="flex items-center gap-2">
-        <Button
-          ref={ref}
-          type="button"
-          variant={scribe.isConnected ? "destructive" : "default"}
-          size="icon"
-          onClick={toggleListening}
-          className={`h-8 w-8 shrink-0 ${scribe.isConnected ? "animate-pulse" : ""} ${className || ""}`}
-          title={scribe.isConnected ? "Stop recording" : "Voice input"}
-        >
-          {scribe.isConnected ? (
-            <MicOff className="h-4 w-4" />
-          ) : (
-            <Mic className="h-4 w-4" />
-          )}
-        </Button>
-        {scribe.isConnected && (
-          <span className="text-xs text-destructive font-medium animate-pulse">
-            Recording… tap to stop
-          </span>
+      <Button
+        ref={ref}
+        type="button"
+        variant={scribe.isConnected ? "destructive" : "default"}
+        size="icon"
+        onClick={toggleListening}
+        className={`h-8 w-8 shrink-0 ${scribe.isConnected ? "animate-pulse" : ""} ${className || ""}`}
+        title={scribe.isConnected ? "Stop recording" : "Voice input"}
+      >
+        {scribe.isConnected ? (
+          <MicOff className="h-4 w-4" />
+        ) : (
+          <Mic className="h-4 w-4" />
         )}
-      </div>
+      </Button>
     );
   }
 );
