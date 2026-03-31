@@ -231,7 +231,7 @@ const Survey = () => {
             className="w-full aspect-video"
             controls
             preload="metadata"
-            poster=""
+            poster="/videos/welcome-poster.png"
           >
             <source src="/videos/welcome.mp4" type="video/mp4" />
             Your browser does not support the video tag.
