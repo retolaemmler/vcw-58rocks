@@ -408,7 +408,7 @@ const Survey = () => {
                             <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="yes" id="idea-yes" />
-                                <Label htmlFor="idea-yes">Yes, ready to roll!</Label>
+                                <Label htmlFor="idea-yes">Yes, I have!</Label>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="no" id="idea-no" />
