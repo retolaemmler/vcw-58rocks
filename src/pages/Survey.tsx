@@ -237,7 +237,7 @@ const Survey = () => {
         </div>
 
         {!showForm ? (
-          <div className="text-center">
+          <div className="text-center mt-8">
             <Button
               size="lg"
               className="gradient-bg text-white font-semibold text-lg px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
