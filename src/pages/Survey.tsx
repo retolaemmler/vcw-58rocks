@@ -474,7 +474,29 @@ const Survey = () => {
                       </>
                     )}
 
-                    {/* Q8: Building blocks */}
+                    {hasAppIdea === "no" && (
+                      <FormField
+                        control={form.control}
+                        name="app_idea_description"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <ClearableInput
+                                placeholder="Any areas where you see potential to build or automate something?"
+                                className="text-sm"
+                                value={field.value || ""}
+                                onChange={(e) => field.onChange((e.target as HTMLInputElement).value)}
+                                onClear={() => field.onChange("")}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+
+
+
                     <FormField
                       control={form.control}
                       name="building_blocks"
