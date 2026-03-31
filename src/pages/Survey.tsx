@@ -564,6 +564,7 @@ const Survey = () => {
             </Form>
           </CardContent>
         </Card>
+        )}
       </div>
     </div>
   );
