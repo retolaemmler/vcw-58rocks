@@ -559,7 +559,7 @@ const Survey = () => {
                         const options = ["Deutsch", "English", "Both are OK"];
                         return (
                           <FormItem>
-                            <FormLabel className="text-base">🗣️ Preferred moderation language?</FormLabel>
+                            <FormLabel className="text-base">🗣️ Preferred workshop language?</FormLabel>
                             <FormControl>
                               <div className="flex flex-wrap gap-2">
                                 {options.map((opt) => (
