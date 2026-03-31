@@ -225,13 +225,17 @@ const Survey = () => {
           </p>
         </div>
 
-        {/* Welcome video placeholder */}
-        <div className="mb-8 rounded-xl border border-border bg-muted/30 aspect-video flex items-center justify-center">
-          <div className="text-center text-muted-foreground">
-            <div className="text-4xl mb-2">🎬</div>
-            <p className="font-medium">Welcome video from your hosts</p>
-            <p className="text-sm">Coming soon — Valentin & Reto</p>
-          </div>
+        {/* Welcome video */}
+        <div className="mb-8 rounded-xl overflow-hidden border border-border">
+          <video
+            className="w-full aspect-video"
+            controls
+            preload="metadata"
+            poster=""
+          >
+            <source src="/videos/welcome.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         {!showForm ? (
