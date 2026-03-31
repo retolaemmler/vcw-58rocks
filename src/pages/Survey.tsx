@@ -421,6 +421,57 @@ const Survey = () => {
                       )}
                     />
 
+                    {hasAppIdea === "yes" && (
+                      <>
+                        <FormField
+                          control={form.control}
+                          name="app_idea_description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-base">📝 Tell us about it! What should the app do?</FormLabel>
+                              <FormControl>
+                              <div className="flex items-start gap-1">
+                                <div className="relative flex-1">
+                                  <Textarea {...field} placeholder="Even a rough idea is great — we'll help you shape it!" rows={3} className="pr-8" />
+                                  {field.value && (
+                                    <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  )}
+                                </div>
+                                <MicrophoneButton onTranscript={(text) => {
+                                  field.onChange(field.value ? `${field.value} ${text}` : text);
+                                }} className="mt-1" />
+                              </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="app_audience"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-base">🌍 Who is it for?</FormLabel>
+                              <FormControl>
+                                <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="public" id="audience-public" />
+                                    <Label htmlFor="audience-public">Public / customers</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="internal" id="audience-internal" />
+                                    <Label htmlFor="audience-internal">Internal / team</Label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </>
                     )}
 
                     {hasAppIdea === "no" && (
@@ -443,6 +494,7 @@ const Survey = () => {
                         )}
                       />
                     )}
+
 
 
                     <FormField
