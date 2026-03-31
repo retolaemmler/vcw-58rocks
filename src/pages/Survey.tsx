@@ -227,7 +227,7 @@ const Survey = () => {
           <div className="text-center text-muted-foreground">
             <div className="text-4xl mb-2">🎬</div>
             <p className="font-medium">Welcome video from your hosts</p>
-            <p className="text-sm">Coming soon — Valentin, Reto & Marc</p>
+            <p className="text-sm">Coming soon — Valentin & Reto</p>
           </div>
         </div>
 
