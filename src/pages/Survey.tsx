@@ -157,6 +157,7 @@ const Survey = () => {
       app_idea_description: values.has_app_idea === "yes" ? values.app_idea_description || null : null,
       app_audience: values.has_app_idea === "yes" ? values.app_audience || null : null,
       building_blocks: values.building_blocks || "",
+      moderation_language: values.moderation_language || "",
       drink_preference: values.drink_preference || "none",
       dietary: values.dietary || "none",
       anything_else: values.anything_else || null,
