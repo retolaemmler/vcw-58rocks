@@ -227,15 +227,13 @@ const Survey = () => {
 
         {/* Welcome video */}
         <div className="mb-8 rounded-xl overflow-hidden border border-border">
-          <video
+          <iframe
             className="w-full aspect-video"
-            controls
-            preload="metadata"
-            poster="/videos/welcome-poster.jpg"
-          >
-            <source src="/videos/welcome.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            src="https://www.youtube.com/embed/IkKErWA_UfI"
+            title="Welcome video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
 
         {!showForm ? (
