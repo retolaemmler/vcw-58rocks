@@ -1,0 +1,1 @@
+ALTER TABLE public.survey_responses ADD COLUMN moderation_language text DEFAULT '';
