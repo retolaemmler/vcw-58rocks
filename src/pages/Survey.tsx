@@ -110,6 +110,7 @@ const Survey = () => {
       app_audience: undefined,
       building_blocks: "",
       drink_preference: undefined,
+      moderation_language: "",
       dietary: "none",
       anything_else: "",
     },
