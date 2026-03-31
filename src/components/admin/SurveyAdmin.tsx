@@ -263,8 +263,12 @@ const SurveyAdmin = () => {
                           </div>
                         )}
                       </TableCell>
-                      <TableCell className="text-sm max-w-[150px] truncate">{r.ai_coding_experience || "—"}</TableCell>
-                      <TableCell className="text-sm max-w-[150px] truncate">{r.lovable_experience || "—"}</TableCell>
+                      <TableCell className="text-sm">
+                        <Badge variant="outline" className="whitespace-nowrap">{r.ai_coding_experience || "—"}</Badge>
+                      </TableCell>
+                      <TableCell className="text-sm">
+                        <Badge variant="outline" className="whitespace-nowrap">{r.lovable_experience || "—"}</Badge>
+                      </TableCell>
                       <TableCell>
                         <Badge variant={r.has_app_idea ? "default" : "outline"}>
                           {r.has_app_idea ? "Yes" : "No"}
