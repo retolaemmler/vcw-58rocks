@@ -210,12 +210,12 @@ const Survey = () => {
   return (
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-2xl mx-auto">
-        <div className="flex items-center gap-3 mb-2">
-          <img src={logo} alt="Vibe Code Workshop" className="h-10 w-10" />
-          <span className="font-display text-lg font-bold">Vibe Code Workshop</span>
-        </div>
         <div className="text-center mb-8">
-          <h1 className="font-display text-3xl font-bold">Let's Get You Ready! 🚀</h1>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <img src={logo} alt="Vibe Code Workshop" className="h-12 w-12" />
+            <h1 className="font-display text-3xl sm:text-4xl font-bold">Vibe Code Workshop</h1>
+          </div>
+          <h2 className="font-display text-xl font-semibold">Let's Get You Ready! 🚀</h2>
           <p className="text-muted-foreground mt-2">
             Quick prep survey — takes about 3 minutes. Tap answers or type your own.
           </p>
