@@ -105,7 +105,7 @@ const Survey = () => {
       lovable_experience: "",
       workshop_goals: "",
       success_criteria: "",
-      has_app_idea: "no",
+      has_app_idea: undefined,
       app_idea_description: "",
       app_audience: undefined,
       building_blocks: "",
