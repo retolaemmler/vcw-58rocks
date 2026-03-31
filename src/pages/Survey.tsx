@@ -111,7 +111,7 @@ const Survey = () => {
       building_blocks: "",
       drink_preference: undefined,
       moderation_language: "",
-      dietary: "none",
+      dietary: undefined,
       anything_else: "",
     },
   });
