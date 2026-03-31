@@ -221,6 +221,15 @@ const Survey = () => {
           </p>
         </div>
 
+        {/* Welcome video placeholder */}
+        <div className="mb-8 rounded-xl border border-border bg-muted/30 aspect-video flex items-center justify-center">
+          <div className="text-center text-muted-foreground">
+            <div className="text-4xl mb-2">🎬</div>
+            <p className="font-medium">Welcome video from your hosts</p>
+            <p className="text-sm">Coming soon — Valentin, Reto & Marc</p>
+          </div>
+        </div>
+
         <Card>
           <CardContent className="pt-6">
             <Form {...form}>
