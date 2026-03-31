@@ -83,7 +83,7 @@ const BUILDING_BLOCK_CHIPS = ["Email", "Payments (e.g. Stripe)", "User login", "
 
 const Survey = () => {
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
+  const token = searchParams.get("token") || "34102c23-93b7-4009-9123-70cdcc2783c2";
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
   const [showForm, setShowForm] = useState(false);
