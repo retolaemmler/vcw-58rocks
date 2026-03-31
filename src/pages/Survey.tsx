@@ -85,6 +85,7 @@ const Survey = () => {
   const token = searchParams.get("token");
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
+  const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [goalDetails, setGoalDetails] = useState("");
@@ -230,6 +231,17 @@ const Survey = () => {
           </div>
         </div>
 
+        {!showForm ? (
+          <div className="text-center">
+            <Button
+              size="lg"
+              className="gradient-bg text-white font-semibold text-lg px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              onClick={() => setShowForm(true)}
+            >
+              Start Survey (3 min)
+            </Button>
+          </div>
+        ) : (
         <Card>
           <CardContent className="pt-6">
             <Form {...form}>
@@ -552,6 +564,7 @@ const Survey = () => {
             </Form>
           </CardContent>
         </Card>
+        )}
       </div>
     </div>
   );
