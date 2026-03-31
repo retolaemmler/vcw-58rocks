@@ -231,6 +231,17 @@ const Survey = () => {
           </div>
         </div>
 
+        {!showForm ? (
+          <div className="text-center">
+            <Button
+              size="lg"
+              className="gradient-bg text-white font-semibold text-lg px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              onClick={() => setShowForm(true)}
+            >
+              Start Survey (3 min)
+            </Button>
+          </div>
+        ) : (
         <Card>
           <CardContent className="pt-6">
             <Form {...form}>
