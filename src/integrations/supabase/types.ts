@@ -88,6 +88,7 @@ export type Database = {
           has_app_idea: boolean
           id: string
           lovable_experience: string
+          moderation_language: string | null
           participant_name: string | null
           success_criteria: string
           token_id: string
@@ -106,6 +107,7 @@ export type Database = {
           has_app_idea?: boolean
           id?: string
           lovable_experience: string
+          moderation_language?: string | null
           participant_name?: string | null
           success_criteria: string
           token_id: string
@@ -124,6 +126,7 @@ export type Database = {
           has_app_idea?: boolean
           id?: string
           lovable_experience?: string
+          moderation_language?: string | null
           participant_name?: string | null
           success_criteria?: string
           token_id?: string

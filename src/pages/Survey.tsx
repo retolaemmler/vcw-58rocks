@@ -29,6 +29,7 @@ const surveySchema = z.object({
   app_audience: z.enum(["public", "internal"]).optional(),
   building_blocks: z.string().optional(),
   drink_preference: z.enum(["coffee", "tea", "both"]).optional(),
+  moderation_language: z.string().optional(),
   dietary: z.enum(["none", "vegetarian", "vegan"]).optional(),
   anything_else: z.string().optional(),
 });
@@ -109,6 +110,7 @@ const Survey = () => {
       app_audience: undefined,
       building_blocks: "",
       drink_preference: undefined,
+      moderation_language: "",
       dietary: "none",
       anything_else: "",
     },
@@ -155,6 +157,7 @@ const Survey = () => {
       app_idea_description: values.has_app_idea === "yes" ? values.app_idea_description || null : null,
       app_audience: values.has_app_idea === "yes" ? values.app_audience || null : null,
       building_blocks: values.building_blocks || "",
+      moderation_language: values.moderation_language || "",
       drink_preference: values.drink_preference || "none",
       dietary: values.dietary || "none",
       anything_else: values.anything_else || null,
@@ -522,6 +525,47 @@ const Survey = () => {
                           <FormMessage />
                         </FormItem>
                       )}
+                    />
+
+                    {/* Moderation language */}
+                    <FormField
+                      control={form.control}
+                      name="moderation_language"
+                      render={({ field }) => {
+                        const options = ["Deutsch", "English", "Both are OK"];
+                        const selected = field.value ? field.value.split(", ").filter(Boolean) : [];
+                        const toggleOption = (opt: string) => {
+                          const newSelected = selected.includes(opt)
+                            ? selected.filter((s) => s !== opt)
+                            : [...selected, opt];
+                          field.onChange(newSelected.join(", "));
+                        };
+                        return (
+                          <FormItem>
+                            <FormLabel className="text-base">🗣️ Preferred moderation language?</FormLabel>
+                            <p className="text-sm text-muted-foreground">Select all that apply</p>
+                            <FormControl>
+                              <div className="flex flex-wrap gap-2">
+                                {options.map((opt) => (
+                                  <button
+                                    key={opt}
+                                    type="button"
+                                    onClick={() => toggleOption(opt)}
+                                    className={`px-3 py-1.5 rounded-full border text-sm transition-colors ${
+                                      selected.includes(opt)
+                                        ? "bg-primary text-primary-foreground border-primary"
+                                        : "bg-muted/50 text-foreground border-border hover:bg-muted"
+                                    }`}
+                                  >
+                                    {opt}
+                                  </button>
+                                ))}
+                              </div>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
                     />
 
                     {/* Q11: Anything else */}
