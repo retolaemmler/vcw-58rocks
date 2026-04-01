@@ -210,6 +210,31 @@ const SurveyAdmin = () => {
         )}
       </Card>
 
+      {/* All Participant Emails */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="flex items-center gap-2 text-base">
+            All Emails ({orderEmails.length})
+          </CardTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              const emails = orderEmails.map((o) => o.customer_email).join(", ");
+              navigator.clipboard.writeText(emails);
+              toast({ title: "Copied!", description: `${orderEmails.length} emails copied` });
+            }}
+          >
+            <Copy className="w-4 h-4 mr-1" /> Copy All
+          </Button>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground break-all">
+            {orderEmails.map((o) => o.customer_email).join(", ")}
+          </p>
+        </CardContent>
+      </Card>
+
       {/* Responses Table */}
       <Card>
         <CardHeader>
