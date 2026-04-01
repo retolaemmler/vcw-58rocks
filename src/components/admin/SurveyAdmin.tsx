@@ -223,6 +223,7 @@ const SurveyAdmin = () => {
                   <TableHead>AI Experience</TableHead>
                   <TableHead>Lovable Experience</TableHead>
                   <TableHead>App Idea</TableHead>
+                  <TableHead>App Idea Description</TableHead>
                   <TableHead>Dietary</TableHead>
                   <TableHead>Details</TableHead>
                 </TableRow>
@@ -275,6 +276,9 @@ const SurveyAdmin = () => {
                           {r.has_app_idea ? "Yes" : "No"}
                         </Badge>
                       </TableCell>
+                      <TableCell className="text-sm max-w-[200px] truncate">
+                        {r.app_idea_description || "—"}
+                      </TableCell>
                       <TableCell className="capitalize">{r.dietary === "none" ? "—" : r.dietary || "—"}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
@@ -293,7 +297,7 @@ const SurveyAdmin = () => {
                     </TableRow>
                     {expandedRow === r.id && (
                       <TableRow key={`${r.id}-detail`}>
-                        <TableCell colSpan={7}>
+                         <TableCell colSpan={8}>
                           <div className="grid gap-3 p-4 bg-muted/50 rounded-lg text-sm">
                              <div><strong>AI Coding Experience:</strong> {r.ai_coding_experience || "—"}</div>
                              <div><strong>Lovable Experience:</strong> {r.lovable_experience || "—"}</div>
@@ -305,8 +309,8 @@ const SurveyAdmin = () => {
                              {r.has_app_idea && r.app_audience && (
                                <div><strong>Audience:</strong> {r.app_audience}</div>
                              )}
-                             <div><strong>Workshop Language:</strong> {r.moderation_language || "—"}</div>
                              <div><strong>Building Blocks:</strong> {r.building_blocks || "—"}</div>
+                             <div><strong>Workshop Language:</strong> {r.moderation_language || "—"}</div>
                              <div><strong>Drink Preference:</strong> {r.drink_preference || "—"}</div>
                              <div><strong>Dietary:</strong> {r.dietary === "none" ? "—" : r.dietary || "—"}</div>
                              {r.anything_else && <div><strong>Other:</strong> {r.anything_else}</div>}
@@ -318,7 +322,7 @@ const SurveyAdmin = () => {
                 ))}
                 {responses.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
                       No responses yet.
                     </TableCell>
                   </TableRow>
