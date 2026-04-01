@@ -146,7 +146,9 @@ const SurveyAdmin = () => {
     }
   };
 
+  const orderEmailSet = new Set(orderEmails.map((o) => o.customer_email.toLowerCase()));
   const respondedEmails = new Set(responses.map((r) => r.email?.toLowerCase()).filter(Boolean));
+  const matchedResponses = responses.filter((r) => r.email && orderEmailSet.has(r.email.toLowerCase()));
   const pendingEmails = orderEmails.filter(
     (o) => !respondedEmails.has(o.customer_email.toLowerCase())
   );
@@ -191,7 +193,7 @@ const SurveyAdmin = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="w-5 h-5" />
-            Completion: {responses.length} / {orderEmails.length}
+            Completion: {matchedResponses.length} / {orderEmails.length}
           </CardTitle>
         </CardHeader>
         {pendingEmails.length > 0 && (
