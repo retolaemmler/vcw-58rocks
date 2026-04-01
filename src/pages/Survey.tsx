@@ -259,7 +259,7 @@ const Survey = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>📧 Your Email</FormLabel>
+                        <FormLabel>📧 Your Email (ideally the same, as you purchased your ticket with)</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" placeholder="your@email.com" />
                         </FormControl>
