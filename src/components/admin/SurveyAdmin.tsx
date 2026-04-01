@@ -23,6 +23,7 @@ interface SurveyResponse {
   drink_preference: string;
   dietary: string;
   anything_else: string | null;
+  moderation_language: string | null;
   created_at: string;
 }
 
