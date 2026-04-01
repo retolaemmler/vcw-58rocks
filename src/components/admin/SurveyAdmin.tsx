@@ -297,7 +297,7 @@ const SurveyAdmin = () => {
                     </TableRow>
                     {expandedRow === r.id && (
                       <TableRow key={`${r.id}-detail`}>
-                        <TableCell colSpan={7}>
+                         <TableCell colSpan={8}>
                           <div className="grid gap-3 p-4 bg-muted/50 rounded-lg text-sm">
                              <div><strong>AI Coding Experience:</strong> {r.ai_coding_experience || "—"}</div>
                              <div><strong>Lovable Experience:</strong> {r.lovable_experience || "—"}</div>
@@ -309,8 +309,8 @@ const SurveyAdmin = () => {
                              {r.has_app_idea && r.app_audience && (
                                <div><strong>Audience:</strong> {r.app_audience}</div>
                              )}
-                             <div><strong>Workshop Language:</strong> {r.moderation_language || "—"}</div>
                              <div><strong>Building Blocks:</strong> {r.building_blocks || "—"}</div>
+                             <div><strong>Workshop Language:</strong> {r.moderation_language || "—"}</div>
                              <div><strong>Drink Preference:</strong> {r.drink_preference || "—"}</div>
                              <div><strong>Dietary:</strong> {r.dietary === "none" ? "—" : r.dietary || "—"}</div>
                              {r.anything_else && <div><strong>Other:</strong> {r.anything_else}</div>}
