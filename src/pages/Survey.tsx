@@ -598,9 +598,6 @@ const Survey = () => {
                                     </button>
                                   )}
                                 </div>
-                                <MicrophoneButton onTranscript={(text) => {
-                                  field.onChange(field.value ? `${field.value} ${text}` : text);
-                                }} className="mt-1" />
                               </div>
                           </FormControl>
                           <FormMessage />
