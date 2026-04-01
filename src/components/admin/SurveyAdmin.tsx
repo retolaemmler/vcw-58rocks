@@ -299,14 +299,12 @@ const SurveyAdmin = () => {
                              <div><strong>Lovable Experience:</strong> {r.lovable_experience || "—"}</div>
                              <div><strong>Workshop Goals:</strong> {r.workshop_goals || "—"}</div>
                              <div><strong>Success Criteria:</strong> {r.success_criteria || "—"}</div>
-                             {r.has_app_idea ? (
-                               <>
-                                 <div><strong>App Idea:</strong> {r.app_idea_description || "—"}</div>
-                                 <div><strong>Audience:</strong> {r.app_audience || "—"}</div>
-                               </>
-                             ) : r.app_idea_description ? (
-                               <div><strong>Exploration Areas:</strong> {r.app_idea_description}</div>
-                             ) : null}
+                             {r.app_idea_description && (
+                               <div><strong>{r.has_app_idea ? "App Idea" : "Exploration Areas"}:</strong> {r.app_idea_description}</div>
+                             )}
+                             {r.has_app_idea && r.app_audience && (
+                               <div><strong>Audience:</strong> {r.app_audience}</div>
+                             )}
                              <div><strong>Workshop Language:</strong> {r.moderation_language || "—"}</div>
                              <div><strong>Building Blocks:</strong> {r.building_blocks || "—"}</div>
                              <div><strong>Drink Preference:</strong> {r.drink_preference || "—"}</div>
