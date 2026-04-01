@@ -276,6 +276,9 @@ const SurveyAdmin = () => {
                           {r.has_app_idea ? "Yes" : "No"}
                         </Badge>
                       </TableCell>
+                      <TableCell className="text-sm max-w-[200px] truncate">
+                        {r.app_idea_description || "—"}
+                      </TableCell>
                       <TableCell className="capitalize">{r.dietary === "none" ? "—" : r.dietary || "—"}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
