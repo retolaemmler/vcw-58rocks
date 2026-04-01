@@ -193,7 +193,7 @@ const SurveyAdmin = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="w-5 h-5" />
-            Completion: {responses.length} / {orderEmails.length}
+            Completion: {matchedResponses.length} / {orderEmails.length}
           </CardTitle>
         </CardHeader>
         {pendingEmails.length > 0 && (
