@@ -154,7 +154,7 @@ const Survey = () => {
       workshop_goals: values.workshop_goals || "",
       success_criteria: values.success_criteria || "",
       has_app_idea: values.has_app_idea === "yes",
-      app_idea_description: values.has_app_idea === "yes" ? values.app_idea_description || null : null,
+      app_idea_description: values.app_idea_description?.trim() || null,
       app_audience: values.has_app_idea === "yes" ? values.app_audience || null : null,
       building_blocks: values.building_blocks || "",
       moderation_language: values.moderation_language || "",
