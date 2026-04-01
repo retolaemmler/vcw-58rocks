@@ -223,6 +223,7 @@ const SurveyAdmin = () => {
                   <TableHead>AI Experience</TableHead>
                   <TableHead>Lovable Experience</TableHead>
                   <TableHead>App Idea</TableHead>
+                  <TableHead>App Idea Description</TableHead>
                   <TableHead>Dietary</TableHead>
                   <TableHead>Details</TableHead>
                 </TableRow>
