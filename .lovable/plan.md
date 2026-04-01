@@ -1,8 +1,13 @@
 
 
-The user wants to use the uploaded screenshot as the video thumbnail (poster image). This is a frame from the welcome video showing the two hosts.
+## Add copyable participant emails list
 
-**Plan:**
-1. Copy the uploaded image to `public/videos/welcome-poster.png`
-2. Add the `poster` attribute to the `<video>` element in `src/pages/Survey.tsx` pointing to `/videos/welcome-poster.png`
+Add a section in the Survey admin that displays all unique participant emails (from both survey responses and orders) as a comma-separated list with a copy button.
+
+### Changes
+
+**`src/components/admin/SurveyAdmin.tsx`**
+- Add a new Card below the Completion card showing all unique emails from `orderEmails` as a comma-separated string
+- Include a "Copy All" button that copies the list to clipboard
+- Optionally show count of emails
 
