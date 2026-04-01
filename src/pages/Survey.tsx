@@ -28,7 +28,7 @@ const surveySchema = z.object({
   app_idea_description: z.string().optional(),
   app_audience: z.enum(["public", "internal"]).optional(),
   building_blocks: z.string().optional(),
-  drink_preference: z.enum(["coffee", "tea", "both"]).optional(),
+  
   moderation_language: z.string().optional(),
   dietary: z.enum(["none", "vegetarian", "vegan"]).optional(),
   anything_else: z.string().optional(),
@@ -109,7 +109,7 @@ const Survey = () => {
       app_idea_description: "",
       app_audience: undefined,
       building_blocks: "",
-      drink_preference: undefined,
+      
       moderation_language: "",
       dietary: undefined,
       anything_else: "",
@@ -158,7 +158,7 @@ const Survey = () => {
       app_audience: values.has_app_idea === "yes" ? values.app_audience || null : null,
       building_blocks: values.building_blocks || "",
       moderation_language: values.moderation_language || "",
-      drink_preference: values.drink_preference || "none",
+      drink_preference: "none",
       dietary: values.dietary || "none",
       anything_else: values.anything_else || null,
     });

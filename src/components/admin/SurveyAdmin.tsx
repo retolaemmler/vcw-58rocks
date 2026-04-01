@@ -311,7 +311,7 @@ const SurveyAdmin = () => {
                              )}
                              <div><strong>Building Blocks:</strong> {r.building_blocks || "—"}</div>
                              <div><strong>Workshop Language:</strong> {r.moderation_language || "—"}</div>
-                             <div><strong>Drink Preference:</strong> {r.drink_preference || "—"}</div>
+                             
                              <div><strong>Dietary:</strong> {r.dietary === "none" ? "—" : r.dietary || "—"}</div>
                              {r.anything_else && <div><strong>Other:</strong> {r.anything_else}</div>}
                            </div>
