@@ -10,6 +10,7 @@ import { Loader2, LogOut, DollarSign, ShoppingCart, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
+import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
