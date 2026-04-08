@@ -18,6 +18,8 @@ const tiers = [
 
 
 const PricingSection = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <section id="pricing" className="py-20 px-4 bg-background">
       <div className="max-w-4xl mx-auto text-center">
