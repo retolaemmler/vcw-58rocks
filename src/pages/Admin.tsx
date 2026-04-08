@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, LogOut, DollarSign, ShoppingCart } from "lucide-react";
+import { Loader2, LogOut, DollarSign, ShoppingCart, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
