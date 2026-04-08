@@ -1,6 +1,15 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Ticket, Star, Users, Gift } from "lucide-react";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const tiers = [
 { name: "Early Bird", price: "599", discount: "25% off", highlight: false, soldOut: true },
