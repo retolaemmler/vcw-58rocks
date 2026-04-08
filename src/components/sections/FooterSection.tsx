@@ -1,7 +1,18 @@
+import { useState } from "react";
 import { Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const FooterSection = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <footer className="py-16 px-4 bg-foreground text-primary-foreground">
       <div className="max-w-5xl mx-auto">
@@ -26,12 +37,32 @@ const FooterSection = () => {
             </div>
           </div>
         </div>
-        <div className="border-t border-primary-foreground/10 pt-8 pb-8">
-          <NewsletterSignup variant="dark" />
+        <div className="border-t border-primary-foreground/10 pt-8 pb-8 text-center">
+          <Button
+            variant="outline"
+            className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+            onClick={() => setOpen(true)}
+          >
+            Alternative Dates
+          </Button>
         </div>
         <div className="border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/40">
           © 2026 58rocks GmbH. All rights reserved.
         </div>
       </div>
-    </footer>);};
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Get Notified About Other Dates</DialogTitle>
+            <DialogDescription>
+              Leave your details and we'll inform you about upcoming workshop dates.
+            </DialogDescription>
+          </DialogHeader>
+          <NewsletterSignup variant="light" />
+        </DialogContent>
+      </Dialog>
+    </footer>
+  );
+};
 export default FooterSection;
