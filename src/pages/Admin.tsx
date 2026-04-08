@@ -281,6 +281,10 @@ const Admin = () => {
           <TabsContent value="survey">
             <SurveyAdmin />
           </TabsContent>
+
+          <TabsContent value="newsletter">
+            <NewsletterAdmin />
+          </TabsContent>
         </Tabs>
       </div>
     </main>
