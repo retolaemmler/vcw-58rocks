@@ -1,10 +1,19 @@
-import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Calendar, MapPin, Users } from "lucide-react";
+import { Sparkles, Calendar, MapPin } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const HeroSection = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-4 pt-28 pb-8">
       {/* Background blobs */}
@@ -51,23 +60,29 @@ const HeroSection = () => {
               size="lg"
               variant="outline"
               className="font-semibold text-lg px-8 py-6 rounded-xl transition-all hover:scale-105"
-              asChild>
-              <a href="mailto:rlaemmler@gmail.com">
-                Get in Touch
-              </a>
+              onClick={() => setOpen(true)}>
+              Alternative Dates
             </Button>
           </div>
           <p className="text-sm text-destructive font-medium animate-pulse">
             🔥 Early Bird Sold Out. 10 tickets left for grab!
           </p>
         </div>
-
-        <div className="mt-10 w-full">
-          <NewsletterSignup variant="light" />
-        </div>
       </div>
-    </section>);
 
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Get Notified About Other Dates</DialogTitle>
+            <DialogDescription>
+              Leave your details and we'll inform you about upcoming workshop dates.
+            </DialogDescription>
+          </DialogHeader>
+          <NewsletterSignup variant="light" />
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
 };
 
 export default HeroSection;
