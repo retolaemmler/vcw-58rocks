@@ -6,10 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, LogOut, DollarSign, ShoppingCart } from "lucide-react";
+import { Loader2, LogOut, DollarSign, ShoppingCart, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
+import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
@@ -190,6 +191,7 @@ const Admin = () => {
           <TabsList>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="survey">Survey</TabsTrigger>
+            <TabsTrigger value="newsletter">Newsletter</TabsTrigger>
           </TabsList>
 
           <TabsContent value="orders">
@@ -278,6 +280,10 @@ const Admin = () => {
 
           <TabsContent value="survey">
             <SurveyAdmin />
+          </TabsContent>
+
+          <TabsContent value="newsletter">
+            <NewsletterAdmin />
           </TabsContent>
         </Tabs>
       </div>

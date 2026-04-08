@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin, Users } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const HeroSection = () => {
   return (
@@ -59,7 +60,10 @@ const HeroSection = () => {
           <p className="text-sm text-destructive font-medium animate-pulse">
             🔥 Early Bird Sold Out. 10 tickets left for grab!
           </p>
+        </div>
 
+        <div className="mt-10 w-full">
+          <NewsletterSignup variant="light" />
         </div>
       </div>
     </section>);

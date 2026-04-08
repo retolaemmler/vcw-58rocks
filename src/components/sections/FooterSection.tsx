@@ -1,4 +1,5 @@
 import { Globe } from "lucide-react";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const FooterSection = () => {
   return (
@@ -24,6 +25,9 @@ const FooterSection = () => {
               </a>
             </div>
           </div>
+        </div>
+        <div className="border-t border-primary-foreground/10 pt-8 pb-8">
+          <NewsletterSignup variant="dark" />
         </div>
         <div className="border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/40">
           © 2026 58rocks GmbH. All rights reserved.
