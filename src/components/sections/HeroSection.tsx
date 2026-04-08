@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin, Users } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const HeroSection = () => {
   return (
