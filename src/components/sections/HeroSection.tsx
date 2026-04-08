@@ -59,7 +59,10 @@ const HeroSection = () => {
           <p className="text-sm text-destructive font-medium animate-pulse">
             🔥 Early Bird Sold Out. 10 tickets left for grab!
           </p>
+        </div>
 
+        <div className="mt-10 w-full">
+          <NewsletterSignup variant="light" />
         </div>
       </div>
     </section>);
