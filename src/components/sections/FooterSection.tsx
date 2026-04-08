@@ -1,4 +1,5 @@
 import { Globe } from "lucide-react";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const FooterSection = () => {
   return (
