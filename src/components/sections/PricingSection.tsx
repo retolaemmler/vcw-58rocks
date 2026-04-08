@@ -99,6 +99,18 @@ const PricingSection = () => {
           </Badge>
         </div>
       </div>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Get Notified About Other Dates</DialogTitle>
+            <DialogDescription>
+              Leave your details and we'll inform you about upcoming workshop dates.
+            </DialogDescription>
+          </DialogHeader>
+          <NewsletterSignup variant="light" />
+        </DialogContent>
+      </Dialog>
     </section>);
 
 };
