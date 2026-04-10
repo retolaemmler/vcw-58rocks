@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import valentinImg from "@/assets/Valentin.jpeg";
+import retoImg from "@/assets/Reto.jpeg";
 
 /* ─── slide data ─── */
 const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?: string }[] = [
@@ -31,13 +33,11 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     content: (
       <div className="grid grid-cols-2 gap-10 px-16 pt-8 max-w-3xl mx-auto">
         {[
-          { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", ambassador: true },
-          { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", ambassador: true },
+          { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", ambassador: true, image: valentinImg },
+          { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", ambassador: true, image: retoImg },
         ].map((c) => (
           <div key={c.name} className="flex flex-col items-center text-center gap-4 p-8 rounded-2xl bg-white/5 border border-white/10">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[hsl(174,72%,40%)] to-[hsl(262,80%,55%)] flex items-center justify-center text-white text-3xl font-bold">
-              {c.initials}
-            </div>
+            <img src={c.image} alt={c.name} className="w-24 h-24 rounded-full object-cover ring-2 ring-white/20" />
             <h3 className="text-2xl font-bold text-white">{c.name}</h3>
             <p className="text-lg text-white/60">{c.role}</p>
             {c.ambassador && (
