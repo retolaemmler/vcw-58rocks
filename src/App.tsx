@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Confirmation from "./pages/Confirmation";
 import Admin from "./pages/Admin";
 import Survey from "./pages/Survey";
+import IdeaGenerator from "./pages/IdeaGenerator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/admin" element={<Admin />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/prepsurvey" element={<Survey />} />
+          <Route path="/ideas" element={<IdeaGenerator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
