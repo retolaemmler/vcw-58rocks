@@ -1,6 +1,28 @@
 import { Linkedin } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
+import valentinImg from "@/assets/Valentin.jpeg";
+import retoImg from "@/assets/Reto.jpeg";
+
+const coaches = [
+  {
+    name: "Valentin Binnendijk",
+    role: "Product Expert & Consultant",
+    linkedin: "https://www.linkedin.com/in/valentinbinnendijk/",
+    initials: "VB",
+    image: valentinImg,
+    ambassador: true,
+  },
+  {
+    name: "Reto Lämmler",
+    role: "Entrepreneur & UX Expert",
+    linkedin: "https://www.linkedin.com/in/rlaemmler/",
+    initials: "RL",
+    image: retoImg,
+    ambassador: true,
+  },
+];
 
 const participants = [
   {
