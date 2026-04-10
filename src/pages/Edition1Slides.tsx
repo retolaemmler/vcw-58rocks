@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import valentinImg from "@/assets/Valentin.jpeg";
