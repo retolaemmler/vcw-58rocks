@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Requirements", id: "requirements" },
   { label: "Coaches", id: "coaches" },
   { label: "Tickets", id: "pricing" },
+  { label: "Ideas", id: "ideas", href: "/ideas" },
 ];
 
 const Navbar = () => {
