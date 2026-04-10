@@ -1,4 +1,6 @@
 import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const examples = [
   {
@@ -68,6 +70,14 @@ const WhySection = () => {
             Get inspired — see what others build with Vibe Coding
             <ExternalLink className="w-4 h-4" />
           </a>
+          <div className="mt-4">
+            <Button asChild size="lg">
+              <Link to="/ideas">
+                <Sparkles className="w-4 h-4" />
+                Try our Idea Generator
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
