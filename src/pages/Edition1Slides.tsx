@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Maximize, Minimize, Home } from "lucide-reac
 import { useNavigate } from "react-router-dom";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
+import vcwLogo from "@/assets/vcw-logo.png";
 
 /* ─── slide data ─── */
 const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?: string }[] = [
@@ -12,6 +13,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     bg: "gradient",
     content: (
       <div className="flex flex-col items-center justify-center h-full text-center gap-8 px-12">
+        <img src={vcwLogo} alt="Vibe Code Workshop" className="w-40 h-40 rounded-full" />
         <p className="uppercase tracking-[0.3em] text-white/70 text-xl font-medium">Edition 1 · 16 April 2026</p>
         <h1 className="text-7xl sm:text-8xl font-extrabold text-white leading-tight font-display">
           Vibe Code<br />Workshop
