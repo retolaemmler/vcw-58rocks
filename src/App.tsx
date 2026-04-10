@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import Survey from "./pages/Survey";
 import IdeaGenerator from "./pages/IdeaGenerator";
 import Edition1Participants from "./pages/Edition1Participants";
+import Edition1Slides from "./pages/Edition1Slides";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/prepsurvey" element={<Survey />} />
           <Route path="/ideas" element={<IdeaGenerator />} />
           <Route path="/edition1/participants" element={<Edition1Participants />} />
+          <Route path="/edition1/slides" element={<Edition1Slides />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
