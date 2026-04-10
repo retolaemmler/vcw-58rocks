@@ -147,7 +147,7 @@ const Edition1Participants = () => {
                 </AvatarFallback>
               </Avatar>
               <div className="min-w-0 flex-1">
-                <div className="font-semibold text-foreground truncate flex items-center gap-2">
+                <div className="font-semibold text-foreground flex items-center gap-2 flex-wrap">
                   {c.name}
                   {c.ambassador && (
                     <Badge variant="secondary" className="text-[10px] px-1.5 py-0 shrink-0">
