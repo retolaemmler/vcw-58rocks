@@ -167,15 +167,15 @@ const Edition1Participants = () => {
                 </AvatarFallback>
               </Avatar>
               <div className="min-w-0 flex-1">
-                <div className="font-semibold text-foreground flex items-center gap-2 flex-wrap">
+                <div className="font-semibold text-foreground truncate">
                   {c.name}
-                  {c.ambassador && (
-                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 shrink-0">
-                      🩷 Lovable Ambassador
-                    </Badge>
-                  )}
                 </div>
                 <div className="text-sm text-muted-foreground truncate">{c.role}</div>
+                {c.ambassador && (
+                  <Badge variant="secondary" className="text-[10px] px-1.5 py-0 mt-1">
+                    🩷 Lovable Ambassador
+                  </Badge>
+                )}
               </div>
               <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
             </a>
