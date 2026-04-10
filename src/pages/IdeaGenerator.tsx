@@ -115,7 +115,7 @@ export default function IdeaGenerator() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Lightbulb className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">App Idea Generator</h1>
+            <h1 className="text-3xl font-bold text-foreground">Idea Generator</h1>
           </div>
           <p className="text-muted-foreground">
             Describe your interest area and get AI-generated app ideas you can build in the workshop.
