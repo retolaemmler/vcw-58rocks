@@ -139,7 +139,7 @@ const Edition1Participants = () => {
                   {p.name}
                 </div>
                 {p.company && (
-                  <div className="text-sm text-muted-foreground truncate">
+                  <div className="text-sm text-muted-foreground">
                     {p.company}
                   </div>
                 )}
