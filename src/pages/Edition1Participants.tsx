@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
+import marcoLImg from "@/assets/MarcoLustenberger.png";
 
 const coaches = [
   {
