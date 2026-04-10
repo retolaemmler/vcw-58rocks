@@ -369,9 +369,24 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
 ];
 
 /* ─── Slides component ─── */
+const SLIDE_W = 1920;
+const SLIDE_H = 1080;
+
 const Edition1Slides = () => {
   const [current, setCurrent] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [scale, setScale] = useState(1);
+  const containerRef = useCallback((node: HTMLDivElement | null) => {
+    if (!node) return;
+    const update = () => {
+      const { width, height } = node.getBoundingClientRect();
+      setScale(Math.min(width / SLIDE_W, height / SLIDE_H));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(node);
+    return () => ro.disconnect();
+  }, []);
   const navigate = useNavigate();
   const total = slides.length;
 
@@ -404,9 +419,10 @@ const Edition1Slides = () => {
   return (
     <div className="h-screen w-screen bg-[#0c0c1d] flex flex-col overflow-hidden select-none">
       {/* Slide area */}
-      <div className="flex-1 relative flex items-center justify-center overflow-hidden">
+      <div ref={containerRef} className="flex-1 relative flex items-center justify-center overflow-hidden">
         <div
-          className={`w-full h-full flex flex-col ${
+          style={{ width: SLIDE_W, height: SLIDE_H, transform: `scale(${scale})`, transformOrigin: "center center" }}
+          className={`absolute flex flex-col shrink-0 ${
             isGradient
               ? "bg-gradient-to-br from-[hsl(220,30%,10%)] via-[hsl(262,50%,20%)] to-[hsl(174,50%,15%)]"
               : "bg-[#12122a]"
