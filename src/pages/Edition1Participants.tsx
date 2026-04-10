@@ -7,6 +7,7 @@ import retoImg from "@/assets/Reto.jpeg";
 import marcoLImg from "@/assets/MarcoLustenberger.png";
 import lukasKImg from "@/assets/LukasKarrer.png";
 import claudiaDImg from "@/assets/ClaudiaDietschi.png";
+import marioFImg from "@/assets/MarioFaeh.png";
 
 const coaches = [
   {
@@ -54,6 +55,7 @@ const participants = [
     company: "Roarington AG",
     linkedin: "https://linkedin.com/in/mariofaeh",
     initials: "MF",
+    image: marioFImg,
   },
   {
     name: "Dave Lieber",
