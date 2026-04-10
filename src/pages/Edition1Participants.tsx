@@ -32,6 +32,7 @@ const participants = [
     company: "Helion Energy AG",
     linkedin: "https://linkedin.com/in/karrerlukas",
     initials: "LK",
+    image: lukasKImg,
   },
   {
     name: "Marco Lustenberger",
