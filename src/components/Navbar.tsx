@@ -5,7 +5,7 @@ import logo from "@/assets/vcw-logo.png";
 
 const navLinks = [
   { label: "Build", id: "why" },
-  { label: "Ideas", id: "ideas", href: "/ideas" },
+  
   { label: "Schedule", id: "agenda" },
   { label: "Participants", id: "audience" },
   { label: "Requirements", id: "requirements" },
@@ -27,9 +27,7 @@ const Navbar = () => {
 
   const handleNav = (link: typeof navLinks[0]) => {
     setMobileOpen(false);
-    if (link.href) {
-      navigate(link.href);
-    } else if (location.pathname !== "/") {
+    if (location.pathname !== "/") {
       navigate("/", { state: { scrollTo: link.id } });
     } else {
       document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" });
@@ -55,11 +53,7 @@ const Navbar = () => {
             <button
               key={link.id}
               onClick={() => handleNav(link)}
-              className={`text-sm font-medium transition-colors ${
-                link.href && location.pathname === link.href
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+              className="text-sm font-medium transition-colors text-muted-foreground hover:text-foreground"
             >
               {link.label}
             </button>
