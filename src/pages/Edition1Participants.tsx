@@ -37,6 +37,7 @@ const participants = [
     company: "TrekkSoft AG",
     linkedin: "https://linkedin.com/in/marco-lustenberger-24259565",
     initials: "ML",
+    image: marcoLImg,
   },
   {
     name: "Claudia Dietschi",
