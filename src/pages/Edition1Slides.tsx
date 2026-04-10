@@ -29,11 +29,10 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
   {
     title: "Your Coaches",
     content: (
-      <div className="grid grid-cols-3 gap-10 px-16 pt-8">
+      <div className="grid grid-cols-2 gap-10 px-16 pt-8 max-w-3xl mx-auto">
         {[
           { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", ambassador: true },
           { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", ambassador: true },
-          { name: "Marc Gasser", role: "Co-Founder at 58rocks", initials: "MG", ambassador: false },
         ].map((c) => (
           <div key={c.name} className="flex flex-col items-center text-center gap-4 p-8 rounded-2xl bg-white/5 border border-white/10">
             <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[hsl(174,72%,40%)] to-[hsl(262,80%,55%)] flex items-center justify-center text-white text-3xl font-bold">
