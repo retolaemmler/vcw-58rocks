@@ -128,9 +128,43 @@ const Edition1Participants = () => {
             </a>
           ))}
         </div>
+
+        {/* Coaches */}
+        <h2 className="text-2xl font-bold text-foreground mt-16 mb-6">Coaches</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+          {coaches.map((c) => (
+            <a
+              key={c.name}
+              href={c.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-all hover:shadow-md hover:border-primary/40"
+            >
+              <Avatar className="h-14 w-14 shrink-0">
+                <AvatarImage src={c.image} alt={c.name} />
+                <AvatarFallback className="bg-primary/10 text-primary font-semibold text-lg">
+                  {c.initials}
+                </AvatarFallback>
+              </Avatar>
+              <div className="min-w-0 flex-1">
+                <div className="font-semibold text-foreground truncate flex items-center gap-2">
+                  {c.name}
+                  {c.ambassador && (
+                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 shrink-0">
+                      🩷 Lovable Ambassador
+                    </Badge>
+                  )}
+                </div>
+                <div className="text-sm text-muted-foreground truncate">{c.role}</div>
+              </div>
+              <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
+};
 };
 
 export default Edition1Participants;
