@@ -6,6 +6,7 @@ import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import marcoLImg from "@/assets/MarcoLustenberger.png";
 import lukasKImg from "@/assets/LukasKarrer.png";
+import claudiaDImg from "@/assets/ClaudiaDietschi.png";
 
 const coaches = [
   {
@@ -46,6 +47,7 @@ const participants = [
     company: "DIETSCHIART",
     linkedin: "https://linkedin.com/in/claudia-dietschi",
     initials: "CD",
+    image: claudiaDImg,
   },
   {
     name: "Mario Fäh",
