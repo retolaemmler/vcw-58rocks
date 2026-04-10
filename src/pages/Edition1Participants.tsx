@@ -8,6 +8,7 @@ import marcoLImg from "@/assets/MarcoLustenberger.png";
 import lukasKImg from "@/assets/LukasKarrer.png";
 import claudiaDImg from "@/assets/ClaudiaDietschi.png";
 import marioFImg from "@/assets/MarioFaeh.png";
+import daveLImg from "@/assets/DaveLieber.png";
 
 const coaches = [
   {
@@ -62,6 +63,7 @@ const participants = [
     company: "TestingTime AG",
     linkedin: "https://linkedin.com/in/dave-lieber-12220b3",
     initials: "DL",
+    image: daveLImg,
   },
   {
     name: "Janine Totz",
