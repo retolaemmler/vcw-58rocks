@@ -13,6 +13,7 @@ import janineTImg from "@/assets/JanineTotz.png";
 import marcMImg from "@/assets/MarcMaurer.png";
 import mattiaPImg from "@/assets/MattiaPiccoli.png";
 import ahmetSImg from "@/assets/AhmetSakali.png";
+import silvioHImg from "@/assets/SilvioHoldener.png";
 
 const coaches = [
   {
@@ -102,6 +103,7 @@ const participants = [
     company: "SIX",
     linkedin: "https://linkedin.com/in/silvio-holdener-456479b8",
     initials: "SH",
+    image: silvioHImg,
   },
 ];
 
