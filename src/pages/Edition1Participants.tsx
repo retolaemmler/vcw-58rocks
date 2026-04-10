@@ -165,6 +165,5 @@ const Edition1Participants = () => {
     </div>
   );
 };
-};
 
 export default Edition1Participants;
