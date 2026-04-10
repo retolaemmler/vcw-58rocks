@@ -12,6 +12,7 @@ import daveLImg from "@/assets/DaveLieber.png";
 import janineTImg from "@/assets/JanineTotz.png";
 import marcMImg from "@/assets/MarcMaurer.png";
 import mattiaPImg from "@/assets/MattiaPiccoli.png";
+import ahmetSImg from "@/assets/AhmetSakali.png";
 
 const coaches = [
   {
@@ -94,6 +95,7 @@ const participants = [
     company: "TestingTime AG",
     linkedin: "https://linkedin.com/in/ahmet-sakali-94aa9ab3",
     initials: "AS",
+    image: ahmetSImg,
   },
   {
     name: "Silvio Holdener",
