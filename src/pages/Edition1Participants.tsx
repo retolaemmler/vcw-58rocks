@@ -9,6 +9,7 @@ import lukasKImg from "@/assets/LukasKarrer.png";
 import claudiaDImg from "@/assets/ClaudiaDietschi.png";
 import marioFImg from "@/assets/MarioFaeh.png";
 import daveLImg from "@/assets/DaveLieber.png";
+import janineTImg from "@/assets/JanineTotz.png";
 
 const coaches = [
   {
@@ -70,6 +71,7 @@ const participants = [
     company: "TestingTime AG",
     linkedin: "https://linkedin.com/in/janine-totz-ux-professional",
     initials: "JT",
+    image: janineTImg,
   },
   {
     name: "Marc Maurer",
