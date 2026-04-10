@@ -29,7 +29,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
   {
     title: "Your Coaches",
     content: (
-      <div className="grid grid-cols-3 gap-10 px-16 pt-8">
+      <div className="grid grid-cols-2 gap-10 px-16 pt-8 max-w-3xl mx-auto">
         {[
           { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", ambassador: true },
           { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", ambassador: true },
