@@ -10,6 +10,7 @@ import claudiaDImg from "@/assets/ClaudiaDietschi.png";
 import marioFImg from "@/assets/MarioFaeh.png";
 import daveLImg from "@/assets/DaveLieber.png";
 import janineTImg from "@/assets/JanineTotz.png";
+import marcMImg from "@/assets/MarcMaurer.png";
 
 const coaches = [
   {
@@ -78,6 +79,7 @@ const participants = [
     company: "Chapters Group",
     linkedin: "https://linkedin.com/in/marcmaurer",
     initials: "MM",
+    image: marcMImg,
   },
   {
     name: "Mattia Piccoli",
