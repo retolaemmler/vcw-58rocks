@@ -413,6 +413,30 @@ const Edition1Slides = () => {
     return () => document.removeEventListener("fullscreenchange", onChange);
   }, []);
 
+  // Swipe support
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  useEffect(() => {
+    const onTouchStart = (e: TouchEvent) => {
+      touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (!touchStart.current) return;
+      const dx = e.changedTouches[0].clientX - touchStart.current.x;
+      const dy = e.changedTouches[0].clientY - touchStart.current.y;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+        if (dx < 0) next();
+        else prev();
+      }
+      touchStart.current = null;
+    };
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [next, prev]);
+
   const slide = slides[current];
   const isGradient = slide.bg === "gradient";
 
