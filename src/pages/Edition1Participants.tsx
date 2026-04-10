@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import marcoLImg from "@/assets/MarcoLustenberger.png";
+import lukasKImg from "@/assets/LukasKarrer.png";
 
 const coaches = [
   {
