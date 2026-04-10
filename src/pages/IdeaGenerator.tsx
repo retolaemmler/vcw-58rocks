@@ -234,7 +234,7 @@ export default function IdeaGenerator() {
                       onClick={() => copyToClipboard(idea.expandedPrompt!, i)}
                     >
                       {copiedIndex === i ? (
-                        <Check className="w-4 h-4 text-green-500" />
+                        <Check className="w-4 h-4 text-primary" />
                       ) : (
                         <Copy className="w-4 h-4" />
                       )}
