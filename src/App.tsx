@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import Survey from "./pages/Survey";
 import IdeaGenerator from "./pages/IdeaGenerator";
 import Edition1Participants from "./pages/Edition1Participants";
+import Edition1Slides from "./pages/Edition1Slides";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
