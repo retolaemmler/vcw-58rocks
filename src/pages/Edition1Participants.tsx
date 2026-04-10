@@ -111,7 +111,7 @@ const Edition1Participants = () => {
               className="group flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-all hover:shadow-md hover:border-primary/40"
             >
               <Avatar className="h-14 w-14 shrink-0">
-                <AvatarImage src="" alt={p.name} />
+                <AvatarImage src={p.image || ""} alt={p.name} />
                 <AvatarFallback className="bg-primary/10 text-primary font-semibold text-lg">
                   {p.initials}
                 </AvatarFallback>
