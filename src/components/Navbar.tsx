@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 
 const navLinks = [
-  { label: "Build", id: "why" },
+  { label: "What", id: "why" },
   
   { label: "Schedule", id: "agenda" },
   { label: "Participants", id: "audience" },
