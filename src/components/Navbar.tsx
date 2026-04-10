@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 
 const navLinks = [
@@ -9,11 +10,14 @@ const navLinks = [
   { label: "Requirements", id: "requirements" },
   { label: "Coaches", id: "coaches" },
   { label: "Tickets", id: "pricing" },
+  { label: "Ideas", id: "ideas", href: "/ideas" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -21,9 +25,15 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const handleNav = (link: typeof navLinks[0]) => {
     setMobileOpen(false);
+    if (link.href) {
+      navigate(link.href);
+    } else if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: link.id } });
+    } else {
+      document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -35,7 +45,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center">
+        <button onClick={() => { if (location.pathname !== "/") navigate("/"); else window.scrollTo({ top: 0, behavior: "smooth" }); }} className="flex items-center">
           <img src={logo} alt="Logo" className="h-12 w-12" />
         </button>
 
@@ -44,8 +54,12 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <button
               key={link.id}
-              onClick={() => scrollTo(link.id)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => handleNav(link)}
+              className={`text-sm font-medium transition-colors ${
+                link.href && location.pathname === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {link.label}
             </button>
@@ -68,7 +82,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <button
               key={link.id}
-              onClick={() => scrollTo(link.id)}
+              onClick={() => handleNav(link)}
               className="block w-full text-left py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}

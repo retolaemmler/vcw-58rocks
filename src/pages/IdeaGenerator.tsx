@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { Lightbulb, Sparkles, Copy, Check, ArrowLeft, Loader2, User } from "lucide-react";
+import { Lightbulb, Sparkles, Copy, Check, Loader2, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 
 interface Idea {
   title: string;
@@ -109,12 +109,10 @@ export default function IdeaGenerator() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <Navbar />
+      <div className="max-w-3xl mx-auto px-4 pt-24 pb-8">
         {/* Header */}
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
-            <ArrowLeft className="w-4 h-4" /> Back
-          </Link>
           <div className="flex items-center gap-3 mb-2">
             <Lightbulb className="w-8 h-8 text-primary" />
             <h1 className="text-3xl font-bold text-foreground">App Idea Generator</h1>
