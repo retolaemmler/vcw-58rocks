@@ -8,6 +8,7 @@ import Confirmation from "./pages/Confirmation";
 import Admin from "./pages/Admin";
 import Survey from "./pages/Survey";
 import IdeaGenerator from "./pages/IdeaGenerator";
+import Edition1Participants from "./pages/Edition1Participants";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/survey" element={<Survey />} />
           <Route path="/prepsurvey" element={<Survey />} />
           <Route path="/ideas" element={<IdeaGenerator />} />
+          <Route path="/edition1/participants" element={<Edition1Participants />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
