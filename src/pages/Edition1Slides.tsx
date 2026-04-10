@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import valentinImg from "@/assets/Valentin.jpeg";
+import retoImg from "@/assets/Reto.jpeg";
 
 /* ─── slide data ─── */
 const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?: string }[] = [
