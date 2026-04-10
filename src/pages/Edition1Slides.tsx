@@ -419,9 +419,10 @@ const Edition1Slides = () => {
   return (
     <div className="h-screen w-screen bg-[#0c0c1d] flex flex-col overflow-hidden select-none">
       {/* Slide area */}
-      <div className="flex-1 relative flex items-center justify-center overflow-hidden">
+      <div ref={containerRef} className="flex-1 relative flex items-center justify-center overflow-hidden">
         <div
-          className={`w-full h-full flex flex-col ${
+          style={{ width: SLIDE_W, height: SLIDE_H, transform: `scale(${scale})`, transformOrigin: "center center" }}
+          className={`absolute flex flex-col shrink-0 ${
             isGradient
               ? "bg-gradient-to-br from-[hsl(220,30%,10%)] via-[hsl(262,50%,20%)] to-[hsl(174,50%,15%)]"
               : "bg-[#12122a]"
