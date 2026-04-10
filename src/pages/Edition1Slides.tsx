@@ -55,16 +55,16 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
   {
     title: "Today's Schedule",
     content: (
-      <div className="grid grid-cols-2 gap-6 px-16 pt-4">
+      <div className="grid grid-cols-2 gap-4 px-16 pt-2">
         {[
-          { time: "09:00", label: "Welcome & Introduction", desc: "Getting to know each other, setting expectations" },
-          { time: "09:30", label: "Intro to Vibe Coding", desc: "What it is, why it matters, and how it works" },
-          { time: "10:15", label: "Lovable Onboarding", desc: "Hands-on walkthrough of Lovable.dev as official ambassadors" },
-          { time: "11:00", label: "Team Formation & Ideas", desc: "Form small teams (1–4), brainstorm & choose your app idea" },
+          { time: "09:00", label: "Welcome & Intro", desc: "Introductions, intro to vibe coding, Lovable setup & tips for structuring your project" },
+          { time: "10:00", label: "Workshop Session #1", desc: "Start working on your app with continuous coaching support" },
           { time: "12:00", label: "🍕 Lunch Break", desc: "Refuel and chat with fellow participants" },
-          { time: "13:00", label: "Hands-On Building", desc: "The core sprint — build your app with continuous coaching" },
-          { time: "15:30", label: "Polish & Prepare", desc: "Finalize your app and prepare a short demo" },
-          { time: "16:00", label: "Presentations & Awards 🏆", desc: "Demo your apps, learn from others, celebrate the best projects" },
+          { time: "12:30", label: "Next Level Vibe Coding", desc: "APIs, emails, payments, backend, login, security — adding complexity" },
+          { time: "13:30", label: "Workshop Session #2", desc: "Continue building & polish your app" },
+          { time: "15:30", label: "Presentations & Feedback", desc: "Present your app to the others and give feedback" },
+          { time: "16:15", label: "Future of Vibe Coding", desc: "Focus is the key! Agentic engineering & what's next" },
+          { time: "16:30", label: "Q&A + 🍺 Beer", desc: "Wrap up, questions, and celebrate together" },
         ].map((s) => (
           <div key={s.time} className="flex gap-5 items-start p-5 rounded-xl bg-white/5 border border-white/10">
             <span className="text-2xl font-mono font-bold text-[hsl(174,72%,55%)] shrink-0 w-16">{s.time}</span>
