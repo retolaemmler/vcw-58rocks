@@ -60,7 +60,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           { time: "09:00", label: "Welcome & Intro", desc: "Introductions, intro to vibe coding, Lovable setup & tips for structuring your project" },
           { time: "10:00", label: "Workshop Session #1", desc: "Start working on your app with continuous coaching support" },
           { time: "12:00", label: "🍕 Lunch Break", desc: "Refuel and chat with fellow participants" },
-          { time: "12:30", label: "Next Level Vibe Coding", desc: "APIs, emails, payments, backend, login, security — adding complexity" },
+          { time: "13:00", label: "Next Level Vibe Coding", desc: "APIs, emails, payments, backend, login, security — adding complexity" },
           { time: "13:30", label: "Workshop Session #2", desc: "Continue building & polish your app" },
           { time: "15:30", label: "Presentations & Feedback", desc: "Present your app to the others and give feedback" },
           { time: "16:15", label: "Future of Vibe Coding", desc: "Focus is the key! Agentic engineering & what's next" },
