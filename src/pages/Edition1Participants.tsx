@@ -52,7 +52,7 @@ const participants = [
   {
     name: "Claudia Dietschi",
     company: "Artist & Owner at DIETSCHIART",
-    linkedin: "https://linkedin.com/in/claudia-dietschi",
+    linkedin: "https://www.linkedin.com/in/claudiadietschi/",
     initials: "CD",
     image: claudiaDImg,
   },
