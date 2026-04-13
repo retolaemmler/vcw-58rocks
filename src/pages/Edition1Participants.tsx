@@ -51,7 +51,7 @@ const participants = [
   },
   {
     name: "Claudia Dietschi",
-    company: "Artist & Owner at DIETSCHIART",
+    company: "Go-To-Market Leader",
     linkedin: "https://www.linkedin.com/in/claudiadietschi/",
     initials: "CD",
     image: claudiaDImg,
