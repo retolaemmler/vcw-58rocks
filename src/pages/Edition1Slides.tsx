@@ -533,6 +533,14 @@ const Edition1Slides = () => {
             <Home className="w-4 h-4" />
           </button>
           <span className="text-sm text-white/40 font-mono">{current + 1} / {total}</span>
+          <button
+            onClick={exportPDF}
+            disabled={isExporting}
+            className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors disabled:opacity-50"
+            title="Download as PDF"
+          >
+            {isExporting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+          </button>
         </div>
 
         <div className="flex items-center gap-2">
