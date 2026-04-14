@@ -43,10 +43,10 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         ].map((c) => (
           <div key={c.name} className="flex flex-col items-center text-center gap-4 p-8 rounded-2xl bg-white/5 border border-white/10">
             <img src={c.image} alt={c.name} className="w-24 h-24 rounded-full object-cover ring-2 ring-white/20" />
-            <h3 className="text-2xl font-bold text-white">{c.name}</h3>
+            <h3 className="text-3xl font-bold text-white">{c.name}</h3>
             <p className="text-lg text-white/60">{c.role}</p>
             {c.ambassador && (
-              <span className="text-sm bg-[hsl(174,72%,40%)]/20 text-[hsl(174,72%,55%)] px-3 py-1 rounded-full">
+              <span className="text-base bg-[hsl(174,72%,40%)]/20 text-[hsl(174,72%,55%)] px-3 py-1 rounded-full">
                 🩷 Lovable Ambassador
               </span>
             )}
@@ -73,8 +73,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           <div key={s.time} className="flex gap-5 items-start p-5 rounded-xl bg-white/5 border border-white/10">
             <span className="text-2xl font-mono font-bold text-[hsl(174,72%,55%)] shrink-0 w-16">{s.time}</span>
             <div>
-              <h3 className="text-xl font-semibold text-white">{s.label}</h3>
-              <p className="text-base text-white/50 mt-1">{s.desc}</p>
+              <h3 className="text-3xl font-semibold text-white">{s.label}</h3>
+              <p className="text-lg text-white/50 mt-1">{s.desc}</p>
             </div>
           </div>
         ))}
@@ -147,8 +147,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           ].map((c) => (
             <div key={c.title} className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
               <p className="text-3xl">{c.icon}</p>
-              <h3 className="text-xl font-bold text-white">{c.title}</h3>
-              <p className="text-base text-white/60 leading-relaxed">{c.desc}</p>
+              <h3 className="text-3xl font-bold text-white">{c.title}</h3>
+              <p className="text-lg text-white/60 leading-relaxed">{c.desc}</p>
             </div>
           ))}
         </div>
@@ -167,7 +167,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         <div className="flex-1 space-y-6">
           <p className="text-lg text-white/60 italic">Prompt Zero = the very first message you send. It sets the tone for the whole project.</p>
           <div className="space-y-4">
-            <h3 className="text-2xl font-semibold text-white">A good Prompt Zero contains:</h3>
+            <h3 className="text-3xl font-semibold text-white">A good Prompt Zero contains:</h3>
             <ul className="space-y-3 text-lg text-white/70">
               <li>🎯 <strong className="text-white">Who</strong> — it's for (the user)</li>
               <li>🧩 <strong className="text-white">What problem</strong> — it solves (one sentence)</li>
@@ -177,14 +177,14 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         </div>
         <div className="flex-1 space-y-5">
           <div className="rounded-2xl bg-[hsl(174,72%,40%)]/10 border border-[hsl(174,72%,40%)]/30 p-6">
-            <h3 className="text-xl font-semibold text-white mb-3">💡 Pro tip</h3>
+            <h3 className="text-3xl font-semibold text-white mb-3">💡 Pro tip</h3>
             <p className="text-lg text-white/60 leading-relaxed">
               Let the AI interrogate you before it builds:
             </p>
             <div className="mt-4 p-4 rounded-lg bg-black/30 font-mono text-base text-[hsl(174,72%,55%)]">
               "Before you build anything, ask me any questions you need to fully understand what I want."
             </div>
-            <p className="text-base text-white/50 mt-3">You'll catch fuzzy thinking before it becomes fuzzy code.</p>
+            <p className="text-lg text-white/50 mt-3">You'll catch fuzzy thinking before it becomes fuzzy code.</p>
           </div>
         </div>
       </div>
@@ -200,45 +200,45 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           <p className="text-lg text-white/60">Prompt engineering is not technical. It's structured thinking made visible.</p>
           <div className="space-y-3">
             <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-base text-white/50 mb-1">🔹 Above the waterline (10%)</p>
+              <p className="text-lg text-white/50 mb-1">🔹 Above the waterline (10%)</p>
               <p className="text-lg text-white/80">The code or output you want</p>
             </div>
             <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-base text-white/50 mb-1">🔸 Below the waterline (90%)</p>
+              <p className="text-lg text-white/50 mb-1">🔸 Below the waterline (90%)</p>
               <p className="text-lg text-white/80">The context — who it's for, what matters, "done" state, constraints, examples</p>
             </div>
           </div>
           <div className="p-4 rounded-xl bg-[hsl(262,80%,55%)]/10 border border-[hsl(262,80%,55%)]/30">
-            <p className="text-base text-white/60 font-semibold mb-2">Role + Action + Vibe</p>
-            <p className="text-sm text-white/50"><strong className="text-white/80">Role:</strong> "You are a senior UI designer..."</p>
-            <p className="text-sm text-white/50"><strong className="text-white/80">Action:</strong> "Build a pricing table..."</p>
-            <p className="text-sm text-white/50"><strong className="text-white/80">Vibe:</strong> "...like a restaurant menu, serif fonts, paper textures."</p>
+            <p className="text-lg text-white/60 font-semibold mb-2">Role + Action + Vibe</p>
+            <p className="text-lg text-white/50"><strong className="text-white/80">Role:</strong> "You are a senior UI designer..."</p>
+            <p className="text-lg text-white/50"><strong className="text-white/80">Action:</strong> "Build a pricing table..."</p>
+            <p className="text-lg text-white/50"><strong className="text-white/80">Vibe:</strong> "...like a restaurant menu, serif fonts, paper textures."</p>
           </div>
         </div>
         <div className="flex-1 space-y-3">
           <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-4">
-            <p className="text-sm text-red-400 uppercase tracking-wider mb-1 font-semibold">❌ Bad</p>
-            <p className="text-base text-white/80">"Make a dashboard."</p>
+            <p className="text-base text-red-400 uppercase tracking-wider mb-1 font-semibold">❌ Bad</p>
+            <p className="text-lg text-white/80">"Make a dashboard."</p>
           </div>
           <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4">
-            <p className="text-sm text-emerald-400 uppercase tracking-wider mb-1 font-semibold">✅ Good</p>
-            <p className="text-base text-white/80">"Create a dashboard for a PE operating team that shows weekly KPI status (green/yellow/red) for 5 portfolio companies."</p>
+            <p className="text-base text-emerald-400 uppercase tracking-wider mb-1 font-semibold">✅ Good</p>
+            <p className="text-lg text-white/80">"Create a dashboard for a PE operating team that shows weekly KPI status (green/yellow/red) for 5 portfolio companies."</p>
           </div>
           <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-4">
-            <p className="text-sm text-red-400 uppercase tracking-wider mb-1 font-semibold">❌ Bad</p>
-            <p className="text-base text-white/80">"Add reporting."</p>
+            <p className="text-base text-red-400 uppercase tracking-wider mb-1 font-semibold">❌ Bad</p>
+            <p className="text-lg text-white/80">"Add reporting."</p>
           </div>
           <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4">
-            <p className="text-sm text-emerald-400 uppercase tracking-wider mb-1 font-semibold">✅ Good</p>
-            <p className="text-base text-white/80">"Add a simple reporting view that summarizes progress by project and highlights overdue milestones."</p>
+            <p className="text-base text-emerald-400 uppercase tracking-wider mb-1 font-semibold">✅ Good</p>
+            <p className="text-lg text-white/80">"Add a simple reporting view that summarizes progress by project and highlights overdue milestones."</p>
           </div>
           <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-4">
-            <p className="text-sm text-red-400 uppercase tracking-wider mb-1 font-semibold">❌ Bad</p>
-            <p className="text-base text-white/80">"It's not quite right, improve it."</p>
+            <p className="text-base text-red-400 uppercase tracking-wider mb-1 font-semibold">❌ Bad</p>
+            <p className="text-lg text-white/80">"It's not quite right, improve it."</p>
           </div>
           <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4">
-            <p className="text-sm text-emerald-400 uppercase tracking-wider mb-1 font-semibold">✅ Good</p>
-            <p className="text-base text-white/80">"The overview screen feels cluttered. Simplify it so a user understands the status in under 10 seconds."</p>
+            <p className="text-base text-emerald-400 uppercase tracking-wider mb-1 font-semibold">✅ Good</p>
+            <p className="text-lg text-white/80">"The overview screen feels cluttered. Simplify it so a user understands the status in under 10 seconds."</p>
           </div>
         </div>
       </div>
@@ -261,25 +261,25 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             ].map((p) => (
               <div key={p.label} className="p-4 rounded-xl bg-white/5 border border-white/10">
                 <p className="text-2xl mb-2">{p.icon}</p>
-                <h4 className="text-lg font-bold text-white">{p.label}</h4>
-                <p className="text-sm text-white/50">{p.desc}</p>
+                <h4 className="text-xl font-bold text-white">{p.label}</h4>
+                <p className="text-lg text-white/50">{p.desc}</p>
               </div>
             ))}
           </div>
         </div>
         <div className="flex-1 space-y-4">
           <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-            <p className="text-base text-white/80"><strong className="text-[hsl(174,72%,55%)]">1</strong> <strong>Agents can build anything — but they don't know what.</strong></p>
-            <p className="text-sm text-white/50 mt-2">The plan is the guardrail. Without it, Lovable drifts toward whatever is most common in its training data.</p>
+            <p className="text-lg text-white/80"><strong className="text-[hsl(174,72%,55%)]">1</strong> <strong>Agents can build anything — but they don't know what.</strong></p>
+            <p className="text-lg text-white/50 mt-2">The plan is the guardrail. Without it, Lovable drifts toward whatever is most common in its training data.</p>
           </div>
           <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-            <p className="text-base text-white/80"><strong className="text-[hsl(174,72%,55%)]">2</strong> <strong>Planning is how you install context.</strong></p>
-            <p className="text-sm text-white/50 mt-2">Everything you know — the whys, constraints, non-goals — has to live in the project before a single line of code appears.</p>
+            <p className="text-lg text-white/80"><strong className="text-[hsl(174,72%,55%)]">2</strong> <strong>Planning is how you install context.</strong></p>
+            <p className="text-lg text-white/50 mt-2">Everything you know — the whys, constraints, non-goals — has to live in the project before a single line of code appears.</p>
           </div>
           <div className="p-5 rounded-xl bg-[hsl(174,72%,40%)]/10 border border-[hsl(174,72%,40%)]/30">
-            <p className="text-base text-white/70">💡 Use <strong className="text-white">Lovable's built-in planning feature</strong> — iterate on the plan until it reads right, then let it build.</p>
+            <p className="text-lg text-white/70">💡 Use <strong className="text-white">Lovable's built-in planning feature</strong> — iterate on the plan until it reads right, then let it build.</p>
           </div>
-          <p className="text-base text-white/40 italic">If the plan is wrong, the code will be wrong. Fix it here — it's cheap.</p>
+          <p className="text-lg text-white/40 italic">If the plan is wrong, the code will be wrong. Fix it here — it's cheap.</p>
         </div>
       </div>
     ),
@@ -301,8 +301,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <div key={s.step} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
                 <span className="w-10 h-10 rounded-full bg-gradient-to-br from-[hsl(174,72%,40%)] to-[hsl(262,80%,55%)] flex items-center justify-center text-white font-bold text-lg shrink-0">{s.step}</span>
                 <div>
-                  <p className="text-lg font-semibold text-white">{s.text}</p>
-                  <p className="text-sm text-white/50">{s.desc}</p>
+                  <p className="text-xl font-semibold text-white">{s.text}</p>
+                  <p className="text-lg text-white/50">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -310,8 +310,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         </div>
         <div className="flex-1 space-y-5">
           <div className="rounded-2xl bg-amber-500/10 border border-amber-500/30 p-6">
-            <h3 className="text-xl font-semibold text-white mb-3">⚠️ Watch the AI's tendency to fill in the gaps</h3>
-            <p className="text-base text-white/60 leading-relaxed">
+            <h3 className="text-3xl font-semibold text-white mb-3">⚠️ Watch the AI's tendency to fill in the gaps</h3>
+            <p className="text-lg text-white/60 leading-relaxed">
               Left alone, Lovable will make your app feature-rich — every button imaginable, every edge case covered. That's the opposite of what you want.
             </p>
           </div>
@@ -320,7 +320,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             <li>🔽 Everything else is <strong className="text-white">secondary or non-existent</strong></li>
             <li>🧭 Say it: <em>"Don't add feature X, Y, or Z"</em></li>
           </ul>
-          <p className="text-base text-white/40 italic mt-4">A good app has a clear purpose. A bad app has all the functionality.</p>
+          <p className="text-lg text-white/40 italic mt-4">A good app has a clear purpose. A bad app has all the functionality.</p>
         </div>
       </div>
     ),
@@ -335,15 +335,15 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         <div className="space-y-5 w-full max-w-2xl">
           <div className="flex gap-4 items-start p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
             <span className="text-2xl">✅</span>
-            <div><h3 className="text-xl font-bold text-white">First</h3><p className="text-base text-white/60">Core flow works end-to-end with fake data</p></div>
+            <div><h3 className="text-3xl font-bold text-white">First</h3><p className="text-lg text-white/60">Core flow works end-to-end with fake data</p></div>
           </div>
           <div className="flex gap-4 items-start p-5 rounded-xl bg-amber-500/10 border border-amber-500/30">
             <span className="text-2xl">⚡</span>
-            <div><h3 className="text-xl font-bold text-white">Then</h3><p className="text-base text-white/60">One integration at a time</p></div>
+            <div><h3 className="text-3xl font-bold text-white">Then</h3><p className="text-lg text-white/60">One integration at a time</p></div>
           </div>
           <div className="flex gap-4 items-start p-5 rounded-xl bg-red-500/10 border border-red-500/30">
             <span className="text-2xl">🚫</span>
-            <div><h3 className="text-xl font-bold text-white">Never</h3><p className="text-base text-white/60">Stack 3 integrations before the first one is proven</p></div>
+            <div><h3 className="text-3xl font-bold text-white">Never</h3><p className="text-lg text-white/60">Stack 3 integrations before the first one is proven</p></div>
           </div>
         </div>
         <p className="text-lg text-white/40 italic">Rule of thumb: if adding an integration breaks the demo, back it out.</p>
@@ -390,8 +390,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             { title: "One-sentence test", desc: "If you can't explain it in one sentence, it's too complex" },
           ].map((c) => (
             <div key={c.title} className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-2">{c.title}</h3>
-              <p className="text-base text-white/50">{c.desc}</p>
+              <h3 className="text-3xl font-bold text-white mb-2">{c.title}</h3>
+              <p className="text-lg text-white/50">{c.desc}</p>
             </div>
           ))}
         </div>
@@ -409,10 +409,10 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           Iteration isn't a fix-it phase — it's how knowledge enters the project.
         </p>
         <img src={iterationLoopImg} alt="The Iteration Loop: Specify, Generate, Review, Iterate" className="w-full max-w-3xl rounded-xl" />
-        <p className="text-base text-white/60 text-center max-w-2xl">
+        <p className="text-lg text-white/60 text-center max-w-2xl">
           Each pass teaches the project something new. You're not just fixing bugs — you're <strong className="text-white/80">building context, loop after loop.</strong>
         </p>
-        <p className="text-base text-white/40 italic">
+        <p className="text-lg text-white/40 italic">
           Rule of thumb: if you hit the same issue twice, fix it in the plan — not just the code.
         </p>
       </div>
@@ -435,7 +435,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             "Or just start fresh — sometimes that's fastest!",
           ].map((tip, i) => (
             <div key={i} className="flex gap-4 items-start p-5 rounded-xl bg-white/5 border border-white/10">
-              <span className="text-[hsl(174,72%,55%)] text-xl font-bold shrink-0">•</span>
+              <span className="text-[hsl(174,72%,55%)] text-3xl font-bold shrink-0">•</span>
               <p className="text-lg text-white/80">{tip}</p>
             </div>
           ))}
@@ -499,8 +499,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <div key={c.text} className="flex gap-4 items-start p-4 rounded-xl bg-white/5 border border-white/10">
                 <span className="text-2xl">{c.icon}</span>
                 <div>
-                  <h3 className="text-lg font-bold text-white">{c.text}</h3>
-                  <p className="text-sm text-white/50">{c.desc}</p>
+                  <h3 className="text-xl font-bold text-white">{c.text}</h3>
+                  <p className="text-lg text-white/50">{c.desc}</p>
                 </div>
               </div>
             ))}
@@ -508,18 +508,18 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         </div>
         <div className="flex-1 space-y-4">
           <div className="p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
-            <p className="text-sm text-emerald-400 uppercase tracking-wider mb-2 font-semibold">✅ What the AI can help with</p>
-            <p className="text-base text-white/70">Integrations, auth, database, emails, payments · Security hardening · Refactoring</p>
+            <p className="text-base text-emerald-400 uppercase tracking-wider mb-2 font-semibold">✅ What the AI can help with</p>
+            <p className="text-lg text-white/70">Integrations, auth, database, emails, payments · Security hardening · Refactoring</p>
           </div>
           <div className="p-5 rounded-xl bg-red-500/10 border border-red-500/30">
-            <p className="text-sm text-red-400 uppercase tracking-wider mb-2 font-semibold">🚫 What the AI cannot do for you</p>
-            <ul className="text-base text-white/70 space-y-1">
+            <p className="text-base text-red-400 uppercase tracking-wider mb-2 font-semibold">🚫 What the AI cannot do for you</p>
+            <ul className="text-lg text-white/70 space-y-1">
               <li>• Product management — what to build, what to cut</li>
               <li>• Understanding your users better than you</li>
               <li>• Owning the roadmap when priorities change</li>
             </ul>
           </div>
-          <p className="text-base text-white/40 italic">Vibe coding scales your building. It doesn't replace your judgement.</p>
+          <p className="text-lg text-white/40 italic">Vibe coding scales your building. It doesn't replace your judgement.</p>
         </div>
       </div>
     ),
@@ -532,7 +532,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
       <div className="flex flex-col items-center px-16 pt-6 gap-6">
         <p className="text-lg text-white/60 italic">This section is only worth it if your MVP has earned it.</p>
         <div className="space-y-4 w-full max-w-2xl">
-          <h3 className="text-xl font-semibold text-white">Signals you're ready:</h3>
+          <h3 className="text-3xl font-semibold text-white">Signals you're ready:</h3>
           {[
             "Your MVP is usable and brings clear value",
             "You want to share it with other users or teams",
@@ -547,7 +547,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             </div>
           ))}
         </div>
-        <p className="text-base text-white/40 italic mt-2">If you're still fixing the main user flow — go back. Finish v1 first.</p>
+        <p className="text-lg text-white/40 italic mt-2">If you're still fixing the main user flow — go back. Finish v1 first.</p>
       </div>
     ),
   },
@@ -559,7 +559,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
       <div className="flex gap-12 px-16 pt-6">
         <div className="flex-1 space-y-6">
           <p className="text-lg text-white/60 italic">AI has an inherent tendency to make things feature-rich, complete, and exhaustive. Simplicity is a choice — and a hard one.</p>
-          <h3 className="text-xl font-semibold text-white">The hidden cost of every extra feature:</h3>
+          <h3 className="text-3xl font-semibold text-white">The hidden cost of every extra feature:</h3>
           <div className="space-y-3">
             {[
               { icon: "🧭", text: "Onboarding gets harder", desc: "Every new button needs explanation" },
@@ -570,15 +570,15 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <div key={c.text} className="flex gap-3 items-start">
                 <span className="text-xl">{c.icon}</span>
                 <div>
-                  <p className="text-base text-white/80 font-semibold">{c.text}</p>
-                  <p className="text-sm text-white/50">{c.desc}</p>
+                  <p className="text-lg text-white/80 font-semibold">{c.text}</p>
+                  <p className="text-lg text-white/50">{c.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div className="flex-1 space-y-5 flex flex-col justify-center">
-          <h3 className="text-xl font-semibold text-white">Before adding X, ask:</h3>
+          <h3 className="text-3xl font-semibold text-white">Before adding X, ask:</h3>
           {[
             "Does the core demo still work without it?",
             "Can I explain it to a stranger in 10 seconds?",
@@ -588,7 +588,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <p className="text-lg text-white/70 italic">{q}</p>
             </div>
           ))}
-          <p className="text-base text-white/40 italic text-center mt-2">
+          <p className="text-lg text-white/40 italic text-center mt-2">
             Information architecture can hide complexity — but it never removes it. Delete first, design second.
           </p>
         </div>
@@ -602,7 +602,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     content: (
       <div className="flex gap-10 px-16 pt-4">
         <div className="flex-1 space-y-4">
-          <p className="text-base text-white/50">The boring-but-essential stuff, bundled:</p>
+          <p className="text-lg text-white/50">The boring-but-essential stuff, bundled:</p>
           <div className="grid grid-cols-1 gap-3">
             {[
               { icon: "🗄️", label: "Database", desc: "Persistent storage (Postgres)" },
@@ -614,16 +614,16 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <div key={f.label} className="flex gap-3 items-center p-3 rounded-lg bg-white/5 border border-white/10">
                 <span className="text-xl">{f.icon}</span>
                 <div>
-                  <span className="text-base font-semibold text-white">{f.label}</span>
-                  <span className="text-sm text-white/50 ml-2">{f.desc}</span>
+                  <span className="text-xl font-semibold text-white">{f.label}</span>
+                  <span className="text-lg text-white/50 ml-2">{f.desc}</span>
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div className="flex-1 space-y-4">
-          <h3 className="text-xl font-semibold text-white">🧠 Make your app intelligent</h3>
-          <p className="text-base text-white/60">LLMs in the backend — not just the chat:</p>
+          <h3 className="text-3xl font-semibold text-white">🧠 Make your app intelligent</h3>
+          <p className="text-lg text-white/60">LLMs in the backend — not just the chat:</p>
           <div className="space-y-3">
             {[
               { icon: "🔎", label: "Smart search", desc: "Users ask questions in plain language" },
@@ -635,13 +635,13 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <div key={f.label} className="flex gap-3 items-center p-3 rounded-lg bg-[hsl(262,80%,55%)]/10 border border-[hsl(262,80%,55%)]/20">
                 <span className="text-lg">{f.icon}</span>
                 <div>
-                  <span className="text-sm font-semibold text-white">{f.label}</span>
-                  <span className="text-xs text-white/50 ml-2">{f.desc}</span>
+                  <span className="text-base font-semibold text-white">{f.label}</span>
+                  <span className="text-base text-white/50 ml-2">{f.desc}</span>
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-sm text-white/40 italic">Not AI bolted on top — intelligence as part of the workflow.</p>
+          <p className="text-lg text-white/40 italic">Not AI bolted on top — intelligence as part of the workflow.</p>
         </div>
       </div>
     ),
@@ -653,7 +653,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     content: (
       <div className="flex gap-10 px-16 pt-4">
         <div className="flex-1 space-y-5">
-          <h3 className="text-xl font-semibold text-white">The basic pattern:</h3>
+          <h3 className="text-3xl font-semibold text-white">The basic pattern:</h3>
           <div className="space-y-3">
             {[
               "Pick one API you actually need",
@@ -663,13 +663,13 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             ].map((s, i) => (
               <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
                 <span className="w-8 h-8 rounded-full bg-[hsl(174,72%,40%)] flex items-center justify-center text-white font-bold text-sm shrink-0">{i + 1}</span>
-                <p className="text-base text-white/80">{s}</p>
+                <p className="text-lg text-white/80">{s}</p>
               </div>
             ))}
           </div>
         </div>
         <div className="flex-1 space-y-4">
-          <h3 className="text-xl font-semibold text-white">Where vibe-coded apps get hurt:</h3>
+          <h3 className="text-3xl font-semibold text-white">Where vibe-coded apps get hurt:</h3>
           <div className="space-y-3">
             {[
               { icon: "📈", text: "Inefficiency at scale — loops across 10,000 items blow up cost" },
@@ -678,12 +678,12 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             ].map((c) => (
               <div key={c.text} className="flex gap-3 items-start p-3 rounded-lg bg-red-500/10 border border-red-500/20">
                 <span className="text-lg">{c.icon}</span>
-                <p className="text-sm text-white/70">{c.text}</p>
+                <p className="text-lg text-white/70">{c.text}</p>
               </div>
             ))}
           </div>
           <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-            <p className="text-sm text-white/50">
+            <p className="text-lg text-white/50">
               Ask the AI: <em className="text-white/70">"Review how we call [API]. Where will we fail or blow up cost at 10× scale?"</em>
             </p>
           </div>
@@ -699,8 +699,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     content: (
       <div className="flex gap-10 px-16 pt-4">
         <div className="flex-1 space-y-5">
-          <p className="text-base text-white/60">Sending one email to your own inbox is trivial. Sending email that actually arrives is its own discipline.</p>
-          <h3 className="text-xl font-semibold text-white">📧 Transactional email the real way:</h3>
+          <p className="text-lg text-white/60">Sending one email to your own inbox is trivial. Sending email that actually arrives is its own discipline.</p>
+          <h3 className="text-3xl font-semibold text-white">📧 Transactional email the real way:</h3>
           <div className="space-y-3">
             {[
               { label: "Use a pro provider", desc: "Resend / Postmark / SendGrid — not Gmail" },
@@ -709,14 +709,14 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               { label: "Warm up the domain", desc: "If volume is serious" },
             ].map((c) => (
               <div key={c.label} className="p-3 rounded-lg bg-white/5 border border-white/10">
-                <p className="text-base font-semibold text-white">{c.label}</p>
-                <p className="text-sm text-white/50">{c.desc}</p>
+                <p className="text-xl font-semibold text-white">{c.label}</p>
+                <p className="text-lg text-white/50">{c.desc}</p>
               </div>
             ))}
           </div>
         </div>
         <div className="flex-1 space-y-5">
-          <h3 className="text-xl font-semibold text-white">🚫 Don't look like phishing:</h3>
+          <h3 className="text-3xl font-semibold text-white">🚫 Don't look like phishing:</h3>
           <ul className="space-y-2 text-base text-white/70">
             <li>• No misleading "from" addresses</li>
             <li>• No dangling "reply-to"</li>
@@ -724,7 +724,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             <li>• Don't spoof trusted brands</li>
           </ul>
           <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 mt-4">
-            <p className="text-base text-white/70">
+            <p className="text-lg text-white/70">
               ⚠️ If emails don't arrive, users assume your app is broken — even if every other part works.
             </p>
           </div>
@@ -739,8 +739,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     content: (
       <div className="flex gap-10 px-16 pt-4">
         <div className="flex-1 space-y-5">
-          <p className="text-base text-white/60">Collecting money or running subscriptions? You need a real payment processor. Stripe is the default.</p>
-          <h3 className="text-xl font-semibold text-white">Minimal setup:</h3>
+          <p className="text-lg text-white/60">Collecting money or running subscriptions? You need a real payment processor. Stripe is the default.</p>
+          <h3 className="text-3xl font-semibold text-white">Minimal setup:</h3>
           <div className="space-y-3">
             {[
               { step: "1", label: "Stripe test keys first", desc: "Never commit real ones!" },
@@ -750,25 +750,25 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <div key={c.step} className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
                 <span className="w-8 h-8 rounded-full bg-[hsl(262,80%,55%)] flex items-center justify-center text-white font-bold text-sm shrink-0">{c.step}</span>
                 <div>
-                  <p className="text-base font-semibold text-white">{c.label}</p>
-                  <p className="text-sm text-white/50">{c.desc}</p>
+                  <p className="text-xl font-semibold text-white">{c.label}</p>
+                  <p className="text-lg text-white/50">{c.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div className="flex-1 space-y-5">
-          <h3 className="text-xl font-semibold text-white">Be pragmatic about what to offer:</h3>
+          <h3 className="text-3xl font-semibold text-white">Be pragmatic about what to offer:</h3>
           <ul className="space-y-3 text-base text-white/70">
             <li>• Low-volume? → cards only, one region</li>
             <li>• Subscriptions? → plan tiers + customer portal</li>
             <li>• Different geography? → SEPA, iDEAL, TWINT, Apple Pay…</li>
           </ul>
           <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-            <p className="text-base text-white/60 italic">Start with a single one-time product. Subscriptions add state — do them last.</p>
+            <p className="text-lg text-white/60 italic">Start with a single one-time product. Subscriptions add state — do them last.</p>
           </div>
           <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30">
-            <p className="text-base text-white/70">⚠️ Never paste production API keys into a prompt.</p>
+            <p className="text-lg text-white/70">⚠️ Never paste production API keys into a prompt.</p>
           </div>
         </div>
       </div>
@@ -781,7 +781,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     content: (
       <div className="flex gap-10 px-16 pt-4">
         <div className="flex-1 space-y-5">
-          <p className="text-base text-white/60 italic">With Lovable Cloud, adding a real backend is a few prompts away — but three things have to be right.</p>
+          <p className="text-lg text-white/60 italic">With Lovable Cloud, adding a real backend is a few prompts away — but three things have to be right.</p>
           <div className="space-y-4">
             {[
               { icon: "🧱", label: "Tables", desc: "Decide your 2–3 core entities first. Don't model everything upfront." },
@@ -791,8 +791,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               <div key={c.label} className="flex gap-4 items-start p-4 rounded-xl bg-white/5 border border-white/10">
                 <span className="text-2xl">{c.icon}</span>
                 <div>
-                  <h3 className="text-lg font-bold text-white">{c.label}</h3>
-                  <p className="text-sm text-white/50">{c.desc}</p>
+                  <h3 className="text-xl font-bold text-white">{c.label}</h3>
+                  <p className="text-lg text-white/50">{c.desc}</p>
                 </div>
               </div>
             ))}
@@ -800,15 +800,15 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         </div>
         <div className="flex-1 space-y-5">
           <div className="p-5 rounded-xl bg-amber-500/10 border border-amber-500/30">
-            <h3 className="text-lg font-semibold text-white mb-2">⚠️ When Lovable Cloud isn't enough:</h3>
-            <ul className="text-base text-white/70 space-y-1">
+            <h3 className="text-xl font-semibold text-white mb-2">⚠️ When Lovable Cloud isn't enough:</h3>
+            <ul className="text-lg text-white/70 space-y-1">
               <li>• Heavy analytics / data-warehouse queries</li>
               <li>• Millions of rows with aggressive performance requirements</li>
               <li>• Integration with a specific enterprise stack</li>
             </ul>
           </div>
           <div className="p-4 rounded-xl bg-[hsl(174,72%,40%)]/10 border border-[hsl(174,72%,40%)]/30">
-            <p className="text-sm text-white/50 font-mono">
+            <p className="text-lg text-white/50 font-mono">
               "Add a Lovable Cloud backend. Store [entity] with these fields: [...]. Every user only sees their own records."
             </p>
           </div>
@@ -822,7 +822,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     title: "Security: Before You Share It",
     content: (
       <div className="flex flex-col px-16 pt-3 gap-4">
-        <p className="text-base text-white/60 italic">
+        <p className="text-lg text-white/60 italic">
           A 2026 audit found 63% of Lovable apps had critical/high-severity issues. Over half had databases anyone could read.
         </p>
         <div className="grid grid-cols-2 gap-4">
@@ -835,14 +835,14 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             <div key={c.num} className="p-4 rounded-xl bg-white/5 border border-white/10">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-7 h-7 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-sm">{c.num}</span>
-                <h3 className="text-base font-bold text-white">{c.title}</h3>
+                <h3 className="text-xl font-bold text-white">{c.title}</h3>
               </div>
-              <p className="text-sm text-white/60 leading-relaxed">{c.desc}</p>
+              <p className="text-lg text-white/60 leading-relaxed">{c.desc}</p>
             </div>
           ))}
         </div>
         <div className="p-3 rounded-xl bg-[hsl(174,72%,40%)]/10 border border-[hsl(174,72%,40%)]/30">
-          <p className="text-sm text-white/60">
+          <p className="text-lg text-white/60">
             🛡️ <strong className="text-white/80">Use what Lovable gives you:</strong> built-in security scan checks RLS & database config. Run before every public release.
           </p>
         </div>
@@ -883,8 +883,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           ].map((c) => (
             <div key={c.title} className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
               <p className="text-3xl">{c.icon}</p>
-              <h3 className="text-xl font-bold text-white">{c.title}</h3>
-              <p className="text-base text-white/60">{c.desc}</p>
+              <h3 className="text-3xl font-bold text-white">{c.title}</h3>
+              <p className="text-lg text-white/60">{c.desc}</p>
             </div>
           ))}
         </div>
@@ -914,7 +914,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             </div>
           ))}
         </div>
-        <p className="text-base text-white/40 italic text-center mt-2">
+        <p className="text-lg text-white/40 italic text-center mt-2">
           The goal isn't to build 1,000 pilots. The goal is to connect things and add value.
         </p>
       </div>
@@ -937,7 +937,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             ].map((c) => (
               <div key={c.text} className="flex gap-4 items-start p-4 rounded-xl bg-white/5 border border-white/10">
                 <span className="text-xl">{c.icon}</span>
-                <p className="text-base text-white/80">{c.text}</p>
+                <p className="text-lg text-white/80">{c.text}</p>
               </div>
             ))}
           </div>
@@ -964,23 +964,23 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           <p className="text-lg text-white/50 italic">The interface changes hands.</p>
           <div className="grid grid-cols-2 gap-4">
             <div className="p-5 rounded-xl bg-white/5 border border-white/10 text-center">
-              <p className="text-sm text-white/40 uppercase tracking-wider mb-2">Today</p>
+              <p className="text-lg text-white/40 uppercase tracking-wider mb-2">Today</p>
               <p className="text-lg text-white/80">A user clicks buttons in an app.</p>
             </div>
             <div className="p-5 rounded-xl bg-[hsl(262,80%,55%)]/10 border border-[hsl(262,80%,55%)]/30 text-center">
-              <p className="text-sm text-[hsl(262,80%,65%)] uppercase tracking-wider mb-2">Tomorrow</p>
+              <p className="text-base text-[hsl(262,80%,65%)] uppercase tracking-wider mb-2">Tomorrow</p>
               <p className="text-lg text-white/80">An agent does the clicking — for you, for your customer.</p>
             </div>
           </div>
         </div>
         <div className="flex-1 space-y-4">
-          <h3 className="text-xl font-semibold text-white">What that means for you:</h3>
+          <h3 className="text-3xl font-semibold text-white">What that means for you:</h3>
           <ul className="space-y-4 text-base text-white/70">
             <li className="flex gap-3"><span className="text-[hsl(174,72%,55%)]">→</span> Agents take on tasks in your niche, your domain</li>
             <li className="flex gap-3"><span className="text-[hsl(174,72%,55%)]">→</span> They make things efficient — freeing you for important work & relationships</li>
             <li className="flex gap-3"><span className="text-[hsl(174,72%,55%)]">→</span> Your app becomes a surface agents use — MCPs, tool-calling APIs, structured outputs</li>
           </ul>
-          <p className="text-base text-white/40 italic mt-4">
+          <p className="text-lg text-white/40 italic mt-4">
             The question shifts from "what can my app do?" to "what can agents do <strong>with</strong> my app?"
           </p>
         </div>
@@ -994,9 +994,9 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
     content: (
       <div className="flex gap-10 px-16 pt-4">
         <div className="flex-1 space-y-5">
-          <p className="text-base text-white/50 italic">Your use case picks your tool — don't pick the tool first.</p>
-          <h3 className="text-xl font-semibold text-white">🛠️ Code-forward tools</h3>
-          <p className="text-sm text-white/40">More control, more power</p>
+          <p className="text-lg text-white/50 italic">Your use case picks your tool — don't pick the tool first.</p>
+          <h3 className="text-3xl font-semibold text-white">🛠️ Code-forward tools</h3>
+          <p className="text-lg text-white/40">More control, more power</p>
           <div className="space-y-3">
             {[
               { name: "Claude Code", desc: "The CLI for building more seriously" },
@@ -1004,15 +1004,15 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               { name: "Antigravity", desc: "Google's free coding agent — worth a play" },
             ].map((t) => (
               <div key={t.name} className="p-3 rounded-lg bg-white/5 border border-white/10">
-                <p className="text-base font-semibold text-white">{t.name}</p>
-                <p className="text-sm text-white/50">{t.desc}</p>
+                <p className="text-xl font-semibold text-white">{t.name}</p>
+                <p className="text-lg text-white/50">{t.desc}</p>
               </div>
             ))}
           </div>
         </div>
         <div className="flex-1 space-y-5">
-          <h3 className="text-xl font-semibold text-white mt-8">🎨 Other vibe-coding tools</h3>
-          <p className="text-sm text-white/40">Pick by use case</p>
+          <h3 className="text-3xl font-semibold text-white mt-8">🎨 Other vibe-coding tools</h3>
+          <p className="text-lg text-white/40">Pick by use case</p>
           <div className="space-y-3">
             {[
               { name: "Replit", desc: "Fast web prototypes, strong for learning" },
@@ -1021,8 +1021,8 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
               { name: "B2C-focused tools", desc: "When onboarding and ease are everything" },
             ].map((t) => (
               <div key={t.name} className="p-3 rounded-lg bg-white/5 border border-white/10">
-                <p className="text-base font-semibold text-white">{t.name}</p>
-                <p className="text-sm text-white/50">{t.desc}</p>
+                <p className="text-xl font-semibold text-white">{t.name}</p>
+                <p className="text-lg text-white/50">{t.desc}</p>
               </div>
             ))}
           </div>
@@ -1049,12 +1049,12 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             { title: "Dynamic & context-aware wins", desc: "Beats static every time" },
           ].map((c) => (
             <div key={c.title} className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-lg font-bold text-white mb-1">{c.title}</h3>
-              <p className="text-sm text-white/50">{c.desc}</p>
+              <h3 className="text-xl font-bold text-white mb-1">{c.title}</h3>
+              <p className="text-lg text-white/50">{c.desc}</p>
             </div>
           ))}
         </div>
-        <p className="text-base text-white/40 italic mt-2">If your product isn't thinking with the user, something else will.</p>
+        <p className="text-lg text-white/40 italic mt-2">If your product isn't thinking with the user, something else will.</p>
       </div>
     ),
   },
@@ -1068,7 +1068,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
         <h2 className="text-5xl font-extrabold text-white font-display">Wrap Up & Thank You 🎉</h2>
         <div className="flex gap-10 mt-4">
           <div className="text-left space-y-3">
-            <h3 className="text-xl font-semibold text-white">What you built today:</h3>
+            <h3 className="text-3xl font-semibold text-white">What you built today:</h3>
             <ul className="space-y-2 text-lg text-white/70">
               <li>✅ A real app — from plain English to working product</li>
               <li>✅ How to prompt, plan, and iterate</li>
@@ -1076,7 +1076,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
             </ul>
           </div>
           <div className="text-left space-y-3">
-            <h3 className="text-xl font-semibold text-white">What stays with you:</h3>
+            <h3 className="text-3xl font-semibold text-white">What stays with you:</h3>
             <ul className="space-y-2 text-lg text-white/70">
               <li>🎯 Focus — cut to the one thing that matters</li>
               <li>🧭 Accountability — you own the vision; the AI doesn't</li>
@@ -1088,7 +1088,7 @@ const slides: { title: string; subtitle?: string; content: React.ReactNode; bg?:
           A vibe-coded prototype that validates an idea in 2 hours beats a 6-month IT project that builds the wrong thing.
         </p>
         <p className="text-2xl text-white/80 font-medium mt-2">Keep experimenting, keep building, keep vibing.</p>
-        <p className="text-base text-white/40 mt-4">vibecodeworkshop.ch · Now — Q&A + 🍺</p>
+        <p className="text-lg text-white/40 mt-4">vibecodeworkshop.ch · Now — Q&A + 🍺</p>
       </div>
     ),
   },
@@ -1107,7 +1107,7 @@ const Edition2Slides = () => {
     if (!node) return;
     const update = () => {
       const { width, height } = node.getBoundingClientRect();
-      setScale(Math.min(width / SLIDE_W, height / SLIDE_H) * 1.08);
+      setScale(Math.min(width / SLIDE_W, height / SLIDE_H));
     };
     update();
     const ro = new ResizeObserver(update);
@@ -1212,9 +1212,9 @@ const Edition2Slides = () => {
           }`}
         >
           {!isGradient && slide.title && (
-            <div className="px-16 pt-10 pb-2">
-              <h2 className="text-4xl font-bold text-white font-display">{slide.title}</h2>
-              {slide.subtitle && <p className="text-lg text-white/50 mt-1">{slide.subtitle}</p>}
+            <div className="px-16 pt-12 pb-3">
+              <h2 className="text-6xl font-bold text-white font-display">{slide.title}</h2>
+              {slide.subtitle && <p className="text-2xl text-white/50 mt-2">{slide.subtitle}</p>}
               <div className="w-20 h-1 bg-gradient-to-r from-[hsl(174,72%,40%)] to-[hsl(262,80%,55%)] rounded-full mt-3" />
             </div>
           )}
@@ -1229,7 +1229,7 @@ const Edition2Slides = () => {
           <button onClick={() => navigate("/")} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors">
             <Home className="w-4 h-4" />
           </button>
-          <span className="text-sm text-white/40 font-mono">{current + 1} / {total}</span>
+          <span className="text-lg text-white/40 font-mono">{current + 1} / {total}</span>
           <button
             onClick={exportPDF}
             disabled={isExporting}
