@@ -442,55 +442,46 @@ const Edition1Slides = () => {
 
   const exportPDF = useCallback(async () => {
     setIsExporting(true);
+    const savedCurrent = current;
     try {
       const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [SLIDE_W, SLIDE_H] });
 
-      // Create an offscreen container
-      const offscreen = document.createElement("div");
-      offscreen.style.cssText = `position:fixed;left:-9999px;top:0;width:${SLIDE_W}px;height:${SLIDE_H}px;overflow:hidden;`;
-      document.body.appendChild(offscreen);
-
       for (let i = 0; i < slides.length; i++) {
-        const s = slides[i];
-        const isGrad = s.bg === "gradient";
-
-        // Build slide DOM
-        const slideEl = document.createElement("div");
-        slideEl.style.cssText = `width:${SLIDE_W}px;height:${SLIDE_H}px;display:flex;flex-direction:column;`;
-        if (isGrad) {
-          slideEl.style.background = "linear-gradient(135deg, hsl(220,30%,10%), hsl(262,50%,20%), hsl(174,50%,15%))";
-        } else {
-          slideEl.style.background = "#12122a";
-        }
-        offscreen.innerHTML = "";
-        offscreen.appendChild(slideEl);
-
-        // Clone the current visible slide content by temporarily rendering it
-        const savedCurrent = current;
         setCurrent(i);
-        // Wait for React to render
-        await new Promise((r) => setTimeout(r, 150));
+        await new Promise((r) => setTimeout(r, 200));
 
-        // Capture the actual slide element in the DOM
         const liveSlide = document.querySelector("[data-slide-content]") as HTMLElement;
-        if (liveSlide) {
-          const canvas = await html2canvas(liveSlide, {
-            width: SLIDE_W,
-            height: SLIDE_H,
-            scale: 2,
-            useCORS: true,
-            backgroundColor: null,
-          });
-          if (i > 0) pdf.addPage();
-          pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, SLIDE_W, SLIDE_H);
-        }
+        if (!liveSlide) continue;
+
+        // Temporarily remove scale transform so html2canvas captures at full 1920x1080
+        const originalTransform = liveSlide.style.transform;
+        const originalPosition = liveSlide.style.position;
+        liveSlide.style.transform = "none";
+        liveSlide.style.position = "relative";
+
+        const canvas = await html2canvas(liveSlide, {
+          width: SLIDE_W,
+          height: SLIDE_H,
+          scale: 2,
+          useCORS: true,
+          backgroundColor: null,
+          windowWidth: SLIDE_W,
+          windowHeight: SLIDE_H,
+        });
+
+        // Restore
+        liveSlide.style.transform = originalTransform;
+        liveSlide.style.position = originalPosition;
+
+        if (i > 0) pdf.addPage();
+        pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, SLIDE_W, SLIDE_H);
       }
 
-      document.body.removeChild(offscreen);
-      setCurrent(current); // restore
+      setCurrent(savedCurrent);
       pdf.save("VCW-Edition1-Slides.pdf");
     } catch (err) {
       console.error("PDF export failed:", err);
+      setCurrent(savedCurrent);
     } finally {
       setIsExporting(false);
     }
