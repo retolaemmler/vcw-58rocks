@@ -1107,7 +1107,7 @@ const Edition2Slides = () => {
     if (!node) return;
     const update = () => {
       const { width, height } = node.getBoundingClientRect();
-      setScale(Math.min(width / SLIDE_W, height / SLIDE_H) * 1.08);
+      setScale(Math.min(width / SLIDE_W, height / SLIDE_H));
     };
     update();
     const ro = new ResizeObserver(update);
