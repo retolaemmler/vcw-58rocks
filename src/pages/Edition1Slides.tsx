@@ -504,6 +504,7 @@ const Edition1Slides = () => {
       {/* Slide area */}
       <div ref={containerRef} className="flex-1 relative flex items-center justify-center overflow-hidden">
         <div
+          data-slide-content
           style={{ width: SLIDE_W, height: SLIDE_H, transform: `scale(${scale})`, transformOrigin: "center center" }}
           className={`absolute flex flex-col shrink-0 ${
             isGradient
