@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { ChevronLeft, ChevronRight, Maximize, Minimize, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize, Minimize, Home, Download, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import vcwLogo from "@/assets/vcw-logo.png";
@@ -374,6 +376,7 @@ const SLIDE_H = 1080;
 
 const Edition1Slides = () => {
   const [current, setCurrent] = useState(0);
+  const [isExporting, setIsExporting] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [scale, setScale] = useState(1);
   const containerRef = useCallback((node: HTMLDivElement | null) => {
@@ -437,6 +440,62 @@ const Edition1Slides = () => {
     };
   }, [next, prev]);
 
+  const exportPDF = useCallback(async () => {
+    setIsExporting(true);
+    try {
+      const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [SLIDE_W, SLIDE_H] });
+
+      // Create an offscreen container
+      const offscreen = document.createElement("div");
+      offscreen.style.cssText = `position:fixed;left:-9999px;top:0;width:${SLIDE_W}px;height:${SLIDE_H}px;overflow:hidden;`;
+      document.body.appendChild(offscreen);
+
+      for (let i = 0; i < slides.length; i++) {
+        const s = slides[i];
+        const isGrad = s.bg === "gradient";
+
+        // Build slide DOM
+        const slideEl = document.createElement("div");
+        slideEl.style.cssText = `width:${SLIDE_W}px;height:${SLIDE_H}px;display:flex;flex-direction:column;`;
+        if (isGrad) {
+          slideEl.style.background = "linear-gradient(135deg, hsl(220,30%,10%), hsl(262,50%,20%), hsl(174,50%,15%))";
+        } else {
+          slideEl.style.background = "#12122a";
+        }
+        offscreen.innerHTML = "";
+        offscreen.appendChild(slideEl);
+
+        // Clone the current visible slide content by temporarily rendering it
+        const savedCurrent = current;
+        setCurrent(i);
+        // Wait for React to render
+        await new Promise((r) => setTimeout(r, 150));
+
+        // Capture the actual slide element in the DOM
+        const liveSlide = document.querySelector("[data-slide-content]") as HTMLElement;
+        if (liveSlide) {
+          const canvas = await html2canvas(liveSlide, {
+            width: SLIDE_W,
+            height: SLIDE_H,
+            scale: 2,
+            useCORS: true,
+            backgroundColor: null,
+          });
+          if (i > 0) pdf.addPage();
+          pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, SLIDE_W, SLIDE_H);
+        }
+      }
+
+      document.body.removeChild(offscreen);
+      setCurrent(current); // restore
+      pdf.save("VCW-Edition1-Slides.pdf");
+    } catch (err) {
+      console.error("PDF export failed:", err);
+    } finally {
+      setIsExporting(false);
+    }
+  }, [current]);
+
   const slide = slides[current];
   const isGradient = slide.bg === "gradient";
 
@@ -445,6 +504,7 @@ const Edition1Slides = () => {
       {/* Slide area */}
       <div ref={containerRef} className="flex-1 relative flex items-center justify-center overflow-hidden">
         <div
+          data-slide-content
           style={{ width: SLIDE_W, height: SLIDE_H, transform: `scale(${scale})`, transformOrigin: "center center" }}
           className={`absolute flex flex-col shrink-0 ${
             isGradient
@@ -473,6 +533,14 @@ const Edition1Slides = () => {
             <Home className="w-4 h-4" />
           </button>
           <span className="text-sm text-white/40 font-mono">{current + 1} / {total}</span>
+          <button
+            onClick={exportPDF}
+            disabled={isExporting}
+            className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors disabled:opacity-50"
+            title="Download as PDF"
+          >
+            {isExporting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+          </button>
         </div>
 
         <div className="flex items-center gap-2">
