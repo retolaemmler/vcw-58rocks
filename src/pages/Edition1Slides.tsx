@@ -376,6 +376,7 @@ const SLIDE_H = 1080;
 
 const Edition1Slides = () => {
   const [current, setCurrent] = useState(0);
+  const [isExporting, setIsExporting] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [scale, setScale] = useState(1);
   const containerRef = useCallback((node: HTMLDivElement | null) => {
