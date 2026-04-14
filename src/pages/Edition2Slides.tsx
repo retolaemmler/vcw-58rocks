@@ -1212,9 +1212,9 @@ const Edition2Slides = () => {
           }`}
         >
           {!isGradient && slide.title && (
-            <div className="px-16 pt-10 pb-2">
-              <h2 className="text-4xl font-bold text-white font-display">{slide.title}</h2>
-              {slide.subtitle && <p className="text-lg text-white/50 mt-1">{slide.subtitle}</p>}
+            <div className="px-16 pt-12 pb-3">
+              <h2 className="text-6xl font-bold text-white font-display">{slide.title}</h2>
+              {slide.subtitle && <p className="text-2xl text-white/50 mt-2">{slide.subtitle}</p>}
               <div className="w-20 h-1 bg-gradient-to-r from-[hsl(174,72%,40%)] to-[hsl(262,80%,55%)] rounded-full mt-3" />
             </div>
           )}
