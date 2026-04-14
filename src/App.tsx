@@ -10,6 +10,7 @@ import Survey from "./pages/Survey";
 import IdeaGenerator from "./pages/IdeaGenerator";
 import Edition1Participants from "./pages/Edition1Participants";
 import Edition1Slides from "./pages/Edition1Slides";
+import Edition2Slides from "./pages/Edition2Slides";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/ideas" element={<IdeaGenerator />} />
           <Route path="/edition1/participants" element={<Edition1Participants />} />
           <Route path="/edition1/slides" element={<Edition1Slides />} />
+          <Route path="/edition2/slides" element={<Edition2Slides />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
