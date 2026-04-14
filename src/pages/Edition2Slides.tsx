@@ -1107,7 +1107,7 @@ const Edition2Slides = () => {
     if (!node) return;
     const update = () => {
       const { width, height } = node.getBoundingClientRect();
-      setScale(Math.min(width / SLIDE_W, height / SLIDE_H));
+      setScale(Math.min(width / SLIDE_W, height / SLIDE_H) * 1.02);
     };
     update();
     const ro = new ResizeObserver(update);
@@ -1224,7 +1224,7 @@ const Edition2Slides = () => {
         </div>
       </div>
 
-      <div className="h-14 bg-[#0a0a1a] border-t border-white/10 flex items-center justify-between px-6 shrink-0">
+      <div className="h-10 bg-[#0a0a1a]/80 border-t border-white/10 flex items-center justify-between px-4 shrink-0">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate("/")} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors">
             <Home className="w-4 h-4" />
