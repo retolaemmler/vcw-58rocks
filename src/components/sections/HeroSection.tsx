@@ -61,7 +61,7 @@ const HeroSection = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Get Notified About Other Dates</DialogTitle>
+            <DialogTitle>Get Notified About Upcoming Workshops</DialogTitle>
             <DialogDescription>
               Leave your details and we'll inform you about upcoming workshop dates.
             </DialogDescription>
