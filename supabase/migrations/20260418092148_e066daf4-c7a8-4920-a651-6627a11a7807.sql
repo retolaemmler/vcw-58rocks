@@ -1,0 +1,1 @@
+ALTER TABLE public.newsletter_signups ADD COLUMN preferred_dates text[];
