@@ -34,7 +34,7 @@ const HeroSection = () => {
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-10">
           <span className="flex items-center gap-1.5">
             <Calendar className="w-4 h-4 text-primary" />
-            Thursday, 16 April 2026
+            TBA
           </span>
           <span className="hidden sm:inline text-border">|</span>
           <span>9:00 – 17:00</span>
