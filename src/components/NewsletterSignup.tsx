@@ -104,13 +104,40 @@ const NewsletterSignup = ({ variant = "light" }: NewsletterSignupProps) => {
             className={`h-9 text-sm ${isDark ? "bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40" : ""}`}
           />
         </div>
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Input
-            placeholder="Company"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            className={`h-9 text-sm ${isDark ? "bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40" : ""}`}
-          />
+        <Input
+          placeholder="Company"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          className={`h-9 text-sm ${isDark ? "bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40" : ""}`}
+        />
+        <div className="pt-2 text-left">
+          <p className={`text-xs font-medium mb-2 ${isDark ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+            Which date(s) would work for you?
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            {AVAILABLE_DATES.map((d) => (
+              <label
+                key={d.value}
+                className={`flex items-center gap-2 rounded-md border px-3 py-2 cursor-pointer text-xs transition-colors ${
+                  selectedDates.includes(d.value)
+                    ? isDark
+                      ? "bg-primary-foreground/20 border-primary-foreground/40"
+                      : "bg-primary/10 border-primary/40"
+                    : isDark
+                    ? "border-primary-foreground/20 hover:bg-primary-foreground/5"
+                    : "border-border hover:bg-muted"
+                }`}
+              >
+                <Checkbox
+                  checked={selectedDates.includes(d.value)}
+                  onCheckedChange={() => toggleDate(d.value)}
+                />
+                <span className={isDark ? "text-primary-foreground" : ""}>{d.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-end pt-1">
           <Button type="submit" size="sm" disabled={loading} className="h-9 px-6 whitespace-nowrap">
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Notify Me"}
           </Button>
