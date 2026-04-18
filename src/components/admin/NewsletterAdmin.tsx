@@ -90,6 +90,7 @@ const NewsletterAdmin = () => {
                   <TableHead>Email</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Company</TableHead>
+                  <TableHead>Preferred Dates</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
@@ -102,6 +103,19 @@ const NewsletterAdmin = () => {
                     <TableCell className="text-sm">{s.email}</TableCell>
                     <TableCell className="text-sm">{s.name || "—"}</TableCell>
                     <TableCell className="text-sm">{s.company || "—"}</TableCell>
+                    <TableCell className="text-sm">
+                      {s.preferred_dates && s.preferred_dates.length > 0 ? (
+                        <div className="flex flex-wrap gap-1">
+                          {s.preferred_dates.map((d) => (
+                            <Badge key={d} variant="secondary" className="text-xs">
+                              {formatPreferredDate(d)}
+                            </Badge>
+                          ))}
+                        </div>
+                      ) : (
+                        "—"
+                      )}
+                    </TableCell>
                     <TableCell>
                       <Button
                         variant="destructive"
@@ -115,7 +129,7 @@ const NewsletterAdmin = () => {
                 ))}
                 {signups.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                       No signups yet.
                     </TableCell>
                   </TableRow>
