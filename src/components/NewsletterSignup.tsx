@@ -2,6 +2,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Bell, Loader2, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -9,23 +10,46 @@ interface NewsletterSignupProps {
   variant?: "light" | "dark";
 }
 
+const AVAILABLE_DATES = [
+  { value: "2026-05-28", label: "Thu, 28 May 2026" },
+  { value: "2026-06-11", label: "Thu, 11 June 2026" },
+  { value: "2026-06-23", label: "Tue, 23 June 2026" },
+  { value: "2026-06-30", label: "Tue, 30 June 2026" },
+];
+
 const NewsletterSignup = ({ variant = "light" }: NewsletterSignupProps) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
+  const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const { toast } = useToast();
+
+  const toggleDate = (value: string) => {
+    setSelectedDates((prev) =>
+      prev.includes(value) ? prev.filter((d) => d !== value) : [...prev, value]
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
 
     setLoading(true);
+    const datesNote = selectedDates.length
+      ? `Preferred dates: ${selectedDates
+          .map((d) => AVAILABLE_DATES.find((x) => x.value === d)?.label || d)
+          .join(", ")}`
+      : null;
+    const companyValue = [company.trim() || null, datesNote]
+      .filter(Boolean)
+      .join(" | ") || null;
+
     const { error } = await supabase.from("newsletter_signups").insert({
       email: email.trim().toLowerCase(),
       name: name.trim() || null,
-      company: company.trim() || null,
+      company: companyValue,
     });
 
     if (error) {
