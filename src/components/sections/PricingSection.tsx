@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Ticket, Star, Users, Gift } from "lucide-react";
+import { Ticket, Star, Users, Gift, Sparkles } from "lucide-react";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import {
   Dialog,
