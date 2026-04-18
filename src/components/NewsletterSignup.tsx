@@ -37,19 +37,11 @@ const NewsletterSignup = ({ variant = "light" }: NewsletterSignupProps) => {
     if (!email.trim()) return;
 
     setLoading(true);
-    const datesNote = selectedDates.length
-      ? `Preferred dates: ${selectedDates
-          .map((d) => AVAILABLE_DATES.find((x) => x.value === d)?.label || d)
-          .join(", ")}`
-      : null;
-    const companyValue = [company.trim() || null, datesNote]
-      .filter(Boolean)
-      .join(" | ") || null;
-
     const { error } = await supabase.from("newsletter_signups").insert({
       email: email.trim().toLowerCase(),
       name: name.trim() || null,
-      company: companyValue,
+      company: company.trim() || null,
+      preferred_dates: selectedDates.length ? selectedDates : null,
     });
 
     if (error) {

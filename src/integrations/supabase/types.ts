@@ -39,6 +39,7 @@ export type Database = {
           email: string
           id: string
           name: string | null
+          preferred_dates: string[] | null
         }
         Insert: {
           company?: string | null
@@ -46,6 +47,7 @@ export type Database = {
           email: string
           id?: string
           name?: string | null
+          preferred_dates?: string[] | null
         }
         Update: {
           company?: string | null
@@ -53,6 +55,7 @@ export type Database = {
           email?: string
           id?: string
           name?: string | null
+          preferred_dates?: string[] | null
         }
         Relationships: []
       }

@@ -12,8 +12,15 @@ interface NewsletterSignup {
   email: string;
   name: string | null;
   company: string | null;
+  preferred_dates: string[] | null;
   created_at: string;
 }
+
+const formatPreferredDate = (iso: string) => {
+  const d = new Date(iso + "T00:00:00");
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("de-CH", { day: "2-digit", month: "short", year: "numeric" });
+};
 
 const NewsletterAdmin = () => {
   const [signups, setSignups] = useState<NewsletterSignup[]>([]);
@@ -83,6 +90,7 @@ const NewsletterAdmin = () => {
                   <TableHead>Email</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Company</TableHead>
+                  <TableHead>Preferred Dates</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
@@ -95,6 +103,19 @@ const NewsletterAdmin = () => {
                     <TableCell className="text-sm">{s.email}</TableCell>
                     <TableCell className="text-sm">{s.name || "—"}</TableCell>
                     <TableCell className="text-sm">{s.company || "—"}</TableCell>
+                    <TableCell className="text-sm">
+                      {s.preferred_dates && s.preferred_dates.length > 0 ? (
+                        <div className="flex flex-wrap gap-1">
+                          {s.preferred_dates.map((d) => (
+                            <Badge key={d} variant="secondary" className="text-xs">
+                              {formatPreferredDate(d)}
+                            </Badge>
+                          ))}
+                        </div>
+                      ) : (
+                        "—"
+                      )}
+                    </TableCell>
                     <TableCell>
                       <Button
                         variant="destructive"
@@ -108,7 +129,7 @@ const NewsletterAdmin = () => {
                 ))}
                 {signups.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                       No signups yet.
                     </TableCell>
                   </TableRow>
