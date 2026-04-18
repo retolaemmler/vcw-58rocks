@@ -12,8 +12,15 @@ interface NewsletterSignup {
   email: string;
   name: string | null;
   company: string | null;
+  preferred_dates: string[] | null;
   created_at: string;
 }
+
+const formatPreferredDate = (iso: string) => {
+  const d = new Date(iso + "T00:00:00");
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("de-CH", { day: "2-digit", month: "short", year: "numeric" });
+};
 
 const NewsletterAdmin = () => {
   const [signups, setSignups] = useState<NewsletterSignup[]>([]);
