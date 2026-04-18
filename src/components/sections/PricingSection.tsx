@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/dialog";
 
 const tiers = [
-{ name: "Early Bird", price: "599", discount: "25% off", highlight: false, soldOut: true },
-{ name: "Regular", price: "679", discount: "15% off", highlight: true, soldOut: false },
+{ name: "Early Bird", price: "599", discount: "25% off", highlight: true, soldOut: false },
+{ name: "Regular", price: "679", discount: "15% off", highlight: false, soldOut: false },
 { name: "Late Bird", price: "799", discount: "Base price", highlight: false, soldOut: false }];
 
 
