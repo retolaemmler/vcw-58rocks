@@ -321,7 +321,7 @@ const Feedback = () => {
                     name="best_part"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">💎 What was the best part of the day?</FormLabel>
+                        <FormLabel className="text-base">💎 What was your highlight of the day?</FormLabel>
                         <FormControl>
                           <div className="relative flex-1">
                             <Textarea {...field} placeholder="The moment, session or insight that stood out…" rows={3} className="pr-8" />
