@@ -405,24 +405,6 @@ const Feedback = () => {
                             )}
                           </div>
                         </FormControl>
-                        <FormField
-                          control={form.control}
-                          name="allow_testimonial_public"
-                          render={({ field: cbField }) => (
-                            <FormItem className="flex items-center gap-2 space-y-0 mt-2">
-                              <FormControl>
-                                <Checkbox
-                                  checked={!!cbField.value}
-                                  onCheckedChange={cbField.onChange}
-                                  id="allow-public"
-                                />
-                              </FormControl>
-                              <Label htmlFor="allow-public" className="text-sm font-normal text-muted-foreground cursor-pointer">
-                                You may publish my testimonial (with my name) on the website.
-                              </Label>
-                            </FormItem>
-                          )}
-                        />
                         <FormMessage />
                       </FormItem>
                     )}
