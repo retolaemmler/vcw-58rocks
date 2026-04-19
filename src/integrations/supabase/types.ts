@@ -32,6 +32,92 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback_responses: {
+        Row: {
+          allow_testimonial_public: boolean | null
+          anything_else: string | null
+          app_built_description: string | null
+          best_part: string | null
+          created_at: string
+          email: string | null
+          id: string
+          improve_part: string | null
+          nps_score: number | null
+          overall_rating: number | null
+          participant_name: string | null
+          rating_future: number | null
+          rating_intro: number | null
+          rating_lunch: number | null
+          rating_next_level: number | null
+          rating_presentations: number | null
+          rating_qa_beer: number | null
+          rating_workshop_session_1: number | null
+          rating_workshop_session_2: number | null
+          recommend_to_others: string | null
+          testimonial: string | null
+          token_id: string
+          will_continue_building: string | null
+        }
+        Insert: {
+          allow_testimonial_public?: boolean | null
+          anything_else?: string | null
+          app_built_description?: string | null
+          best_part?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          improve_part?: string | null
+          nps_score?: number | null
+          overall_rating?: number | null
+          participant_name?: string | null
+          rating_future?: number | null
+          rating_intro?: number | null
+          rating_lunch?: number | null
+          rating_next_level?: number | null
+          rating_presentations?: number | null
+          rating_qa_beer?: number | null
+          rating_workshop_session_1?: number | null
+          rating_workshop_session_2?: number | null
+          recommend_to_others?: string | null
+          testimonial?: string | null
+          token_id: string
+          will_continue_building?: string | null
+        }
+        Update: {
+          allow_testimonial_public?: boolean | null
+          anything_else?: string | null
+          app_built_description?: string | null
+          best_part?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          improve_part?: string | null
+          nps_score?: number | null
+          overall_rating?: number | null
+          participant_name?: string | null
+          rating_future?: number | null
+          rating_intro?: number | null
+          rating_lunch?: number | null
+          rating_next_level?: number | null
+          rating_presentations?: number | null
+          rating_qa_beer?: number | null
+          rating_workshop_session_1?: number | null
+          rating_workshop_session_2?: number | null
+          recommend_to_others?: string | null
+          testimonial?: string | null
+          token_id?: string
+          will_continue_building?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_responses_token_id_fkey"
+            columns: ["token_id"]
+            isOneToOne: false
+            referencedRelation: "survey_tokens"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       newsletter_signups: {
         Row: {
           company: string | null
@@ -173,16 +259,19 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          kind: string
           token: string
         }
         Insert: {
           created_at?: string
           id?: string
+          kind?: string
           token?: string
         }
         Update: {
           created_at?: string
           id?: string
+          kind?: string
           token?: string
         }
         Relationships: []
