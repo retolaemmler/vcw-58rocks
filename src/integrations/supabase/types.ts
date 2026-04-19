@@ -192,6 +192,7 @@ export type Database = {
           ai_coding_experience: string
           anything_else: string | null
           app_audience: string | null
+          app_built: string | null
           app_idea_description: string | null
           building_blocks: string
           created_at: string
@@ -211,6 +212,7 @@ export type Database = {
           ai_coding_experience: string
           anything_else?: string | null
           app_audience?: string | null
+          app_built?: string | null
           app_idea_description?: string | null
           building_blocks: string
           created_at?: string
@@ -230,6 +232,7 @@ export type Database = {
           ai_coding_experience?: string
           anything_else?: string | null
           app_audience?: string | null
+          app_built?: string | null
           app_idea_description?: string | null
           building_blocks?: string
           created_at?: string
