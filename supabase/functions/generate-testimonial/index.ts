@@ -79,9 +79,10 @@ serve(async (req) => {
     if (lovableExp) contextParts.push(`Prior Lovable experience: ${lovableExp}.`);
     if (aiExp) contextParts.push(`Prior AI coding experience: ${aiExp}.`);
 
-    const userContext = contextParts.length
+    const hasAnyContext = contextParts.length > 0;
+    const userContext = hasAnyContext
       ? contextParts.join(" ")
-      : `The participant attended the Vibe Code Workshop and enjoyed the experience.`;
+      : `No specific information was found for this participant. Write a generic but exciting first-person testimonial about spending one day at the Vibe Code Workshop building a real web app with Lovable — capture the "I can't believe I actually built this in a single day" feeling, without inventing specific app details.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -103,6 +104,7 @@ Rules:
 - When mentioning the tool/platform used, refer to it as "Lovable" — do NOT say "AI tools", "no-code tools", or other generic phrases.
 - You may use the provided context (app built, idea, audience, goals, experience) as inspiration, but NEVER include URLs, links, domains, or web addresses in the output.
 - Mention what the person built only if it makes the testimonial more concrete and human.
+- If no specific context is provided, write a generic but exciting testimonial that captures the surprise of building something real in a single day with Lovable. Do NOT invent fake app names or fake specifics — keep it about the experience.
 - First person ("I built...", "I came in...").
 - No quotes around the output. No name signature. No emojis.
 - Vary tone slightly each time — sometimes reflective, sometimes punchy, sometimes practical.`,
