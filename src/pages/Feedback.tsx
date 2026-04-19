@@ -19,20 +19,20 @@ import logo from "@/assets/vcw-logo.png";
 const feedbackSchema = z.object({
   email: z.string().trim().email({ message: "Please enter a valid email address" }),
   participant_name: z.string().optional(),
-  nps_score: z.number().min(0).max(10).optional(),
-  overall_rating: z.number().min(1).max(5).optional(),
-  rating_intro: z.number().min(1).max(5).optional(),
-  rating_workshop_session_1: z.number().min(1).max(5).optional(),
-  rating_lunch: z.number().min(1).max(5).optional(),
-  rating_next_level: z.number().min(1).max(5).optional(),
-  rating_workshop_session_2: z.number().min(1).max(5).optional(),
-  rating_presentations: z.number().min(1).max(5).optional(),
-  rating_future: z.number().min(1).max(5).optional(),
-  rating_qa_beer: z.number().min(1).max(5).optional(),
+  nps_score: z.number({ required_error: "Please select a score" }).min(0).max(10),
+  overall_rating: z.number({ required_error: "Please rate the workshop" }).min(1).max(5),
+  rating_intro: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  rating_workshop_session_1: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  rating_lunch: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  rating_next_level: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  rating_workshop_session_2: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  rating_presentations: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  rating_future: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  rating_qa_beer: z.number({ required_error: "Please rate this section" }).min(1).max(5),
   best_part: z.string().optional(),
   improve_part: z.string().optional(),
   app_built_description: z.string().optional(),
-  will_continue_building: z.enum(["yes", "maybe", "no"]).optional(),
+  will_continue_building: z.enum(["yes", "maybe", "no"], { required_error: "Please choose an option" }),
   recommend_to_others: z.enum(["yes", "maybe", "no"]).optional(),
   testimonial: z.string().optional(),
   allow_testimonial_public: z.boolean().optional(),
@@ -292,7 +292,7 @@ const Feedback = () => {
                   <div className="space-y-6">
                     <div>
                       <h3 className="font-display font-semibold text-base">📅 How did each part land?</h3>
-                      <p className="text-sm text-muted-foreground">Rate each session — skip any you don't want to score.</p>
+                      <p className="text-sm text-muted-foreground">Rate each session from 1 (poor) to 5 (amazing).</p>
                     </div>
                     {AGENDA_SECTIONS.map(({ key, label }) => (
                       <FormField
