@@ -31,21 +31,56 @@ serve(async (req) => {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     const normalized = email.trim().toLowerCase();
-    const { data: order, error: orderErr } = await supabase
-      .from("orders")
-      .select("app_built, customer_name, contact_name")
-      .ilike("customer_email", normalized)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
 
-    if (orderErr) {
-      console.error("Order lookup error:", orderErr);
-    }
+    const [orderRes, surveyRes] = await Promise.all([
+      supabase
+        .from("orders")
+        .select("app_built, customer_name, contact_name")
+        .ilike("customer_email", normalized)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+      supabase
+        .from("survey_responses")
+        .select("participant_name, app_idea_description, app_audience, workshop_goals, success_criteria, lovable_experience, ai_coding_experience, building_blocks")
+        .ilike("email", normalized)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+    ]);
 
-    const appBuilt = order?.app_built?.trim();
-    const userContext = appBuilt
-      ? `The participant built the following app at the workshop: "${appBuilt}".`
+    const order = orderRes.data;
+    const survey = surveyRes.data;
+    if (orderRes.error) console.error("Order lookup error:", orderRes.error);
+    if (surveyRes.error) console.error("Survey lookup error:", surveyRes.error);
+
+    // Strip URLs from a string so we never echo a link in the testimonial
+    const stripUrls = (s?: string | null) =>
+      (s || "")
+        .replace(/https?:\/\/\S+/gi, "")
+        .replace(/www\.\S+/gi, "")
+        .replace(/\s{2,}/g, " ")
+        .trim();
+
+    const appBuilt = stripUrls(order?.app_built);
+    const appIdea = stripUrls(survey?.app_idea_description);
+    const audience = stripUrls(survey?.app_audience);
+    const goals = stripUrls(survey?.workshop_goals);
+    const success = stripUrls(survey?.success_criteria);
+    const lovableExp = survey?.lovable_experience?.trim();
+    const aiExp = survey?.ai_coding_experience?.trim();
+
+    const contextParts: string[] = [];
+    if (appBuilt) contextParts.push(`At the workshop they built: "${appBuilt}".`);
+    if (appIdea) contextParts.push(`Their original app idea going in: "${appIdea}".`);
+    if (audience) contextParts.push(`Intended audience: ${audience}.`);
+    if (goals) contextParts.push(`Their workshop goals: ${goals}.`);
+    if (success) contextParts.push(`What success looked like for them: ${success}.`);
+    if (lovableExp) contextParts.push(`Prior Lovable experience: ${lovableExp}.`);
+    if (aiExp) contextParts.push(`Prior AI coding experience: ${aiExp}.`);
+
+    const userContext = contextParts.length
+      ? contextParts.join(" ")
       : `The participant attended the Vibe Code Workshop and enjoyed the experience.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -64,14 +99,16 @@ serve(async (req) => {
 Rules:
 - 1-2 sentences max, around 20-40 words.
 - Sound natural and human, NOT marketing-fluffy. No clichés like "game-changer", "next-level", "blown away".
-- Mention what the person built if context is provided.
+- Refer to the workshop as "in a day" or "in one day" — NEVER say "in an afternoon", "in a morning", or "in a few hours".
+- You may use the provided context (app built, idea, audience, goals, experience) as inspiration, but NEVER include URLs, links, domains, or web addresses in the output.
+- Mention what the person built only if it makes the testimonial more concrete and human.
 - First person ("I built...", "I came in...").
 - No quotes around the output. No name signature. No emojis.
 - Vary tone slightly each time — sometimes reflective, sometimes punchy, sometimes practical.`,
           },
           {
             role: "user",
-            content: `Write a short testimonial. ${userContext}`,
+            content: `Write a short testimonial. Context about the participant (use as inspiration only, do not quote URLs): ${userContext}`,
           },
         ],
         temperature: 0.9,
@@ -101,9 +138,15 @@ Rules:
     let testimonial: string = data.choices?.[0]?.message?.content?.trim() || "";
     // Strip surrounding quotes if model added them
     testimonial = testimonial.replace(/^["“”']+|["“”']+$/g, "").trim();
+    // Final safety net: remove any URLs/domains the model might have included
+    testimonial = testimonial
+      .replace(/https?:\/\/\S+/gi, "")
+      .replace(/www\.\S+/gi, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
 
     return new Response(
-      JSON.stringify({ testimonial, appBuilt: appBuilt || null, foundOrder: !!order }),
+      JSON.stringify({ testimonial, appBuilt: appBuilt || null, foundOrder: !!order, foundSurvey: !!survey }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (e) {
