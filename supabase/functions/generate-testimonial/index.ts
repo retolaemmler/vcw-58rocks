@@ -31,21 +31,56 @@ serve(async (req) => {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     const normalized = email.trim().toLowerCase();
-    const { data: order, error: orderErr } = await supabase
-      .from("orders")
-      .select("app_built, customer_name, contact_name")
-      .ilike("customer_email", normalized)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
 
-    if (orderErr) {
-      console.error("Order lookup error:", orderErr);
-    }
+    const [orderRes, surveyRes] = await Promise.all([
+      supabase
+        .from("orders")
+        .select("app_built, customer_name, contact_name")
+        .ilike("customer_email", normalized)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+      supabase
+        .from("survey_responses")
+        .select("participant_name, app_idea_description, app_audience, workshop_goals, success_criteria, lovable_experience, ai_coding_experience, building_blocks")
+        .ilike("email", normalized)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+    ]);
 
-    const appBuilt = order?.app_built?.trim();
-    const userContext = appBuilt
-      ? `The participant built the following app at the workshop: "${appBuilt}".`
+    const order = orderRes.data;
+    const survey = surveyRes.data;
+    if (orderRes.error) console.error("Order lookup error:", orderRes.error);
+    if (surveyRes.error) console.error("Survey lookup error:", surveyRes.error);
+
+    // Strip URLs from a string so we never echo a link in the testimonial
+    const stripUrls = (s?: string | null) =>
+      (s || "")
+        .replace(/https?:\/\/\S+/gi, "")
+        .replace(/www\.\S+/gi, "")
+        .replace(/\s{2,}/g, " ")
+        .trim();
+
+    const appBuilt = stripUrls(order?.app_built);
+    const appIdea = stripUrls(survey?.app_idea_description);
+    const audience = stripUrls(survey?.app_audience);
+    const goals = stripUrls(survey?.workshop_goals);
+    const success = stripUrls(survey?.success_criteria);
+    const lovableExp = survey?.lovable_experience?.trim();
+    const aiExp = survey?.ai_coding_experience?.trim();
+
+    const contextParts: string[] = [];
+    if (appBuilt) contextParts.push(`At the workshop they built: "${appBuilt}".`);
+    if (appIdea) contextParts.push(`Their original app idea going in: "${appIdea}".`);
+    if (audience) contextParts.push(`Intended audience: ${audience}.`);
+    if (goals) contextParts.push(`Their workshop goals: ${goals}.`);
+    if (success) contextParts.push(`What success looked like for them: ${success}.`);
+    if (lovableExp) contextParts.push(`Prior Lovable experience: ${lovableExp}.`);
+    if (aiExp) contextParts.push(`Prior AI coding experience: ${aiExp}.`);
+
+    const userContext = contextParts.length
+      ? contextParts.join(" ")
       : `The participant attended the Vibe Code Workshop and enjoyed the experience.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
