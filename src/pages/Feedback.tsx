@@ -254,19 +254,6 @@ const Feedback = () => {
                         </FormItem>
                       )}
                     />
-                    <FormField
-                      control={form.control}
-                      name="participant_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>👤 Your Name (optional)</FormLabel>
-                          <FormControl>
-                            <Input {...field} placeholder="Your name" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                   </div>
 
                   {/* Overall rating */}
