@@ -138,9 +138,15 @@ Rules:
     let testimonial: string = data.choices?.[0]?.message?.content?.trim() || "";
     // Strip surrounding quotes if model added them
     testimonial = testimonial.replace(/^["“”']+|["“”']+$/g, "").trim();
+    // Final safety net: remove any URLs/domains the model might have included
+    testimonial = testimonial
+      .replace(/https?:\/\/\S+/gi, "")
+      .replace(/www\.\S+/gi, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
 
     return new Response(
-      JSON.stringify({ testimonial, appBuilt: appBuilt || null, foundOrder: !!order }),
+      JSON.stringify({ testimonial, appBuilt: appBuilt || null, foundOrder: !!order, foundSurvey: !!survey }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (e) {
