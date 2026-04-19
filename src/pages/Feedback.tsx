@@ -123,28 +123,25 @@ const Feedback = () => {
 
   const handleGenerateTestimonial = async () => {
     const email = form.getValues("email")?.trim();
-    if (!email) {
-      toast({
-        title: "Email required",
-        description: "Please enter your email above first so we can find your project.",
-        variant: "destructive",
-      });
-      return;
-    }
     setGeneratingTestimonial(true);
     try {
       const { data, error } = await supabase.functions.invoke("generate-testimonial", {
-        body: { email },
+        body: { email: email || null },
       });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
       const testimonial = data?.testimonial as string | undefined;
       if (!testimonial) throw new Error("No testimonial returned");
       form.setValue("testimonial", testimonial, { shouldDirty: true, shouldValidate: true });
-      if (!data?.foundOrder) {
+      if (email && !data?.foundOrder && !data?.foundSurvey) {
         toast({
-          title: "No matching order found",
+          title: "No matching record found",
           description: "Generated a generic testimonial — feel free to edit it.",
+        });
+      } else if (!email) {
+        toast({
+          title: "Generic testimonial generated",
+          description: "Add your email above to personalize it based on your project.",
         });
       }
     } catch (err) {
