@@ -1,0 +1,1 @@
+ALTER TABLE public.orders ADD COLUMN app_built text;
