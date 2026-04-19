@@ -393,7 +393,7 @@ const Feedback = () => {
                     name="testimonial"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">💬 A short testimonial in your own words?</FormLabel>
+                        <FormLabel className="text-base">💬 A short testimonial in your own words we can use online?</FormLabel>
                         <p className="text-sm text-muted-foreground">Optional — a sentence we could quote.</p>
                         <FormControl>
                           <div className="relative flex-1">
