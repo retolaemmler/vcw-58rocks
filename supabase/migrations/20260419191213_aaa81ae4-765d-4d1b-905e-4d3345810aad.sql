@@ -1,1 +1,0 @@
-ALTER TABLE public.survey_responses ADD COLUMN app_built text;
