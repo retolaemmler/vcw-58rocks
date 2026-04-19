@@ -101,14 +101,14 @@ const NpsRating = ({
 );
 
 const AGENDA_SECTIONS: { key: keyof FeedbackFormValues; label: string }[] = [
-  { key: "rating_intro", label: "👋 Welcome & Intro (09:00)" },
-  { key: "rating_workshop_session_1", label: "🛠️ Workshop Session #1 (10:00)" },
-  { key: "rating_lunch", label: "🍕 Lunch Break (12:00)" },
-  { key: "rating_next_level", label: "🚀 Next Level Vibe Coding (13:00)" },
-  { key: "rating_workshop_session_2", label: "🛠️ Workshop Session #2 (13:30)" },
-  { key: "rating_presentations", label: "🎤 Presentations & Feedback (15:30)" },
-  { key: "rating_future", label: "🔮 Future of Vibe Coding (16:15)" },
-  { key: "rating_qa_beer", label: "🍺 Q&A + Beer (16:30)" },
+  { key: "rating_intro", label: "👋 Welcome & Intro" },
+  { key: "rating_workshop_session_1", label: "🛠️ Workshop Session #1" },
+  { key: "rating_lunch", label: "🍕 Lunch Break" },
+  { key: "rating_next_level", label: "🚀 Next Level Vibe Coding" },
+  { key: "rating_workshop_session_2", label: "🛠️ Workshop Session #2" },
+  { key: "rating_presentations", label: "🎤 Presentations & Feedback" },
+  { key: "rating_future", label: "🔮 Future of Vibe Coding" },
+  { key: "rating_qa_beer", label: "🍺 Q&A + Beer" },
 ];
 
 const Feedback = () => {
