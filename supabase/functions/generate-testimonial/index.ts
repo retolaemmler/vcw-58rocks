@@ -99,14 +99,16 @@ serve(async (req) => {
 Rules:
 - 1-2 sentences max, around 20-40 words.
 - Sound natural and human, NOT marketing-fluffy. No clichés like "game-changer", "next-level", "blown away".
-- Mention what the person built if context is provided.
+- Refer to the workshop as "in a day" or "in one day" — NEVER say "in an afternoon", "in a morning", or "in a few hours".
+- You may use the provided context (app built, idea, audience, goals, experience) as inspiration, but NEVER include URLs, links, domains, or web addresses in the output.
+- Mention what the person built only if it makes the testimonial more concrete and human.
 - First person ("I built...", "I came in...").
 - No quotes around the output. No name signature. No emojis.
 - Vary tone slightly each time — sometimes reflective, sometimes punchy, sometimes practical.`,
           },
           {
             role: "user",
-            content: `Write a short testimonial. ${userContext}`,
+            content: `Write a short testimonial. Context about the participant (use as inspiration only, do not quote URLs): ${userContext}`,
           },
         ],
         temperature: 0.9,
