@@ -409,34 +409,6 @@ const Feedback = () => {
                     )}
                   />
 
-                  {/* Recommend */}
-                  <FormField
-                    control={form.control}
-                    name="recommend_to_others"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base">📣 Would you recommend the workshop to others?</FormLabel>
-                        <FormControl>
-                          <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-wrap gap-4">
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="recommend-yes" />
-                              <Label htmlFor="recommend-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="maybe" id="recommend-maybe" />
-                              <Label htmlFor="recommend-maybe">Maybe</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="recommend-no" />
-                              <Label htmlFor="recommend-no">No</Label>
-                            </div>
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
                   {/* Testimonial */}
                   <FormField
                     control={form.control}
