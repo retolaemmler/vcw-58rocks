@@ -292,7 +292,7 @@ const Feedback = () => {
                   <div className="space-y-6">
                     <div>
                       <h3 className="font-display font-semibold text-base">📅 How did each part land?</h3>
-                      <p className="text-sm text-muted-foreground">Rate each session — skip any you don't want to score.</p>
+                      <p className="text-sm text-muted-foreground">Rate each session from 1 (poor) to 5 (amazing).</p>
                     </div>
                     {AGENDA_SECTIONS.map(({ key, label }) => (
                       <FormField
