@@ -94,12 +94,13 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You write short, authentic, first-person testimonials for the "Vibe Code Workshop" — a one-day workshop where people build a real web app using AI tools like Lovable.
+            content: `You write short, authentic, first-person testimonials for the "Vibe Code Workshop" — a one-day workshop where people build a real web app using Lovable.
 
 Rules:
 - 1-2 sentences max, around 20-40 words.
 - Sound natural and human, NOT marketing-fluffy. No clichés like "game-changer", "next-level", "blown away".
 - Refer to the workshop as "in a day" or "in one day" — NEVER say "in an afternoon", "in a morning", or "in a few hours".
+- When mentioning the tool/platform used, refer to it as "Lovable" — do NOT say "AI tools", "no-code tools", or other generic phrases.
 - You may use the provided context (app built, idea, audience, goals, experience) as inspiration, but NEVER include URLs, links, domains, or web addresses in the output.
 - Mention what the person built only if it makes the testimonial more concrete and human.
 - First person ("I built...", "I came in...").
