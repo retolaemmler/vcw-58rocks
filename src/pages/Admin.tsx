@@ -10,6 +10,7 @@ import { Loader2, LogOut, DollarSign, ShoppingCart, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
+import FeedbackAdmin from "@/components/admin/FeedbackAdmin";
 import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
 import type { Session } from "@supabase/supabase-js";
 
@@ -190,7 +191,7 @@ const Admin = () => {
         <Tabs defaultValue="orders" className="space-y-6">
           <TabsList>
             <TabsTrigger value="orders">Orders</TabsTrigger>
-            <TabsTrigger value="survey">Survey</TabsTrigger>
+            <TabsTrigger value="survey">Surveys</TabsTrigger>
             <TabsTrigger value="newsletter">Newsletter</TabsTrigger>
           </TabsList>
 
@@ -279,7 +280,18 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="survey">
-            <SurveyAdmin />
+            <Tabs defaultValue="prep" className="space-y-4">
+              <TabsList>
+                <TabsTrigger value="prep">Prep Survey</TabsTrigger>
+                <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
+              </TabsList>
+              <TabsContent value="prep">
+                <SurveyAdmin />
+              </TabsContent>
+              <TabsContent value="feedback">
+                <FeedbackAdmin />
+              </TabsContent>
+            </Tabs>
           </TabsContent>
 
           <TabsContent value="newsletter">
