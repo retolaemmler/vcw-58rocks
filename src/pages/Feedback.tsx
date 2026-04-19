@@ -359,28 +359,6 @@ const Feedback = () => {
                     )}
                   />
 
-                  {/* App built */}
-                  <FormField
-                    control={form.control}
-                    name="app_built_description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base">🚀 What did you build (or start building)?</FormLabel>
-                        <FormControl>
-                          <div className="relative flex-1">
-                            <Textarea {...field} placeholder="A quick description — even a sentence works." rows={3} className="pr-8" />
-                            {field.value && (
-                              <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
-                                <X className="w-4 h-4" />
-                              </button>
-                            )}
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
                   {/* Continue building */}
                   <FormField
                     control={form.control}
