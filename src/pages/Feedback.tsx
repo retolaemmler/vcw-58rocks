@@ -394,7 +394,6 @@ const Feedback = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-base">💬 A short testimonial in your own words we can use online?</FormLabel>
-                        <p className="text-sm text-muted-foreground">Optional — a sentence we could quote.</p>
                         <FormControl>
                           <div className="relative flex-1">
                             <Textarea {...field} placeholder="“The workshop helped me…”" rows={3} className="pr-8" />
