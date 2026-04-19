@@ -14,12 +14,7 @@ serve(async (req) => {
 
   try {
     const { email } = await req.json();
-    if (!email || typeof email !== "string") {
-      return new Response(JSON.stringify({ error: "Email is required" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const hasEmail = typeof email === "string" && email.trim().length > 0;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
@@ -30,29 +25,42 @@ serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    const normalized = email.trim().toLowerCase();
+    let order: { app_built: string | null; customer_name: string | null; contact_name: string | null } | null = null;
+    let survey: {
+      participant_name: string | null;
+      app_idea_description: string | null;
+      app_audience: string | null;
+      workshop_goals: string | null;
+      success_criteria: string | null;
+      lovable_experience: string | null;
+      ai_coding_experience: string | null;
+      building_blocks: string | null;
+    } | null = null;
 
-    const [orderRes, surveyRes] = await Promise.all([
-      supabase
-        .from("orders")
-        .select("app_built, customer_name, contact_name")
-        .ilike("customer_email", normalized)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-      supabase
-        .from("survey_responses")
-        .select("participant_name, app_idea_description, app_audience, workshop_goals, success_criteria, lovable_experience, ai_coding_experience, building_blocks")
-        .ilike("email", normalized)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-    ]);
+    if (hasEmail) {
+      const normalized = email.trim().toLowerCase();
+      const [orderRes, surveyRes] = await Promise.all([
+        supabase
+          .from("orders")
+          .select("app_built, customer_name, contact_name")
+          .ilike("customer_email", normalized)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+        supabase
+          .from("survey_responses")
+          .select("participant_name, app_idea_description, app_audience, workshop_goals, success_criteria, lovable_experience, ai_coding_experience, building_blocks")
+          .ilike("email", normalized)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+      ]);
 
-    const order = orderRes.data;
-    const survey = surveyRes.data;
-    if (orderRes.error) console.error("Order lookup error:", orderRes.error);
-    if (surveyRes.error) console.error("Survey lookup error:", surveyRes.error);
+      order = orderRes.data;
+      survey = surveyRes.data;
+      if (orderRes.error) console.error("Order lookup error:", orderRes.error);
+      if (surveyRes.error) console.error("Survey lookup error:", surveyRes.error);
+    }
 
     // Strip URLs from a string so we never echo a link in the testimonial
     const stripUrls = (s?: string | null) =>
