@@ -1,0 +1,1 @@
+ALTER TABLE public.survey_responses DROP COLUMN IF EXISTS app_built;
