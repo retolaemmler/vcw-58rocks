@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Loader2, CheckCircle2, AlertCircle, Sparkles, X } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Sparkles, X, Wand2, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
 
@@ -118,7 +118,46 @@ const Feedback = () => {
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [generatingTestimonial, setGeneratingTestimonial] = useState(false);
   const { toast } = useToast();
+
+  const handleGenerateTestimonial = async () => {
+    const email = form.getValues("email")?.trim();
+    if (!email) {
+      toast({
+        title: "Email required",
+        description: "Please enter your email above first so we can find your project.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setGeneratingTestimonial(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-testimonial", {
+        body: { email },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      const testimonial = data?.testimonial as string | undefined;
+      if (!testimonial) throw new Error("No testimonial returned");
+      form.setValue("testimonial", testimonial, { shouldDirty: true, shouldValidate: true });
+      if (!data?.foundOrder) {
+        toast({
+          title: "No matching order found",
+          description: "Generated a generic testimonial — feel free to edit it.",
+        });
+      }
+    } catch (err) {
+      console.error("Generate testimonial error:", err);
+      toast({
+        title: "Couldn't generate testimonial",
+        description: err instanceof Error ? err.message : "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setGeneratingTestimonial(false);
+    }
+  };
 
   const form = useForm<FeedbackFormValues>({
     resolver: zodResolver(feedbackSchema),
@@ -404,6 +443,22 @@ const Feedback = () => {
                             )}
                           </div>
                         </FormControl>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={handleGenerateTestimonial}
+                          disabled={generatingTestimonial}
+                          className="mt-2"
+                        >
+                          {generatingTestimonial ? (
+                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Generating…</>
+                          ) : field.value ? (
+                            <><RefreshCw className="w-4 h-4 mr-2" /> Regenerate testimonial</>
+                          ) : (
+                            <><Wand2 className="w-4 h-4 mr-2" /> Generate testimonial</>
+                          )}
+                        </Button>
                         <FormMessage />
                       </FormItem>
                     )}
