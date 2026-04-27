@@ -45,10 +45,9 @@ const UpdateDates = () => {
 
     const handle = setTimeout(async () => {
       lastLookupRef.current = trimmed;
-      const { data, error } = await supabase.functions.invoke(
-        "update-newsletter-dates",
-        { body: { action: "lookup", email: trimmed } }
-      );
+       const { data, error } = await supabase.functions.invoke("update-newsletter-dates", {
+         body: { action: "lookup", email: trimmed },
+       });
       if (error || !data?.found) {
         setPrefilled(false);
         return;
