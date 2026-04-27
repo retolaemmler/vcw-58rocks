@@ -205,7 +205,7 @@ const Admin = () => {
           <TabsList>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="survey">Surveys</TabsTrigger>
-            <TabsTrigger value="newsletter">Newsletter</TabsTrigger>
+            <TabsTrigger value="newsletter">Waitlist</TabsTrigger>
           </TabsList>
 
           <TabsContent value="orders">
