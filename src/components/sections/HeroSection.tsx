@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
-import NewsletterSignup from "@/components/NewsletterSignup";
+ import WaitlistSignup from "@/components/NewsletterSignup";
 import {
   Dialog,
   DialogContent,
@@ -66,7 +66,7 @@ const HeroSection = () => {
               Leave your details and we'll inform you about upcoming workshop dates.
             </DialogDescription>
           </DialogHeader>
-          <NewsletterSignup variant="light" />
+           <WaitlistSignup variant="light" />
         </DialogContent>
       </Dialog>
     </section>
