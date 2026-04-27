@@ -21,6 +21,7 @@ Deno.serve(async (req) => {
   try {
     const body = await req.json();
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    const action = typeof body.action === "string" ? body.action : "update";
     const datesInput = Array.isArray(body.preferred_dates) ? body.preferred_dates : [];
     const name = typeof body.name === "string" ? body.name.trim() : "";
     const company = typeof body.company === "string" ? body.company.trim() : "";
@@ -40,6 +41,44 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
+
+    // Lookup-only: return existing signup info to prefill the form
+    if (action === "lookup") {
+      const { data: existing, error: lookupErr } = await supabase
+        .from("newsletter_signups")
+        .select("name, company, preferred_dates")
+        .eq("email", email)
+        .maybeSingle();
+
+      if (lookupErr) {
+        console.error("lookup error", lookupErr);
+        return new Response(
+          JSON.stringify({ error: "Lookup failed" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      if (!existing) {
+        return new Response(
+          JSON.stringify({ found: false }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      const filteredDates = Array.isArray(existing.preferred_dates)
+        ? existing.preferred_dates.filter((d: unknown) => typeof d === "string" && ALLOWED_DATES.has(d))
+        : [];
+
+      return new Response(
+        JSON.stringify({
+          found: true,
+          name: existing.name ?? "",
+          company: existing.company ?? "",
+          preferred_dates: filteredDates,
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     // Find existing signup by email
     const { data: existing, error: lookupErr } = await supabase
