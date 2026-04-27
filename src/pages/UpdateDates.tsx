@@ -4,8 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Calendar, CheckCircle, Loader2, ArrowLeft } from "lucide-react";
+import { Calendar, CheckCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import Navbar from "@/components/Navbar";
+import FooterSection from "@/components/sections/FooterSection";
 
 const AVAILABLE_DATES = [
   { value: "2026-05-28", label: "Thu, 28 May 2026" },
@@ -99,15 +101,8 @@ const UpdateDates = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="container mx-auto px-4 py-8 flex-1">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to home
-        </Link>
-
+      <Navbar />
+      <main className="container mx-auto px-4 pt-28 pb-16 flex-1">
         <div className="max-w-xl mx-auto">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
@@ -214,7 +209,8 @@ const UpdateDates = () => {
             </form>
           )}
         </div>
-      </div>
+      </main>
+      <FooterSection />
     </div>
   );
 };
