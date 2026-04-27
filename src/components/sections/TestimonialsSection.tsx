@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { Quote, Link2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Quote } from "lucide-react";
 
 type Testimonial = {
   slug: string;
@@ -59,10 +58,8 @@ const testimonials: Testimonial[] = [
 ];
 
 const TestimonialsSection = () => {
-  const { toast } = useToast();
-
-  // Smooth-scroll to the section or a specific testimonial when arriving with a hash
-  // (e.g. #testimonials or #t-lukas). Uses a delay so the sticky header offset
+  // Smooth-scroll to the section when arriving with a hash like #testimonials.
+  // Uses a delay so the sticky header offset
   // (scroll-mt-*) is respected after layout settles.
   useEffect(() => {
     if (!window.location.hash) return;
@@ -73,15 +70,6 @@ const TestimonialsSection = () => {
     }, 150);
     return () => clearTimeout(timer);
   }, []);
-
-  const copyLink = (slug: string, name: string) => {
-    const url = `${window.location.origin}/#t-${slug}`;
-    navigator.clipboard.writeText(url);
-    toast({
-      title: "Link copied",
-      description: `Share ${name}'s testimonial: ${url}`,
-    });
-  };
 
   return (
     <section id="testimonials" className="py-20 px-4 bg-section-alt scroll-mt-24">
@@ -99,33 +87,20 @@ const TestimonialsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((t) => {
-            const anchorId = `t-${t.slug}`;
-            return (
-              <article
-                key={t.slug}
-                id={anchorId}
-                className="group relative bg-background border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow scroll-mt-24 target:ring-2 target:ring-primary"
-              >
-                <Quote className="w-7 h-7 text-primary/30 mb-3" />
-                <p className="text-foreground leading-relaxed mb-5">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <span className="font-semibold text-foreground">{t.name}</span>
-                  <button
-                    type="button"
-                    onClick={() => copyLink(t.slug, t.name)}
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors"
-                    aria-label={`Copy share link for ${t.name}'s testimonial`}
-                  >
-                    <Link2 className="w-3.5 h-3.5" />
-                    #{t.slug}
-                  </button>
-                </div>
-              </article>
-            );
-          })}
+          {testimonials.map((t) => (
+            <article
+              key={t.slug}
+              className="group relative bg-background border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <Quote className="w-7 h-7 text-primary/30 mb-3" />
+              <p className="text-foreground leading-relaxed mb-5">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="pt-4 border-t border-border">
+                <span className="font-semibold text-foreground">{t.name}</span>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
