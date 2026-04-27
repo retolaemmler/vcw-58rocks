@@ -52,7 +52,7 @@ const testimonials: Testimonial[] = [
   },
   {
     slug: "claudio",
-    name: "Claudio",
+    name: "Claudia",
     quote:
       "I loved seeing how easy it is to build an app with no line of code written. It was helpful to have the time blocked and the pressure to get it done in a day. It was great to have assistance by the coaches in moments where I would typically get blocked.",
   },
