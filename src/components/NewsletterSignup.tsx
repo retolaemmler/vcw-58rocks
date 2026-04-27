@@ -17,7 +17,7 @@ const AVAILABLE_DATES = [
   { value: "2026-06-30", label: "Tue, 30 June 2026" },
 ];
 
-const NewsletterSignup = ({ variant = "light" }: NewsletterSignupProps) => {
+ const WaitlistSignup = ({ variant = "light" }: NewsletterSignupProps) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
@@ -142,4 +142,4 @@ const NewsletterSignup = ({ variant = "light" }: NewsletterSignupProps) => {
   );
 };
 
-export default NewsletterSignup;
+ export default WaitlistSignup;
