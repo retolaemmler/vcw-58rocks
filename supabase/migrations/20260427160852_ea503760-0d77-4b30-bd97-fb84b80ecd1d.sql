@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Public testimonials readable by anyone" ON public.feedback_responses;
