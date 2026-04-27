@@ -112,8 +112,8 @@ const UpdateDates = () => {
               Pick your preferred dates
             </h1>
             <p className="text-muted-foreground">
-              The dates we suggested earlier weren't a fit for everyone — here are
-              the current options. Select all that work for you. This is{" "}
+              Here are the current options for a future Vibe Code Workshop. Select
+              all that work for you. This is{" "}
               <span className="italic">non-binding, no commitment required.</span>
             </p>
           </div>
