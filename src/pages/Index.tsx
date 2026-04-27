@@ -18,10 +18,10 @@ const Index = () => {
       <WhySection />
       <AgendaSection />
       <AudienceSection />
+      <TestimonialsSection />
       <RequirementsSection />
       <HostsSection />
       <PricingSection />
-      <TestimonialsSection />
       
       <FooterSection />
     </main>
