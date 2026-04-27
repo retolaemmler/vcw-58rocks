@@ -61,14 +61,17 @@ const testimonials: Testimonial[] = [
 const TestimonialsSection = () => {
   const { toast } = useToast();
 
-  // Smooth-scroll to a specific testimonial when arriving with a hash like #t-lukas
+  // Smooth-scroll to the section or a specific testimonial when arriving with a hash
+  // (e.g. #testimonials or #t-lukas). Uses a delay so the sticky header offset
+  // (scroll-mt-*) is respected after layout settles.
   useEffect(() => {
     if (!window.location.hash) return;
     const id = window.location.hash.slice(1);
-    requestAnimationFrame(() => {
+    const timer = setTimeout(() => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => clearTimeout(timer);
   }, []);
 
   const copyLink = (slug: string, name: string) => {
@@ -81,7 +84,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section id="testimonials" className="py-20 px-4 bg-section-alt">
+    <section id="testimonials" className="py-20 px-4 bg-section-alt scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">
