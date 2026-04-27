@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,8 @@ const UpdateDates = () => {
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [prefilled, setPrefilled] = useState(false);
+  const lastLookupRef = useRef<string>("");
   const { toast } = useToast();
 
   const toggleDate = (value: string) => {
@@ -28,6 +30,38 @@ const UpdateDates = () => {
       prev.includes(value) ? prev.filter((d) => d !== value) : [...prev, value]
     );
   };
+
+  // Look up existing signup by email and prefill the form
+  useEffect(() => {
+    const trimmed = email.trim().toLowerCase();
+    if (!trimmed || !trimmed.includes("@") || !trimmed.includes(".")) {
+      setPrefilled(false);
+      lastLookupRef.current = "";
+      return;
+    }
+    if (trimmed === lastLookupRef.current) return;
+
+    const handle = setTimeout(async () => {
+      lastLookupRef.current = trimmed;
+      const { data, error } = await supabase.functions.invoke(
+        "update-newsletter-dates",
+        { body: { action: "lookup", email: trimmed } }
+      );
+      if (error || !data?.found) {
+        setPrefilled(false);
+        return;
+      }
+      if (data.name && !name) setName(data.name);
+      if (data.company && !company) setCompany(data.company);
+      if (Array.isArray(data.preferred_dates)) {
+        setSelectedDates(data.preferred_dates);
+      }
+      setPrefilled(true);
+    }, 500);
+
+    return () => clearTimeout(handle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,6 +149,11 @@ const UpdateDates = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                {prefilled && (
+                  <p className="text-xs text-primary">
+                    We found your previous selection — feel free to update it below.
+                  </p>
+                )}
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
