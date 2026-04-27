@@ -1,4 +1,15 @@
 import { useEffect, useState } from "react";
+
+const usePersistedTab = (key: string, defaultValue: string) => {
+  const [value, setValue] = useState<string>(() => {
+    if (typeof window === "undefined") return defaultValue;
+    return localStorage.getItem(key) ?? defaultValue;
+  });
+  useEffect(() => {
+    try { localStorage.setItem(key, value); } catch {}
+  }, [key, value]);
+  return [value, setValue] as const;
+};
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
@@ -35,6 +46,8 @@ const Admin = () => {
   const [authState, setAuthState] = useState<AuthState>("loading");
   const [orders, setOrders] = useState<Order[]>([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
+  const [mainTab, setMainTab] = usePersistedTab("admin.mainTab", "orders");
+  const [surveyTab, setSurveyTab] = usePersistedTab("admin.surveyTab", "prep");
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -188,7 +201,7 @@ const Admin = () => {
       <div className="max-w-6xl mx-auto px-4 pt-24 pb-8">
         <h1 className="font-display text-2xl font-bold mb-6">Admin Dashboard</h1>
 
-        <Tabs defaultValue="orders" className="space-y-6">
+        <Tabs value={mainTab} onValueChange={setMainTab} className="space-y-6">
           <TabsList>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="survey">Surveys</TabsTrigger>
@@ -280,7 +293,7 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="survey">
-            <Tabs defaultValue="prep" className="space-y-4">
+            <Tabs value={surveyTab} onValueChange={setSurveyTab} className="space-y-4">
               <TabsList>
                 <TabsTrigger value="prep">Prep Survey</TabsTrigger>
                 <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
