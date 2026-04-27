@@ -45,7 +45,7 @@ const UpdateDates = () => {
 
     const handle = setTimeout(async () => {
       lastLookupRef.current = trimmed;
-       const { data, error } = await supabase.functions.invoke("update-newsletter-dates", {
+       const { data, error } = await supabase.functions.invoke("update-waitlist-dates", {
          body: { action: "lookup", email: trimmed },
        });
       if (error || !data?.found) {
@@ -69,7 +69,7 @@ const UpdateDates = () => {
     if (!email.trim()) return;
 
     setLoading(true);
-    const { data, error } = await supabase.functions.invoke("update-newsletter-dates", {
+    const { data, error } = await supabase.functions.invoke("update-waitlist-dates", {
       body: {
         email: email.trim().toLowerCase(),
         name: name.trim(),
