@@ -1,13 +1,5 @@
 import { Quote } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import daveLImg from "@/assets/DaveLieber.png";
-import ahmetSImg from "@/assets/AhmetSakali.png";
-import lukasKImg from "@/assets/LukasKarrer.png";
-import marcoLImg from "@/assets/MarcoLustenberger.png";
-import mattiaPImg from "@/assets/MattiaPiccoli.png";
-import marioFImg from "@/assets/MarioFaeh.png";
-import silvioHImg from "@/assets/SilvioHoldener.png";
-import claudiaDImg from "@/assets/ClaudiaDietschi.png";
 
 type Testimonial = {
   slug: string;
@@ -22,7 +14,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "dave",
     name: "Dave Lieber",
-    image: daveLImg,
+    image: "/participants/DaveLieber.png",
     initials: "DL",
     linkedin: "https://linkedin.com/in/dave-lieber-12220b3",
     quote:
@@ -31,7 +23,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "ahmet",
     name: "Ahmet Sakali",
-    image: ahmetSImg,
+    image: "/participants/AhmetSakali.png",
     initials: "AS",
     linkedin: "https://linkedin.com/in/ahmet-sakali-94aa9ab3",
     quote:
@@ -40,7 +32,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "lukas",
     name: "Lukas Karrer",
-    image: lukasKImg,
+    image: "/participants/LukasKarrer.png",
     initials: "LK",
     linkedin: "https://linkedin.com/in/karrerlukas",
     quote:
@@ -49,7 +41,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "marco",
     name: "Marco Lustenberger",
-    image: marcoLImg,
+    image: "/participants/MarcoLustenberger.png",
     initials: "ML",
     linkedin: "https://linkedin.com/in/marco-lustenberger-24259565",
     quote:
@@ -58,7 +50,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "mattia",
     name: "Mattia Piccoli",
-    image: mattiaPImg,
+    image: "/participants/MattiaPiccoli.png",
     initials: "MP",
     linkedin: "https://linkedin.com/in/mattiapiccoli",
     quote:
@@ -67,7 +59,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "mario",
     name: "Mario Fäh",
-    image: marioFImg,
+    image: "/participants/MarioFaeh.png",
     initials: "MF",
     linkedin: "https://linkedin.com/in/mariofaeh",
     quote:
@@ -76,7 +68,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "silvio",
     name: "Silvio Holdener",
-    image: silvioHImg,
+    image: "/participants/SilvioHoldener.png",
     initials: "SH",
     linkedin: "https://linkedin.com/in/silvio-holdener-456479b8",
     quote: "Turned an idea into something real — in just one day.",
@@ -84,7 +76,7 @@ const testimonials: Testimonial[] = [
   {
     slug: "claudia",
     name: "Claudia Dietschi",
-    image: claudiaDImg,
+    image: "/participants/ClaudiaDietschi.png",
     initials: "CD",
     linkedin: "https://www.linkedin.com/in/claudiadietschi/",
     quote:
@@ -108,7 +100,7 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Participant testimonials">
           {testimonials.map((t) => (
             <article
               key={t.slug}
