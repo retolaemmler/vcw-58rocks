@@ -1,76 +1,98 @@
-import { useEffect } from "react";
 import { Quote } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import daveLImg from "@/assets/DaveLieber.png";
+import ahmetSImg from "@/assets/AhmetSakali.png";
+import lukasKImg from "@/assets/LukasKarrer.png";
+import marcoLImg from "@/assets/MarcoLustenberger.png";
+import mattiaPImg from "@/assets/MattiaPiccoli.png";
+import marioFImg from "@/assets/MarioFaeh.png";
+import silvioHImg from "@/assets/SilvioHoldener.png";
+import claudiaDImg from "@/assets/ClaudiaDietschi.png";
 
 type Testimonial = {
   slug: string;
   name: string;
   quote: string;
+  image: string;
+  initials: string;
+  linkedin: string;
 };
 
 const testimonials: Testimonial[] = [
   {
     slug: "dave",
-    name: "Dave",
+    name: "Dave Lieber",
+    image: daveLImg,
+    initials: "DL",
+    linkedin: "https://linkedin.com/in/dave-lieber-12220b3",
     quote:
       "Genuinely great working atmosphere that made it easy to engage, learn, and try things out.",
   },
   {
     slug: "ahmet",
-    name: "Ahmet",
+    name: "Ahmet Sakali",
+    image: ahmetSImg,
+    initials: "AS",
+    linkedin: "https://linkedin.com/in/ahmet-sakali-94aa9ab3",
     quote:
       "Yes, it works. You have something in mind and with easy efforts you will get a nice outcome.",
   },
   {
     slug: "lukas",
-    name: "Lukas K.",
+    name: "Lukas Karrer",
+    image: lukasKImg,
+    initials: "LK",
+    linkedin: "https://linkedin.com/in/karrerlukas",
     quote:
       "I came in with just a rough idea and left with a working solar calculator linked to our CRM in a day. Seeing how Lovable actually builds complex API integrations shifted my whole perspective on what I can create myself.",
   },
   {
     slug: "marco",
-    name: "Marco",
+    name: "Marco Lustenberger",
+    image: marcoLImg,
+    initials: "ML",
+    linkedin: "https://linkedin.com/in/marco-lustenberger-24259565",
     quote:
       "Reto and Valentin really helped us dive into using these tools quickly and getting quick results. I also liked the advice on what types of projects work well and where more caution is advised. Seeing all of the ideas that others come up with was also fascinating.",
   },
   {
     slug: "mattia",
-    name: "Mattia",
+    name: "Mattia Piccoli",
+    image: mattiaPImg,
+    initials: "MP",
+    linkedin: "https://linkedin.com/in/mattiapiccoli",
     quote:
       "I showed up with nothing and finished the day with a functional web app. It is wild how much I actually got done using Lovable in a single day.",
   },
   {
     slug: "mario",
-    name: "Mario",
+    name: "Mario Fäh",
+    image: marioFImg,
+    initials: "MF",
+    linkedin: "https://linkedin.com/in/mariofaeh",
     quote:
       "I went from never touching AI coding to building a custom marketing automation tool in a day. It was surprising to see how Lovable handled the email integrations and customer data so quickly.",
   },
   {
     slug: "silvio",
-    name: "Silvio",
+    name: "Silvio Holdener",
+    image: silvioHImg,
+    initials: "SH",
+    linkedin: "https://linkedin.com/in/silvio-holdener-456479b8",
     quote: "Turned an idea into something real — in just one day.",
   },
   {
-    slug: "claudio",
-    name: "Claudia",
+    slug: "claudia",
+    name: "Claudia Dietschi",
+    image: claudiaDImg,
+    initials: "CD",
+    linkedin: "https://www.linkedin.com/in/claudiadietschi/",
     quote:
       "I loved seeing how easy it is to build an app with no line of code written. It was helpful to have the time blocked and the pressure to get it done in a day. It was great to have assistance by the coaches in moments where I would typically get blocked.",
   },
 ];
 
 const TestimonialsSection = () => {
-  // Smooth-scroll to the section when arriving with a hash like #testimonials.
-  // Uses a delay so the sticky header offset
-  // (scroll-mt-*) is respected after layout settles.
-  useEffect(() => {
-    if (!window.location.hash) return;
-    const id = window.location.hash.slice(1);
-    const timer = setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 150);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <section id="testimonials" className="py-20 px-4 bg-section-alt scroll-mt-24">
       <div className="max-w-6xl mx-auto">
@@ -96,8 +118,21 @@ const TestimonialsSection = () => {
               <p className="text-foreground leading-relaxed mb-5">
                 &ldquo;{t.quote}&rdquo;
               </p>
-              <div className="pt-4 border-t border-border">
-                <span className="font-semibold text-foreground">{t.name}</span>
+              <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <Avatar className="h-10 w-10 shrink-0">
+                  <AvatarImage src={t.image} alt={t.name} />
+                  <AvatarFallback className="bg-primary/10 text-primary font-semibold text-sm">
+                    {t.initials}
+                  </AvatarFallback>
+                </Avatar>
+                <a
+                  href={t.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-foreground hover:text-primary transition-colors"
+                >
+                  {t.name}
+                </a>
               </div>
             </article>
           ))}

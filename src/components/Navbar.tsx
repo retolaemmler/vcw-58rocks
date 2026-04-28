@@ -8,7 +8,6 @@ const navLinks = [
   
   { label: "Schedule", id: "agenda" },
   { label: "Participants", id: "audience" },
-  { label: "Testimonials", id: "testimonials" },
   { label: "Requirements", id: "requirements" },
   { label: "Coaches", id: "coaches" },
   { label: "Tickets", id: "pricing" },
