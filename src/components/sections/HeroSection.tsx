@@ -55,6 +55,7 @@ const HeroSection = () => {
               Get your Ticket
             </Button>
           </div>
+          <p className="text-sm text-muted-foreground">Limited tickets available.</p>
         </div>
       </div>
 
