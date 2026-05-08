@@ -50,9 +50,9 @@ const HeroSection = () => {
             <Button
               size="lg"
               className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-              onClick={() => setOpen(true)}>
+              onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}>
               <Sparkles className="w-5 h-5 mr-2" />
-              Upcoming Workshops
+              Get your Ticket
             </Button>
           </div>
         </div>
