@@ -41,7 +41,7 @@ const HeroSection = () => {
           <span className="hidden sm:inline text-border">|</span>
           <span className="flex items-center gap-1.5">
             <MapPin className="w-4 h-4 text-primary" />
-            memox @ Novu Campus | Zürich Flughafen The Circle
+            Zurich / TBA
           </span>
         </div>
 
