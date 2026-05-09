@@ -2,6 +2,18 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2, CheckCircle, Bell } from "lucide-react";
 
 const navLinks = [
   { label: "What", id: "why" },
@@ -16,6 +28,13 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [newsletterOpen, setNewsletterOpen] = useState(false);
+  const [nlEmail, setNlEmail] = useState("");
+  const [nlName, setNlName] = useState("");
+  const [nlCompany, setNlCompany] = useState("");
+  const [nlLoading, setNlLoading] = useState(false);
+  const [nlSuccess, setNlSuccess] = useState(false);
+  const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,6 +51,29 @@ const Navbar = () => {
     } else {
       document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nlEmail.trim()) return;
+    setNlLoading(true);
+    const { error } = await supabase.from("newsletter_signups").insert({
+      email: nlEmail.trim().toLowerCase(),
+      name: nlName.trim() || null,
+      company: nlCompany.trim() || null,
+    });
+    if (error) {
+      if (error.code === "23505") {
+        toast({ title: "Already signed up!", description: "You're already on the list." });
+        setNlSuccess(true);
+      } else {
+        toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+      }
+    } else {
+      setNlSuccess(true);
+      toast({ title: "You're on the list! 🎉", description: "We'll keep you posted." });
+    }
+    setNlLoading(false);
   };
 
   return (
@@ -58,6 +100,10 @@ const Navbar = () => {
               {link.label}
             </button>
           ))}
+          <Button size="sm" onClick={() => setNewsletterOpen(true)}>
+            <Bell className="w-4 h-4 mr-1" />
+            Newsletter
+          </Button>
         </div>
 
         {/* Mobile toggle */}
@@ -82,8 +128,54 @@ const Navbar = () => {
               {link.label}
             </button>
           ))}
+          <Button size="sm" className="mt-2 w-full" onClick={() => { setMobileOpen(false); setNewsletterOpen(true); }}>
+            <Bell className="w-4 h-4 mr-1" />
+            Newsletter
+          </Button>
         </div>
       )}
+
+      <Dialog open={newsletterOpen} onOpenChange={setNewsletterOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Subscribe to our Newsletter</DialogTitle>
+            <DialogDescription>
+              Get updates about upcoming workshops and news.
+            </DialogDescription>
+          </DialogHeader>
+          {nlSuccess ? (
+            <div className="flex items-center gap-2 justify-center text-sm py-4">
+              <CheckCircle className="w-5 h-5 text-green-500" />
+              <span className="text-muted-foreground">You're on the list — we'll keep you posted!</span>
+            </div>
+          ) : (
+            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+              <Input
+                type="email"
+                required
+                placeholder="Email *"
+                value={nlEmail}
+                onChange={(e) => setNlEmail(e.target.value)}
+              />
+              <Input
+                placeholder="Name"
+                value={nlName}
+                onChange={(e) => setNlName(e.target.value)}
+              />
+              <Input
+                placeholder="Company"
+                value={nlCompany}
+                onChange={(e) => setNlCompany(e.target.value)}
+              />
+              <div className="flex justify-end pt-2">
+                <Button type="submit" disabled={nlLoading}>
+                  {nlLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Subscribe"}
+                </Button>
+              </div>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
     </nav>
   );
 };
