@@ -199,6 +199,7 @@ export type Database = {
           anything_else: string | null
           app_audience: string | null
           app_idea_description: string | null
+          attendance_day: string | null
           building_blocks: string
           created_at: string
           dietary: string
@@ -218,6 +219,7 @@ export type Database = {
           anything_else?: string | null
           app_audience?: string | null
           app_idea_description?: string | null
+          attendance_day?: string | null
           building_blocks: string
           created_at?: string
           dietary: string
@@ -237,6 +239,7 @@ export type Database = {
           anything_else?: string | null
           app_audience?: string | null
           app_idea_description?: string | null
+          attendance_day?: string | null
           building_blocks?: string
           created_at?: string
           dietary?: string
