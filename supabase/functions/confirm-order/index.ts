@@ -180,7 +180,7 @@ Deno.serve(async (req) => {
         },
         body: JSON.stringify({
           from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
-          to: ["rlaemmler@gmail.com"],
+          to: ["rlaemmler@gmail.com", "valentin.binnendijk@pedalix.com"],
           subject: `🎟️ New Ticket Sold – ${customerEmail}`,
           html: `
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
