@@ -23,6 +23,7 @@ import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
 import FeedbackAdmin from "@/components/admin/FeedbackAdmin";
 import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
+import RaiffeisenSurveyAdmin from "@/components/admin/RaiffeisenSurveyAdmin";
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
@@ -296,10 +297,14 @@ const Admin = () => {
             <Tabs value={surveyTab} onValueChange={setSurveyTab} className="space-y-4">
               <TabsList>
                 <TabsTrigger value="prep">Prep Survey</TabsTrigger>
+                <TabsTrigger value="raiffeisen">Raiffeisen Prep</TabsTrigger>
                 <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
               </TabsList>
               <TabsContent value="prep">
                 <SurveyAdmin />
+              </TabsContent>
+              <TabsContent value="raiffeisen">
+                <RaiffeisenSurveyAdmin />
               </TabsContent>
               <TabsContent value="feedback">
                 <FeedbackAdmin />
