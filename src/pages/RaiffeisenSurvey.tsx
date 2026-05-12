@@ -222,7 +222,7 @@ const RaiffeisenSurvey = () => {
         <div className="mb-8 rounded-xl overflow-hidden border border-border">
           <iframe
             className="w-full aspect-video"
-            src="https://www.youtube.com/embed/IkKErWA_UfI"
+            src="https://www.youtube.com/embed/a0y5BMCnjp8"
             title="Willkommensvideo"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
