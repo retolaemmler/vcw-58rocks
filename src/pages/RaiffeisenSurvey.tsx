@@ -251,7 +251,7 @@ const RaiffeisenSurvey = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>📧 Deine E-Mail (idealerweise dieselbe, mit der du dich angemeldet hast)</FormLabel>
+                        <FormLabel>📧 Deine private E-Mail (bitte nicht diese von Raiffeisen)</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" placeholder="deine@email.com" />
                         </FormControl>
