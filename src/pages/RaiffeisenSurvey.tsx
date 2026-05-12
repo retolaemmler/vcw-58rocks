@@ -532,7 +532,7 @@ const RaiffeisenSurvey = () => {
                   {submitting ? (
                     <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Wird gesendet…</>
                   ) : (
-                    <><Sparkles className="w-4 h-4 mr-2" /> Absenden & loslegen! 🚀</>
+                    <><Sparkles className="w-4 h-4 mr-2" /> Absenden & vorfreuen! 🚀</>
                   )}
                 </Button>
 
