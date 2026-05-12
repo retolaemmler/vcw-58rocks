@@ -52,10 +52,13 @@ Deno.serve(async (req) => {
         }
       }
 
-      // Check if token exists
+      const kind = typeof body.kind === "string" && body.kind.length > 0 ? body.kind : "prep";
+
+      // Check if token exists for this kind
       const { data: existing } = await supabase
         .from("survey_tokens")
         .select("token")
+        .eq("kind", kind)
         .limit(1)
         .maybeSingle();
 
@@ -68,7 +71,7 @@ Deno.serve(async (req) => {
 
       const { data: newToken, error } = await supabase
         .from("survey_tokens")
-        .insert({})
+        .insert({ kind })
         .select("token")
         .single();
 
