@@ -266,6 +266,26 @@ const RaiffeisenSurvey = () => {
 
                 <FormField
                   control={form.control}
+                  name="attendance_day"
+                  render={({ field }) => {
+                    const ATTENDANCE_OPTIONS = ["Freitag, 29. Mai", "Montag, 1. Juni", "Weiss ich noch nicht"];
+                    return (
+                      <FormItem>
+                        <FormLabel className="text-base">📅 An welchem Tag nimmst du teil?</FormLabel>
+                        <ChipSelect
+                          options={ATTENDANCE_OPTIONS}
+                          selected={field.value ? [field.value] : []}
+                          onChange={(sel) => field.onChange(sel[0] || "")}
+                          multiple={false}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+
+                <FormField
+                  control={form.control}
                   name="ai_coding_experience"
                   render={({ field }) => {
                     const chipValue = AI_EXPERIENCE_OPTIONS.find((o) => field.value?.startsWith(o)) || "";
