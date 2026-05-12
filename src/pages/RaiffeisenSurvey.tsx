@@ -20,6 +20,7 @@ import logo from "@/assets/vcw-logo.png";
 const surveySchema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
   participant_name: z.string().optional(),
+  attendance_day: z.string().optional(),
   ai_coding_experience: z.string().optional(),
   lovable_experience: z.string().optional(),
   workshop_goals: z.string().optional(),
@@ -97,6 +98,7 @@ const RaiffeisenSurvey = () => {
     defaultValues: {
       email: "",
       participant_name: "",
+      attendance_day: "",
       ai_coding_experience: "",
       lovable_experience: "",
       workshop_goals: "",
@@ -143,6 +145,7 @@ const RaiffeisenSurvey = () => {
       token_id: tokenId,
       email: values.email?.trim().toLowerCase() || null,
       participant_name: values.participant_name?.trim() || null,
+      attendance_day: values.attendance_day || null,
       ai_coding_experience: values.ai_coding_experience || "",
       lovable_experience: values.lovable_experience || "",
       workshop_goals: values.workshop_goals || "",
@@ -260,6 +263,26 @@ const RaiffeisenSurvey = () => {
                     )}
                   />
                 </div>
+
+                <FormField
+                  control={form.control}
+                  name="attendance_day"
+                  render={({ field }) => {
+                    const ATTENDANCE_OPTIONS = ["Freitag, 29. Mai", "Montag, 1. Juni", "Weiss ich noch nicht"];
+                    return (
+                      <FormItem>
+                        <FormLabel className="text-base">📅 An welchem Tag nimmst du teil?</FormLabel>
+                        <ChipSelect
+                          options={ATTENDANCE_OPTIONS}
+                          selected={field.value ? [field.value] : []}
+                          onChange={(sel) => field.onChange(sel[0] || "")}
+                          multiple={false}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
 
                 <FormField
                   control={form.control}
