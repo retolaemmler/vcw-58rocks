@@ -457,29 +457,6 @@ const RaiffeisenSurvey = () => {
                         </FormItem>
                       )}
                     />
-
-                    <FormField
-                      control={form.control}
-                      name="app_audience"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base">🌍 Für wen ist sie?</FormLabel>
-                          <FormControl>
-                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="public" id="audience-public" />
-                                <Label htmlFor="audience-public">Öffentlich / Kunden</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="internal" id="audience-internal" />
-                                <Label htmlFor="audience-internal">Intern / Team</Label>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                   </>
                 )}
 
