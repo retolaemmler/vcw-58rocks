@@ -39,7 +39,6 @@ const HeroSection = () => {
                 </a>
               ),
             }}
-            values={{ lovable: "Lovable" }}
           />
         </p>
 
