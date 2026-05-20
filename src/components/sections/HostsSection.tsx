@@ -1,24 +1,26 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Linkedin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
 
 const coaches = [
-  { name: "Valentin Binnendijk", role: "Product Expert & Consultant", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
-  { name: "Reto Lämmler", role: "Entrepreneur & UX Expert", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: true },
-  { name: "Remy Blaettler", role: "CTO Supertext", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
+  { name: "Valentin Binnendijk", roleKey: "valentin", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
+  { name: "Reto Lämmler", roleKey: "reto", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: true },
+  { name: "Remy Blaettler", roleKey: "remy", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
 ];
 
 const HostsSection = () => {
+  const { t } = useTranslation();
   return (
     <section id="coaches" className="py-20 px-4 bg-section-alt">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-          Your <span className="gradient-text">Workshop Coaches</span>
+          {t("coaches.titlePre")}<span className="gradient-text">{t("coaches.titleHighlight")}</span>
         </h2>
-        <p className="text-muted-foreground mb-12">Coaches with vast experiences and backgrounds in Product Management, User Experience, Software Engineering and Entrepreneurship.</p>
+        <p className="text-muted-foreground mb-12">{t("coaches.intro")}</p>
 
         <div className="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
           {coaches.map((host) => (
@@ -33,11 +35,11 @@ const HostsSection = () => {
                 </AvatarFallback>
               </Avatar>
               <h3 className="font-display font-semibold text-lg">{host.name}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{host.role}</p>
+              <p className="text-sm text-muted-foreground mt-1">{t(`coaches.roles.${host.roleKey}`)}</p>
               <div className="flex flex-col items-center gap-2 mt-2">
                 {host.ambassador && (
                   <Badge className="px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 text-xs">
-                    Official Lovable Ambassador
+                    {t("coaches.ambassador")}
                   </Badge>
                 )}
                 <a href={host.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:text-primary/80 text-sm transition-colors">
