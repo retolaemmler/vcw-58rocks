@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,21 +16,10 @@ interface Idea {
   isExpanding?: boolean;
 }
 
-const businessChips = [
-  "Internal team dashboard",
-  "Client onboarding portal",
-  "Invoice automation tool",
-];
-
-const consumerChips = [
-  "Fitness tracker with social features",
-  "Recipe sharing community",
-  "Local event discovery app",
-  "Personal budget planner",
-  "Habit tracker with streaks",
-];
-
 export default function IdeaGenerator() {
+  const { t } = useTranslation();
+  const businessChips = t("ideas.chips.business", { returnObjects: true }) as string[];
+  const consumerChips = t("ideas.chips.consumer", { returnObjects: true }) as string[];
   const [prompt, setPrompt] = useState("");
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,8 +42,8 @@ export default function IdeaGenerator() {
       setIdeas(data.ideas || []);
     } catch (e: any) {
       toast({
-        title: "Error generating ideas",
-        description: e.message || "Please try again.",
+        title: t("ideas.errorIdeas"),
+        description: e.message || t("ideas.tryAgain"),
         variant: "destructive",
       });
     } finally {
@@ -88,8 +78,8 @@ export default function IdeaGenerator() {
         prev.map((item, i) => (i === index ? { ...item, isExpanding: false } : item))
       );
       toast({
-        title: "Error expanding idea",
-        description: e.message || "Please try again.",
+        title: t("ideas.errorExpand"),
+        description: e.message || t("ideas.tryAgain"),
         variant: "destructive",
       });
     }
@@ -99,7 +89,7 @@ export default function IdeaGenerator() {
     await navigator.clipboard.writeText(text);
     setCopiedIndex(index);
     setTimeout(() => setCopiedIndex(null), 2000);
-    toast({ title: "Copied to clipboard!" });
+    toast({ title: t("ideas.copied") });
   };
 
   const handleChipClick = (chip: string) => {
@@ -115,17 +105,15 @@ export default function IdeaGenerator() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Lightbulb className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">Idea Generator</h1>
+            <h1 className="text-3xl font-bold text-foreground">{t("ideas.title")}</h1>
           </div>
-          <p className="text-muted-foreground">
-            Describe your interest area and get AI-generated app ideas you can build in the workshop.
-          </p>
+          <p className="text-muted-foreground">{t("ideas.intro")}</p>
         </div>
 
         {/* Input */}
         <div className="space-y-4 mb-8">
           <Textarea
-            placeholder="Describe what kind of app you'd like to build, your industry, or a problem you want to solve..."
+            placeholder={t("ideas.placeholder")}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             className="min-h-[100px]"
@@ -143,11 +131,11 @@ export default function IdeaGenerator() {
           >
             {isLoading ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" /> Generating ideas...
+                <Loader2 className="w-4 h-4 animate-spin" /> {t("ideas.generating")}
               </>
             ) : (
               <>
-                <Sparkles className="w-4 h-4" /> Generate Ideas
+                <Sparkles className="w-4 h-4" /> {t("ideas.generate")}
               </>
             )}
           </Button>
@@ -157,7 +145,7 @@ export default function IdeaGenerator() {
         {ideas.length === 0 && !isLoading && (
           <div className="space-y-4 mb-8">
             <div>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Business / Internal</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">{t("ideas.businessLabel")}</p>
               <div className="flex flex-wrap gap-2">
                 {businessChips.map((chip) => (
                   <button
@@ -171,7 +159,7 @@ export default function IdeaGenerator() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Consumer / Public</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">{t("ideas.consumerLabel")}</p>
               <div className="flex flex-wrap gap-2">
                 {consumerChips.map((chip) => (
                   <button
@@ -210,11 +198,11 @@ export default function IdeaGenerator() {
                   >
                     {idea.isExpanding ? (
                       <>
-                        <Loader2 className="w-3 h-3 animate-spin" /> Generating prompt...
+                        <Loader2 className="w-3 h-3 animate-spin" /> {t("ideas.generatingPrompt")}
                       </>
                     ) : (
                       <>
-                        <Sparkles className="w-3 h-3" /> Generate Lovable Prompt
+                        <Sparkles className="w-3 h-3" /> {t("ideas.generatePrompt")}
                       </>
                     )}
                   </Button>
