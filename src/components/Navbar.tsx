@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import logo from "@/assets/vcw-logo.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   Dialog,
   DialogContent,
@@ -15,17 +17,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle, Bell } from "lucide-react";
 
-const navLinks = [
-  { label: "What", id: "why" },
-  
-  { label: "Schedule", id: "agenda" },
-  { label: "Participants", id: "audience" },
-  { label: "Requirements", id: "requirements" },
-  { label: "Coaches", id: "coaches" },
-  { label: "Tickets", id: "pricing" },
-];
-
 const Navbar = () => {
+  const { t } = useTranslation();
+  const navLinks = [
+    { label: t("nav.what"), id: "why" },
+    { label: t("nav.schedule"), id: "agenda" },
+    { label: t("nav.participants"), id: "audience" },
+    { label: t("nav.requirements"), id: "requirements" },
+    { label: t("nav.coaches"), id: "coaches" },
+    { label: t("nav.tickets"), id: "pricing" },
+  ];
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [newsletterOpen, setNewsletterOpen] = useState(false);
@@ -64,14 +65,14 @@ const Navbar = () => {
     });
     if (error) {
       if (error.code === "23505") {
-        toast({ title: "Already signed up!", description: "You're already on the list." });
+        toast({ title: t("newsletter.alreadyTitle"), description: t("newsletter.alreadyDesc") });
         setNlSuccess(true);
       } else {
-        toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+        toast({ title: t("newsletter.errorTitle"), description: t("newsletter.errorDesc"), variant: "destructive" });
       }
     } else {
       setNlSuccess(true);
-      toast({ title: "You're on the list! 🎉", description: "We'll keep you posted." });
+      toast({ title: t("newsletter.successToast"), description: t("newsletter.successToastDesc") });
     }
     setNlLoading(false);
   };
@@ -100,20 +101,24 @@ const Navbar = () => {
               {link.label}
             </button>
           ))}
+          <LanguageSwitcher />
           <Button size="sm" onClick={() => setNewsletterOpen(true)}>
             <Bell className="w-4 h-4 mr-1" />
-            Newsletter
+            {t("nav.newsletter")}
           </Button>
         </div>
 
         {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          <LanguageSwitcher />
+          <button
+            className="p-2 text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -130,7 +135,7 @@ const Navbar = () => {
           ))}
           <Button size="sm" className="mt-2 w-full" onClick={() => { setMobileOpen(false); setNewsletterOpen(true); }}>
             <Bell className="w-4 h-4 mr-1" />
-            Newsletter
+            {t("nav.newsletter")}
           </Button>
         </div>
       )}
@@ -138,38 +143,36 @@ const Navbar = () => {
       <Dialog open={newsletterOpen} onOpenChange={setNewsletterOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Subscribe to our Newsletter</DialogTitle>
-            <DialogDescription>
-              Get updates about upcoming workshops and news.
-            </DialogDescription>
+            <DialogTitle>{t("newsletter.title")}</DialogTitle>
+            <DialogDescription>{t("newsletter.description")}</DialogDescription>
           </DialogHeader>
           {nlSuccess ? (
             <div className="flex items-center gap-2 justify-center text-sm py-4">
               <CheckCircle className="w-5 h-5 text-green-500" />
-              <span className="text-muted-foreground">You're on the list — we'll keep you posted!</span>
+              <span className="text-muted-foreground">{t("newsletter.success")}</span>
             </div>
           ) : (
             <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <Input
                 type="email"
                 required
-                placeholder="Email *"
+                placeholder={t("newsletter.emailPlaceholder")}
                 value={nlEmail}
                 onChange={(e) => setNlEmail(e.target.value)}
               />
               <Input
-                placeholder="Name"
+                placeholder={t("newsletter.namePlaceholder")}
                 value={nlName}
                 onChange={(e) => setNlName(e.target.value)}
               />
               <Input
-                placeholder="Company"
+                placeholder={t("newsletter.companyPlaceholder")}
                 value={nlCompany}
                 onChange={(e) => setNlCompany(e.target.value)}
               />
               <div className="flex justify-end pt-2">
                 <Button type="submit" disabled={nlLoading}>
-                  {nlLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Subscribe"}
+                  {nlLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : t("newsletter.subscribe")}
                 </Button>
               </div>
             </form>

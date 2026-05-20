@@ -1,61 +1,39 @@
 import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
-const examples = [
-  {
-    icon: BarChart3,
-    title: "Excel → Live Dashboard",
-    description: "Turn your manual Excel reports into interactive, real-time dashboards your whole team can access.",
-  },
-  {
-    icon: Zap,
-    title: "Automate Manual Workflows",
-    description: "Replace repetitive, error-prone processes with smart automations — no developer needed.",
-  },
-  {
-    icon: Wrench,
-    title: "Build Internal Tools",
-    description: "Create that one little app your team has been wishing for — in hours, not months.",
-  },
-  {
-    icon: Globe,
-    title: "Launch a Landing Page",
-    description: "Go from idea to a polished, published website in a single afternoon.",
-  },
-  {
-    icon: FileText,
-    title: "Custom Client Portals",
-    description: "Build tailored portals and forms for your clients — professional and fully branded.",
-  },
-  {
-    icon: Sparkles,
-    title: "And So Much More…",
-    description: "CRM tools, booking systems, calculators, onboarding flows — if you can describe it, you can build it.",
-  },
+const exampleKeys: { icon: typeof BarChart3; key: string }[] = [
+  { icon: BarChart3, key: "excel" },
+  { icon: Zap, key: "automate" },
+  { icon: Wrench, key: "internal" },
+  { icon: Globe, key: "landing" },
+  { icon: FileText, key: "portals" },
+  { icon: Sparkles, key: "more" },
 ];
 
 const WhySection = () => {
+  const { t } = useTranslation();
   return (
     <section id="why" className="py-20 px-4 bg-section-alt">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-6">
-          What You will <span className="gradient-text">Build with Vibe Coding</span>
+          {t("why.titlePre")}<span className="gradient-text">{t("why.titleHighlight")}</span>
         </h2>
         <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-14 leading-relaxed">
-          Lovable.dev lets anyone build real, functional applications using just natural language. Here are just a few things you'll be able to create in this workshop:
+          {t("why.intro")}
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {examples.map((v) => (
+          {exampleKeys.map((v) => (
             <div
-              key={v.title}
+              key={v.key}
               className="bg-card rounded-xl p-6 shadow-sm border border-border/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-lg gradient-bg-subtle flex items-center justify-center mb-4">
                 <v.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-display font-semibold text-lg mb-2">{v.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{v.description}</p>
+              <h3 className="font-display font-semibold text-lg mb-2">{t(`why.examples.${v.key}.title`)}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{t(`why.examples.${v.key}.description`)}</p>
             </div>
           ))}
         </div>
@@ -67,14 +45,14 @@ const WhySection = () => {
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
           >
             <Sparkles className="w-4 h-4" />
-            Get inspired — see what others build with Vibe Coding
+            {t("why.inspire")}
             <ExternalLink className="w-4 h-4" />
           </a>
           <div className="mt-4">
             <Button asChild size="lg">
               <Link to="/ideas">
                 <Sparkles className="w-4 h-4" />
-                Try our Idea Generator
+                {t("why.ideaGenerator")}
               </Link>
             </Button>
           </div>
