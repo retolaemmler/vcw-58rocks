@@ -50,7 +50,7 @@ const de = {
       more: { title: "Und vieles mehr…", description: "CRM-Tools, Buchungssysteme, Rechner, Onboarding-Flows — wenn du es beschreiben kannst, kannst du es bauen." },
     },
     inspire: "Lass dich inspirieren — sieh, was andere mit Vibe Coding bauen",
-    ideaGenerator: "Probier unseren Idea Generator",
+    ideaGenerator: "Probier unseren Ideen-Generator",
   },
   agenda: {
     titlePre: "Der ",
