@@ -24,6 +24,7 @@ type Lang = (typeof SUPPORTED_LANGS)[number];
 const LangLayout = () => {
   const { lang } = useParams<{ lang: string }>();
   const { i18n } = useTranslation();
+  const location = useLocation();
 
   useEffect(() => {
     if (lang && SUPPORTED_LANGS.includes(lang as Lang) && i18n.language !== lang) {
@@ -32,7 +33,19 @@ const LangLayout = () => {
   }, [lang, i18n]);
 
   if (!lang || !SUPPORTED_LANGS.includes(lang as Lang)) {
-    return <Navigate to="/en" replace />;
+    // Not a language prefix — treat as a normal path and redirect to detected lang
+    const stored =
+      typeof window !== "undefined" ? window.localStorage.getItem("i18nextLng") : null;
+    const browser =
+      typeof navigator !== "undefined" ? navigator.language.toLowerCase() : "en";
+    const candidate = (stored || browser || "en").toLowerCase();
+    const target: Lang = candidate.startsWith("de") ? "de" : "en";
+    return (
+      <Navigate
+        to={`/${target}${location.pathname}${location.search}${location.hash}`}
+        replace
+      />
+    );
   }
   return <Outlet />;
 };
