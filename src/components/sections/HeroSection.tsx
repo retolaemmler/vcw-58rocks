@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
@@ -30,16 +30,11 @@ const HeroSection = () => {
         </h1>
 
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-tight">
-          <Trans
-            i18nKey="hero.description"
-            components={{
-              lovable: (
-                <a href="https://www.lovable.dev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center align-middle">
-                  <img src={lovableLogo} alt="Lovable.dev" className="h-3 sm:h-4 inline-block" />
-                </a>
-              ),
-            }}
-          />
+          {t("hero.descriptionBefore")}
+          <a href="https://www.lovable.dev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center align-middle">
+            <img src={lovableLogo} alt="Lovable.dev" className="h-3 sm:h-4 inline-block" />
+          </a>
+          {t("hero.descriptionAfter")}
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-10">

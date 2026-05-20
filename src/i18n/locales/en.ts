@@ -26,8 +26,8 @@ const en = {
   hero: {
     title: "Vibe Code Workshop",
     subtitle: "Build a Real Web App in One Day",
-    description:
-      "A full-day hands-on workshop where you'll go from idea to working web app using <lovable></lovable> — the platform that turns natural language into functional code. No coding experience required.",
+    descriptionBefore: "A full-day hands-on workshop where you'll go from idea to working web app using ",
+    descriptionAfter: " — the platform that turns natural language into functional code. No coding experience required.",
     date: "Tue. 30.6.2026",
     time: "9:00 – 17:00",
     location: "Zurich / TBA",
