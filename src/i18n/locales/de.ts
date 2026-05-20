@@ -134,5 +134,34 @@ const de = {
   language: {
     label: "Sprache",
   },
+  ideas: {
+    title: "Ideen-Generator",
+    intro: "Beschreibe dein Interessensgebiet und erhalte KI-generierte App-Ideen, die du im Workshop bauen kannst.",
+    placeholder: "Beschreibe, welche Art von App du bauen möchtest, deine Branche oder ein Problem, das du lösen willst...",
+    generating: "Ideen werden generiert...",
+    generate: "Ideen generieren",
+    businessLabel: "Business / Intern",
+    consumerLabel: "Consumer / Öffentlich",
+    generatingPrompt: "Prompt wird generiert...",
+    generatePrompt: "Lovable-Prompt generieren",
+    copied: "In die Zwischenablage kopiert!",
+    errorIdeas: "Fehler beim Generieren der Ideen",
+    errorExpand: "Fehler beim Erweitern der Idee",
+    tryAgain: "Bitte versuche es erneut.",
+    chips: {
+      business: [
+        "Internes Team-Dashboard",
+        "Kunden-Onboarding-Portal",
+        "Tool zur Rechnungsautomatisierung"
+      ],
+      consumer: [
+        "Fitness-Tracker mit Social Features",
+        "Community zum Teilen von Rezepten",
+        "App für lokale Events",
+        "Persönlicher Budgetplaner",
+        "Habit-Tracker mit Streaks"
+      ],
+    },
+  },
 };
 export default de;

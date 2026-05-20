@@ -134,5 +134,34 @@ const en = {
   language: {
     label: "Language",
   },
+  ideas: {
+    title: "Idea Generator",
+    intro: "Describe your interest area and get AI-generated app ideas you can build in the workshop.",
+    placeholder: "Describe what kind of app you'd like to build, your industry, or a problem you want to solve...",
+    generating: "Generating ideas...",
+    generate: "Generate Ideas",
+    businessLabel: "Business / Internal",
+    consumerLabel: "Consumer / Public",
+    generatingPrompt: "Generating prompt...",
+    generatePrompt: "Generate Lovable Prompt",
+    copied: "Copied to clipboard!",
+    errorIdeas: "Error generating ideas",
+    errorExpand: "Error expanding idea",
+    tryAgain: "Please try again.",
+    chips: {
+      business: [
+        "Internal team dashboard",
+        "Client onboarding portal",
+        "Invoice automation tool"
+      ],
+      consumer: [
+        "Fitness tracker with social features",
+        "Recipe sharing community",
+        "Local event discovery app",
+        "Personal budget planner",
+        "Habit tracker with streaks"
+      ],
+    },
+  },
 };
 export default en;
