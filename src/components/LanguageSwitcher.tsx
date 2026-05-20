@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Languages } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +16,21 @@ const LANGS = [
 
 const LanguageSwitcher = ({ className }: { className?: string }) => {
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const current = i18n.resolvedLanguage?.startsWith("de") ? "DE" : "EN";
+
+  const switchTo = (code: string) => {
+    i18n.changeLanguage(code);
+    const segments = location.pathname.split("/");
+    if (segments[1] === "en" || segments[1] === "de") {
+      segments[1] = code;
+    } else {
+      segments.splice(1, 0, code);
+    }
+    const newPath = segments.join("/") || `/${code}`;
+    navigate(`${newPath}${location.search}${location.hash}`, { replace: true });
+  };
 
   return (
     <DropdownMenu>
@@ -27,7 +42,7 @@ const LanguageSwitcher = ({ className }: { className?: string }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {LANGS.map((l) => (
-          <DropdownMenuItem key={l.code} onClick={() => i18n.changeLanguage(l.code)}>
+          <DropdownMenuItem key={l.code} onClick={() => switchTo(l.code)}>
             {l.label}
           </DropdownMenuItem>
         ))}
