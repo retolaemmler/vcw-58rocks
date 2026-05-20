@@ -1,5 +1,6 @@
 import { Quote } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useTranslation } from "react-i18next";
 
 type Testimonial = {
   slug: string;
@@ -85,18 +86,19 @@ const testimonials: Testimonial[] = [
 ];
 
 const TestimonialsSection = () => {
+  const { t } = useTranslation();
   return (
     <section id="testimonials" className="py-20 px-4 bg-section-alt scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">
-            Testimonials
+            {t("testimonials.eyebrow")}
           </p>
           <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-            What past participants say
+            {t("testimonials.title")}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Real feedback from people who joined a previous Vibe Code Workshop.
+            {t("testimonials.intro")}
           </p>
         </div>
 
