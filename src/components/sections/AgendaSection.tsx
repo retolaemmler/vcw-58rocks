@@ -1,15 +1,17 @@
-const morning = [
-  { time: "09:00", title: "Welcome & Intro", description: "Kickoff, introductions, and overview of the day ahead." },
-  { time: "10:00", title: "Workshop Session #1", description: "Hands-on app building in small teams with expert guidance." },
-  { time: "12:00", title: "🍕 Lunch Break", description: "Recharge with pizza and connect with fellow participants." },
+import { useTranslation } from "react-i18next";
+
+const morningKeys = [
+  { time: "09:00", key: "welcome" },
+  { time: "10:00", key: "session1" },
+  { time: "12:00", key: "lunch" },
 ];
 
-const afternoon = [
-  { time: "13:00", title: "Next Level Vibe Coding", description: "APIs, backend integration, and advanced techniques." },
-  { time: "13:30", title: "Workshop Session #2", description: "Continue building — push your app to the next level." },
-  { time: "15:30", title: "Presentations & Feedback", description: "Present your apps, learn from other teams, and get feedback." },
-  { time: "16:15", title: "Future of Vibe Coding", description: "Where is AI-assisted development heading next?" },
-  { time: "16:30", title: "Q&A + 🍺 Beer", description: "Open discussion, networking, and a well-deserved drink." },
+const afternoonKeys = [
+  { time: "13:00", key: "nextLevel" },
+  { time: "13:30", key: "session2" },
+  { time: "15:30", key: "presentations" },
+  { time: "16:15", key: "future" },
+  { time: "16:30", key: "qa" },
 ];
 
 interface AgendaItemProps {
@@ -35,32 +37,45 @@ const AgendaItem = ({ time, title, description, isLast }: AgendaItemProps) => (
 );
 
 const AgendaSection = () => {
+  const { t } = useTranslation();
   return (
     <section id="agenda" className="py-20 px-4 bg-background">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-14">
-          <span className="gradient-text">Workshop Schedule</span> in a Nutshell
+          {t("agenda.titlePre")}<span className="gradient-text">{t("agenda.titleHighlight")}</span>{t("agenda.titlePost")}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {/* Morning */}
           <div>
             <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
-              ☀️ Morning
+              {t("agenda.morning")}
             </h3>
             <div>
-              {morning.map((item, i) => (
-                <AgendaItem key={item.time} {...item} isLast={i === morning.length - 1} />
+              {morningKeys.map((item, i) => (
+                <AgendaItem
+                  key={item.time}
+                  time={item.time}
+                  title={t(`agenda.items.${item.key}.title`)}
+                  description={t(`agenda.items.${item.key}.description`)}
+                  isLast={i === morningKeys.length - 1}
+                />
               ))}
             </div>
           </div>
           {/* Afternoon */}
           <div>
             <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
-              🌙 Afternoon
+              {t("agenda.afternoon")}
             </h3>
             <div>
-              {afternoon.map((item, i) => (
-                <AgendaItem key={item.time} {...item} isLast={i === afternoon.length - 1} />
+              {afternoonKeys.map((item, i) => (
+                <AgendaItem
+                  key={item.time}
+                  time={item.time}
+                  title={t(`agenda.items.${item.key}.title`)}
+                  description={t(`agenda.items.${item.key}.description`)}
+                  isLast={i === afternoonKeys.length - 1}
+                />
               ))}
             </div>
           </div>
