@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Link2, Copy, ClipboardCheck, MessageSquare, Trash2, Star } from "lucide-react";
+import { Loader2, Link2, Copy, ClipboardCheck, MessageSquare, Trash2, Star, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { exportToXlsx } from "@/lib/exportXlsx";
 
 interface FeedbackResponse {
   id: string;
@@ -204,8 +205,16 @@ const FeedbackAdmin = () => {
 
       {/* Table */}
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Feedback Responses</CardTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={!responses.length}
+            onClick={() => exportToXlsx(responses, "feedback", "Feedback")}
+          >
+            <Download className="w-4 h-4 mr-1" /> Export XLSX
+          </Button>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
