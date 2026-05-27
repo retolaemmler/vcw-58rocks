@@ -13,45 +13,46 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json();
-    
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    // Require admin authentication for all actions on this endpoint.
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const userClient = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_ANON_KEY")!,
+      { global: { headers: { Authorization: authHeader } } }
+    );
+    const { data: { user } } = await userClient.auth.getUser();
+    if (!user?.email) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const { data: adminCheck } = await supabase
+      .from("admin_allowed_emails")
+      .select("id")
+      .eq("email", user.email)
+      .maybeSingle();
+    if (!adminCheck) {
+      return new Response(JSON.stringify({ error: "Forbidden" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // Handle token creation (admin action)
     if (body.action === "create-token") {
-      // Verify the caller is an admin
-      const authHeader = req.headers.get("Authorization");
-      if (authHeader) {
-        const userClient = createClient(
-          Deno.env.get("SUPABASE_URL")!,
-          Deno.env.get("SUPABASE_ANON_KEY")!,
-          { global: { headers: { Authorization: authHeader } } }
-        );
-        const { data: { user } } = await userClient.auth.getUser();
-        if (!user?.email) {
-          return new Response(JSON.stringify({ error: "Unauthorized" }), {
-            status: 401,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          });
-        }
-
-        // Check admin
-        const { data: adminCheck } = await supabase
-          .from("admin_allowed_emails")
-          .select("id")
-          .eq("email", user.email)
-          .maybeSingle();
-
-        if (!adminCheck) {
-          return new Response(JSON.stringify({ error: "Forbidden" }), {
-            status: 403,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          });
-        }
-      }
-
       const kind = typeof body.kind === "string" && body.kind.length > 0 ? body.kind : "prep";
 
       // Check if token exists for this kind
