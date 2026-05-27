@@ -120,8 +120,11 @@ const Survey = () => {
 
   useEffect(() => {
     if (!token) { setPageState("invalid"); return; }
-    supabase.from("survey_tokens").select("id").eq("token", token).maybeSingle()
-      .then(({ data }) => { if (data) { setTokenId(data.id); setPageState("form"); } else setPageState("invalid"); });
+    supabase.rpc("validate_survey_token", { _token: token })
+      .then(({ data }) => {
+        const row = Array.isArray(data) ? data[0] : null;
+        if (row) { setTokenId(row.id); setPageState("form"); } else setPageState("invalid");
+      });
   }, [token]);
 
   // Sync chip selections into form fields

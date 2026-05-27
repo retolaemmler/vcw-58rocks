@@ -291,6 +291,13 @@ export type Database = {
     }
     Functions: {
       is_admin_email: { Args: never; Returns: boolean }
+      validate_survey_token: {
+        Args: { _token: string }
+        Returns: {
+          id: string
+          kind: string
+        }[]
+      }
     }
     Enums: {
       app_role: "admin" | "user"
