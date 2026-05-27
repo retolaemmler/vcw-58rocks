@@ -14,6 +14,7 @@ interface SurveyResponse {
   participant_name: string | null;
   ai_coding_experience: string;
   lovable_experience: string;
+  attendance_day: string | null;
   workshop_goals: string;
   success_criteria: string;
   has_app_idea: boolean;
@@ -171,6 +172,7 @@ const RaiffeisenSurveyAdmin = () => {
                 <TableRow>
                   <TableHead>Date</TableHead>
                   <TableHead>Email</TableHead>
+                  <TableHead>Day</TableHead>
                   <TableHead>AI Experience</TableHead>
                   <TableHead>Lovable Experience</TableHead>
                   <TableHead>App Idea</TableHead>
@@ -183,6 +185,7 @@ const RaiffeisenSurveyAdmin = () => {
                     <TableRow key={r.id} className="cursor-pointer" onClick={() => setExpandedRow(expandedRow === r.id ? null : r.id)}>
                       <TableCell className="whitespace-nowrap text-sm">{new Date(r.created_at).toLocaleDateString("de-CH")}</TableCell>
                       <TableCell className="text-sm">{r.email || "—"}</TableCell>
+                      <TableCell className="text-sm"><Badge variant="outline" className="whitespace-nowrap">{r.attendance_day || "—"}</Badge></TableCell>
                       <TableCell className="text-sm"><Badge variant="outline" className="whitespace-nowrap">{r.ai_coding_experience || "—"}</Badge></TableCell>
                       <TableCell className="text-sm"><Badge variant="outline" className="whitespace-nowrap">{r.lovable_experience || "—"}</Badge></TableCell>
                       <TableCell><Badge variant={r.has_app_idea ? "default" : "outline"}>{r.has_app_idea ? "Yes" : "No"}</Badge></TableCell>
@@ -197,8 +200,9 @@ const RaiffeisenSurveyAdmin = () => {
                     </TableRow>
                     {expandedRow === r.id && (
                       <TableRow key={`${r.id}-detail`}>
-                        <TableCell colSpan={6}>
+                        <TableCell colSpan={7}>
                           <div className="grid gap-3 p-4 bg-muted/50 rounded-lg text-sm">
+                            <div><strong>Attendance Day:</strong> {r.attendance_day || "—"}</div>
                             <div><strong>AI Coding Experience:</strong> {r.ai_coding_experience || "—"}</div>
                             <div><strong>Lovable Experience:</strong> {r.lovable_experience || "—"}</div>
                             <div><strong>Workshop Goals:</strong> {r.workshop_goals || "—"}</div>
@@ -216,7 +220,7 @@ const RaiffeisenSurveyAdmin = () => {
                   </>
                 ))}
                 {responses.length === 0 && (
-                  <TableRow><TableCell colSpan={6} className="text-center text-muted-foreground py-8">No responses yet.</TableCell></TableRow>
+                  <TableRow><TableCell colSpan={7} className="text-center text-muted-foreground py-8">No responses yet.</TableCell></TableRow>
                 )}
               </TableBody>
             </Table>
