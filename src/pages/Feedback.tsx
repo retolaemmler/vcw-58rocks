@@ -167,9 +167,10 @@ const Feedback = () => {
 
   useEffect(() => {
     if (!token) { setPageState("invalid"); return; }
-    supabase.from("survey_tokens").select("id,kind").eq("token", token).maybeSingle()
+    supabase.rpc("validate_survey_token", { _token: token })
       .then(({ data }) => {
-        if (data) { setTokenId(data.id); setPageState("form"); }
+        const row = Array.isArray(data) ? data[0] : null;
+        if (row) { setTokenId(row.id); setPageState("form"); }
         else setPageState("invalid");
       });
   }, [token]);
