@@ -52,11 +52,6 @@ const UpdateDates = () => {
         setPrefilled(false);
         return;
       }
-      if (data.name && !name) setName(data.name);
-      if (data.company && !company) setCompany(data.company);
-      if (Array.isArray(data.preferred_dates)) {
-        setSelectedDates(data.preferred_dates);
-      }
       setPrefilled(true);
     }, 500);
 

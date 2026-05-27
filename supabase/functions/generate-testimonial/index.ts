@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { email } = await req.json();
+    const { email, token } = await req.json();
     const hasEmail = typeof email === "string" && email.trim().length > 0;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
@@ -24,6 +24,26 @@ serve(async (req) => {
     }
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    // Require a valid survey/feedback token to prevent unauthenticated
+    // enumeration of customer emails.
+    if (!token || typeof token !== "string") {
+      return new Response(JSON.stringify({ error: "Missing token" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const { data: tokenRow } = await supabase
+      .from("survey_tokens")
+      .select("id")
+      .eq("token", token)
+      .maybeSingle();
+    if (!tokenRow) {
+      return new Response(JSON.stringify({ error: "Invalid token" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     let order: { app_built: string | null; customer_name: string | null; contact_name: string | null } | null = null;
     let survey: {
@@ -157,7 +177,7 @@ Rules:
       .trim();
 
     return new Response(
-      JSON.stringify({ testimonial, appBuilt: appBuilt || null, foundOrder: !!order, foundSurvey: !!survey }),
+      JSON.stringify({ testimonial }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (e) {

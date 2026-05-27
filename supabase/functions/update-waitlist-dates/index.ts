@@ -46,7 +46,7 @@ Deno.serve(async (req) => {
     if (action === "lookup") {
       const { data: existing, error: lookupErr } = await supabase
         .from("newsletter_signups")
-        .select("name, company, preferred_dates")
+        .select("id")
         .eq("email", email)
         .maybeSingle();
 
@@ -58,24 +58,10 @@ Deno.serve(async (req) => {
         );
       }
 
-      if (!existing) {
-        return new Response(
-          JSON.stringify({ found: false }),
-          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-
-      const filteredDates = Array.isArray(existing.preferred_dates)
-        ? existing.preferred_dates.filter((d: unknown) => typeof d === "string" && ALLOWED_DATES.has(d))
-        : [];
-
+      // Only return a boolean to avoid leaking PII (name/company/dates) about
+      // other people's signups to anonymous callers.
       return new Response(
-        JSON.stringify({
-          found: true,
-          name: existing.name ?? "",
-          company: existing.company ?? "",
-          preferred_dates: filteredDates,
-        }),
+        JSON.stringify({ found: !!existing }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
