@@ -7,6 +7,19 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Link2, Copy, ClipboardCheck, Trash2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { exportToXlsx } from "@/lib/exportXlsx";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+  CartesianGrid,
+} from "recharts";
 
 interface SurveyResponse {
   id: string;
@@ -28,6 +41,45 @@ interface SurveyResponse {
 const KIND = "raiffeisen_prep";
 const SURVEY_PATH = "/raiffeisen-prep";
 
+type ChartDatum = { name: string; value: number };
+
+const ChartBlock = ({
+  title,
+  data,
+  colors,
+  type,
+}: {
+  title: string;
+  data: ChartDatum[];
+  colors: string[];
+  type: "bar" | "pie";
+}) => (
+  <div>
+    <h4 className="text-sm font-semibold mb-3 text-muted-foreground">{title}</h4>
+    <ResponsiveContainer width="100%" height={220}>
+      {type === "pie" ? (
+        <PieChart>
+          <Pie data={data} dataKey="value" nameKey="name" outerRadius={80} label>
+            {data.map((_, i) => (
+              <Cell key={i} fill={colors[i % colors.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      ) : (
+        <BarChart data={data} layout="vertical" margin={{ left: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+          <XAxis type="number" allowDecimals={false} />
+          <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 12 }} />
+          <Tooltip />
+          <Bar dataKey="value" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+        </BarChart>
+      )}
+    </ResponsiveContainer>
+  </div>
+);
+
 const RaiffeisenSurveyAdmin = () => {
   const [surveyLink, setSurveyLink] = useState<string | null>(null);
   const [responses, setResponses] = useState<SurveyResponse[]>([]);
@@ -38,6 +90,36 @@ const RaiffeisenSurveyAdmin = () => {
   const { toast } = useToast();
 
   useEffect(() => { loadData(); }, []);
+
+  const total = responses.length;
+
+  const countBy = (key: keyof SurveyResponse, fallback = "—") => {
+    const map = new Map<string, number>();
+    responses.forEach((r) => {
+      const v = (r[key] as string | null) || fallback;
+      map.set(v, (map.get(v) || 0) + 1);
+    });
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value);
+  };
+
+  const dayData = countBy("attendance_day");
+  const aiExpData = countBy("ai_coding_experience");
+  const lovableExpData = countBy("lovable_experience");
+  const appIdeaData = [
+    { name: "Has idea", value: responses.filter((r) => r.has_app_idea).length },
+    { name: "Exploring", value: responses.filter((r) => !r.has_app_idea).length },
+  ];
+
+  const CHART_COLORS = [
+    "hsl(var(--primary))",
+    "hsl(var(--accent))",
+    "hsl(var(--secondary))",
+    "hsl(var(--muted-foreground))",
+    "hsl(var(--destructive))",
+    "hsl(var(--ring))",
+  ];
 
   const loadData = async () => {
     setLoading(true);
@@ -152,6 +234,22 @@ const RaiffeisenSurveyAdmin = () => {
           </CardContent>
         )}
       </Card>
+
+      {total > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Overview ({total} participants)</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ChartBlock title="Attendance Day" data={dayData} colors={CHART_COLORS} type="pie" />
+              <ChartBlock title="App Idea" data={appIdeaData} colors={CHART_COLORS} type="pie" />
+              <ChartBlock title="AI Coding Experience" data={aiExpData} colors={CHART_COLORS} type="bar" />
+              <ChartBlock title="Lovable Experience" data={lovableExpData} colors={CHART_COLORS} type="bar" />
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
