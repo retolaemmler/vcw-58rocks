@@ -41,6 +41,45 @@ interface SurveyResponse {
 const KIND = "raiffeisen_prep";
 const SURVEY_PATH = "/raiffeisen-prep";
 
+type ChartDatum = { name: string; value: number };
+
+const ChartBlock = ({
+  title,
+  data,
+  colors,
+  type,
+}: {
+  title: string;
+  data: ChartDatum[];
+  colors: string[];
+  type: "bar" | "pie";
+}) => (
+  <div>
+    <h4 className="text-sm font-semibold mb-3 text-muted-foreground">{title}</h4>
+    <ResponsiveContainer width="100%" height={220}>
+      {type === "pie" ? (
+        <PieChart>
+          <Pie data={data} dataKey="value" nameKey="name" outerRadius={80} label>
+            {data.map((_, i) => (
+              <Cell key={i} fill={colors[i % colors.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      ) : (
+        <BarChart data={data} layout="vertical" margin={{ left: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+          <XAxis type="number" allowDecimals={false} />
+          <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 12 }} />
+          <Tooltip />
+          <Bar dataKey="value" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+        </BarChart>
+      )}
+    </ResponsiveContainer>
+  </div>
+);
+
 const RaiffeisenSurveyAdmin = () => {
   const [surveyLink, setSurveyLink] = useState<string | null>(null);
   const [responses, setResponses] = useState<SurveyResponse[]>([]);
