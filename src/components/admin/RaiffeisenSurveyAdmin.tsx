@@ -7,6 +7,19 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Link2, Copy, ClipboardCheck, Trash2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { exportToXlsx } from "@/lib/exportXlsx";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+} from "recharts";
 
 interface SurveyResponse {
   id: string;
@@ -127,6 +140,24 @@ const RaiffeisenSurveyAdmin = () => {
     );
   }
 
+  const countBy = (key: keyof SurveyResponse) => {
+    const map = new Map<string, number>();
+    responses.forEach((r) => {
+      const v = (r[key] as string | null) || "—";
+      map.set(v, (map.get(v) || 0) + 1);
+    });
+    return Array.from(map, ([name, value]) => ({ name, value }));
+  };
+
+  const dayData = countBy("attendance_day");
+  const aiData = countBy("ai_coding_experience");
+  const lovableData = countBy("lovable_experience");
+  const ideaData = [
+    { name: "Has idea", value: responses.filter((r) => r.has_app_idea).length },
+    { name: "No idea", value: responses.filter((r) => !r.has_app_idea).length },
+  ];
+  const PIE_COLORS = ["hsl(var(--primary))", "hsl(var(--muted-foreground))", "hsl(var(--accent))", "hsl(var(--secondary))"];
+
   return (
     <div className="space-y-6">
       <Card>
@@ -152,6 +183,80 @@ const RaiffeisenSurveyAdmin = () => {
           </CardContent>
         )}
       </Card>
+
+      {responses.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card>
+            <CardHeader><CardTitle className="text-base">Teilnehmer total</CardTitle></CardHeader>
+            <CardContent>
+              <p className="text-4xl font-bold font-display">{responses.length}</p>
+              <p className="text-sm text-muted-foreground mt-2">
+                {ideaData[0].value} mit App-Idee · {ideaData[1].value} ohne
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader><CardTitle className="text-base">App-Idee</CardTitle></CardHeader>
+            <CardContent className="h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={ideaData} dataKey="value" nameKey="name" outerRadius={70} label>
+                    {ideaData.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}
+                  </Pie>
+                  <Legend />
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader><CardTitle className="text-base">Teilnahme-Tag</CardTitle></CardHeader>
+            <CardContent className="h-56">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={dayData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis dataKey="name" tick={{ fontSize: 11 }} />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader><CardTitle className="text-base">AI Coding Erfahrung</CardTitle></CardHeader>
+            <CardContent className="h-56">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={aiData} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
+                  <YAxis dataKey="name" type="category" width={120} tick={{ fontSize: 11 }} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          <Card className="md:col-span-2">
+            <CardHeader><CardTitle className="text-base">Lovable Erfahrung</CardTitle></CardHeader>
+            <CardContent className="h-56">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={lovableData} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
+                  <YAxis dataKey="name" type="category" width={160} tick={{ fontSize: 11 }} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
