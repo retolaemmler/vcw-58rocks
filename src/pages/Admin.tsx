@@ -24,6 +24,7 @@ import SurveyAdmin from "@/components/admin/SurveyAdmin";
 import FeedbackAdmin from "@/components/admin/FeedbackAdmin";
 import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
 import RaiffeisenSurveyAdmin from "@/components/admin/RaiffeisenSurveyAdmin";
+import RaiffeisenFeedbackAdmin from "@/components/admin/RaiffeisenFeedbackAdmin";
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
@@ -299,12 +300,16 @@ const Admin = () => {
                 <TabsTrigger value="prep">Prep Survey</TabsTrigger>
                 <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
                 <TabsTrigger value="raiffeisen">Raiffeisen Prep</TabsTrigger>
+                <TabsTrigger value="raiffeisen-feedback">Raiffeisen Feedback</TabsTrigger>
               </TabsList>
               <TabsContent value="prep">
                 <SurveyAdmin />
               </TabsContent>
               <TabsContent value="raiffeisen">
                 <RaiffeisenSurveyAdmin />
+              </TabsContent>
+              <TabsContent value="raiffeisen-feedback">
+                <RaiffeisenFeedbackAdmin />
               </TabsContent>
               <TabsContent value="feedback">
                 <FeedbackAdmin />
