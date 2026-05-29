@@ -19,7 +19,7 @@ import logo from "@/assets/vcw-logo.png";
 const feedbackSchema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
   participant_name: z.string().optional(),
-  attendance_day: z.enum(["day1", "day2", "both"], { required_error: "Bitte wähle einen Workshop-Tag" }),
+  attendance_day: z.enum(["day1", "day2"], { required_error: "Bitte wähle einen Workshop-Tag" }),
   nps_score: z.number({ required_error: "Bitte wähle einen Wert" }).min(0).max(10),
   overall_rating: z.number({ required_error: "Bitte bewerte den Workshop" }).min(1).max(5),
   rating_intro: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
