@@ -13,8 +13,9 @@ serve(async (req) => {
   }
 
   try {
-    const { email, token } = await req.json();
+    const { email, token, language } = await req.json();
     const hasEmail = typeof email === "string" && email.trim().length > 0;
+    const lang = language === "de" ? "de" : "en";
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
@@ -123,7 +124,22 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You write short, authentic, first-person testimonials for the "Vibe Code Workshop" — a one-day workshop where people build a real web app using Lovable.
+            content: lang === "de"
+              ? `Du schreibst kurze, authentische Testimonials in der Ich-Form für den "Vibe Code Workshop" — ein eintägiger Workshop, bei dem die Teilnehmenden mit Lovable eine echte Web-App bauen.
+
+Regeln:
+- Maximal 1–2 Sätze, ca. 20–40 Wörter.
+- Natürlich und menschlich klingen, NICHT marketing-floskelhaft. Keine Klischees wie "Game-Changer", "Next Level" oder "absolut umgehauen".
+- Bezeichne den Workshop als "an einem Tag" oder "in einem Tag" — NIE "an einem Nachmittag", "an einem Morgen" oder "in wenigen Stunden".
+- Nenne die Plattform "Lovable" — NICHT "KI-Tools", "No-Code-Tools" oder andere generische Begriffe.
+- Du darfst den bereitgestellten Kontext (gebaute App, Idee, Zielgruppe, Ziele, Erfahrung) als Inspiration nutzen, aber NIE URLs, Links, Domains oder Web-Adressen ausgeben.
+- Erwähne nur dann, was die Person gebaut hat, wenn es das Testimonial konkreter und menschlicher macht.
+- Wenn kein spezifischer Kontext vorliegt, schreibe ein generisches, aber begeistertes Testimonial, das die Überraschung einfängt, an einem einzigen Tag mit Lovable etwas Echtes gebaut zu haben. Erfinde KEINE App-Namen oder spezifischen Details.
+- Ich-Form ("Ich habe gebaut…", "Ich kam mit…").
+- Keine Anführungszeichen um die Ausgabe. Keine Namensunterschrift. Keine Emojis.
+- Variiere den Ton leicht — mal reflektiert, mal prägnant, mal praktisch.
+- Schreibe auf Deutsch (Schweizer Hochdeutsch, kein "ß").`
+              : `You write short, authentic, first-person testimonials for the "Vibe Code Workshop" — a one-day workshop where people build a real web app using Lovable.
 
 Rules:
 - 1-2 sentences max, around 20-40 words.
@@ -139,7 +155,9 @@ Rules:
           },
           {
             role: "user",
-            content: `Write a short testimonial. Context about the participant (use as inspiration only, do not quote URLs): ${userContext}`,
+            content: lang === "de"
+              ? `Schreibe ein kurzes Testimonial auf Deutsch. Kontext zur Person (nur als Inspiration, keine URLs zitieren): ${userContext}`
+              : `Write a short testimonial. Context about the participant (use as inspiration only, do not quote URLs): ${userContext}`,
           },
         ],
         temperature: 0.9,
