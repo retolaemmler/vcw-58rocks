@@ -1,0 +1,1 @@
+ALTER TABLE public.feedback_responses ADD COLUMN IF NOT EXISTS attendance_day text;
