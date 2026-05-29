@@ -88,7 +88,7 @@ const testimonials: Testimonial[] = [
 const TestimonialsSection = () => {
   const { t } = useTranslation();
   return (
-    <section id="testimonials" className="py-20 px-4 bg-background scroll-mt-24">
+    <section id="testimonials" className="py-20 px-4 bg-section-alt scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">

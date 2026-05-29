@@ -8,7 +8,7 @@ const FooterSection = () => {
       <div className="max-w-5xl mx-auto">
         <div className="grid sm:grid-cols-2 gap-10 mb-12">
           <div>
-            <h3 className="font-display font-bold text-lg mb-4">Vibe Coding Workshop</h3>
+            <h3 className="font-display font-bold text-lg mb-4">Vibe Code Workshop</h3>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
               58rocks GmbH<br />
               Letzigraben 102<br />
