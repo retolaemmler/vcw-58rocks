@@ -314,15 +314,11 @@ const RaiffeisenFeedback = () => {
                           <RadioGroup value={field.value} onValueChange={field.onChange} className="space-y-2">
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="day1" id="att-day1" />
-                              <Label htmlFor="att-day1" className="font-normal cursor-pointer">Tag 1</Label>
+                              <Label htmlFor="att-day1" className="font-normal cursor-pointer">Freitag, 29.5.</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="day2" id="att-day2" />
-                              <Label htmlFor="att-day2" className="font-normal cursor-pointer">Tag 2</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="both" id="att-both" />
-                              <Label htmlFor="att-both" className="font-normal cursor-pointer">Beide Tage</Label>
+                              <Label htmlFor="att-day2" className="font-normal cursor-pointer">Montag, 1.6.</Label>
                             </div>
                           </RadioGroup>
                         </FormControl>
