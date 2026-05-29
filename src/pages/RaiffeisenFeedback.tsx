@@ -437,7 +437,7 @@ const RaiffeisenFeedback = () => {
                         <FormLabel className="text-base">💬 Ein kurzes Testimonial in deinen eigenen Worten, das wir intern verwenden dürfen?</FormLabel>
                         <FormControl>
                           <div className="relative flex-1">
-                            <Textarea {...field} placeholder="„Der Workshop hat mir geholfen…"" rows={3} className="pr-8" />
+                            <Textarea {...field} placeholder="„Der Workshop hat mir geholfen…“" rows={3} className="pr-8" />
                             {field.value && (
                               <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
                                 <X className="w-4 h-4" />
