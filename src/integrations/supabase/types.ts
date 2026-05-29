@@ -37,6 +37,7 @@ export type Database = {
           allow_testimonial_public: boolean | null
           anything_else: string | null
           app_built_description: string | null
+          attendance_day: string | null
           best_part: string | null
           created_at: string
           email: string | null
@@ -62,6 +63,7 @@ export type Database = {
           allow_testimonial_public?: boolean | null
           anything_else?: string | null
           app_built_description?: string | null
+          attendance_day?: string | null
           best_part?: string | null
           created_at?: string
           email?: string | null
@@ -87,6 +89,7 @@ export type Database = {
           allow_testimonial_public?: boolean | null
           anything_else?: string | null
           app_built_description?: string | null
+          attendance_day?: string | null
           best_part?: string | null
           created_at?: string
           email?: string | null
