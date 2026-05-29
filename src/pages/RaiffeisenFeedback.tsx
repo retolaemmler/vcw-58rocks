@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Loader2, CheckCircle2, AlertCircle, Sparkles, X } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Sparkles, X, Wand2, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
 
@@ -118,7 +118,38 @@ const RaiffeisenFeedback = () => {
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [generatingTestimonial, setGeneratingTestimonial] = useState(false);
   const { toast } = useToast();
+
+  const handleGenerateTestimonial = async () => {
+    const email = form.getValues("email")?.trim();
+    setGeneratingTestimonial(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-testimonial", {
+        body: { email: email || null, token, language: "de" },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      const testimonial = data?.testimonial as string | undefined;
+      if (!testimonial) throw new Error("Kein Testimonial erhalten");
+      form.setValue("testimonial", testimonial, { shouldDirty: true, shouldValidate: true });
+      if (!email) {
+        toast({
+          title: "Generisches Testimonial erstellt",
+          description: "Trage oben deine E-Mail ein, um es auf dein Projekt zuzuschneiden.",
+        });
+      }
+    } catch (err) {
+      console.error("Generate testimonial error:", err);
+      toast({
+        title: "Testimonial konnte nicht erstellt werden",
+        description: err instanceof Error ? err.message : "Bitte versuche es erneut.",
+        variant: "destructive",
+      });
+    } finally {
+      setGeneratingTestimonial(false);
+    }
+  };
 
   const form = useForm<FeedbackFormValues>({
     resolver: zodResolver(feedbackSchema),
@@ -445,6 +476,22 @@ const RaiffeisenFeedback = () => {
                             )}
                           </div>
                         </FormControl>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={handleGenerateTestimonial}
+                          disabled={generatingTestimonial}
+                          className="mt-2"
+                        >
+                          {generatingTestimonial ? (
+                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Wird generiert…</>
+                          ) : field.value ? (
+                            <><RefreshCw className="w-4 h-4 mr-2" /> Testimonial neu generieren</>
+                          ) : (
+                            <><Wand2 className="w-4 h-4 mr-2" /> Testimonial generieren</>
+                          )}
+                        </Button>
                         <FormMessage />
                       </FormItem>
                     )}
