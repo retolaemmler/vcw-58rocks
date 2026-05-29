@@ -15,7 +15,7 @@ const coaches = [
 const HostsSection = () => {
   const { t } = useTranslation();
   return (
-    <section id="coaches" className="py-20 px-4 bg-section-alt">
+    <section id="coaches" className="py-20 px-4 bg-background">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
           {t("coaches.titlePre")}<span className="gradient-text">{t("coaches.titleHighlight")}</span>

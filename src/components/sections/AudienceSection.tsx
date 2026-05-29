@@ -16,7 +16,7 @@ const audienceKeys = [
 const AudienceSection = () => {
   const { t } = useTranslation();
   return (
-    <section id="audience" className="py-20 px-4 bg-section-alt">
+    <section id="audience" className="py-20 px-4 bg-background">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-10">
           {t("audience.titlePre")}<span className="gradient-text">{t("audience.titleHighlight")}</span>{t("audience.titlePost")}

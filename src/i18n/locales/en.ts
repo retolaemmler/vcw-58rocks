@@ -24,7 +24,7 @@ const en = {
     successToastDesc: "We'll keep you posted.",
   },
   hero: {
-    title: "Vibe Code Workshop",
+    title: "Vibe Coding Workshop",
     subtitle: "Build a Real Web App in One Day",
     descriptionBefore: "A full-day hands-on workshop where you'll go from idea to working web app using ",
     descriptionAfter: " — the platform that turns natural language into functional code. No coding experience required.",
