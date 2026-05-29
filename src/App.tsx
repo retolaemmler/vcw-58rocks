@@ -14,6 +14,7 @@ import IdeaGenerator from "./pages/IdeaGenerator";
 import Edition1Participants from "./pages/Edition1Participants";
 import UpdateDates from "./pages/UpdateDates";
 import RaiffeisenSurvey from "./pages/RaiffeisenSurvey";
+import RaiffeisenFeedback from "./pages/RaiffeisenFeedback";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -81,6 +82,7 @@ const App = () => (
             <Route path="edition1/participants" element={<Edition1Participants />} />
             <Route path="dates" element={<UpdateDates />} />
             <Route path="raiffeisen-prep" element={<RaiffeisenSurvey />} />
+            <Route path="raiffeisen-feedback" element={<RaiffeisenFeedback />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           {/* Redirect any non-prefixed path to the detected language */}
