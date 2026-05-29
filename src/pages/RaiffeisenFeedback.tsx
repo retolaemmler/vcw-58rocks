@@ -19,7 +19,7 @@ import logo from "@/assets/vcw-logo.png";
 const feedbackSchema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
   participant_name: z.string().optional(),
-  attendance_day: z.enum(["day1", "day2", "both"], { required_error: "Bitte wähle einen Workshop-Tag" }),
+  attendance_day: z.enum(["day1", "day2"], { required_error: "Bitte wähle einen Workshop-Tag" }),
   nps_score: z.number({ required_error: "Bitte wähle einen Wert" }).min(0).max(10),
   overall_rating: z.number({ required_error: "Bitte bewerte den Workshop" }).min(1).max(5),
   rating_intro: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
@@ -314,15 +314,11 @@ const RaiffeisenFeedback = () => {
                           <RadioGroup value={field.value} onValueChange={field.onChange} className="space-y-2">
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="day1" id="att-day1" />
-                              <Label htmlFor="att-day1" className="font-normal cursor-pointer">Tag 1</Label>
+                              <Label htmlFor="att-day1" className="font-normal cursor-pointer">Freitag, 29.5.</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="day2" id="att-day2" />
-                              <Label htmlFor="att-day2" className="font-normal cursor-pointer">Tag 2</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="both" id="att-both" />
-                              <Label htmlFor="att-both" className="font-normal cursor-pointer">Beide Tage</Label>
+                              <Label htmlFor="att-day2" className="font-normal cursor-pointer">Montag, 1.6.</Label>
                             </div>
                           </RadioGroup>
                         </FormControl>
