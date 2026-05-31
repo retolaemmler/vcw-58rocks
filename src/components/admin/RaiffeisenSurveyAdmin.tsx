@@ -7,10 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Link2, Copy, ClipboardCheck, Trash2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { exportToXlsx } from "@/lib/exportXlsx";
-import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend,
-} from "recharts";
 
 interface SurveyResponse {
   id: string;
