@@ -7,10 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Link2, Copy, ClipboardCheck, Trash2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { exportToXlsx } from "@/lib/exportXlsx";
-import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend,
-} from "recharts";
 
 interface SurveyResponse {
   id: string;
@@ -42,34 +38,6 @@ const RaiffeisenSurveyAdmin = () => {
   const { toast } = useToast();
 
   useEffect(() => { loadData(); }, []);
-
-  const CHART_COLORS = [
-    "hsl(var(--primary))",
-    "hsl(var(--accent))",
-    "hsl(173 58% 39%)",
-    "hsl(43 74% 49%)",
-    "hsl(280 65% 60%)",
-    "hsl(340 75% 55%)",
-    "hsl(200 70% 50%)",
-  ];
-
-  const countBy = <T,>(items: T[], key: (t: T) => string | null | undefined) => {
-    const map = new Map<string, number>();
-    for (const it of items) {
-      const v = (key(it) ?? "—").toString().trim() || "—";
-      map.set(v, (map.get(v) ?? 0) + 1);
-    }
-    return Array.from(map, ([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
-  };
-
-  const dayData = countBy(responses, (r) => r.attendance_day);
-  const aiData = countBy(responses, (r) => r.ai_coding_experience);
-  const lovableData = countBy(responses, (r) => r.lovable_experience);
-  const ideaData = [
-    { name: "Mit Idee", value: responses.filter((r) => r.has_app_idea).length },
-    { name: "Ohne Idee", value: responses.filter((r) => !r.has_app_idea).length },
-  ].filter((d) => d.value > 0);
-  const blocksData = countBy(responses, (r) => r.building_blocks);
 
   const loadData = async () => {
     setLoading(true);
@@ -184,101 +152,6 @@ const RaiffeisenSurveyAdmin = () => {
           </CardContent>
         )}
       </Card>
-
-      {responses.length > 0 && (
-        <div className="grid gap-6 md:grid-cols-2">
-          <Card>
-            <CardHeader><CardTitle className="text-base">Teilnehmende ({responses.length})</CardTitle></CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div>
-                  <p className="text-3xl font-bold font-display">{responses.length}</p>
-                  <p className="text-xs text-muted-foreground mt-1">Antworten total</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold font-display">{responses.filter((r) => r.has_app_idea).length}</p>
-                  <p className="text-xs text-muted-foreground mt-1">Mit App-Idee</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold font-display">{new Set(responses.map((r) => r.email).filter(Boolean)).size}</p>
-                  <p className="text-xs text-muted-foreground mt-1">Unique Emails</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><CardTitle className="text-base">App-Idee vorhanden</CardTitle></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={220}>
-                <PieChart>
-                  <Pie data={ideaData} dataKey="value" nameKey="name" outerRadius={80} label>
-                    {ideaData.map((_, i) => <Cell key={i} fill={CHART_COLORS[i]} />)}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><CardTitle className="text-base">Teilnahme-Tag</CardTitle></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={dayData}>
-                  <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
-                  <Tooltip />
-                  <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><CardTitle className="text-base">AI Coding Erfahrung</CardTitle></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={aiData} layout="vertical">
-                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
-                  <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 11 }} />
-                  <Tooltip />
-                  <Bar dataKey="value" fill="hsl(var(--accent))" radius={[0, 4, 4, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><CardTitle className="text-base">Lovable Erfahrung</CardTitle></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={lovableData} layout="vertical">
-                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
-                  <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 11 }} />
-                  <Tooltip />
-                  <Bar dataKey="value" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><CardTitle className="text-base">Building Blocks</CardTitle></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={blocksData} layout="vertical">
-                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
-                  <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 11 }} />
-                  <Tooltip />
-                  <Bar dataKey="value" fill="hsl(var(--accent))" radius={[0, 4, 4, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
-      )}
 
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
