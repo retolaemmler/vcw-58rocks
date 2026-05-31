@@ -39,7 +39,6 @@ const RaiffeisenSurveyAdmin = () => {
 
   useEffect(() => { loadData(); }, []);
 
-
   const loadData = async () => {
     setLoading(true);
 
