@@ -39,33 +39,6 @@ const RaiffeisenSurveyAdmin = () => {
 
   useEffect(() => { loadData(); }, []);
 
-  const CHART_COLORS = [
-    "hsl(var(--primary))",
-    "hsl(var(--accent))",
-    "hsl(173 58% 39%)",
-    "hsl(43 74% 49%)",
-    "hsl(280 65% 60%)",
-    "hsl(340 75% 55%)",
-    "hsl(200 70% 50%)",
-  ];
-
-  const countBy = <T,>(items: T[], key: (t: T) => string | null | undefined) => {
-    const map = new Map<string, number>();
-    for (const it of items) {
-      const v = (key(it) ?? "—").toString().trim() || "—";
-      map.set(v, (map.get(v) ?? 0) + 1);
-    }
-    return Array.from(map, ([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
-  };
-
-  const dayData = countBy(responses, (r) => r.attendance_day);
-  const aiData = countBy(responses, (r) => r.ai_coding_experience);
-  const lovableData = countBy(responses, (r) => r.lovable_experience);
-  const ideaData = [
-    { name: "Mit Idee", value: responses.filter((r) => r.has_app_idea).length },
-    { name: "Ohne Idee", value: responses.filter((r) => !r.has_app_idea).length },
-  ].filter((d) => d.value > 0);
-  const blocksData = countBy(responses, (r) => r.building_blocks);
 
   const loadData = async () => {
     setLoading(true);
