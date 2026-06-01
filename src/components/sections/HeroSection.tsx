@@ -26,7 +26,7 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
           {t("hero.title")}
-          <span className="block gradient-text mt-2">{t("hero.subtitle")}</span>
+          <span className="block gradient-text mt-2 whitespace-pre-line">{t("hero.subtitle")}</span>
         </h1>
 
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-tight">
