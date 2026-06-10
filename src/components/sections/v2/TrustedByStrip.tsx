@@ -1,7 +1,7 @@
 import trekksoft from "@/assets/trekksoft-logo.png.asset.json";
 import raiffeisen from "@/assets/raiffeisen-logo.png.asset.json";
 import humatica from "@/assets/humatica-logo.png.asset.json";
-import startups from "@/assets/startups-logo.png.asset.json";
+import startups from "@/assets/startups-logo.svg.asset.json";
 
 const logos = [
   { name: "Raiffeisen", src: raiffeisen.url },
