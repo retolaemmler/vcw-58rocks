@@ -2,7 +2,8 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import AgendaSection from "@/components/sections/AgendaSection";
 import IndustriesSection from "@/components/sections/v2/IndustriesSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import CompanyLinkedInPosts from "@/components/sections/v2/CompanyLinkedInPosts";
+import TrustedByStrip from "@/components/sections/v2/TrustedByStrip";
 import RequirementsSection from "@/components/sections/RequirementsSection";
 import HostsSection from "@/components/sections/HostsSection";
 import FooterSection from "@/components/sections/FooterSection";
@@ -38,11 +39,12 @@ const WorkshopCompany = () => {
               Request a company workshop
             </a>
           </Button>
+          <TrustedByStrip />
         </div>
       </section>
       <AgendaSection />
       <IndustriesSection />
-      <TestimonialsSection />
+      <CompanyLinkedInPosts />
       <RequirementsSection />
       <HostsSection />
       <FooterSection />
