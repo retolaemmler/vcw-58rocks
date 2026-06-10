@@ -11,18 +11,18 @@ const logos = [
 ];
 
 const TrustedByStrip = () => (
-  <div className="mt-12">
-    <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-5">
+  <div className="mt-14">
+    <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-4">
       Trusted by teams at
     </p>
-    <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+    <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
       {logos.map((l) => (
         <img
           key={l.name}
           src={l.src}
           alt={l.name}
           loading="lazy"
-          className="h-7 md:h-9 w-auto object-contain grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
+          className="h-6 md:h-7 w-auto object-contain grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
         />
       ))}
     </div>
