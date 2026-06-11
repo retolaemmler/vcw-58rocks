@@ -51,6 +51,7 @@ const Admin = () => {
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [mainTab, setMainTab] = usePersistedTab("admin.mainTab", "orders");
   const [surveyTab, setSurveyTab] = usePersistedTab("admin.surveyTab", "prep");
+  const [ordersBatchTab, setOrdersBatchTab] = usePersistedTab("admin.ordersBatchTab", "workshop2");
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -122,8 +123,16 @@ const Admin = () => {
     setOrders([]);
   };
 
-  const totalRevenue = orders.reduce((sum, o) => sum + o.amount_total, 0) / 100;
-  const totalOrders = orders.length;
+  const BATCH1_END = new Date("2026-04-16T00:00:00Z").getTime();
+  const BATCH2_END = new Date("2026-06-30T23:59:59Z").getTime();
+  const filteredOrders = orders.filter((o) => {
+    const t = new Date(o.created_at).getTime();
+    if (ordersBatchTab === "workshop1") return t < BATCH1_END;
+    if (ordersBatchTab === "workshop2") return t >= BATCH1_END && t < BATCH2_END;
+    return true;
+  });
+  const totalRevenue = filteredOrders.reduce((sum, o) => sum + o.amount_total, 0) / 100;
+  const totalOrders = filteredOrders.length;
 
   const NavBar = ({ children }: { children?: React.ReactNode }) => (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-sm border-b border-border/50">
@@ -212,6 +221,13 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="orders">
+            <Tabs value={ordersBatchTab} onValueChange={setOrdersBatchTab} className="mb-6">
+              <TabsList>
+                <TabsTrigger value="workshop1">Workshop 1 (April 26)</TabsTrigger>
+                <TabsTrigger value="workshop2">Workshop 2 (June 26)</TabsTrigger>
+                <TabsTrigger value="all">All</TabsTrigger>
+              </TabsList>
+            </Tabs>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -257,7 +273,7 @@ const Admin = () => {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {orders.map((order) => (
+                        {filteredOrders.map((order) => (
                           <TableRow key={order.id}>
                             <TableCell className="whitespace-nowrap text-sm">
                               {new Date(order.created_at).toLocaleDateString("de-CH")}
@@ -280,7 +296,7 @@ const Admin = () => {
                             </TableCell>
                           </TableRow>
                         ))}
-                        {orders.length === 0 && (
+                        {filteredOrders.length === 0 && (
                           <TableRow>
                             <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                               No orders yet.
