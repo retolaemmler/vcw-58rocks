@@ -1,6 +1,6 @@
 const posts = [
   "https://www.linkedin.com/embed/feed/update/urn:li:activity:7419422883065688064",
-  "https://www.linkedin.com/embed/feed/update/urn:li:activity:7469734925231869952",
+  "https://www.linkedin.com/embed/feed/update/urn:li:activity:7453172833674956800",
 ];
 
 const CompanyLinkedInPosts = () => (
