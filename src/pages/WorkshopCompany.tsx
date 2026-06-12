@@ -26,7 +26,8 @@ const WorkshopCompany = () => {
             Company Workshop
           </div>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-            A vibecoding workshop
+            A dedicated
+            <span className="block mt-2">vibe coding workshop</span>
             <span className="block gradient-text mt-2">for your whole team.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
