@@ -9,8 +9,8 @@ const WorkshopChoice = () => {
   const cards = [
     {
       icon: Building2,
-      title: "Private Company Workshop",
-      subtitle: "A dedicated workshop for your team (6–20 people) — every team member builds their own app.",
+      title: "Dedicated Team Training",
+      subtitle: "A private company workshop for your team (6–20 people) every team member builds their own app.",
       bullets: [
         "Tailored to your industry & use cases",
         "On-site or remote, on your dates",
@@ -22,13 +22,13 @@ const WorkshopChoice = () => {
     {
       icon: Users,
       title: "Vibe Code Masterclass",
-      subtitle: "Join one of our upcoming public dates.",
+      subtitle: "Join as an individual one of our upcoming workshops.",
       bullets: [
-        "Mixed group, curated participants",
+        "Mixed group (max 12p, 2 coaches)",
         "Fixed public dates, apply for a spot",
         "Perfect for individuals & small teams",
       ],
-      cta: "Apply for a date",
+      cta: "Get your ticket",
       to: `/${lang}/v2/classic`,
     },
   ];
