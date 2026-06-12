@@ -9,23 +9,23 @@ const WorkshopChoice = () => {
   const cards = [
     {
       icon: Building2,
-      title: "Company Workshop",
-      subtitle: "Private workshop for your team (6–20 people).",
+      title: "Private Company Workshop",
+      subtitle: "A dedicated workshop for your team (6–20 people) — every team member builds their own app.",
       bullets: [
         "Tailored to your industry & use cases",
-        "On-site or remote, your dates",
-        "Team builds real internal tools",
+        "On-site or remote, on your dates",
+        "Each team member ships a real app",
       ],
       cta: "Book for your team",
       to: `/${lang}/v2/company`,
     },
     {
       icon: Users,
-      title: "Classic Workshop",
+      title: "Vibe Code Masterclass",
       subtitle: "Join one of our upcoming public dates.",
       bullets: [
         "Mixed group, curated participants",
-        "Fixed dates, apply for a spot",
+        "Fixed public dates, apply for a spot",
         "Perfect for individuals & small teams",
       ],
       cta: "Apply for a date",
@@ -55,7 +55,7 @@ const WorkshopChoice = () => {
                 </li>
               ))}
             </ul>
-            <Button className="w-full group-hover:gap-3 transition-all">
+            <Button className="w-full gradient-bg text-white font-semibold rounded-xl shadow-md hover:shadow-xl transition-all group-hover:gap-3">
               {c.cta}
               <ArrowRight className="w-4 h-4" />
             </Button>
