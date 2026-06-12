@@ -1,8 +1,11 @@
-Replace the second (right) embedded LinkedIn post in `src/components/sections/v2/CompanyLinkedInPosts.tsx`.
+Make `/:lang/v2/classic` render the current homepage instead of the custom Classic placeholder.
 
-Change:
-- `posts[1]` from `urn:li:activity:7469734925231869952` to `urn:li:activity:7453172833674956800`
+**Change:** In `src/App.tsx`, point the `v2/classic` route to the existing `Index` page component (the current homepage).
 
-New URL: `https://www.linkedin.com/embed/feed/update/urn:li:activity:7453172833674956800`
+```tsx
+<Route path="v2/classic" element={<Index />} />
+```
 
-No other changes.
+This keeps the V2 "Vibe Code Masterclass" CTA from `WorkshopChoice` working — clicking it lands on the full real homepage with all its sections (hero, pricing, agenda, testimonials, etc.).
+
+`src/pages/WorkshopClassic.tsx` becomes unused but will be left in place for now (no deletion) so we can revisit later if needed.
