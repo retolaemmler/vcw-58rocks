@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Calendar, MapPin } from "lucide-react";
+import { Sparkles, Calendar, MapPin, ExternalLink } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
  import WaitlistSignup from "@/components/NewsletterSignup";
 import {
@@ -45,10 +45,16 @@ const HeroSection = () => {
           <span className="hidden sm:inline text-border">|</span>
           <span>{t("hero.time")}</span>
           <span className="hidden sm:inline text-border">|</span>
-          <span className="flex items-center gap-1.5">
+          <a
+            href="https://maps.app.goo.gl/DgThKo1tHm5i4bsK6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-primary transition-colors"
+          >
             <MapPin className="w-4 h-4 text-primary" />
             {t("hero.location")}
-          </span>
+            <ExternalLink className="w-3 h-3 opacity-60" />
+          </a>
         </div>
 
         <div className="items-center gap-6 flex flex-col">
