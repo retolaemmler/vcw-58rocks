@@ -30,7 +30,7 @@ const de = {
     descriptionAfter: ", der Plattform, die natürliche Sprache in funktionierenden Code verwandelt. Keine Programmiererfahrung nötig.",
     date: "Di. 30.6.2026",
     time: "9:00 – 17:00",
-    location: "Zürich / TBA",
+    location: "Novu Campus, Zürich",
     cta: "Ticket sichern",
     limited: "Begrenzte Anzahl Tickets verfügbar.",
     notifyTitle: "Werde über kommende Workshops informiert",

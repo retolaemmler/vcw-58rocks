@@ -30,7 +30,7 @@ const en = {
     descriptionAfter: " — the platform that turns natural language into functional code. No coding experience required.",
     date: "Tue. 30.6.2026",
     time: "9:00 – 17:00",
-    location: "Zurich / TBA",
+    location: "Novu Campus, Zurich",
     cta: "Get your Ticket",
     limited: "Limited tickets available.",
     notifyTitle: "Get Notified About Upcoming Workshops",
