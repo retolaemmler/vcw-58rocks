@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle, Bell } from "lucide-react";
 
 const Navbar = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navLinks = [
     { label: t("nav.what"), id: "why" },
     { label: t("nav.schedule"), id: "agenda" },
@@ -47,8 +47,9 @@ const Navbar = () => {
 
   const handleNav = (link: typeof navLinks[0]) => {
     setMobileOpen(false);
-    if (location.pathname !== "/") {
-      navigate("/", { state: { scrollTo: link.id } });
+    const isHome = /^\/(en|de)\/?$/.test(location.pathname) || location.pathname === "/";
+    if (!isHome) {
+      navigate(`/${i18n.language || "en"}`, { state: { scrollTo: link.id } });
     } else {
       document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" });
     }
@@ -86,7 +87,11 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <button onClick={() => { if (location.pathname !== "/") navigate("/"); else window.scrollTo({ top: 0, behavior: "smooth" }); }} className="flex items-center">
+        <button onClick={() => {
+          const isHome = /^\/(en|de)\/?$/.test(location.pathname) || location.pathname === "/";
+          if (!isHome) navigate(`/${i18n.language || "en"}`);
+          else window.scrollTo({ top: 0, behavior: "smooth" });
+        }} className="flex items-center">
           <img src={logo} alt="Logo" className="h-12 w-12" />
         </button>
 
