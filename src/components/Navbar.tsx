@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle, Bell } from "lucide-react";
 
 const Navbar = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navLinks = [
     { label: t("nav.what"), id: "why" },
     { label: t("nav.schedule"), id: "agenda" },
