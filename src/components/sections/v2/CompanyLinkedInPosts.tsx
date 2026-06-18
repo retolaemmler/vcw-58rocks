@@ -1,7 +1,7 @@
 const posts = [
   "https://www.linkedin.com/embed/feed/update/urn:li:activity:7419422883065688064",
   "https://www.linkedin.com/embed/feed/update/urn:li:activity:7453172833674956800",
-  "https://lovable.dev/projects/409521c4-d1ea-444d-a669-86945b8f9acc",
+  "https://www.linkedin.com/embed/feed/update/urn:li:activity:7472883248189235200",
   "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7472592287907164161",
 ];
 
