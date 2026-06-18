@@ -34,7 +34,7 @@ function isRateLimited(ip: string): boolean {
   return hits.length > RATE_LIMIT_MAX;
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
