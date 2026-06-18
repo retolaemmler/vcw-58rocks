@@ -1,16 +1,13 @@
 import { Badge } from "@/components/ui/badge";
-import { Banknote, Briefcase, Megaphone, Rocket, Shield, Landmark, ShoppingBag, GraduationCap, Building2 } from "lucide-react";
+import { Banknote, Briefcase, Megaphone, Shield, GraduationCap, Building2 } from "lucide-react";
 
 const industries = [
   { label: "Financial services", icon: Banknote },
   { label: "Banking", icon: Building2 },
+  { label: "Insurances", icon: Shield },
   { label: "Consulting", icon: Briefcase },
   { label: "Marketing & agencies", icon: Megaphone },
   { label: "Education", icon: GraduationCap },
-  { label: "Product teams", icon: Rocket },
-  { label: "Retail & e-commerce", icon: ShoppingBag },
-  { label: "The public sector", icon: Landmark },
-  { label: "Insurances", icon: Shield },
 ];
 
 const IndustriesSection = () => {
