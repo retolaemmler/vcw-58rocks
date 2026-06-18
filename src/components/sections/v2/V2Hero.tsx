@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import lovableLogo from "@/assets/lovable-logo.png";
 
 const V2Hero = () => {
   return (
@@ -7,17 +8,16 @@ const V2Hero = () => {
       <div className="absolute top-40 -right-32 w-80 h-80 rounded-full bg-purple/10 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border border-border/60 text-xs font-medium text-muted-foreground mb-6">
-          <Sparkles className="w-3.5 h-3.5 text-primary" />
-          Vibe Code Workshop
-        </div>
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-          Build a working app
-          <span className="block gradient-text mt-2">in a single day.</span>
+          Vibe Code Workshop
+          <span className="block gradient-text mt-2">Build a Real Web App in One Day</span>
         </h1>
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-tight">
-          A hands-on workshop where non-developers ship real software using AI.
-          Pick the format that fits you below.
+          A full-day hands-on workshop where you'll go from idea to working web app using{" "}
+          <a href="https://www.lovable.dev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center align-middle">
+            <img src={lovableLogo} alt="Lovable.dev" className="h-3 sm:h-4 inline-block" />
+          </a>
+          {" "}— the platform that turns natural language into functional code. No coding experience required.
         </p>
       </div>
     </section>

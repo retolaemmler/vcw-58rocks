@@ -9,7 +9,7 @@ const WorkshopChoice = () => {
   const cards = [
     {
       icon: Building2,
-      title: "Dedicated Team Training",
+      title: "Dedicated Team Workshop",
       subtitle: "A private company workshop for your team (6–20 people) every team member builds their own app.",
       bullets: [
         "Tailored to your industry & use cases",
