@@ -1,15 +1,16 @@
 import { Badge } from "@/components/ui/badge";
-import { Banknote, Briefcase, Megaphone, Rocket, Heart, Landmark, ShoppingBag, GraduationCap } from "lucide-react";
+import { Banknote, Briefcase, Megaphone, Rocket, Shield, Landmark, ShoppingBag, GraduationCap, Building2 } from "lucide-react";
 
 const industries = [
   { label: "Financial services", icon: Banknote },
+  { label: "Banking", icon: Building2 },
   { label: "Consulting", icon: Briefcase },
   { label: "Marketing & agencies", icon: Megaphone },
-  { label: "Product teams", icon: Rocket },
-  { label: "HR & L&D", icon: Heart },
-  { label: "Public sector", icon: Landmark },
-  { label: "Retail & e-commerce", icon: ShoppingBag },
   { label: "Education", icon: GraduationCap },
+  { label: "Product teams", icon: Rocket },
+  { label: "Retail & e-commerce", icon: ShoppingBag },
+  { label: "The public sector", icon: Landmark },
+  { label: "Insurances", icon: Shield },
 ];
 
 const IndustriesSection = () => {
@@ -17,7 +18,7 @@ const IndustriesSection = () => {
     <section className="py-20 px-4 bg-background">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-          Built for <span className="gradient-text">any industry</span>
+          Built for <span className="gradient-text">your industry</span>
         </h2>
         <p className="text-muted-foreground mb-10 max-w-2xl mx-auto">
           We've run vibecoding workshops with teams across very different fields. The toolkit
