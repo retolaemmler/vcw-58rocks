@@ -18,7 +18,7 @@ const IndustriesSection = () => {
     <section className="py-20 px-4 bg-background">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-          Built for <span className="gradient-text">any industry</span>
+          Built for <span className="gradient-text">your industry</span>
         </h2>
         <p className="text-muted-foreground mb-10 max-w-2xl mx-auto">
           We've run vibecoding workshops with teams across very different fields. The toolkit
