@@ -134,6 +134,8 @@ const TestimonialsSection = () => {
                       ? "Lukas Karrer, CDO at Helion Energy AG"
                       : t.name === "Marco Lustenberger"
                       ? "Marco Lustenberger, Group CFO at Trekksoft Group"
+                      : t.name === "Mario Fäh"
+                      ? "Mario Fäh, CMO at Roaringten"
                       : t.name}
                   </a>
                 </div>
