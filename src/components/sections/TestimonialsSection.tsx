@@ -126,13 +126,12 @@ const TestimonialsSection = () => {
                     rel="noopener noreferrer"
                     className="font-semibold text-foreground hover:text-primary transition-colors leading-tight"
                   >
-                    {t.name}
+                    {t.name === "Dave Lieber" 
+                      ? "Dave Lieber, Managing Director at TestingTime" 
+                      : t.name === "Ahmet Sakali"
+                      ? "Ahmet Sakali, Senior Account Manager at TestingTime"
+                      : t.name}
                   </a>
-                  {t.name === "Dave Lieber" && (
-                    <span className="text-xs text-muted-foreground leading-tight">
-                      Managing Director TestingTime
-                    </span>
-                  )}
                 </div>
               </div>
             </article>
