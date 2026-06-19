@@ -106,7 +106,7 @@ const en = {
       tech: "Tech & Startups",
       public: "Public Sector",
     },
-    industryAgnostic: "\"We are industry agnostic. We held workshops across these industries.\"",
+    industryAgnostic: "\"We are industry agnostic. We held workshops across different industries.\"",
     items: {
       senior: "Senior Professionals",
       consultants: "Consultants",
