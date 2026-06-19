@@ -9,7 +9,6 @@ import RequirementsSection from "@/components/sections/RequirementsSection";
 import HostsSection from "@/components/sections/HostsSection";
 import PricingSection from "@/components/sections/PricingSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-
 import FooterSection from "@/components/sections/FooterSection";
 
 const Index = () => {
