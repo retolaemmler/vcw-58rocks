@@ -20,7 +20,9 @@ interface HeroSectionProps {
 
 const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   const [open, setOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const isGerman = i18n.language === "de";
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-4 pt-28 pb-8">
