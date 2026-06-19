@@ -28,7 +28,7 @@ const HostsSection = () => {
             src={coachesTeamImg.url}
             alt="Valentin Binnendijk, Reto Lämmler and Remy Blaettler at a Vibe Code Workshop"
             loading="lazy"
-            className="w-full aspect-[16/7] object-cover object-[center_20%]"
+            className="w-full aspect-[16/8] object-cover object-[center_20%]"
           />
         </div>
 
