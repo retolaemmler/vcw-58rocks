@@ -100,7 +100,7 @@ const HeroSection = () => {
                 <button
                   type="button"
                   onClick={() => setOpen(true)}
-                  className="text-sm text-primary hover:underline underline-offset-4 font-medium"
+                  className="text-sm text-primary hover:underline underline-offset-4 font-medium text-left"
                 >
                   {t("hero.masterclass.dateNote")}
                 </button>
