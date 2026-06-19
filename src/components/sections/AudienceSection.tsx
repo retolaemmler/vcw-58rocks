@@ -1,5 +1,22 @@
 import { Badge } from "@/components/ui/badge";
-import { Briefcase, BarChart3, Palette, Rocket, Megaphone, UserCheck, Building2, Heart } from "lucide-react";
+import {
+  Briefcase,
+  BarChart3,
+  Palette,
+  Rocket,
+  Megaphone,
+  UserCheck,
+  Building2,
+  Heart,
+  CreditCard,
+  Landmark,
+  Shield,
+  GraduationCap,
+  Store,
+  HeartPulse,
+  Cpu,
+  Building,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const audienceKeys = [
