@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin, ExternalLink, Users, ArrowRight, Check } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
@@ -21,7 +21,6 @@ interface HeroSectionProps {
 const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { lang = "en" } = useParams();
 
   return (
