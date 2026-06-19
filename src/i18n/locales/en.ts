@@ -40,7 +40,7 @@ const en = {
     },
     company: {
       title: "Dedicated Company Workshop",
-      description: "A tailored company workshop for your team (6–20 people).",
+      description: "A tailored workshop for your team (6–20 people).",
       topic1: "Tailored to your industry & use cases",
       topic2: "On-site or remote, on your dates",
       topic3: "Each team member ships a real app",
