@@ -63,8 +63,23 @@ const AudienceSection = () => {
             </Badge>
           ))}
         </div>
-        <p className="text-muted-foreground text-lg italic">
+        <p className="text-muted-foreground text-lg italic mb-10">
           {t("audience.quote")}
+        </p>
+        <div className="flex flex-wrap justify-center gap-3 mb-6">
+          {industryKeys.map((industry) => (
+            <Badge
+              key={industry.key}
+              variant="secondary"
+              className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
+            >
+              <industry.icon className="w-4 h-4 mr-2 text-primary" />
+              {t(`audience.industries.${industry.key}`)}
+            </Badge>
+          ))}
+        </div>
+        <p className="text-muted-foreground text-sm">
+          {t("audience.industryAgnostic")}
         </p>
       </div>
     </section>
