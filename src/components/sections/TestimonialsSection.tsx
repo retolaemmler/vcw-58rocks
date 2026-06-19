@@ -9,6 +9,7 @@ type Testimonial = {
   image: string;
   initials: string;
   linkedin: string;
+  linkedinPost?: string;
 };
 
 const testimonials: Testimonial[] = [
