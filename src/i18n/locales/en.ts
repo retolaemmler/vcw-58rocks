@@ -43,7 +43,7 @@ const en = {
       cta: "Get your Ticket",
     },
     company: {
-      title: "Dedicated Company Workshop",
+      title: "Dedicated Team Workshop",
       description: "A tailored workshop for your team (6–20 people).",
       topic1: "Tailored to your industry & use cases",
       topic2: "On-site or remote, on your dates",
