@@ -21,7 +21,7 @@ const Index = () => {
       <TrustedBySection isVisible={activeTab === "company"} />
       <WhySection />
       <AgendaSection />
-      <AudienceSection />
+      {activeTab === "company" && <AudienceSection />}
       <TestimonialsSection />
       <RequirementsSection />
       <HostsSection />
