@@ -1,4 +1,4 @@
-import { Quote } from "lucide-react";
+import { Quote, ExternalLink } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useTranslation } from "react-i18next";
 
