@@ -119,14 +119,21 @@ const TestimonialsSection = () => {
                     {t.initials}
                   </AvatarFallback>
                 </Avatar>
-                <a
-                  href={t.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-foreground hover:text-primary transition-colors"
-                >
-                  {t.name}
-                </a>
+                <div className="flex flex-col">
+                  <a
+                    href={t.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-foreground hover:text-primary transition-colors leading-tight"
+                  >
+                    {t.name}
+                  </a>
+                  {t.name === "Dave Lieber" && (
+                    <span className="text-xs text-muted-foreground leading-tight">
+                      Managing Director TestingTime
+                    </span>
+                  )}
+                </div>
               </div>
             </article>
           ))}
