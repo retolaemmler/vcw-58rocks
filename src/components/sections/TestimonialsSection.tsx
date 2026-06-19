@@ -131,7 +131,7 @@ const TestimonialsSection = () => {
                       : t.name === "Ahmet Sakali"
                       ? "Ahmet Sakali, Senior Account Manager at TestingTime AG"
                       : t.name === "Lukas Karrer"
-                      ? "Lukas Karrer, CDO at Helion Energy AG"
+                      ? "Lukas Karrer, CDO at Helion Energy"
                       : t.name === "Marco Lustenberger"
                       ? "Marco Lustenberger, Group CFO at Trekksoft Group"
                       : t.name === "Mario Fäh"
