@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin, ExternalLink, Users, ArrowRight, Check } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
@@ -21,8 +20,6 @@ interface HeroSectionProps {
 const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { lang = "en" } = useParams();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-4 pt-28 pb-8">
@@ -144,11 +141,13 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
 
               <Button
                 size="lg"
+                asChild
                 className="w-full gradient-bg text-white font-semibold text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-                onClick={() => navigate(`/${lang}/v2/company`)}
               >
-                {t("hero.company.cta")}
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <a href="mailto:reto@58rocks.com,valentin.binnendijk@pedalix.com?subject=Company%20Workshop%20Inquiry">
+                  {t("hero.company.cta")}
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </a>
               </Button>
             </div>
           )}

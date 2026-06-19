@@ -51,7 +51,7 @@ const de = {
       topic1: "Passend zu deiner Branche & deinen Use Cases",
       topic2: "Vor Ort oder remote, an deinen Terminen",
       topic3: "Jedes Teammitglied liefert eine echte App",
-      cta: "Mehr erfahren",
+      cta: "Kontakt aufnehmen",
     },
     notifyTitle: "Werde über kommende Workshops informiert",
     notifyDesc: "Hinterlasse deine Daten und wir informieren dich über kommende Workshop-Termine.",

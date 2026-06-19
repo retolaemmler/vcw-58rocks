@@ -51,7 +51,7 @@ const en = {
       topic1: "Tailored to your industry & use cases",
       topic2: "On-site or remote, on your dates",
       topic3: "Each team member ships a real app",
-      cta: "Learn more",
+      cta: "Get in touch",
     },
     notifyTitle: "Get Notified About Upcoming Workshops",
     notifyDesc: "Leave your details and we'll inform you about upcoming workshop dates.",
