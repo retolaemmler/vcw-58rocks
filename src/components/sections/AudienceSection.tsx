@@ -30,6 +30,19 @@ const audienceKeys = [
   { key: "hr", icon: Heart },
 ];
 
+const industryKeys = [
+  { key: "financial", icon: CreditCard },
+  { key: "banking", icon: Landmark },
+  { key: "insurances", icon: Shield },
+  { key: "consulting", icon: Briefcase },
+  { key: "marketing", icon: Megaphone },
+  { key: "education", icon: GraduationCap },
+  { key: "retail", icon: Store },
+  { key: "healthcare", icon: HeartPulse },
+  { key: "tech", icon: Cpu },
+  { key: "public", icon: Building },
+];
+
 const AudienceSection = () => {
   const { t } = useTranslation();
   return (
