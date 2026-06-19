@@ -166,17 +166,6 @@ const TestimonialsSection = () => {
                       <span className="font-normal">, Account Executive at ServiceNow</span>
                     )}
                   </a>
-                  {t.linkedinPost && (
-                    <a
-                      href={t.linkedinPost}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 mt-1 text-xs text-primary hover:text-primary/80 transition-colors"
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                      View LinkedIn post
-                    </a>
-                  )}
                 </div>
               </div>
             </article>
