@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Calendar, MapPin, ExternalLink, Users, ArrowRight } from "lucide-react";
+import { Sparkles, Calendar, MapPin, ExternalLink, Users, ArrowRight, Check } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
 import WaitlistSignup from "@/components/NewsletterSignup";
 import {
@@ -96,7 +96,18 @@ const HeroSection = () => {
               <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.company.description")}</p>
             </div>
 
-            <div className="flex-grow" />
+            <div className="flex-grow space-y-3 mb-8">
+              {[
+                "hero.company.topic1",
+                "hero.company.topic2",
+                "hero.company.topic3",
+              ].map((key) => (
+                <div key={key} className="flex items-center gap-3 text-muted-foreground">
+                  <Check className="w-4 h-4 text-accent shrink-0" />
+                  <span className="text-sm font-medium">{t(key)}</span>
+                </div>
+              ))}
+            </div>
 
             <Button
               variant="outline"
