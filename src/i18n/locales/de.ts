@@ -52,6 +52,7 @@ const de = {
       topic2: "Vor Ort oder remote, an deinen Wunschterminen",
       topic3: "2-3 Coaches, je nach Teamgrösse",
       cta: "Kontakt aufnehmen",
+      flyer: "Flyer herunterladen",
     },
     notifyTitle: "Werde über kommende Workshops informiert",
     notifyDesc: "Hinterlasse deine Daten und wir informieren dich über kommende Workshop-Termine.",

@@ -52,6 +52,7 @@ const en = {
       topic2: "On-site or remote, on your preferred dates",
       topic3: "2-3 coaches, depending on the team size",
       cta: "Get in touch",
+      flyer: "Download flyer",
     },
     notifyTitle: "Get Notified About Upcoming Workshops",
     notifyDesc: "Leave your details and we'll inform you about upcoming workshop dates.",
