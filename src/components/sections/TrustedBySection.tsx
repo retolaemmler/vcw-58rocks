@@ -9,7 +9,7 @@ interface TrustedBySectionProps {
 }
 
 const logos = [
-  { src: raiffeisenLogo.url, alt: "Raiffeisen" },
+  { src: raiffeisenLogo.url, alt: "Raiffeisen", className: "scale-[0.9]" },
   { src: trekksoftLogo.url, alt: "TrekkSoft" },
   { src: humaticaLogo.url, alt: "Humatica", className: "scale-[1.75]" },
   { src: startupsLogo.url, alt: "Startups.ch" },
