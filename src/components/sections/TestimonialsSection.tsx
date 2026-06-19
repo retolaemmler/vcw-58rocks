@@ -115,6 +115,17 @@ const TestimonialsSection = () => {
               <p className="text-foreground leading-relaxed mb-5">
                 &ldquo;{t.quote}&rdquo;
               </p>
+              {t.linkedinPost && (
+                <a
+                  href={t.linkedinPost}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 mb-5 text-sm text-primary hover:text-primary/80 transition-colors"
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  Read more on LinkedIn
+                </a>
+              )}
               <div className="flex items-center gap-3 pt-4 border-t border-border">
                 <Avatar className="h-10 w-10 shrink-0">
                   <AvatarImage src={t.image} alt={t.name} />
@@ -155,17 +166,6 @@ const TestimonialsSection = () => {
                       <span className="font-normal">, Account Executive at ServiceNow</span>
                     )}
                   </a>
-                  {t.linkedinPost && (
-                    <a
-                      href={t.linkedinPost}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 mt-1 text-xs text-primary hover:text-primary/80 transition-colors"
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                      View LinkedIn post
-                    </a>
-                  )}
                 </div>
               </div>
             </article>
