@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
+import coachesTeamImg from "@/assets/coaches-team.jpg.asset.json";
 
 const coaches = [
   { name: "Valentin Binnendijk", roleKey: "valentin", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
@@ -21,6 +22,15 @@ const HostsSection = () => {
           {t("coaches.titlePre")}<span className="gradient-text">{t("coaches.titleHighlight")}</span>
         </h2>
         <p className="text-muted-foreground mb-12">{t("coaches.intro")}</p>
+
+        <div className="max-w-5xl mx-auto mb-12 rounded-2xl overflow-hidden shadow-md border border-border/50">
+          <img
+            src={coachesTeamImg.url}
+            alt="Valentin Binnendijk, Reto Lämmler and Remy Blaettler at a Vibe Code Workshop"
+            loading="lazy"
+            className="w-full aspect-[16/7] object-cover object-center"
+          />
+        </div>
 
         <div className="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
           {coaches.map((host) => (
