@@ -51,21 +51,25 @@ const AudienceSection = ({ activeTab = "you" }: { activeTab?: "you" | "company" 
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-10">
           {t("audience.titlePre")}<span className="gradient-text">{t("audience.titleHighlight")}</span>{t("audience.titlePost")}
         </h2>
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {audienceKeys.map((a) => (
-            <Badge
-              key={a.key}
-              variant="secondary"
-              className="px-4 py-2.5 text-sm font-medium bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
-            >
-              <a.icon className="w-4 h-4 mr-2 text-primary" />
-              {t(`audience.items.${a.key}`)}
-            </Badge>
-          ))}
-        </div>
-        <p className="text-muted-foreground text-lg italic mb-10">
-          {t("audience.quote")}
-        </p>
+        {activeTab === "you" && (
+          <>
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              {audienceKeys.map((a) => (
+                <Badge
+                  key={a.key}
+                  variant="secondary"
+                  className="px-4 py-2.5 text-sm font-medium bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
+                >
+                  <a.icon className="w-4 h-4 mr-2 text-primary" />
+                  {t(`audience.items.${a.key}`)}
+                </Badge>
+              ))}
+            </div>
+            <p className="text-muted-foreground text-lg italic mb-10">
+              {t("audience.quote")}
+            </p>
+          </>
+        )}
         {activeTab === "company" && (
           <>
             <div className="flex flex-wrap justify-center gap-3 mb-6">
