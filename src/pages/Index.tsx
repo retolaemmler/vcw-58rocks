@@ -13,10 +13,13 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FooterSection from "@/components/sections/FooterSection";
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState<"you" | "company">("you");
+
   return (
     <main className="min-h-screen">
       <Navbar />
-      <HeroSection />
+      <HeroSection activeTab={activeTab} setActiveTab={setActiveTab} />
+      <TrustedBySection isVisible={activeTab === "company"} />
       <WhySection />
       <AgendaSection />
       <AudienceSection />
