@@ -140,6 +140,8 @@ const TestimonialsSection = () => {
                       ? "Mattia Piccoli, CMO at Nexus Group Holding"
                       : t.name === "Silvio Holdener"
                       ? "Silvio Holdener, Senior Business Development Manager at SIX"
+                      : t.name === "Claudia Dietschi"
+                      ? "Claudia Dietschi, Account Executive at ServiceNow"
                       : t.name}
                   </a>
                 </div>
