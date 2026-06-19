@@ -1,4 +1,6 @@
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Briefcase,
   BarChart3,
@@ -45,12 +47,19 @@ const industryKeys = [
 
 const AudienceSection = () => {
   const { t } = useTranslation();
+  const [view, setView] = useState<"team" | "masterclass">("team");
   return (
     <section id="audience" className="py-20 px-4 bg-section-alt">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-10">
           {t("audience.titlePre")}<span className="gradient-text">{t("audience.titleHighlight")}</span>{t("audience.titlePost")}
         </h2>
+        <Tabs value={view} onValueChange={(v) => setView(v as "team" | "masterclass")} className="mb-8 flex justify-center">
+          <TabsList>
+            <TabsTrigger value="team">For your team</TabsTrigger>
+            <TabsTrigger value="masterclass">Masterclass</TabsTrigger>
+          </TabsList>
+        </Tabs>
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {audienceKeys.map((a) => (
             <Badge
@@ -66,24 +75,28 @@ const AudienceSection = () => {
         <p className="text-muted-foreground text-lg italic mb-10">
           {t("audience.quote")}
         </p>
-        <div className="flex flex-wrap justify-center gap-3 mb-6">
-          {industryKeys.map((industry) => {
-            const Icon = industry.icon;
-            return (
-              <Badge
-                key={industry.key}
-                variant="secondary"
-                className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
-              >
-                <Icon className="w-4 h-4 mr-2 text-primary" />
-                {t(`audience.industries.${industry.key}`)}
-              </Badge>
-            );
-          })}
-        </div>
-        <p className="text-muted-foreground text-lg italic mb-0">
-          {t("audience.industryAgnostic")}
-        </p>
+        {view === "team" && (
+          <>
+            <div className="flex flex-wrap justify-center gap-3 mb-6">
+              {industryKeys.map((industry) => {
+                const Icon = industry.icon;
+                return (
+                  <Badge
+                    key={industry.key}
+                    variant="secondary"
+                    className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
+                  >
+                    <Icon className="w-4 h-4 mr-2 text-primary" />
+                    {t(`audience.industries.${industry.key}`)}
+                  </Badge>
+                );
+              })}
+            </div>
+            <p className="text-muted-foreground text-lg italic mb-0">
+              {t("audience.industryAgnostic")}
+            </p>
+          </>
+        )}
       </div>
     </section>
   );
