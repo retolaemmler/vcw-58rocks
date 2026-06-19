@@ -44,10 +44,6 @@ const HeroSection = () => {
         <div className="grid md:grid-cols-2 gap-6 w-full text-left">
           {/* Masterclass card */}
           <div className="relative flex flex-col p-8 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
-            <div className="absolute -top-4 left-8 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-              {t("hero.masterclass.badge")}
-            </div>
-
             <div className="mb-6">
               <h3 className="font-display text-2xl font-bold mb-2">{t("hero.masterclass.title")}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.masterclass.description")}</p>
