@@ -29,7 +29,7 @@ const de = {
     descriptionBefore: "Ein ganztägiger Hands-on-Workshop, in dem du von der Idee zur funktionierenden Web-App kommst — mit ",
     descriptionAfter: ", der Plattform, die natürliche Sprache in funktionierenden Code verwandelt. Keine Programmiererfahrung nötig.",
     tabs: {
-      you: "Du",
+      you: "Für dich",
       company: "Firma",
     },
     masterclass: {
