@@ -50,7 +50,7 @@ const de = {
       description: "Ein massgeschneiderter Workshop für dein Team (6–20 Personen).",
       topic1: "Passend zu deiner Branche & deinen Use Cases",
       topic2: "Vor Ort oder remote, an deinen Wunschterminen",
-      topic3: "Jedes Teammitglied liefert eine echte App",
+      topic3: "2-3 Coaches, je nach Teamgrösse",
       cta: "Kontakt aufnehmen",
     },
     notifyTitle: "Werde über kommende Workshops informiert",
