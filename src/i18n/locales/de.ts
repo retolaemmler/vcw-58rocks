@@ -32,7 +32,7 @@ const de = {
       badge: "Am beliebtesten",
       title: "Öffentliche Masterclass",
       description: "Nimm an einem der kommenden Workshops teil (6–10 Personen).",
-      date: "Di. 30.6.2026",
+      date: "Di. 30.6.2026 von 9:00 - 17:00 Uhr",
       dateNote: "Newsletter für kommende Termine abonnieren",
       location: "Novu Campus, Zürich",
       capacity: "6–10 Personen",
