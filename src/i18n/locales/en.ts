@@ -33,7 +33,7 @@ const en = {
       company: "For your Team",
     },
     trustedBy: {
-      title: "EXPERIENCED BY TEAMS FROM",
+      title: "TRUSTED BY TEAMS FROM",
     },
     masterclass: {
       badge: "Most Popular",
