@@ -30,7 +30,7 @@ const de = {
     descriptionAfter: ", der Plattform, die natürliche Sprache in funktionierenden Code verwandelt. Keine Programmiererfahrung nötig.",
     masterclass: {
       badge: "Am beliebtesten",
-      title: "Masterclass",
+      title: "Öffentliche Masterclass",
       description: "Nimm an einem der kommenden Workshops teil (6–10 Personen).",
       date: "Di. 30.6.2026",
       dateNote: "Newsletter für kommende Termine abonnieren",

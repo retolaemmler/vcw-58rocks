@@ -30,7 +30,7 @@ const en = {
     descriptionAfter: " — the platform that turns natural language into functional code. No coding experience required.",
     masterclass: {
       badge: "Most Popular",
-      title: "Masterclass",
+      title: "Public Masterclass",
       description: "Join one of the upcoming workshops (6–10 people).",
       date: "Tue. 30.6.2026",
       dateNote: "Subscribe to newsletter for upcoming dates",
