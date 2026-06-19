@@ -12,8 +12,12 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 
 import FooterSection from "@/components/sections/FooterSection";
 
-const Index = () => {
-  const [activeTab, setActiveTab] = useState<"you" | "company">("you");
+interface IndexProps {
+  initialTab?: "you" | "company";
+}
+
+const Index = ({ initialTab = "you" }: IndexProps) => {
+  const [activeTab, setActiveTab] = useState<"you" | "company">(initialTab);
 
   return (
     <main className="min-h-screen">
