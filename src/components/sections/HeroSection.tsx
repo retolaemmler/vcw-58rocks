@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Calendar, MapPin, ExternalLink } from "lucide-react";
+import { Sparkles, Calendar, MapPin, ExternalLink, Users, ArrowRight } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
- import WaitlistSignup from "@/components/NewsletterSignup";
+import WaitlistSignup from "@/components/NewsletterSignup";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +16,8 @@ import {
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { lang = "en" } = useParams();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-4 pt-28 pb-8">
@@ -29,7 +32,7 @@ const HeroSection = () => {
           <span className="block gradient-text mt-2">{t("hero.subtitle")}</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-tight">
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-tight">
           {t("hero.descriptionBefore")}
           <a href="https://www.lovable.dev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center align-middle">
             <img src={lovableLogo} alt="Lovable.dev" className="h-3 sm:h-4 inline-block" />
@@ -37,37 +40,78 @@ const HeroSection = () => {
           {t("hero.descriptionAfter")}
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-10">
-          <span className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4 text-primary" />
-            {t("hero.date")}
-          </span>
-          <span className="hidden sm:inline text-border">|</span>
-          <span>{t("hero.time")}</span>
-          <span className="hidden sm:inline text-border">|</span>
-          <a
-            href="https://maps.app.goo.gl/DgThKo1tHm5i4bsK6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:text-primary transition-colors"
-          >
-            <MapPin className="w-4 h-4 text-primary" />
-            {t("hero.location")}
-            <ExternalLink className="w-3 h-3 opacity-60" />
-          </a>
-        </div>
+        {/* Workshop choice cards */}
+        <div className="grid md:grid-cols-2 gap-6 w-full text-left">
+          {/* Masterclass card */}
+          <div className="relative flex flex-col p-8 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
+            <div className="absolute -top-4 left-8 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              {t("hero.masterclass.badge")}
+            </div>
 
-        <div className="items-center gap-6 flex flex-col">
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <div className="mb-6">
+              <h3 className="font-display text-2xl font-bold mb-2">{t("hero.masterclass.title")}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.masterclass.description")}</p>
+            </div>
+
+            <div className="flex-grow space-y-3 mb-8">
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <Calendar className="w-4 h-4 text-accent shrink-0" />
+                <span className="text-sm font-medium">{t("hero.masterclass.date")}</span>
+              </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <MapPin className="w-4 h-4 text-accent shrink-0" />
+                <a
+                  href="https://maps.app.goo.gl/DgThKo1tHm5i4bsK6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium hover:text-accent transition-colors inline-flex items-center gap-1"
+                >
+                  {t("hero.masterclass.location")}
+                  <ExternalLink className="w-3 h-3 opacity-60" />
+                </a>
+              </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <Users className="w-4 h-4 text-accent shrink-0" />
+                <span className="text-sm font-medium">{t("hero.masterclass.capacity")}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="text-sm text-primary hover:underline underline-offset-4 font-medium"
+              >
+                {t("hero.masterclass.dateNote")}
+              </button>
+            </div>
+
             <Button
               size="lg"
-              className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-              onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}>
+              className="w-full gradient-bg text-white font-semibold text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+            >
               <Sparkles className="w-5 h-5 mr-2" />
-              {t("hero.cta")}
+              {t("hero.masterclass.cta")}
             </Button>
           </div>
-          <p className="text-sm text-muted-foreground">{t("hero.limited")}</p>
+
+          {/* Company workshop card */}
+          <div className="flex flex-col p-8 rounded-3xl border-2 border-border/60 bg-secondary/30 transition-transform hover:-translate-y-1">
+            <div className="mb-6">
+              <h3 className="font-display text-2xl font-bold mb-2">{t("hero.company.title")}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.company.description")}</p>
+            </div>
+
+            <div className="flex-grow" />
+
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full font-semibold text-lg py-6 rounded-xl border-2 hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all group"
+              onClick={() => navigate(`/${lang}/v2/company`)}
+            >
+              {t("hero.company.cta")}
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -77,7 +121,7 @@ const HeroSection = () => {
             <DialogTitle>{t("hero.notifyTitle")}</DialogTitle>
             <DialogDescription>{t("hero.notifyDesc")}</DialogDescription>
           </DialogHeader>
-           <WaitlistSignup variant="light" />
+          <WaitlistSignup variant="light" />
         </DialogContent>
       </Dialog>
     </section>
