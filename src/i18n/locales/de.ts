@@ -28,6 +28,10 @@ const de = {
     subtitle: "Baue eine echte Web-App an einem Tag",
     descriptionBefore: "Ein ganztägiger Hands-on-Workshop, in dem du von der Idee zur funktionierenden Web-App kommst — mit ",
     descriptionAfter: ", der Plattform, die natürliche Sprache in funktionierenden Code verwandelt. Keine Programmiererfahrung nötig.",
+    tabs: {
+      you: "Du",
+      company: "Firma",
+    },
     masterclass: {
       badge: "Am beliebtesten",
       title: "Öffentliche Masterclass",
