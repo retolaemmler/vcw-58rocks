@@ -22,7 +22,7 @@ const Index = () => {
       <TrustedBySection isVisible={activeTab === "company"} />
       <WhySection />
       <AgendaSection />
-      <AudienceSection />
+      <AudienceSection activeTab={activeTab} />
       <TestimonialsSection />
       <RequirementsSection />
       <HostsSection />
