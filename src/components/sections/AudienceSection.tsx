@@ -43,7 +43,7 @@ const industryKeys = [
   { key: "public", icon: Building },
 ];
 
-const AudienceSection = ({ activeTab }: { activeTab: "you" | "company" }) => {
+const AudienceSection = ({ activeTab = "you" }: { activeTab?: "you" | "company" }) => {
   const { t } = useTranslation();
   return (
     <section id="audience" className="py-20 px-4 bg-section-alt">
