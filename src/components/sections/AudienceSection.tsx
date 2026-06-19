@@ -81,7 +81,7 @@ const AudienceSection = () => {
             );
           })}
         </div>
-        <p className="text-muted-foreground text-lg italic mb-10">
+        <p className="text-muted-foreground text-lg italic mb-0">
           {t("audience.industryAgnostic")}
         </p>
       </div>
