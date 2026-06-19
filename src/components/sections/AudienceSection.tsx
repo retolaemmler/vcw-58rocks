@@ -1,5 +1,22 @@
 import { Badge } from "@/components/ui/badge";
-import { Briefcase, BarChart3, Palette, Rocket, Megaphone, UserCheck, Building2, Heart } from "lucide-react";
+import {
+  Briefcase,
+  BarChart3,
+  Palette,
+  Rocket,
+  Megaphone,
+  UserCheck,
+  Building2,
+  Heart,
+  CreditCard,
+  Landmark,
+  Shield,
+  GraduationCap,
+  Store,
+  HeartPulse,
+  Cpu,
+  Building,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const audienceKeys = [
@@ -11,6 +28,19 @@ const audienceKeys = [
   { key: "founders", icon: Building2 },
   { key: "agency", icon: UserCheck },
   { key: "hr", icon: Heart },
+];
+
+const industryKeys = [
+  { key: "financial", icon: CreditCard },
+  { key: "banking", icon: Landmark },
+  { key: "insurances", icon: Shield },
+  { key: "consulting", icon: Briefcase },
+  { key: "marketing", icon: Megaphone },
+  { key: "education", icon: GraduationCap },
+  { key: "retail", icon: Store },
+  { key: "healthcare", icon: HeartPulse },
+  { key: "tech", icon: Cpu },
+  { key: "public", icon: Building },
 ];
 
 const AudienceSection = () => {
@@ -33,8 +63,26 @@ const AudienceSection = () => {
             </Badge>
           ))}
         </div>
-        <p className="text-muted-foreground text-lg italic">
+        <p className="text-muted-foreground text-lg italic mb-10">
           {t("audience.quote")}
+        </p>
+        <div className="flex flex-wrap justify-center gap-3 mb-6">
+          {industryKeys.map((industry) => {
+            const Icon = industry.icon;
+            return (
+              <Badge
+                key={industry.key}
+                variant="secondary"
+                className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
+              >
+                <Icon className="w-4 h-4 mr-2 text-primary" />
+                {t(`audience.industries.${industry.key}`)}
+              </Badge>
+            );
+          })}
+        </div>
+        <p className="text-muted-foreground text-sm">
+          {t("audience.industryAgnostic")}
         </p>
       </div>
     </section>
