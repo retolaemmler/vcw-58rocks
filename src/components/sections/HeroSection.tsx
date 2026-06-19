@@ -152,6 +152,16 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
                   {t("hero.company.cta")}
                 </a>
               </Button>
+              {isGerman && (
+                <a
+                  href={flyerPdf.url}
+                  download
+                  className="inline-flex items-center justify-center gap-1.5 mt-4 text-sm text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Download className="w-4 h-4" />
+                  {t("hero.company.flyer")}
+                </a>
+              )}
             </div>
           )}
         </div>
