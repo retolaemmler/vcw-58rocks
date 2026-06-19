@@ -106,7 +106,7 @@ const de = {
       tech: "Tech & Startups",
       public: "Öffentlicher Sektor",
     },
-    industryAgnostic: "\"Wir sind branchenunabhängig. Wir haben Workshops in all diesen Branchen durchgeführt.\"",
+    industryAgnostic: "\"Wir sind branchenunabhängig. Wir haben Workshops in verschiedenen Branchen durchgeführt.\"",
     items: {
       senior: "Senior Professionals",
       consultants: "Consultants",
