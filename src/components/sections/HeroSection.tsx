@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Calendar, MapPin, ExternalLink, Users, Mail, Check } from "lucide-react";
+import { Sparkles, Calendar, MapPin, ExternalLink, Users, Mail, Check, Download } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
+import flyerPdf from "@/assets/Vibe_Coding_Workshop.pdf.asset.json";
 import WaitlistSignup from "@/components/NewsletterSignup";
 import {
   Dialog,
