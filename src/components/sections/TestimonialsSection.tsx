@@ -130,6 +130,8 @@ const TestimonialsSection = () => {
                       ? "Dave Lieber, Managing Director at TestingTime" 
                       : t.name === "Ahmet Sakali"
                       ? "Ahmet Sakali, Senior Account Manager at TestingTime"
+                      : t.name === "Lukas Karrer"
+                      ? "Lukas Karrer, CDO at Helion Energy AG"
                       : t.name}
                   </a>
                 </div>
