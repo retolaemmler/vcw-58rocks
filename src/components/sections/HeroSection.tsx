@@ -116,42 +116,33 @@ const HeroSection = () => {
               </Button>
             </div>
           ) : (
-            <div className="relative overflow-hidden flex flex-col p-10 rounded-[40px] border border-white/80 bg-card/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.02)] transition-all hover:-translate-y-1 hover:shadow-[0_25px_60px_rgba(0,0,0,0.06)]">
-              <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-3xl" />
-
-              <div className="relative z-10">
-                <div className="mb-6">
-                  <h3 className="font-display text-[22px] font-semibold leading-tight tracking-tight mb-3">
-                    {t("hero.company.title")}
-                  </h3>
-                  <p className="text-muted-foreground text-[15px] leading-relaxed">
-                    {t("hero.company.description")}
-                  </p>
-                </div>
-
-                <div className="flex-grow space-y-4 mb-10">
-                  {[
-                    "hero.company.topic1",
-                    "hero.company.topic2",
-                    "hero.company.topic3",
-                  ].map((key) => (
-                    <div key={key} className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-1" strokeWidth={2.5} />
-                      <span className="text-sm font-medium text-foreground/80">{t(key)}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full bg-background border-border text-foreground text-[15px] font-semibold py-4 px-6 rounded-2xl shadow-sm hover:bg-secondary hover:border-border/80 hover:shadow-md active:scale-[0.98] transition-all group"
-                  onClick={() => navigate(`/${lang}/v2/company`)}
-                >
-                  {t("hero.company.cta")}
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
+            <div className="relative flex flex-col p-8 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
+              <div className="mb-6">
+                <h3 className="font-display text-2xl font-bold mb-2">{t("hero.company.title")}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.company.description")}</p>
               </div>
+
+              <div className="flex-grow space-y-3 mb-8">
+                {[
+                  "hero.company.topic1",
+                  "hero.company.topic2",
+                  "hero.company.topic3",
+                ].map((key) => (
+                  <div key={key} className="flex items-start gap-3 text-muted-foreground">
+                    <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <span className="text-sm font-medium">{t(key)}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button
+                size="lg"
+                className="w-full gradient-bg text-white font-semibold text-lg py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                onClick={() => navigate(`/${lang}/v2/company`)}
+              >
+                {t("hero.company.cta")}
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
             </div>
           )}
         </div>
