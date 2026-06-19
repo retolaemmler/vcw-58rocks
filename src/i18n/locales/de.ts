@@ -110,7 +110,7 @@ const de = {
     items: {
       senior: "Senior Professionals",
       consultants: "Consultants",
-      marketing: "Marketing-Verantwortliche",
+      marketing: "Sales- & Marketing-Verantwortliche",
       product: "Product Manager:innen",
       design: "UX/UI Designer:innen",
       founders: "CEOs & Gründer:innen",
