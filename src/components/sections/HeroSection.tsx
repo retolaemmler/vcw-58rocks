@@ -61,13 +61,16 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
           <button
             type="button"
             onClick={() => setActiveTab("company")}
-            className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
               activeTab === "company"
                 ? "bg-card text-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {t("hero.tabs.company")}
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-destructive text-destructive-foreground leading-none">
+              New
+            </span>
           </button>
         </div>
 
