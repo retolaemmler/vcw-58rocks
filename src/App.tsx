@@ -89,6 +89,7 @@ const App = () => (
             <Route path="v2" element={<HomeV2 />} />
             <Route path="v2/company" element={<WorkshopCompany />} />
             <Route path="v2/classic" element={<Index />} />
+            <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           {/* Redirect any non-prefixed path to the detected language */}
