@@ -11,7 +11,7 @@ interface TrustedBySectionProps {
 const logos = [
   { src: raiffeisenLogo.url, alt: "Raiffeisen" },
   { src: trekksoftLogo.url, alt: "TrekkSoft" },
-  { src: humaticaLogo.url, alt: "Humatica" },
+  { src: humaticaLogo.url, alt: "Humatica", className: "scale-[1.75]" },
   { src: startupsLogo.url, alt: "Startups.ch" },
 ];
 
@@ -36,7 +36,7 @@ const TrustedBySection = ({ isVisible }: TrustedBySectionProps) => {
                 src={logo.src}
                 alt={logo.alt}
                 loading="lazy"
-                className="max-h-full max-w-full object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition"
+                className={`max-h-full max-w-full object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition ${logo.className ?? ""}`}
               />
             </div>
           ))}
