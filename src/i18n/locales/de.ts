@@ -29,8 +29,8 @@ const de = {
     descriptionBefore: "Ein ganztägiger Hands-on-Workshop, in dem du von der Idee zur funktionierenden Web-App kommst — mit ",
     descriptionAfter: ", der Plattform, die natürliche Sprache in funktionierenden Code verwandelt. Keine Programmiererfahrung nötig.",
     tabs: {
-      you: "Für dich",
-      company: "Firma",
+      you: "Individuell",
+      company: "Für dein Team",
     },
     masterclass: {
       badge: "Am beliebtesten",
