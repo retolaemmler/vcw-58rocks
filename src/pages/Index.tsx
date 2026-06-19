@@ -26,10 +26,10 @@ const Index = ({ initialTab = "you" }: IndexProps) => {
       <TrustedBySection isVisible={activeTab === "company"} />
       <WhySection />
       <AgendaSection />
+        <HostsSection />
       <AudienceSection activeTab={activeTab} />
       <TestimonialsSection />
       <RequirementsSection />
-      <HostsSection />
       {activeTab === "you" && <PricingSection />}
       
       <FooterSection />
