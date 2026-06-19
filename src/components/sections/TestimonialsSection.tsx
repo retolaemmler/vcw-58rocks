@@ -1,4 +1,4 @@
-import { Quote } from "lucide-react";
+import { Quote, ExternalLink } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +9,7 @@ type Testimonial = {
   image: string;
   initials: string;
   linkedin: string;
+  linkedinPost?: string;
 };
 
 const testimonials: Testimonial[] = [
@@ -63,6 +64,8 @@ const testimonials: Testimonial[] = [
     image: "/participants/MarioFaeh.png",
     initials: "MF",
     linkedin: "https://linkedin.com/in/mariofaeh",
+    linkedinPost:
+      "https://www.linkedin.com/posts/mariofaeh_%F0%9D%97%A0%F0%9D%97%BC%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%BC%F0%9D%97%BD%F0%9D%97%B9%F0%9D%97%B2-%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B2-%F0%9D%98%80%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%B9%F0%9D%97%B9-%F0%9D%97%BD%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BB%F0%9D%97%BB%F0%9D%97%B6%F0%9D%97%BB%F0%9D%97%B4-ugcPost-7453172832194228225-ae_u/",
     quote:
       "I went from never touching AI coding to building a custom marketing automation tool in a day. It was surprising to see how Lovable handled the email integrations and customer data so quickly.",
   },
@@ -152,6 +155,17 @@ const TestimonialsSection = () => {
                       <span className="font-normal">, Account Executive at ServiceNow</span>
                     )}
                   </a>
+                  {t.linkedinPost && (
+                    <a
+                      href={t.linkedinPost}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 mt-1 text-xs text-primary hover:text-primary/80 transition-colors"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      View LinkedIn post
+                    </a>
+                  )}
                 </div>
               </div>
             </article>
