@@ -26,7 +26,7 @@ const Index = () => {
       <TestimonialsSection />
       <RequirementsSection />
       <HostsSection />
-      <PricingSection />
+      {activeTab === "you" && <PricingSection />}
       
       <FooterSection />
     </main>
