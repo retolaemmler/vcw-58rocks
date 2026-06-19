@@ -124,25 +124,33 @@ const TestimonialsSection = () => {
                     href={t.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-foreground hover:text-primary transition-colors leading-tight"
+                    className="text-foreground hover:text-primary transition-colors leading-tight"
                   >
-                    {t.name === "Dave Lieber" 
-                      ? "Dave Lieber, Managing Director at TestingTime" 
-                      : t.name === "Ahmet Sakali"
-                      ? "Ahmet Sakali, Senior Account Manager at TestingTime"
-                      : t.name === "Lukas Karrer"
-                      ? "Lukas Karrer, CDO at Helion Energy"
-                      : t.name === "Marco Lustenberger"
-                      ? "Marco Lustenberger, Group CFO at Trekksoft Group"
-                      : t.name === "Mario Fäh"
-                      ? "Mario Fäh, CMO at Roaringten"
-                      : t.name === "Mattia Piccoli"
-                      ? "Mattia Piccoli, CMO at Nexus Group Holding"
-                      : t.name === "Silvio Holdener"
-                      ? "Silvio Holdener, Senior Business Development Manager at SIX"
-                      : t.name === "Claudia Dietschi"
-                      ? "Claudia Dietschi, Account Executive at ServiceNow"
-                      : t.name}
+                    <span className="font-semibold">{t.name}</span>
+                    {t.name === "Dave Lieber" && (
+                      <span className="font-normal">, Managing Director at TestingTime</span>
+                    )}
+                    {t.name === "Ahmet Sakali" && (
+                      <span className="font-normal">, Senior Account Manager at TestingTime</span>
+                    )}
+                    {t.name === "Lukas Karrer" && (
+                      <span className="font-normal">, CDO at Helion Energy</span>
+                    )}
+                    {t.name === "Marco Lustenberger" && (
+                      <span className="font-normal">, Group CFO at Trekksoft Group</span>
+                    )}
+                    {t.name === "Mario Fäh" && (
+                      <span className="font-normal">, CMO at Roaringten</span>
+                    )}
+                    {t.name === "Mattia Piccoli" && (
+                      <span className="font-normal">, CMO at Nexus Group Holding</span>
+                    )}
+                    {t.name === "Silvio Holdener" && (
+                      <span className="font-normal">, Senior Business Development Manager at SIX</span>
+                    )}
+                    {t.name === "Claudia Dietschi" && (
+                      <span className="font-normal">, Account Executive at ServiceNow</span>
+                    )}
                   </a>
                 </div>
               </div>
