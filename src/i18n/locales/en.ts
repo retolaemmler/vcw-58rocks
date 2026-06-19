@@ -32,6 +32,9 @@ const en = {
       you: "For you",
       company: "For your Team",
     },
+    trustedBy: {
+      title: "Trusted by teams at",
+    },
     masterclass: {
       badge: "Most Popular",
       title: "Public Masterclass",

@@ -13,9 +13,13 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  activeTab: "you" | "company";
+  setActiveTab: (tab: "you" | "company") => void;
+}
+
+const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   const [open, setOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<"you" | "company">("you");
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { lang = "en" } = useParams();
