@@ -75,9 +75,9 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
         </div>
 
         {/* Workshop card */}
-        <div className="w-full max-w-2xl mx-auto text-left">
+        <div className="w-full max-w-3xl mx-auto text-left">
           {activeTab === "you" ? (
-            <div className="relative flex flex-col p-5 rounded-2xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
+            <div className="relative flex flex-col p-6 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
               <div className="mb-6">
                 <h3 className="font-display text-2xl font-bold mb-2">{t("hero.masterclass.title")}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.masterclass.description")}</p>
@@ -123,7 +123,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
               </Button>
             </div>
           ) : (
-            <div className="relative flex flex-col p-5 rounded-2xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
+            <div className="relative flex flex-col p-6 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
               <div className="mb-6">
                 <h3 className="font-display text-2xl font-bold mb-2">{t("hero.company.title")}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.company.description")}</p>
