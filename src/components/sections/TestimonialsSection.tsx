@@ -64,6 +64,8 @@ const testimonials: Testimonial[] = [
     image: "/participants/MarioFaeh.png",
     initials: "MF",
     linkedin: "https://linkedin.com/in/mariofaeh",
+    linkedinPost:
+      "https://www.linkedin.com/posts/mariofaeh_%F0%9D%97%A0%F0%9D%97%BC%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%BC%F0%9D%97%BD%F0%9D%97%B9%F0%9D%97%B2-%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B2-%F0%9D%98%80%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%B9%F0%9D%97%B9-%F0%9D%97%BD%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BB%F0%9D%97%BB%F0%9D%97%B6%F0%9D%97%BB%F0%9D%97%B4-ugcPost-7453172832194228225-ae_u/",
     quote:
       "I went from never touching AI coding to building a custom marketing automation tool in a day. It was surprising to see how Lovable handled the email integrations and customer data so quickly.",
   },
