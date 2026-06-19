@@ -32,7 +32,7 @@ const en = {
       badge: "Most Popular",
       title: "Public Masterclass",
       description: "Join one of the upcoming workshops (6–10 people).",
-      date: "Tue. 30.6.2026",
+      date: "Tue. 30.6.2026 from 9:00 - 17:00",
       dateNote: "Subscribe to newsletter for upcoming dates",
       location: "Novu Campus, Zurich",
       capacity: "6–10 people",
