@@ -10,9 +10,9 @@ interface TrustedBySectionProps {
 
 const logos = [
   { src: raiffeisenLogo.url, alt: "Raiffeisen", height: "h-7 sm:h-8" },
-  { src: trekksoftLogo.url, alt: "TrekkSoft", height: "h-6 sm:h-7" },
-  { src: humaticaLogo.url, alt: "Humatica", height: "h-6 sm:h-7" },
-  { src: startupsLogo.url, alt: "Startups.ch", height: "h-6 sm:h-7" },
+  { src: trekksoftLogo.url, alt: "TrekkSoft", height: "h-7 sm:h-8" },
+  { src: humaticaLogo.url, alt: "Humatica", height: "h-7 sm:h-8" },
+  { src: startupsLogo.url, alt: "Startups.ch", height: "h-7 sm:h-8" },
 ];
 
 const TrustedBySection = ({ isVisible }: TrustedBySectionProps) => {
