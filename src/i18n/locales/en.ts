@@ -50,7 +50,7 @@ const en = {
       description: "A tailored workshop for your team (6–20 people).",
       topic1: "Tailored to your industry & use cases",
       topic2: "On-site or remote, on your preferred dates",
-      topic3: "Each team member ships a real app",
+      topic3: "2-3 coaches, depending on the team size",
       cta: "Get in touch",
     },
     notifyTitle: "Get Notified About Upcoming Workshops",
