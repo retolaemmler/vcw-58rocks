@@ -33,7 +33,7 @@ const de = {
       company: "Für dein Team",
     },
     trustedBy: {
-      title: "Vertraut von Teams bei",
+      title: "Erfahren von Teams bei",
     },
     masterclass: {
       badge: "Am beliebtesten",
