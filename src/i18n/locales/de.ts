@@ -39,7 +39,7 @@ const de = {
       cta: "Ticket sichern",
     },
     company: {
-      title: "Firmen-Workshop",
+      title: "Exklusiver Firmen-Workshop",
       description: "Ein massgeschneiderter Workshop für dein Team (6–20 Personen).",
       cta: "Mehr erfahren",
     },
