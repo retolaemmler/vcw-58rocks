@@ -11,7 +11,7 @@ interface TrustedBySectionProps {
 const logos = [
   { src: raiffeisenLogo.url, alt: "Raiffeisen", height: "h-7 sm:h-8" },
   { src: trekksoftLogo.url, alt: "TrekkSoft", height: "h-7 sm:h-8" },
-  { src: humaticaLogo.url, alt: "Humatica", height: "h-9 sm:h-10" },
+  { src: humaticaLogo.url, alt: "Humatica", height: "h-12 sm:h-14" },
   { src: startupsLogo.url, alt: "Startups.ch", height: "h-7 sm:h-8" },
 ];
 
