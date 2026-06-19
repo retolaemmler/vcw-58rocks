@@ -43,7 +43,7 @@ const industryKeys = [
   { key: "public", icon: Building },
 ];
 
-const AudienceSection = () => {
+const AudienceSection = ({ activeTab }: { activeTab: "you" | "company" }) => {
   const { t } = useTranslation();
   return (
     <section id="audience" className="py-20 px-4 bg-section-alt">
@@ -66,24 +66,28 @@ const AudienceSection = () => {
         <p className="text-muted-foreground text-lg italic mb-10">
           {t("audience.quote")}
         </p>
-        <div className="flex flex-wrap justify-center gap-3 mb-6">
-          {industryKeys.map((industry) => {
-            const Icon = industry.icon;
-            return (
-              <Badge
-                key={industry.key}
-                variant="secondary"
-                className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
-              >
-                <Icon className="w-4 h-4 mr-2 text-primary" />
-                {t(`audience.industries.${industry.key}`)}
-              </Badge>
-            );
-          })}
-        </div>
-        <p className="text-muted-foreground text-lg italic mb-0">
-          {t("audience.industryAgnostic")}
-        </p>
+        {activeTab === "company" && (
+          <>
+            <div className="flex flex-wrap justify-center gap-3 mb-6">
+              {industryKeys.map((industry) => {
+                const Icon = industry.icon;
+                return (
+                  <Badge
+                    key={industry.key}
+                    variant="secondary"
+                    className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
+                  >
+                    <Icon className="w-4 h-4 mr-2 text-primary" />
+                    {t(`audience.industries.${industry.key}`)}
+                  </Badge>
+                );
+              })}
+            </div>
+            <p className="text-muted-foreground text-lg italic mb-0">
+              {t("audience.industryAgnostic")}
+            </p>
+          </>
+        )}
       </div>
     </section>
   );
