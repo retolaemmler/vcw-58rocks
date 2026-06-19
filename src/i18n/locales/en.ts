@@ -141,7 +141,7 @@ const en = {
     roles: {
       valentin: "Product Expert & Consultant",
       reto: "Entrepreneur & UX Expert",
-      remy: "CTO Supertext",
+      remy: "Co-Founder Supertext",
     },
     ambassador: "Official Lovable Ambassador",
   },

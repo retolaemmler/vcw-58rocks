@@ -141,7 +141,7 @@ const de = {
     roles: {
       valentin: "Product-Experte & Berater",
       reto: "Unternehmer & UX-Experte",
-      remy: "CTO Supertext",
+      remy: "Co-Founder Supertext",
     },
     ambassador: "Official Lovable Ambassador",
   },
