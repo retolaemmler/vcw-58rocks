@@ -49,7 +49,7 @@ const de = {
       title: "Team-Workshop",
       description: "Ein massgeschneiderter Workshop für dein Team (6–20 Personen).",
       topic1: "Passend zu deiner Branche & deinen Use Cases",
-      topic2: "Vor Ort oder remote, an deinen Terminen",
+      topic2: "Vor Ort oder remote, an deinen Wunschterminen",
       topic3: "Jedes Teammitglied liefert eine echte App",
       cta: "Kontakt aufnehmen",
     },
