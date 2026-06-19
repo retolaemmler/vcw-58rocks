@@ -29,8 +29,8 @@ const en = {
     descriptionBefore: "A full-day hands-on workshop where you'll go from idea to working web app using ",
     descriptionAfter: " — the platform that turns natural language into functional code. No coding experience required.",
     tabs: {
-      you: "For you",
-      company: "Company",
+      you: "Individual",
+      company: "For your Team",
     },
     masterclass: {
       badge: "Most Popular",
