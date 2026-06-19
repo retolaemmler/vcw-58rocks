@@ -110,7 +110,7 @@ const en = {
     items: {
       senior: "Senior Professionals",
       consultants: "Consultants",
-      marketing: "Marketing Leaders",
+      marketing: "Sales & Marketing Leaders",
       product: "Product Managers",
       design: "UX/UI Designers",
       founders: "CEOs & Founders",
