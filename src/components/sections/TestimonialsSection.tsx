@@ -127,7 +127,7 @@ const TestimonialsSection = () => {
                     className="font-semibold text-foreground hover:text-primary transition-colors leading-tight"
                   >
                     {t.name === "Dave Lieber" 
-                      ? "Dave Lieber, Managing Director at TestingTime AG" 
+                      ? "Dave Lieber, Managing Director at TestingTime" 
                       : t.name === "Ahmet Sakali"
                       ? "Ahmet Sakali, Senior Account Manager at TestingTime AG"
                       : t.name === "Lukas Karrer"
