@@ -15,6 +15,7 @@ import Edition1Participants from "./pages/Edition1Participants";
 import UpdateDates from "./pages/UpdateDates";
 import RaiffeisenSurvey from "./pages/RaiffeisenSurvey";
 import RaiffeisenFeedback from "./pages/RaiffeisenFeedback";
+import MasterclassJune30Survey from "./pages/MasterclassJune30Survey";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -83,6 +84,7 @@ const App = () => (
             <Route path="dates" element={<UpdateDates />} />
             <Route path="raiffeisen-prep" element={<RaiffeisenSurvey />} />
             <Route path="raiffeisen-feedback" element={<RaiffeisenFeedback />} />
+            <Route path="masterclass-june30-prep" element={<MasterclassJune30Survey />} />
             <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
           </Route>
