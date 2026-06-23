@@ -250,9 +250,9 @@ const MasterclassJune30Survey = () => {
           </div>
         ) : (
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="p-4 sm:p-6 sm:pt-6">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-16">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10 sm:space-y-16">
 
                 <div className="space-y-4">
                   <FormField
@@ -403,7 +403,7 @@ const MasterclassJune30Survey = () => {
                     <FormItem>
                       <FormLabel className="text-base">💡 Hast du schon eine App-Idee?</FormLabel>
                       <FormControl>
-                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="yes" id="idea-yes" />
                             <Label htmlFor="idea-yes">Ja, habe ich!</Label>
@@ -451,7 +451,7 @@ const MasterclassJune30Survey = () => {
                         <FormItem>
                           <FormLabel className="text-base">🌍 Für wen ist sie gedacht?</FormLabel>
                           <FormControl>
-                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
+                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="public" id="audience-public" />
                                 <Label htmlFor="audience-public">Öffentlich / Kundinnen & Kunden</Label>
