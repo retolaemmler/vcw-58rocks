@@ -55,21 +55,26 @@ const SurveyAdmin = () => {
     // Load existing token
     const { data: tokens } = await supabase
       .from("survey_tokens")
-      .select("token")
+      .select("id, token")
+      .eq("kind", "prep")
       .limit(1)
       .maybeSingle();
 
+    let tokenId: string | null = null;
     if (tokens) {
       setSurveyLink(`${window.location.origin}/survey?token=${tokens.token}`);
+      tokenId = tokens.id;
     }
 
     // Load responses
-    const { data: resps } = await supabase
-      .from("survey_responses")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (resps) setResponses(resps as SurveyResponse[]);
+    if (tokenId) {
+      const { data: resps } = await supabase
+        .from("survey_responses")
+        .select("*")
+        .eq("token_id", tokenId)
+        .order("created_at", { ascending: false });
+      if (resps) setResponses(resps as SurveyResponse[]);
+    }
 
     // Load order emails for completion tracking
     const { data: orders } = await supabase
