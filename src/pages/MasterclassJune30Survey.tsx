@@ -1,0 +1,612 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ClearableInput } from "@/components/ClearableInput";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Loader2, CheckCircle2, AlertCircle, Sparkles, X } from "lucide-react";
+
+import { useToast } from "@/hooks/use-toast";
+import logo from "@/assets/vcw-logo.png";
+
+const surveySchema = z.object({
+  email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
+  participant_name: z.string().optional(),
+  ai_coding_experience: z.string().optional(),
+  lovable_experience: z.string().optional(),
+  workshop_goals: z.string().optional(),
+  success_criteria: z.string().optional(),
+  has_app_idea: z.enum(["yes", "no"]).optional(),
+  app_idea_description: z.string().optional(),
+  app_audience: z.enum(["public", "internal"]).optional(),
+  building_blocks: z.string().optional(),
+  dietary: z.enum(["none", "vegetarian", "vegan"]).optional(),
+  poke_bowl: z.enum(["chicken", "tuna", "tofu"]).optional(),
+  anything_else: z.string().optional(),
+});
+
+type SurveyFormValues = z.infer<typeof surveySchema>;
+
+const ChipSelect = ({
+  options,
+  selected,
+  onChange,
+  multiple = true,
+}: {
+  options: string[];
+  selected: string[];
+  onChange: (selected: string[]) => void;
+  multiple?: boolean;
+}) => (
+  <div className="flex flex-wrap gap-2">
+    {options.map((opt) => {
+      const isSelected = selected.includes(opt);
+      return (
+        <button
+          key={opt}
+          type="button"
+          onClick={() => {
+            if (multiple) {
+              onChange(isSelected ? selected.filter((s) => s !== opt) : [...selected, opt]);
+            } else {
+              onChange(isSelected ? [] : [opt]);
+            }
+          }}
+          className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
+            isSelected
+              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              : "bg-background text-foreground border-border hover:border-primary/50 hover:bg-primary/5"
+          }`}
+        >
+          {opt}
+        </button>
+      );
+    })}
+  </div>
+);
+
+const AI_EXPERIENCE_OPTIONS = ["Noch nie ausprobiert", "Etwas herumgespielt, nichts Ernstes", "Schon eine App gebaut und veröffentlicht"];
+const LOVABLE_EXPERIENCE_OPTIONS = ["Davon gehört", "Eine Demo gesehen", "Damit herumgespielt", "Etwas Echtes damit gebaut"];
+const GOAL_CHIPS = ["Meine erste App bauen", "Eine Idee schnell prototypen", "Verstehen, was möglich ist", "Mit anderen Buildern netzwerken", "Spass haben 🎉"];
+const SUCCESS_CHIPS = ["Mit einer funktionierenden App nach Hause gehen", "Lovable eigenständig nutzen können", "Eine klare Roadmap für mein Projekt", "Neue Kontakte knüpfen", "Mindset-Shift rund ums Coden"];
+const BUILDING_BLOCK_CHIPS = ["E-Mail", "Zahlungen (z.B. Stripe)", "User-Login", "CRM (z.B. HubSpot)", "Buchhaltung (z.B. Bexio)", "Datenbank / Speicher", "Datei-Uploads", "Karten / Standort", "Kalender", "API-Integrationen", "KI-Features (z.B. OpenAI)"];
+
+const DEFAULT_TOKEN = "june30-masterclass-prep";
+
+const MasterclassJune30Survey = () => {
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token") || DEFAULT_TOKEN;
+  const [tokenId, setTokenId] = useState<string | null>(null);
+  const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
+  const [showForm, setShowForm] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
+  const [goalDetails, setGoalDetails] = useState("");
+  const [selectedSuccess, setSelectedSuccess] = useState<string[]>([]);
+  const [successDetails, setSuccessDetails] = useState("");
+  const [selectedBlocks, setSelectedBlocks] = useState<string[]>([]);
+  const [blockDetails, setBlockDetails] = useState("");
+  const { toast } = useToast();
+
+  const form = useForm<SurveyFormValues>({
+    resolver: zodResolver(surveySchema),
+    defaultValues: {
+      email: "",
+      participant_name: "",
+      ai_coding_experience: "",
+      lovable_experience: "",
+      workshop_goals: "",
+      success_criteria: "",
+      has_app_idea: undefined,
+      app_idea_description: "",
+      app_audience: undefined,
+      building_blocks: "",
+      dietary: undefined,
+      poke_bowl: undefined,
+      anything_else: "",
+    },
+  });
+
+  const hasAppIdea = form.watch("has_app_idea");
+
+  useEffect(() => {
+    if (!token) { setPageState("invalid"); return; }
+    supabase.rpc("validate_survey_token", { _token: token })
+      .then(({ data }) => {
+        const row = Array.isArray(data) ? data[0] : null;
+        if (row && row.kind === "masterclass_june30_prep") { setTokenId(row.id); setPageState("form"); }
+        else setPageState("invalid");
+      });
+  }, [token]);
+
+  useEffect(() => {
+    const chips = selectedGoals.join(", ");
+    form.setValue("workshop_goals", chips && goalDetails ? `${chips}; ${goalDetails}` : chips || goalDetails, { shouldValidate: true });
+  }, [selectedGoals, goalDetails]);
+
+  useEffect(() => {
+    const chips = selectedSuccess.join(", ");
+    form.setValue("success_criteria", chips && successDetails ? `${chips}; ${successDetails}` : chips || successDetails, { shouldValidate: true });
+  }, [selectedSuccess, successDetails]);
+
+  useEffect(() => {
+    const chips = selectedBlocks.join(", ");
+    form.setValue("building_blocks", chips && blockDetails ? `${chips}; ${blockDetails}` : chips || blockDetails, { shouldValidate: true });
+  }, [selectedBlocks, blockDetails]);
+
+  const onSubmit = async (values: SurveyFormValues) => {
+    if (!tokenId) return;
+    setSubmitting(true);
+
+    const { error } = await supabase.from("survey_responses").insert({
+      token_id: tokenId,
+      email: values.email?.trim().toLowerCase() || null,
+      participant_name: values.participant_name?.trim() || null,
+      ai_coding_experience: values.ai_coding_experience || "",
+      lovable_experience: values.lovable_experience || "",
+      workshop_goals: values.workshop_goals || "",
+      success_criteria: values.success_criteria || "",
+      has_app_idea: values.has_app_idea === "yes",
+      app_idea_description: values.app_idea_description?.trim() || null,
+      app_audience: values.has_app_idea === "yes" ? values.app_audience || null : null,
+      building_blocks: values.building_blocks || "",
+      moderation_language: "",
+      drink_preference: "none",
+      dietary: values.dietary || "none",
+      poke_bowl: values.poke_bowl || null,
+      anything_else: values.anything_else || null,
+    });
+
+    if (error) {
+      console.error("Survey submit error:", error);
+      if (error.code === "23505") {
+        toast({ title: "Bereits abgeschickt", description: "Du hast bereits eine Antwort eingereicht. Vielen Dank!", variant: "default" });
+        setPageState("submitted");
+      } else {
+        toast({ title: "Fehler", description: "Übermittlung fehlgeschlagen. Bitte versuche es erneut.", variant: "destructive" });
+      }
+    } else {
+      setPageState("submitted");
+    }
+    setSubmitting(false);
+  };
+
+  if (pageState === "loading") {
+    return <div className="min-h-screen bg-background flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
+  }
+
+  if (pageState === "invalid") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+        <Card className="w-full max-w-md text-center">
+          <CardHeader>
+            <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-2" />
+            <CardTitle>Ungültiger Umfrage-Link</CardTitle>
+            <p className="text-muted-foreground mt-2">Dieser Umfrage-Link ist ungültig oder abgelaufen.</p>
+          </CardHeader>
+        </Card>
+      </div>
+    );
+  }
+
+  if (pageState === "submitted") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+        <Card className="w-full max-w-md text-center">
+          <CardHeader>
+            <CheckCircle2 className="w-12 h-12 text-primary mx-auto mb-2" />
+            <CardTitle className="font-display text-2xl">Alles erledigt! 🎉</CardTitle>
+            <p className="text-muted-foreground mt-2">
+              Vielen Dank, dass du dir die Zeit genommen hast — wir nutzen deine Antworten, um die Masterclass für dich grossartig zu machen. Bis am 30. Juni!
+            </p>
+          </CardHeader>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background py-8 px-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <img src={logo} alt="Vibe Code Workshop" className="h-12 w-12" />
+            <h1 className="font-display text-3xl sm:text-4xl font-bold">Vibe Code Masterclass</h1>
+          </div>
+          <h2 className="font-display text-xl font-semibold">Bereit machen für den 30. Juni 🚀</h2>
+          <p className="text-muted-foreground mt-2">
+            Kurze Vorbereitungs-Umfrage — dauert ca. 3 Minuten. Tippe Antworten an oder schreibe deine eigene.
+          </p>
+        </div>
+
+        {/* Welcome video */}
+        <div className="mb-8 rounded-xl overflow-hidden border border-border">
+          <iframe
+            className="w-full aspect-video"
+            src="https://www.youtube.com/embed/a0y5BMCnjp8"
+            title="Welcome video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+
+        {!showForm ? (
+          <div className="text-center pt-16">
+            <Button
+              size="lg"
+              className="gradient-bg text-white font-semibold text-lg px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              onClick={() => setShowForm(true)}
+            >
+              Umfrage starten (3 Min.)
+            </Button>
+          </div>
+        ) : (
+        <Card>
+          <CardContent className="pt-6">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-16">
+
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>📧 Deine E-Mail (idealerweise dieselbe, mit der du dein Ticket gekauft hast)</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="email" placeholder="deine@email.com" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="ai_coding_experience"
+                  render={({ field }) => {
+                    const chipValue = AI_EXPERIENCE_OPTIONS.find((o) => field.value?.startsWith(o)) || "";
+                    const detailsValue = chipValue && field.value ? field.value.slice(chipValue.length).replace(/^;\s*/, "") : (AI_EXPERIENCE_OPTIONS.includes(field.value || "") ? "" : field.value || "");
+                    return (
+                      <FormItem>
+                        <FormLabel className="text-base">🤖 Hast du vor dieser Masterclass schon einmal eine Website mit KI-Tools gebaut?</FormLabel>
+                        <div className="space-y-3">
+                          <ChipSelect
+                            options={AI_EXPERIENCE_OPTIONS}
+                            selected={chipValue ? [chipValue] : []}
+                            onChange={(sel) => {
+                              const chip = sel[0] || "";
+                              const details = detailsValue;
+                              field.onChange(chip && details ? `${chip}; ${details}` : chip || details);
+                            }}
+                            multiple={false}
+                          />
+                          <FormControl>
+                            <ClearableInput
+                              value={detailsValue}
+                              onChange={(e) => {
+                                const details = (e.target as HTMLInputElement).value;
+                                field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                              }}
+                              onClear={() => field.onChange(chipValue || "")}
+                              placeholder="Füge gerne Details hinzu…"
+                              className="text-sm"
+                            />
+                          </FormControl>
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="lovable_experience"
+                  render={({ field }) => {
+                    const chipValue = LOVABLE_EXPERIENCE_OPTIONS.find((o) => field.value?.startsWith(o)) || "";
+                    const detailsValue = chipValue && field.value ? field.value.slice(chipValue.length).replace(/^;\s*/, "") : (LOVABLE_EXPERIENCE_OPTIONS.includes(field.value || "") ? "" : field.value || "");
+                    return (
+                      <FormItem>
+                        <FormLabel className="text-base">💜 Wie sind deine Erfahrungen mit Lovable.dev?</FormLabel>
+                        <div className="space-y-3">
+                          <ChipSelect
+                            options={LOVABLE_EXPERIENCE_OPTIONS}
+                            selected={chipValue ? [chipValue] : []}
+                            onChange={(sel) => {
+                              const chip = sel[0] || "";
+                              const details = detailsValue;
+                              field.onChange(chip && details ? `${chip}; ${details}` : chip || details);
+                            }}
+                            multiple={false}
+                          />
+                          <FormControl>
+                            <ClearableInput
+                              value={detailsValue}
+                              onChange={(e) => {
+                                const details = (e.target as HTMLInputElement).value;
+                                field.onChange(chipValue && details ? `${chipValue}; ${details}` : chipValue || details);
+                              }}
+                              onClear={() => field.onChange(chipValue || "")}
+                              placeholder="Füge gerne Details hinzu…"
+                              className="text-sm"
+                            />
+                          </FormControl>
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="workshop_goals"
+                  render={() => (
+                    <FormItem>
+                      <FormLabel className="text-base">🎯 Was möchtest du aus dieser Masterclass mitnehmen?</FormLabel>
+                      <p className="text-sm text-muted-foreground">Wähle so viele wie du möchtest — oder ergänze eigene</p>
+                      <div className="space-y-3">
+                        <ChipSelect options={GOAL_CHIPS} selected={selectedGoals} onChange={setSelectedGoals} />
+                        <FormControl>
+                          <ClearableInput
+                            value={goalDetails}
+                            onChange={(e) => setGoalDetails((e.target as HTMLInputElement).value)}
+                            onClear={() => setGoalDetails("")}
+                            placeholder="Etwas anderes…"
+                            className="text-sm"
+                          />
+                        </FormControl>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="success_criteria"
+                  render={() => (
+                    <FormItem>
+                      <FormLabel className="text-base">🏆 Was würde diesen Tag für dich zu einem WIN machen?</FormLabel>
+                      <p className="text-sm text-muted-foreground">Und was wäre eine Enttäuschung?</p>
+                      <div className="space-y-3">
+                        <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
+                        <FormControl>
+                          <ClearableInput
+                            placeholder="Füge gerne Details hinzu…"
+                            className="text-sm"
+                            value={successDetails}
+                            onChange={(e) => setSuccessDetails((e.target as HTMLInputElement).value)}
+                            onClear={() => setSuccessDetails("")}
+                          />
+                        </FormControl>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="has_app_idea"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-base">💡 Hast du schon eine App-Idee?</FormLabel>
+                      <FormControl>
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="yes" id="idea-yes" />
+                            <Label htmlFor="idea-yes">Ja, habe ich!</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="no" id="idea-no" />
+                            <Label htmlFor="idea-no">Noch nicht, ich erkunde noch</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {hasAppIdea === "yes" && (
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="app_idea_description"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-base">📝 Erzähl uns davon! Was soll die App tun?</FormLabel>
+                          <FormControl>
+                          <div className="flex items-start gap-1">
+                            <div className="relative flex-1">
+                              <Textarea {...field} placeholder="Eine grobe Idee genügt — wir helfen dir, sie zu schärfen!" rows={3} className="pr-8" />
+                              {field.value && (
+                                <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
+                                  <X className="w-4 h-4" />
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="app_audience"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-base">🌍 Für wen ist sie gedacht?</FormLabel>
+                          <FormControl>
+                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="public" id="audience-public" />
+                                <Label htmlFor="audience-public">Öffentlich / Kundinnen & Kunden</Label>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="internal" id="audience-internal" />
+                                <Label htmlFor="audience-internal">Intern / Team</Label>
+                              </div>
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </>
+                )}
+
+                {hasAppIdea === "no" && (
+                  <FormField
+                    control={form.control}
+                    name="app_idea_description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <ClearableInput
+                            placeholder="Gibt es Bereiche, in denen du Potenzial siehst, etwas zu bauen oder zu automatisieren?"
+                            className="text-sm"
+                            value={field.value || ""}
+                            onChange={(e) => field.onChange((e.target as HTMLInputElement).value)}
+                            onClear={() => field.onChange("")}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+
+                <FormField
+                  control={form.control}
+                  name="building_blocks"
+                  render={() => (
+                    <FormItem>
+                      <FormLabel className="text-base">🔗 Möchtest du deine Web-App in andere Systeme integrieren?</FormLabel>
+                      <p className="text-sm text-muted-foreground">Tippe alles an, was passt — hilft uns, passende Beispiele vorzubereiten</p>
+                      <div className="space-y-3">
+                        <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
+                        <FormControl>
+                          <ClearableInput
+                            value={blockDetails}
+                            onChange={(e) => setBlockDetails((e.target as HTMLInputElement).value)}
+                            onClear={() => setBlockDetails("")}
+                            placeholder="Etwas anderes…"
+                            className="text-sm"
+                          />
+                        </FormControl>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="dietary"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-base">🥗 Hast du Ernährungspräferenzen?</FormLabel>
+                      <FormControl>
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="none" id="diet-none" />
+                            <Label htmlFor="diet-none">Ich esse alles</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="vegetarian" id="diet-veg" />
+                            <Label htmlFor="diet-veg">🌿 Vegetarisch</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="vegan" id="diet-vegan" />
+                            <Label htmlFor="diet-vegan">🌱 Vegan</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="poke_bowl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-base">🍱 Welche Poke Bowl darf's sein?</FormLabel>
+                      <FormControl>
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-wrap gap-4">
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="chicken" id="poke-chicken" />
+                            <Label htmlFor="poke-chicken">🍗 Chicken</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="tuna" id="poke-tuna" />
+                            <Label htmlFor="poke-tuna">🐟 Tuna</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="tofu" id="poke-tofu" />
+                            <Label htmlFor="poke-tofu">🌱 Tofu</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="anything_else"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-base">💬 Sonst noch etwas, das wir wissen sollten?</FormLabel>
+                      <FormControl>
+                          <div className="flex items-start gap-1">
+                            <div className="relative flex-1">
+                              <Textarea {...field} placeholder="Schreib hier alles weitere…" rows={2} className="pr-8" />
+                              {field.value && (
+                                <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
+                                  <X className="w-4 h-4" />
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" size="lg" className="w-full text-base" disabled={submitting}>
+                  {submitting ? (
+                    <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Wird gesendet…</>
+                  ) : (
+                    <><Sparkles className="w-4 h-4 mr-2" /> Absenden & startklar machen! 🚀</>
+                  )}
+                </Button>
+
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MasterclassJune30Survey;
