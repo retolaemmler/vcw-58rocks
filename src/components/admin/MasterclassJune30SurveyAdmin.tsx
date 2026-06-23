@@ -175,7 +175,6 @@ const MasterclassJune30SurveyAdmin = () => {
                             {r.has_app_idea && r.app_audience && (<div><strong>Audience:</strong> {r.app_audience}</div>)}
                             <div><strong>Building Blocks:</strong> {r.building_blocks || "—"}</div>
                             <div><strong>Poke Bowl:</strong> {r.poke_bowl || "—"}</div>
-                            <div><strong>Dietary:</strong> {r.dietary === "none" ? "—" : r.dietary || "—"}</div>
                             {r.anything_else && <div><strong>Other:</strong> {r.anything_else}</div>}
                           </div>
                         </TableCell>
