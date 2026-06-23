@@ -160,7 +160,7 @@ const MasterclassJune30Survey = () => {
       building_blocks: values.building_blocks || "",
       moderation_language: "",
       drink_preference: "none",
-      
+      dietary: "none",
       poke_bowl: values.poke_bowl || null,
       anything_else: values.anything_else || null,
     });
