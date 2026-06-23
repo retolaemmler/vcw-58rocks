@@ -469,27 +469,6 @@ const MasterclassJune30Survey = () => {
                   </>
                 )}
 
-                {hasAppIdea === "no" && (
-                  <FormField
-                    control={form.control}
-                    name="app_idea_description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <ClearableInput
-                            placeholder="Gibt es Bereiche, in denen du Potenzial siehst, etwas zu bauen oder zu automatisieren?"
-                            className="text-sm"
-                            value={field.value || ""}
-                            onChange={(e) => field.onChange((e.target as HTMLInputElement).value)}
-                            onClear={() => field.onChange("")}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                )}
-
                 <FormField
                   control={form.control}
                   name="building_blocks"
