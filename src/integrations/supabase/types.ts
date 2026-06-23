@@ -213,6 +213,7 @@ export type Database = {
           lovable_experience: string
           moderation_language: string | null
           participant_name: string | null
+          poke_bowl: string | null
           success_criteria: string
           token_id: string
           workshop_goals: string
@@ -233,6 +234,7 @@ export type Database = {
           lovable_experience: string
           moderation_language?: string | null
           participant_name?: string | null
+          poke_bowl?: string | null
           success_criteria: string
           token_id: string
           workshop_goals: string
@@ -253,6 +255,7 @@ export type Database = {
           lovable_experience?: string
           moderation_language?: string | null
           participant_name?: string | null
+          poke_bowl?: string | null
           success_criteria?: string
           token_id?: string
           workshop_goals?: string

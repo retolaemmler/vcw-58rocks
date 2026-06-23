@@ -1,0 +1,2 @@
+ALTER TABLE public.survey_responses ADD COLUMN IF NOT EXISTS poke_bowl text;
+INSERT INTO public.survey_tokens (token, kind) VALUES ('june30-masterclass-prep', 'masterclass_june30_prep') ON CONFLICT (token) DO NOTHING;
