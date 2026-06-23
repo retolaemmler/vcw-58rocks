@@ -51,7 +51,7 @@ const MasterclassJune30SurveyAdmin = () => {
 
     let tokenId: string | null = null;
     if (tokenRow) {
-      setSurveyLink(`${window.location.origin}${SURVEY_PATH}?token=${tokenRow.token}`);
+      setSurveyLink(`${window.location.origin}${SURVEY_PATH}`);
       tokenId = tokenRow.id;
     }
 
