@@ -28,7 +28,7 @@ const surveySchema = z.object({
   app_idea_description: z.string().optional(),
   app_audience: z.enum(["public", "internal"]).optional(),
   building_blocks: z.string().optional(),
-  dietary: z.enum(["none", "vegetarian", "vegan"]).optional(),
+  
   poke_bowl: z.enum(["chicken", "tuna", "tofu"]).optional(),
   anything_else: z.string().optional(),
 });
@@ -109,7 +109,7 @@ const MasterclassJune30Survey = () => {
       app_idea_description: "",
       app_audience: undefined,
       building_blocks: "",
-      dietary: undefined,
+      
       poke_bowl: undefined,
       anything_else: "",
     },
@@ -160,7 +160,7 @@ const MasterclassJune30Survey = () => {
       building_blocks: values.building_blocks || "",
       moderation_language: "",
       drink_preference: "none",
-      dietary: values.dietary || "none",
+      
       poke_bowl: values.poke_bowl || null,
       anything_else: values.anything_else || null,
     });
@@ -516,33 +516,6 @@ const MasterclassJune30Survey = () => {
 
                 <FormField
                   control={form.control}
-                  name="dietary"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base">🥗 Hast du Ernährungspräferenzen?</FormLabel>
-                      <FormControl>
-                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="none" id="diet-none" />
-                            <Label htmlFor="diet-none">Ich esse alles</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="vegetarian" id="diet-veg" />
-                            <Label htmlFor="diet-veg">🌿 Vegetarisch</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="vegan" id="diet-vegan" />
-                            <Label htmlFor="diet-vegan">🌱 Vegan</Label>
-                          </div>
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
                   name="poke_bowl"
                   render={({ field }) => (
                     <FormItem>
@@ -551,15 +524,15 @@ const MasterclassJune30Survey = () => {
                         <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-wrap gap-4">
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="chicken" id="poke-chicken" />
-                            <Label htmlFor="poke-chicken">🍗 Chicken</Label>
+                            <Label htmlFor="poke-chicken">Chicken</Label>
                           </div>
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="tuna" id="poke-tuna" />
-                            <Label htmlFor="poke-tuna">🐟 Tuna</Label>
+                            <Label htmlFor="poke-tuna">Tuna</Label>
                           </div>
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="tofu" id="poke-tofu" />
-                            <Label htmlFor="poke-tofu">🌱 Tofu</Label>
+                            <Label htmlFor="poke-tofu">Tofu</Label>
                           </div>
                         </RadioGroup>
                       </FormControl>
