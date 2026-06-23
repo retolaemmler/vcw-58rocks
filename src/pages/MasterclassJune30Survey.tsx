@@ -260,7 +260,7 @@ const MasterclassJune30Survey = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>📧 Deine E-Mail (idealerweise dieselbe, mit der du dein Ticket gekauft hast)</FormLabel>
+                        <FormLabel>👤 Teilnehmer:in — deine E-Mail (idealerweise dieselbe, mit der du dein Ticket gekauft hast)</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" placeholder="deine@email.com" />
                         </FormControl>
