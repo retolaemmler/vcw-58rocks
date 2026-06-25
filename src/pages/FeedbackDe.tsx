@@ -17,22 +17,22 @@ import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
 
 const feedbackSchema = z.object({
-  email: z.string().trim().email({ message: "Please enter a valid email address" }),
+  email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
   participant_name: z.string().optional(),
-  nps_score: z.number({ required_error: "Please select a score" }).min(0).max(10),
-  overall_rating: z.number({ required_error: "Please rate the workshop" }).min(1).max(5),
-  rating_intro: z.number({ required_error: "Please rate this section" }).min(1).max(5),
-  rating_workshop_session_1: z.number({ required_error: "Please rate this section" }).min(1).max(5),
-  rating_lunch: z.number({ required_error: "Please rate this section" }).min(1).max(5),
-  rating_next_level: z.number({ required_error: "Please rate this section" }).min(1).max(5),
-  rating_workshop_session_2: z.number({ required_error: "Please rate this section" }).min(1).max(5),
-  rating_presentations: z.number({ required_error: "Please rate this section" }).min(1).max(5),
-  rating_future: z.number({ required_error: "Please rate this section" }).min(1).max(5),
-  rating_qa_beer: z.number({ required_error: "Please rate this section" }).min(1).max(5),
+  nps_score: z.number({ required_error: "Bitte wähle einen Wert" }).min(0).max(10),
+  overall_rating: z.number({ required_error: "Bitte bewerte den Workshop" }).min(1).max(5),
+  rating_intro: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
+  rating_workshop_session_1: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
+  rating_lunch: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
+  rating_next_level: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
+  rating_workshop_session_2: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
+  rating_presentations: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
+  rating_future: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
+  rating_qa_beer: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
   best_part: z.string().optional(),
   improve_part: z.string().optional(),
   app_built_description: z.string().optional(),
-  will_continue_building: z.enum(["yes", "maybe", "no"], { required_error: "Please choose an option" }),
+  will_continue_building: z.enum(["yes", "maybe", "no"], { required_error: "Bitte wähle eine Option" }),
   recommend_to_others: z.enum(["yes", "maybe", "no"]).optional(),
   testimonial: z.string().optional(),
   allow_testimonial_public: z.boolean().optional(),
@@ -63,7 +63,7 @@ const StarRating = ({
               ? "bg-primary text-primary-foreground border-primary shadow-sm"
               : "bg-background text-foreground border-border hover:border-primary/50 hover:bg-primary/5"
           }`}
-          aria-label={`${n} star${n > 1 ? "s" : ""}`}
+          aria-label={`${n} Stern${n > 1 ? "e" : ""}`}
         >
           {n}
         </button>
@@ -101,19 +101,19 @@ const NpsRating = ({
 );
 
 const AGENDA_SECTIONS: { key: keyof FeedbackFormValues; label: string }[] = [
-  { key: "rating_intro", label: "👋 Welcome & Intro" },
-  { key: "rating_workshop_session_1", label: "🛠️ Workshop Session #1" },
-  { key: "rating_lunch", label: "🍕 Lunch Break" },
+  { key: "rating_intro", label: "👋 Begrüssung & Intro" },
+  { key: "rating_workshop_session_1", label: "🛠️ Workshop-Session #1" },
+  { key: "rating_lunch", label: "🍕 Mittagspause" },
   { key: "rating_next_level", label: "🚀 Next Level Vibe Coding" },
-  { key: "rating_workshop_session_2", label: "🛠️ Workshop Session #2" },
-  { key: "rating_presentations", label: "🎤 Presentations & Feedback" },
-  { key: "rating_future", label: "🔮 Future of Vibe Coding" },
-  { key: "rating_qa_beer", label: "🍺 Q&A + Beer" },
+  { key: "rating_workshop_session_2", label: "🛠️ Workshop-Session #2" },
+  { key: "rating_presentations", label: "🎤 Präsentationen & Feedback" },
+  { key: "rating_future", label: "🔮 Zukunft von Vibe Coding" },
+  { key: "rating_qa_beer", label: "🍺 Q&A + Bier" },
 ];
 
-const Feedback = () => {
+const FeedbackDe = () => {
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token") || "feedback-default-2748de83f3cd4235b6e3c4469bda0d80";
+  const token = searchParams.get("token") || "feedback-de-default-bcce08cf945e4353818161f52ad62e31";
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
   const [showForm, setShowForm] = useState(false);
@@ -135,15 +135,15 @@ const Feedback = () => {
       form.setValue("testimonial", testimonial, { shouldDirty: true, shouldValidate: true });
       if (!email) {
         toast({
-          title: "Generic testimonial generated",
-          description: "Add your email above to personalize it based on your project.",
+          title: "Allgemeines Testimonial erstellt",
+          description: "Füge oben deine E-Mail hinzu, damit wir es auf dein Projekt zuschneiden können.",
         });
       }
     } catch (err) {
       console.error("Generate testimonial error:", err);
       toast({
-        title: "Couldn't generate testimonial",
-        description: err instanceof Error ? err.message : "Please try again.",
+        title: "Testimonial konnte nicht erstellt werden",
+        description: err instanceof Error ? err.message : "Bitte versuche es erneut.",
         variant: "destructive",
       });
     } finally {
@@ -200,7 +200,7 @@ const Feedback = () => {
 
     if (error) {
       console.error("Feedback submit error:", error);
-      toast({ title: "Error", description: "Failed to submit. Please try again.", variant: "destructive" });
+      toast({ title: "Fehler", description: "Senden fehlgeschlagen. Bitte versuche es erneut.", variant: "destructive" });
     } else {
       setPageState("submitted");
     }
@@ -217,8 +217,8 @@ const Feedback = () => {
         <Card className="w-full max-w-md text-center">
           <CardHeader>
             <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-2" />
-            <CardTitle>Invalid Feedback Link</CardTitle>
-            <p className="text-muted-foreground mt-2">This feedback link is invalid or has expired.</p>
+            <CardTitle>Ungültiger Feedback-Link</CardTitle>
+            <p className="text-muted-foreground mt-2">Dieser Feedback-Link ist ungültig oder abgelaufen.</p>
           </CardHeader>
         </Card>
       </div>
@@ -231,9 +231,9 @@ const Feedback = () => {
         <Card className="w-full max-w-md text-center">
           <CardHeader>
             <CheckCircle2 className="w-12 h-12 text-primary mx-auto mb-2" />
-            <CardTitle className="font-display text-2xl">Thank you! 🙌</CardTitle>
+            <CardTitle className="font-display text-2xl">Vielen Dank! 🙌</CardTitle>
             <p className="text-muted-foreground mt-2">
-              Your feedback helps us make the next Vibe Code Workshop even better. You're a star ⭐
+              Dein Feedback hilft uns, den nächsten Vibe Code Workshop noch besser zu machen. Du bist ein Star ⭐
             </p>
           </CardHeader>
         </Card>
@@ -249,9 +249,9 @@ const Feedback = () => {
             <img src={logo} alt="Vibe Code Workshop" className="h-12 w-12" />
             <h1 className="font-display text-3xl sm:text-4xl font-bold">Vibe Code Workshop</h1>
           </div>
-          <h2 className="font-display text-xl font-semibold">How was your day? 💬</h2>
+          <h2 className="font-display text-xl font-semibold">Wie war dein Tag? 💬</h2>
           <p className="text-muted-foreground mt-2">
-            Quick post-workshop feedback — takes about 3 minutes. Your honest input shapes the next edition.
+            Kurzes Feedback nach dem Workshop — dauert ca. 3 Minuten. Dein ehrliches Feedback prägt die nächste Ausgabe.
           </p>
         </div>
 
@@ -262,7 +262,7 @@ const Feedback = () => {
               className="gradient-bg text-white font-semibold text-lg px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
               onClick={() => setShowForm(true)}
             >
-              Start Feedback (3 min)
+              Feedback starten (3 Min.)
             </Button>
           </div>
         ) : (
@@ -278,9 +278,9 @@ const Feedback = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>📧 Your Email (same as your ticket)</FormLabel>
+                          <FormLabel>📧 Deine E-Mail (gleich wie auf deinem Ticket)</FormLabel>
                           <FormControl>
-                            <Input {...field} type="email" placeholder="your@email.com" />
+                            <Input {...field} type="email" placeholder="deine@email.com" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -294,8 +294,8 @@ const Feedback = () => {
                     name="overall_rating"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">⭐ Overall, how would you rate the workshop?</FormLabel>
-                        <p className="text-sm text-muted-foreground">1 = poor, 5 = amazing</p>
+                        <FormLabel className="text-base">⭐ Wie würdest du den Workshop insgesamt bewerten?</FormLabel>
+                        <p className="text-sm text-muted-foreground">1 = schlecht, 5 = grossartig</p>
                         <FormControl>
                           <StarRating value={field.value} onChange={field.onChange} />
                         </FormControl>
@@ -310,8 +310,8 @@ const Feedback = () => {
                     name="nps_score"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">🤝 How likely are you to recommend this workshop to a friend or colleague?</FormLabel>
-                        <p className="text-sm text-muted-foreground">0 = not at all, 10 = absolutely</p>
+                        <FormLabel className="text-base">🤝 Wie wahrscheinlich würdest du diesen Workshop einem/einer Freund:in oder Kolleg:in empfehlen?</FormLabel>
+                        <p className="text-sm text-muted-foreground">0 = gar nicht, 10 = absolut</p>
                         <FormControl>
                           <NpsRating value={field.value} onChange={field.onChange} />
                         </FormControl>
@@ -323,8 +323,8 @@ const Feedback = () => {
                   {/* Per-section ratings */}
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-display font-semibold text-base">📅 How did each part land?</h3>
-                      <p className="text-sm text-muted-foreground">Rate each session from 1 (poor) to 5 (amazing).</p>
+                      <h3 className="font-display font-semibold text-base">📅 Wie hat dir jeder Teil gefallen?</h3>
+                      <p className="text-sm text-muted-foreground">Bewerte jede Session von 1 (schlecht) bis 5 (grossartig).</p>
                     </div>
                     {AGENDA_SECTIONS.map(({ key, label }) => (
                       <FormField
@@ -353,10 +353,10 @@ const Feedback = () => {
                     name="best_part"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">💎 What was your highlight of the day?</FormLabel>
+                        <FormLabel className="text-base">💎 Was war dein Highlight des Tages?</FormLabel>
                         <FormControl>
                           <div className="relative flex-1">
-                            <Textarea {...field} placeholder="The moment, session or insight that stood out…" rows={3} className="pr-8" />
+                            <Textarea {...field} placeholder="Der Moment, die Session oder der Aha-Effekt, der herausragte…" rows={3} className="pr-8" />
                             {field.value && (
                               <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
                                 <X className="w-4 h-4" />
@@ -375,10 +375,10 @@ const Feedback = () => {
                     name="improve_part"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">🛠️ What would you change or improve?</FormLabel>
+                        <FormLabel className="text-base">🛠️ Was würdest du ändern oder verbessern?</FormLabel>
                         <FormControl>
                           <div className="relative flex-1">
-                            <Textarea {...field} placeholder="Be honest — we want to make the next one even better." rows={3} className="pr-8" />
+                            <Textarea {...field} placeholder="Sei ehrlich — wir wollen den nächsten noch besser machen." rows={3} className="pr-8" />
                             {field.value && (
                               <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
                                 <X className="w-4 h-4" />
@@ -397,20 +397,20 @@ const Feedback = () => {
                     name="will_continue_building"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">🔧 Will you keep building your app after the workshop?</FormLabel>
+                        <FormLabel className="text-base">🔧 Wirst du nach dem Workshop weiter an deiner App bauen?</FormLabel>
                         <FormControl>
                           <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-wrap gap-4">
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="yes" id="continue-yes" />
-                              <Label htmlFor="continue-yes">Yes, definitely</Label>
+                              <Label htmlFor="continue-yes">Ja, auf jeden Fall</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="maybe" id="continue-maybe" />
-                              <Label htmlFor="continue-maybe">Maybe</Label>
+                              <Label htmlFor="continue-maybe">Vielleicht</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="no" id="continue-no" />
-                              <Label htmlFor="continue-no">Probably not</Label>
+                              <Label htmlFor="continue-no">Eher nicht</Label>
                             </div>
                           </RadioGroup>
                         </FormControl>
@@ -425,10 +425,10 @@ const Feedback = () => {
                     name="testimonial"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">💬 A short testimonial in your own words we can use online?</FormLabel>
+                        <FormLabel className="text-base">💬 Ein kurzes Testimonial in deinen eigenen Worten, das wir online verwenden dürfen?</FormLabel>
                         <FormControl>
                           <div className="relative flex-1">
-                            <Textarea {...field} placeholder="“The workshop helped me…”" rows={3} className="pr-8" />
+                            <Textarea {...field} placeholder="„Der Workshop hat mir geholfen…“" rows={3} className="pr-8" />
                             {field.value && (
                               <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
                                 <X className="w-4 h-4" />
@@ -445,11 +445,11 @@ const Feedback = () => {
                           className="mt-2"
                         >
                           {generatingTestimonial ? (
-                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Generating…</>
+                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Wird erstellt…</>
                           ) : field.value ? (
-                            <><RefreshCw className="w-4 h-4 mr-2" /> Regenerate testimonial</>
+                            <><RefreshCw className="w-4 h-4 mr-2" /> Testimonial neu erstellen</>
                           ) : (
-                            <><Wand2 className="w-4 h-4 mr-2" /> Generate testimonial</>
+                            <><Wand2 className="w-4 h-4 mr-2" /> Testimonial erstellen</>
                           )}
                         </Button>
                         <FormMessage />
@@ -463,10 +463,10 @@ const Feedback = () => {
                     name="anything_else"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">✨ Anything else you want to share?</FormLabel>
+                        <FormLabel className="text-base">✨ Möchtest du sonst noch etwas teilen?</FormLabel>
                         <FormControl>
                           <div className="relative flex-1">
-                            <Textarea {...field} placeholder="Add anything else…" rows={2} className="pr-8" />
+                            <Textarea {...field} placeholder="Ergänze, was dir noch wichtig ist…" rows={2} className="pr-8" />
                             {field.value && (
                               <button type="button" tabIndex={-1} onClick={() => field.onChange("")} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors">
                                 <X className="w-4 h-4" />
@@ -481,9 +481,9 @@ const Feedback = () => {
 
                   <Button type="submit" size="lg" className="w-full text-base" disabled={submitting}>
                     {submitting ? (
-                      <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Submitting…</>
+                      <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Wird gesendet…</>
                     ) : (
-                      <><Sparkles className="w-4 h-4 mr-2" /> Send Feedback 🙌</>
+                      <><Sparkles className="w-4 h-4 mr-2" /> Feedback senden 🙌</>
                     )}
                   </Button>
                 </form>
@@ -496,4 +496,4 @@ const Feedback = () => {
   );
 };
 
-export default Feedback;
+export default FeedbackDe;
