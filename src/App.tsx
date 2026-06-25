@@ -10,6 +10,8 @@ import Confirmation from "./pages/Confirmation";
 import Admin from "./pages/Admin";
 import Survey from "./pages/Survey";
 import Feedback from "./pages/Feedback";
+import FeedbackDe from "./pages/FeedbackDe";
+import Edition2Slides from "./pages/Edition2Slides";
 import IdeaGenerator from "./pages/IdeaGenerator";
 import Edition1Participants from "./pages/Edition1Participants";
 import UpdateDates from "./pages/UpdateDates";
@@ -22,6 +24,11 @@ const queryClient = new QueryClient();
 
 const SUPPORTED_LANGS = ["en", "de"] as const;
 type Lang = (typeof SUPPORTED_LANGS)[number];
+
+const FeedbackByLang = () => {
+  const { lang } = useParams<{ lang: string }>();
+  return lang === "de" ? <FeedbackDe /> : <Feedback />;
+};
 
 const LangLayout = () => {
   const { lang } = useParams<{ lang: string }>();
@@ -77,10 +84,11 @@ const App = () => (
             <Route path="admin" element={<Admin />} />
             <Route path="survey" element={<Survey />} />
             <Route path="prepsurvey" element={<Survey />} />
-            <Route path="feedback" element={<Feedback />} />
-            <Route path="postsurvey" element={<Feedback />} />
+            <Route path="feedback" element={<FeedbackByLang />} />
+            <Route path="postsurvey" element={<FeedbackByLang />} />
             <Route path="ideas" element={<IdeaGenerator />} />
             <Route path="edition1/participants" element={<Edition1Participants />} />
+            <Route path="edition2/slides" element={<Edition2Slides />} />
             <Route path="dates" element={<UpdateDates />} />
             <Route path="raiffeisen-prep" element={<RaiffeisenSurvey />} />
             <Route path="raiffeisen-feedback" element={<RaiffeisenFeedback />} />

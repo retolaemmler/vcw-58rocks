@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
 import FeedbackAdmin from "@/components/admin/FeedbackAdmin";
+import FeedbackDeAdmin from "@/components/admin/FeedbackDeAdmin";
 import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
 import RaiffeisenSurveyAdmin from "@/components/admin/RaiffeisenSurveyAdmin";
 import RaiffeisenFeedbackAdmin from "@/components/admin/RaiffeisenFeedbackAdmin";
@@ -317,6 +318,7 @@ const Admin = () => {
               <TabsList>
                 <TabsTrigger value="prep">Prep Survey</TabsTrigger>
                 <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
+                <TabsTrigger value="feedback-de">Post-Workshop Feedback (DE)</TabsTrigger>
                 <TabsTrigger value="raiffeisen-dashboard">Raiffeisen Dashboard</TabsTrigger>
                 <TabsTrigger value="raiffeisen">Raiffeisen Prep</TabsTrigger>
                 <TabsTrigger value="raiffeisen-feedback">Raiffeisen Feedback</TabsTrigger>
@@ -339,6 +341,9 @@ const Admin = () => {
               </TabsContent>
               <TabsContent value="feedback">
                 <FeedbackAdmin />
+              </TabsContent>
+              <TabsContent value="feedback-de">
+                <FeedbackDeAdmin />
               </TabsContent>
             </Tabs>
           </TabsContent>
