@@ -140,24 +140,36 @@ const FeedbackAdmin = () => {
 
   return (
     <div className="space-y-6">
-      {/* Link */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Link2 className="w-5 h-5" /> Feedback Link
-          </CardTitle>
-        </CardHeader>
-        {feedbackLink && (
-          <CardContent>
-            <div className="flex items-center gap-2">
-              <code className="flex-1 bg-muted p-3 rounded text-sm break-all">{feedbackLink}</code>
-              <Button variant="outline" size="icon" onClick={copyLink}>
-                {copied ? <ClipboardCheck className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-              </Button>
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <Card className="w-full sm:w-auto">
+          <CardHeader className="py-3 px-4">
+            <div className="flex items-center gap-2 text-sm font-medium">
+              <Filter className="w-4 h-4" /> Filter by Edition
             </div>
+          </CardHeader>
+          <CardContent className="py-0 px-4 pb-3">
+            <Select value={editionFilter} onValueChange={setEditionFilter}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="All Editions" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Editions</SelectItem>
+                <SelectItem value="edition1">Edition 1</SelectItem>
+                <SelectItem value="edition2">Edition 2</SelectItem>
+              </SelectContent>
+            </Select>
           </CardContent>
+        </Card>
+
+        {feedbackLink && (
+          <div className="flex items-center gap-2 bg-muted p-2 rounded-lg text-xs">
+            <code className="text-muted-foreground">{feedbackLink}</code>
+            <Button variant="ghost" size="icon" className="h-6 w-6" onClick={copyLink}>
+              {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+            </Button>
+          </div>
         )}
-      </Card>
+      </div>
 
       {/* Summary cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -167,7 +179,7 @@ const FeedbackAdmin = () => {
             <MessageSquare className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold font-display">{responses.length}</p>
+            <p className="text-3xl font-bold font-display">{filteredResponses.length}</p>
           </CardContent>
         </Card>
         <Card>
