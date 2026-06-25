@@ -109,12 +109,22 @@ const FeedbackAdmin = () => {
     }
   };
 
+  // Filter
+  const edition1TokenId = tokens.find(t => t.kind === "feedback")?.id;
+  const edition2TokenId = tokens.find(t => t.kind === "feedback_de")?.id;
+
+  const filteredResponses = responses.filter((r) => {
+    if (editionFilter === "edition1") return (r as any).token_id === edition1TokenId;
+    if (editionFilter === "edition2") return (r as any).token_id === edition2TokenId;
+    return true;
+  });
+
   // Aggregates
-  const avgOverall = avg(responses.map((r) => r.overall_rating));
-  const avgNps = avg(responses.map((r) => r.nps_score));
-  const promoters = responses.filter((r) => (r.nps_score ?? -1) >= 9).length;
-  const detractors = responses.filter((r) => (r.nps_score ?? -1) >= 0 && (r.nps_score ?? 11) <= 6).length;
-  const npsResponses = responses.filter((r) => typeof r.nps_score === "number").length;
+  const avgOverall = avg(filteredResponses.map((r) => r.overall_rating));
+  const avgNps = avg(filteredResponses.map((r) => r.nps_score));
+  const promoters = filteredResponses.filter((r) => (r.nps_score ?? -1) >= 9).length;
+  const detractors = filteredResponses.filter((r) => (r.nps_score ?? -1) >= 0 && (r.nps_score ?? 11) <= 6).length;
+  const npsResponses = filteredResponses.filter((r) => typeof r.nps_score === "number").length;
   const npsValue = npsResponses > 0
     ? Math.round(((promoters - detractors) / npsResponses) * 100)
     : null;
