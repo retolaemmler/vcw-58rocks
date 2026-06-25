@@ -40,13 +40,13 @@ type Participant = {
 };
 
 const participants: Participant[] = [
-  { name: "Andreas Kropf", company: "Finalix AG", initials: "AK", image: p19.url, linkedin: "https://www.linkedin.com/in/andreaskropf" },
+  { name: "Andreas Kropf", company: "Finalix AG", initials: "AK", image: p23.url, linkedin: "https://www.linkedin.com/in/andreaskropf" },
   { name: "Klaus Enke", initials: "KE", image: p20.url, linkedin: "https://www.linkedin.com/in/klaus-enke" },
   { name: "Nicole Steiner", company: "Netcetera", initials: "NS", image: p21.url, linkedin: "https://www.linkedin.com/in/nicolesteinerch" },
-  { name: "Simon Husi", company: "Startups.ch AG", initials: "SH", image: p22.url, linkedin: "https://www.linkedin.com/in/simon-husi-926842321/" },
-  { name: "Tobias Bangerter", company: "Tobis 2nd Opinion", initials: "TB", image: p23.url, linkedin: "https://www.linkedin.com/in/tobias-bangerter-6909a239/" },
+  { name: "Simon Husi", company: "Startups.ch AG", initials: "SH", image: p25.url, linkedin: "https://www.linkedin.com/in/simon-husi-926842321/" },
+  { name: "Tobias Bangerter", company: "Tobis 2nd Opinion", initials: "TB", image: p19.url, linkedin: "https://www.linkedin.com/in/tobias-bangerter-6909a239/" },
   { name: "Michel Schoch", company: "Zugerberg Finanz AG", initials: "MS", image: p24.url, linkedin: "https://www.linkedin.com/in/michel-schoch" },
-  { name: "Felix Huber", company: "OST – Ostschweizer Fachhochschule", initials: "FH", image: p25.url, linkedin: "https://www.linkedin.com/in/felix-huber-73200018" },
+  { name: "Felix Huber", company: "OST – Ostschweizer Fachhochschule", initials: "FH", image: p22.url, linkedin: "https://www.linkedin.com/in/felix-huber-73200018" },
 ];
 
 const Edition2Participants = () => {
