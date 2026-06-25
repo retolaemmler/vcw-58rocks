@@ -4,6 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
+import p19 from "@/assets/edition2/p19.png.asset.json";
+import p20 from "@/assets/edition2/p20.png.asset.json";
+import p21 from "@/assets/edition2/p21.png.asset.json";
+import p22 from "@/assets/edition2/p22.png.asset.json";
+import p23 from "@/assets/edition2/p23.png.asset.json";
+import p24 from "@/assets/edition2/p24.png.asset.json";
+import p25 from "@/assets/edition2/p25.png.asset.json";
 
 const coaches = [
   {
@@ -33,13 +40,13 @@ type Participant = {
 };
 
 const participants: Participant[] = [
-  { name: "Andreas Kropf", company: "Finalix AG", initials: "AK" },
-  { name: "Klaus Enke", initials: "KE" },
-  { name: "Nicole Steiner", company: "Netcetera", initials: "NS" },
-  { name: "Simon Husi", company: "Startups.ch AG", initials: "SH" },
-  { name: "Tobias Bangerter", company: "Tobis 2nd Opinion", initials: "TB" },
-  { name: "Michel Schoch", company: "Zugerberg Finanz AG", initials: "MS" },
-  { name: "Felix Huber", company: "OST – Ostschweizer Fachhochschule", initials: "FH" },
+  { name: "Andreas Kropf", company: "Finalix AG", initials: "AK", image: p19.url, linkedin: "https://www.linkedin.com/in/andreaskropf" },
+  { name: "Klaus Enke", initials: "KE", image: p20.url, linkedin: "https://www.linkedin.com/in/klaus-enke" },
+  { name: "Nicole Steiner", company: "Netcetera", initials: "NS", image: p21.url, linkedin: "https://www.linkedin.com/in/nicolesteinerch" },
+  { name: "Simon Husi", company: "Startups.ch AG", initials: "SH", image: p22.url },
+  { name: "Tobias Bangerter", company: "Tobis 2nd Opinion", initials: "TB", image: p23.url },
+  { name: "Michel Schoch", company: "Zugerberg Finanz AG", initials: "MS", image: p24.url, linkedin: "https://www.linkedin.com/in/michel-schoch" },
+  { name: "Felix Huber", company: "OST – Ostschweizer Fachhochschule", initials: "FH", image: p25.url, linkedin: "https://www.linkedin.com/in/felix-huber-73200018" },
 ];
 
 const Edition2Participants = () => {
