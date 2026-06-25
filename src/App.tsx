@@ -11,6 +11,7 @@ import Admin from "./pages/Admin";
 import Survey from "./pages/Survey";
 import Feedback from "./pages/Feedback";
 import FeedbackDe from "./pages/FeedbackDe";
+import Edition2Slides from "./pages/Edition2Slides";
 import IdeaGenerator from "./pages/IdeaGenerator";
 import Edition1Participants from "./pages/Edition1Participants";
 import UpdateDates from "./pages/UpdateDates";
@@ -87,6 +88,7 @@ const App = () => (
             <Route path="postsurvey" element={<FeedbackByLang />} />
             <Route path="ideas" element={<IdeaGenerator />} />
             <Route path="edition1/participants" element={<Edition1Participants />} />
+            <Route path="edition2/slides" element={<Edition2Slides />} />
             <Route path="dates" element={<UpdateDates />} />
             <Route path="raiffeisen-prep" element={<RaiffeisenSurvey />} />
             <Route path="raiffeisen-feedback" element={<RaiffeisenFeedback />} />
