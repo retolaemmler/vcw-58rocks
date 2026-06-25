@@ -319,7 +319,6 @@ const Admin = () => {
                 <TabsTrigger value="prep">Edition 1 Survey</TabsTrigger>
                 <TabsTrigger value="masterclass-june30">Edition 2 Survey</TabsTrigger>
                 <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
-                <TabsTrigger value="raiffeisen-dashboard">Raiffeisen Dashboard</TabsTrigger>
                 <TabsTrigger value="raiffeisen">Raiffeisen Prep</TabsTrigger>
                 <TabsTrigger value="raiffeisen-feedback">Raiffeisen Feedback</TabsTrigger>
               </TabsList>
@@ -328,9 +327,6 @@ const Admin = () => {
               </TabsContent>
               <TabsContent value="masterclass-june30">
                 <MasterclassJune30SurveyAdmin />
-              </TabsContent>
-              <TabsContent value="raiffeisen-dashboard">
-                <RaiffeisenDashboard />
               </TabsContent>
               <TabsContent value="raiffeisen">
                 <RaiffeisenSurveyAdmin />
