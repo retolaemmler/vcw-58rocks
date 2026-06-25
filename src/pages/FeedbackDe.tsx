@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2, CheckCircle2, AlertCircle, Sparkles, X, Wand2, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
+import FeedbackLangToggle from "@/components/FeedbackLangToggle";
 
 const feedbackSchema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
@@ -244,6 +245,7 @@ const FeedbackDe = () => {
   return (
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-2xl mx-auto">
+        <FeedbackLangToggle />
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <img src={logo} alt="Vibe Code Workshop" className="h-12 w-12" />
