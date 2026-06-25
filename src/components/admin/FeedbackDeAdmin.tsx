@@ -50,7 +50,10 @@ const avg = (vals: (number | null)[]) => {
   return filtered.reduce((a, b) => a + b, 0) / filtered.length;
 };
 
-const FeedbackAdmin = () => {
+const KIND = "feedback_de";
+const SURVEY_PATH = "/de/feedback";
+
+const FeedbackDeAdmin = () => {
   const [feedbackLink, setFeedbackLink] = useState<string | null>(null);
   const [responses, setResponses] = useState<FeedbackResponse[]>([]);
   const [loading, setLoading] = useState(true);
@@ -67,21 +70,25 @@ const FeedbackAdmin = () => {
 
     const { data: tokens } = await supabase
       .from("survey_tokens")
-      .select("token")
-      .eq("kind", "feedback")
+      .select("id, token")
+      .eq("kind", KIND)
       .limit(1)
       .maybeSingle();
 
+    let tokenId: string | null = null;
     if (tokens) {
-      setFeedbackLink(`${window.location.origin}/feedback?token=${tokens.token}`);
+      setFeedbackLink(`${window.location.origin}${SURVEY_PATH}?token=${tokens.token}`);
+      tokenId = tokens.id;
     }
 
-    const { data: resps } = await supabase
-      .from("feedback_responses")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (resps) setResponses(resps as FeedbackResponse[]);
+    if (tokenId) {
+      const { data: resps } = await supabase
+        .from("feedback_responses")
+        .select("*")
+        .eq("token_id", tokenId)
+        .order("created_at", { ascending: false });
+      if (resps) setResponses(resps as FeedbackResponse[]);
+    }
     setLoading(false);
   };
 
@@ -211,7 +218,7 @@ const FeedbackAdmin = () => {
             variant="outline"
             size="sm"
             disabled={!responses.length}
-            onClick={() => exportToXlsx(responses, "feedback", "Feedback")}
+            onClick={() => exportToXlsx(responses, "feedback-de", "Feedback (DE)")}
           >
             <Download className="w-4 h-4 mr-1" /> Export XLSX
           </Button>
@@ -324,4 +331,4 @@ const FeedbackAdmin = () => {
   );
 };
 
-export default FeedbackAdmin;
+export default FeedbackDeAdmin;

@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
 import FeedbackAdmin from "@/components/admin/FeedbackAdmin";
+import FeedbackDeAdmin from "@/components/admin/FeedbackDeAdmin";
 import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
 import RaiffeisenSurveyAdmin from "@/components/admin/RaiffeisenSurveyAdmin";
 import RaiffeisenFeedbackAdmin from "@/components/admin/RaiffeisenFeedbackAdmin";
