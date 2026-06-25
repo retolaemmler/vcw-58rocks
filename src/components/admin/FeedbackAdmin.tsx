@@ -217,7 +217,7 @@ const FeedbackAdmin = () => {
         <CardContent>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {SECTION_RATINGS.map((s) => {
-              const a = avg(responses.map((r) => r[s.key] as number | null));
+              const a = avg(filteredResponses.map((r) => r[s.key] as number | null));
               return (
                 <div key={s.key} className="bg-muted/50 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">{s.label}</p>
