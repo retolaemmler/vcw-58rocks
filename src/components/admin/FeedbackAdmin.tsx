@@ -117,7 +117,8 @@ const FeedbackAdmin = () => {
   const filteredResponses = responses.filter((r) => {
     if (editionFilter === "edition1") return r.token_id === edition1TokenId;
     if (editionFilter === "edition2") return r.token_id === edition2TokenId;
-    return true;
+    // "all" excludes Raiffeisen — only show Edition 1 + Edition 2
+    return r.token_id === edition1TokenId || r.token_id === edition2TokenId;
   });
 
   // Aggregates
