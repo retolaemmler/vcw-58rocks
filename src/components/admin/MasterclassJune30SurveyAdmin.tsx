@@ -121,7 +121,7 @@ const MasterclassJune30SurveyAdmin = () => {
             variant="outline"
             size="sm"
             disabled={!responses.length}
-            onClick={() => exportToXlsx(responses, "masterclass-june30-prep", "June 30 Prep")}
+            onClick={() => exportToXlsx(responses, "edition2-survey", "Edition 2 Survey")}
           >
             <Download className="w-4 h-4 mr-1" /> Export XLSX
           </Button>
