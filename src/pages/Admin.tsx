@@ -319,7 +319,7 @@ const Admin = () => {
                 <TabsTrigger value="prep">Edition 1 Prep Survey</TabsTrigger>
                 <TabsTrigger value="masterclass-june30">Edition 2 Prep Survey</TabsTrigger>
                 <TabsTrigger value="feedback">Masterclass Feedback</TabsTrigger>
-                <TabsTrigger value="raiffeisen">Raiffeisen Prep</TabsTrigger>
+                <TabsTrigger value="raiffeisen">Raiffeisen Prep Survey</TabsTrigger>
                 <TabsTrigger value="raiffeisen-feedback">Raiffeisen Feedback</TabsTrigger>
               </TabsList>
               <TabsContent value="prep">
