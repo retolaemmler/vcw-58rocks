@@ -54,9 +54,11 @@ const avg = (vals: (number | null)[]) => {
 const FeedbackAdmin = () => {
   const [feedbackLink, setFeedbackLink] = useState<string | null>(null);
   const [responses, setResponses] = useState<FeedbackResponse[]>([]);
+  const [tokens, setTokens] = useState<{ id: string, kind: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [editionFilter, setEditionFilter] = useState<string>("all");
   const { toast } = useToast();
 
   useEffect(() => {
