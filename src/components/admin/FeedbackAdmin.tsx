@@ -235,12 +235,12 @@ const FeedbackAdmin = () => {
       {/* Table */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Feedback Responses</CardTitle>
+          <CardTitle>Masterclass Feedback</CardTitle>
           <Button
             variant="outline"
             size="sm"
             disabled={!filteredResponses.length}
-            onClick={() => exportToXlsx(filteredResponses, "feedback", "Feedback")}
+            onClick={() => exportToXlsx(filteredResponses, "masterclass-feedback", "Masterclass Feedback")}
           >
             <Download className="w-4 h-4 mr-1" /> Export XLSX
           </Button>
