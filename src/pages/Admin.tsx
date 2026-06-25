@@ -317,7 +317,7 @@ const Admin = () => {
             <Tabs value={surveyTab} onValueChange={setSurveyTab} className="space-y-4">
               <TabsList>
                 <TabsTrigger value="prep">Edition 1 Prep Survey</TabsTrigger>
-                <TabsTrigger value="masterclass-june30">Edition 2 Survey</TabsTrigger>
+                <TabsTrigger value="masterclass-june30">Edition 2 Prep Survey</TabsTrigger>
                 <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
                 <TabsTrigger value="raiffeisen">Raiffeisen Prep</TabsTrigger>
                 <TabsTrigger value="raiffeisen-feedback">Raiffeisen Feedback</TabsTrigger>
