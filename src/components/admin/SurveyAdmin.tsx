@@ -249,7 +249,7 @@ const SurveyAdmin = () => {
             variant="outline"
             size="sm"
             disabled={!responses.length}
-            onClick={() => exportToXlsx(responses, "prep-survey", "Prep Survey")}
+            onClick={() => exportToXlsx(responses, "edition1-survey", "Edition 1 Survey")}
           >
             <Download className="w-4 h-4 mr-1" /> Export XLSX
           </Button>

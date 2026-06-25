@@ -316,22 +316,17 @@ const Admin = () => {
           <TabsContent value="survey">
             <Tabs value={surveyTab} onValueChange={setSurveyTab} className="space-y-4">
               <TabsList>
-                <TabsTrigger value="prep">Prep Survey</TabsTrigger>
+                <TabsTrigger value="prep">Edition 1 Survey</TabsTrigger>
+                <TabsTrigger value="masterclass-june30">Edition 2 Survey</TabsTrigger>
                 <TabsTrigger value="feedback">Post-Workshop Feedback</TabsTrigger>
-                <TabsTrigger value="feedback-de">Post-Workshop Feedback (DE)</TabsTrigger>
-                <TabsTrigger value="raiffeisen-dashboard">Raiffeisen Dashboard</TabsTrigger>
                 <TabsTrigger value="raiffeisen">Raiffeisen Prep</TabsTrigger>
                 <TabsTrigger value="raiffeisen-feedback">Raiffeisen Feedback</TabsTrigger>
-                <TabsTrigger value="masterclass-june30">Masterclass June 30</TabsTrigger>
               </TabsList>
               <TabsContent value="prep">
                 <SurveyAdmin />
               </TabsContent>
               <TabsContent value="masterclass-june30">
                 <MasterclassJune30SurveyAdmin />
-              </TabsContent>
-              <TabsContent value="raiffeisen-dashboard">
-                <RaiffeisenDashboard />
               </TabsContent>
               <TabsContent value="raiffeisen">
                 <RaiffeisenSurveyAdmin />
@@ -341,9 +336,6 @@ const Admin = () => {
               </TabsContent>
               <TabsContent value="feedback">
                 <FeedbackAdmin />
-              </TabsContent>
-              <TabsContent value="feedback-de">
-                <FeedbackDeAdmin />
               </TabsContent>
             </Tabs>
           </TabsContent>

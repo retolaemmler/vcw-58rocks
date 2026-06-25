@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Link2, Copy, ClipboardCheck, MessageSquare, Trash2, Star, Download } from "lucide-react";
+import { Loader2, Link2, Copy, ClipboardCheck, MessageSquare, Trash2, Star, Download, Filter } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { exportToXlsx } from "@/lib/exportXlsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface FeedbackResponse {
   id: string;
@@ -30,6 +31,7 @@ interface FeedbackResponse {
   testimonial: string | null;
   allow_testimonial_public: boolean | null;
   anything_else: string | null;
+  token_id: string;
   created_at: string;
 }
 
@@ -53,9 +55,11 @@ const avg = (vals: (number | null)[]) => {
 const FeedbackAdmin = () => {
   const [feedbackLink, setFeedbackLink] = useState<string | null>(null);
   const [responses, setResponses] = useState<FeedbackResponse[]>([]);
+  const [tokens, setTokens] = useState<{ id: string, kind: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [editionFilter, setEditionFilter] = useState<string>("all");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -65,15 +69,17 @@ const FeedbackAdmin = () => {
   const loadData = async () => {
     setLoading(true);
 
-    const { data: tokens } = await supabase
+    const { data: tokensData } = await supabase
       .from("survey_tokens")
-      .select("token")
-      .eq("kind", "feedback")
-      .limit(1)
-      .maybeSingle();
+      .select("id, token, kind")
+      .in("kind", ["feedback", "feedback_de"]);
 
-    if (tokens) {
-      setFeedbackLink(`${window.location.origin}/feedback?token=${tokens.token}`);
+    if (tokensData) {
+      setTokens(tokensData);
+      const mainToken = tokensData.find(t => t.kind === "feedback");
+      if (mainToken) {
+        setFeedbackLink(`${window.location.origin}/feedback?token=${mainToken.token}`);
+      }
     }
 
     const { data: resps } = await supabase
@@ -104,12 +110,22 @@ const FeedbackAdmin = () => {
     }
   };
 
+  // Filter
+  const edition1TokenId = tokens.find(t => t.kind === "feedback")?.id;
+  const edition2TokenId = tokens.find(t => t.kind === "feedback_de")?.id;
+
+  const filteredResponses = responses.filter((r) => {
+    if (editionFilter === "edition1") return r.token_id === edition1TokenId;
+    if (editionFilter === "edition2") return r.token_id === edition2TokenId;
+    return true;
+  });
+
   // Aggregates
-  const avgOverall = avg(responses.map((r) => r.overall_rating));
-  const avgNps = avg(responses.map((r) => r.nps_score));
-  const promoters = responses.filter((r) => (r.nps_score ?? -1) >= 9).length;
-  const detractors = responses.filter((r) => (r.nps_score ?? -1) >= 0 && (r.nps_score ?? 11) <= 6).length;
-  const npsResponses = responses.filter((r) => typeof r.nps_score === "number").length;
+  const avgOverall = avg(filteredResponses.map((r) => r.overall_rating));
+  const avgNps = avg(filteredResponses.map((r) => r.nps_score));
+  const promoters = filteredResponses.filter((r) => (r.nps_score ?? -1) >= 9).length;
+  const detractors = filteredResponses.filter((r) => (r.nps_score ?? -1) >= 0 && (r.nps_score ?? 11) <= 6).length;
+  const npsResponses = filteredResponses.filter((r) => typeof r.nps_score === "number").length;
   const npsValue = npsResponses > 0
     ? Math.round(((promoters - detractors) / npsResponses) * 100)
     : null;
@@ -124,24 +140,36 @@ const FeedbackAdmin = () => {
 
   return (
     <div className="space-y-6">
-      {/* Link */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Link2 className="w-5 h-5" /> Feedback Link
-          </CardTitle>
-        </CardHeader>
-        {feedbackLink && (
-          <CardContent>
-            <div className="flex items-center gap-2">
-              <code className="flex-1 bg-muted p-3 rounded text-sm break-all">{feedbackLink}</code>
-              <Button variant="outline" size="icon" onClick={copyLink}>
-                {copied ? <ClipboardCheck className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-              </Button>
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <Card className="w-full sm:w-auto">
+          <CardHeader className="py-3 px-4">
+            <div className="flex items-center gap-2 text-sm font-medium">
+              <Filter className="w-4 h-4" /> Filter by Edition
             </div>
+          </CardHeader>
+          <CardContent className="py-0 px-4 pb-3">
+            <Select value={editionFilter} onValueChange={setEditionFilter}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="All Editions" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Editions</SelectItem>
+                <SelectItem value="edition1">Edition 1</SelectItem>
+                <SelectItem value="edition2">Edition 2</SelectItem>
+              </SelectContent>
+            </Select>
           </CardContent>
+        </Card>
+
+        {feedbackLink && (
+          <div className="flex items-center gap-2 bg-muted p-2 rounded-lg text-xs">
+            <code className="text-muted-foreground">{feedbackLink}</code>
+            <Button variant="ghost" size="icon" className="h-6 w-6" onClick={copyLink}>
+              {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+            </Button>
+          </div>
         )}
-      </Card>
+      </div>
 
       {/* Summary cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -151,7 +179,7 @@ const FeedbackAdmin = () => {
             <MessageSquare className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold font-display">{responses.length}</p>
+            <p className="text-3xl font-bold font-display">{filteredResponses.length}</p>
           </CardContent>
         </Card>
         <Card>
@@ -189,7 +217,7 @@ const FeedbackAdmin = () => {
         <CardContent>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {SECTION_RATINGS.map((s) => {
-              const a = avg(responses.map((r) => r[s.key] as number | null));
+              const a = avg(filteredResponses.map((r) => r[s.key] as number | null));
               return (
                 <div key={s.key} className="bg-muted/50 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">{s.label}</p>
@@ -210,8 +238,8 @@ const FeedbackAdmin = () => {
           <Button
             variant="outline"
             size="sm"
-            disabled={!responses.length}
-            onClick={() => exportToXlsx(responses, "feedback", "Feedback")}
+            disabled={!filteredResponses.length}
+            onClick={() => exportToXlsx(filteredResponses, "feedback", "Feedback")}
           >
             <Download className="w-4 h-4 mr-1" /> Export XLSX
           </Button>
@@ -231,7 +259,7 @@ const FeedbackAdmin = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {responses.map((r) => (
+                {filteredResponses.map((r) => (
                   <>
                     <TableRow key={r.id} className="cursor-pointer" onClick={() => setExpandedRow(expandedRow === r.id ? null : r.id)}>
                       <TableCell className="whitespace-nowrap text-sm">
@@ -308,7 +336,7 @@ const FeedbackAdmin = () => {
                     )}
                   </>
                 ))}
-                {responses.length === 0 && (
+                {filteredResponses.length === 0 && (
                   <TableRow>
                     <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                       No feedback yet.

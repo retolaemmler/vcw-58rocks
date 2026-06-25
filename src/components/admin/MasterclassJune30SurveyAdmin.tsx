@@ -99,7 +99,7 @@ const MasterclassJune30SurveyAdmin = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            <Link2 className="w-5 h-5" /> June 30 Masterclass Prep Link
+            <Link2 className="w-5 h-5" /> Edition 2 Survey Link
           </CardTitle>
         </CardHeader>
         {surveyLink && (
@@ -121,7 +121,7 @@ const MasterclassJune30SurveyAdmin = () => {
             variant="outline"
             size="sm"
             disabled={!responses.length}
-            onClick={() => exportToXlsx(responses, "masterclass-june30-prep", "June 30 Prep")}
+            onClick={() => exportToXlsx(responses, "edition2-survey", "Edition 2 Survey")}
           >
             <Download className="w-4 h-4 mr-1" /> Export XLSX
           </Button>
