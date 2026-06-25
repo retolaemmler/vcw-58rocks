@@ -336,7 +336,7 @@ const FeedbackAdmin = () => {
                     )}
                   </>
                 ))}
-                {responses.length === 0 && (
+                {filteredResponses.length === 0 && (
                   <TableRow>
                     <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                       No feedback yet.
