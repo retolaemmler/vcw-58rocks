@@ -31,6 +31,7 @@ interface FeedbackResponse {
   testimonial: string | null;
   allow_testimonial_public: boolean | null;
   anything_else: string | null;
+  token_id: string;
   created_at: string;
 }
 
