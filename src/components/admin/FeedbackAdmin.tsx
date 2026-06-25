@@ -115,8 +115,8 @@ const FeedbackAdmin = () => {
   const edition2TokenId = tokens.find(t => t.kind === "feedback_de")?.id;
 
   const filteredResponses = responses.filter((r) => {
-    if (editionFilter === "edition1") return (r as any).token_id === edition1TokenId;
-    if (editionFilter === "edition2") return (r as any).token_id === edition2TokenId;
+    if (editionFilter === "edition1") return r.token_id === edition1TokenId;
+    if (editionFilter === "edition2") return r.token_id === edition2TokenId;
     return true;
   });
 
