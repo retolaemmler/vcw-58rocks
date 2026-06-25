@@ -259,7 +259,7 @@ const FeedbackAdmin = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {responses.map((r) => (
+                {filteredResponses.map((r) => (
                   <>
                     <TableRow key={r.id} className="cursor-pointer" onClick={() => setExpandedRow(expandedRow === r.id ? null : r.id)}>
                       <TableCell className="whitespace-nowrap text-sm">
