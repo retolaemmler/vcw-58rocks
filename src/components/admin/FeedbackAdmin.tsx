@@ -68,15 +68,17 @@ const FeedbackAdmin = () => {
   const loadData = async () => {
     setLoading(true);
 
-    const { data: tokens } = await supabase
+    const { data: tokensData } = await supabase
       .from("survey_tokens")
-      .select("token")
-      .eq("kind", "feedback")
-      .limit(1)
-      .maybeSingle();
+      .select("id, token, kind")
+      .in("kind", ["feedback", "feedback_de"]);
 
-    if (tokens) {
-      setFeedbackLink(`${window.location.origin}/feedback?token=${tokens.token}`);
+    if (tokensData) {
+      setTokens(tokensData);
+      const mainToken = tokensData.find(t => t.kind === "feedback");
+      if (mainToken) {
+        setFeedbackLink(`${window.location.origin}/feedback?token=${mainToken.token}`);
+      }
     }
 
     const { data: resps } = await supabase
