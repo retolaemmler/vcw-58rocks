@@ -238,8 +238,8 @@ const FeedbackAdmin = () => {
           <Button
             variant="outline"
             size="sm"
-            disabled={!responses.length}
-            onClick={() => exportToXlsx(responses, "feedback", "Feedback")}
+            disabled={!filteredResponses.length}
+            onClick={() => exportToXlsx(filteredResponses, "feedback", "Feedback")}
           >
             <Download className="w-4 h-4 mr-1" /> Export XLSX
           </Button>
