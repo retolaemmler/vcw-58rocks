@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Link2, Copy, ClipboardCheck, Trash2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { exportToXlsx } from "@/lib/exportXlsx";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Cell } from "recharts";
 
 interface SurveyResponse {
   id: string;
@@ -94,6 +96,53 @@ const MasterclassJune30SurveyAdmin = () => {
     );
   }
 
+  const countBy = (fn: (r: SurveyResponse) => string | null | undefined) => {
+    const map = new Map<string, number>();
+    for (const r of responses) {
+      const v = (fn(r) || "—").toString().trim() || "—";
+      map.set(v, (map.get(v) || 0) + 1);
+    }
+    return Array.from(map, ([name, value]) => ({ name, value }));
+  };
+
+  const aiData = countBy((r) => r.ai_coding_experience);
+  const lovableData = countBy((r) => r.lovable_experience);
+  const ideaData = countBy((r) => (r.has_app_idea ? "Yes" : "No"));
+  const pokeData = countBy((r) => r.poke_bowl);
+  const blockData = (() => {
+    const map = new Map<string, number>();
+    for (const r of responses) {
+      const raw = (r.building_blocks || "").split(/[,;]/).map((s) => s.trim()).filter(Boolean);
+      for (const v of raw) map.set(v, (map.get(v) || 0) + 1);
+    }
+    return Array.from(map, ([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
+  })();
+
+  const palette = ["hsl(var(--primary))", "hsl(var(--accent))", "hsl(var(--secondary))", "hsl(var(--muted-foreground))", "hsl(var(--destructive))", "hsl(var(--ring))"];
+
+  const ChartCard = ({ title, data }: { title: string; data: { name: string; value: number }[] }) => (
+    <Card>
+      <CardHeader><CardTitle className="text-base">{title}</CardTitle></CardHeader>
+      <CardContent>
+        {data.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No data</p>
+        ) : (
+          <ChartContainer config={{ value: { label: "Responses", color: "hsl(var(--primary))" } }} className="h-[240px] w-full">
+            <BarChart data={data} layout="vertical" margin={{ left: 8, right: 16 }}>
+              <CartesianGrid horizontal={false} strokeDasharray="3 3" />
+              <XAxis type="number" allowDecimals={false} />
+              <YAxis type="category" dataKey="name" width={160} tick={{ fontSize: 12 }} />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+                {data.map((_, i) => <Cell key={i} fill={palette[i % palette.length]} />)}
+              </Bar>
+            </BarChart>
+          </ChartContainer>
+        )}
+      </CardContent>
+    </Card>
+  );
+
   return (
     <div className="space-y-6">
       <Card>
@@ -113,6 +162,16 @@ const MasterclassJune30SurveyAdmin = () => {
           </CardContent>
         )}
       </Card>
+
+      {responses.length > 0 && (
+        <div className="grid gap-4 md:grid-cols-2">
+          <ChartCard title="AI Coding Experience" data={aiData} />
+          <ChartCard title="Lovable Experience" data={lovableData} />
+          <ChartCard title="Has App Idea" data={ideaData} />
+          <ChartCard title="Poke Bowl Preference" data={pokeData} />
+          <div className="md:col-span-2"><ChartCard title="Building Blocks" data={blockData} /></div>
+        </div>
+      )}
 
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
