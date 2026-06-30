@@ -110,15 +110,22 @@ const FeedbackAdmin = () => {
     }
   };
 
-  // Filter
+  // Filter — Edition 1 and Edition 2 both submit via the shared feedback/feedback_de
+  // tokens; split them by date (Edition 2 = masterclass on 2026-06-30).
   const edition1TokenId = tokens.find(t => t.kind === "feedback")?.id;
-  const edition2TokenId = tokens.find(t => t.kind === "feedback_de")?.id;
+  const edition2DeTokenId = tokens.find(t => t.kind === "feedback_de")?.id;
+  const EDITION2_CUTOFF = new Date("2026-06-01T00:00:00Z").getTime();
+
+  const isMasterclassResp = (r: FeedbackResponse) =>
+    r.token_id === edition1TokenId || r.token_id === edition2DeTokenId;
+  const isEdition2 = (r: FeedbackResponse) =>
+    isMasterclassResp(r) && new Date(r.created_at).getTime() >= EDITION2_CUTOFF;
 
   const filteredResponses = responses.filter((r) => {
-    if (editionFilter === "edition1") return r.token_id === edition1TokenId;
-    if (editionFilter === "edition2") return r.token_id === edition2TokenId;
-    // "all" excludes Raiffeisen — only show Edition 1 + Edition 2
-    return r.token_id === edition1TokenId || r.token_id === edition2TokenId;
+    if (!isMasterclassResp(r)) return false;
+    if (editionFilter === "edition1") return !isEdition2(r);
+    if (editionFilter === "edition2") return isEdition2(r);
+    return true;
   });
 
   // Aggregates
