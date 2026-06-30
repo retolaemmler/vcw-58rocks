@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Link2, Copy, ClipboardCheck, Trash2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { exportToXlsx } from "@/lib/exportXlsx";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 interface SurveyResponse {
   id: string;
@@ -95,45 +94,6 @@ const MasterclassJune30SurveyAdmin = () => {
     );
   }
 
-  const countBy = (key: keyof SurveyResponse) => {
-    const counts: Record<string, number> = {};
-    responses.forEach((r) => {
-      const v = (r[key] ?? "—") as string;
-      const k = String(v || "—").trim() || "—";
-      counts[k] = (counts[k] || 0) + 1;
-    });
-    return Object.entries(counts)
-      .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value);
-  };
-
-  const aiData = countBy("ai_coding_experience");
-  const lovableData = countBy("lovable_experience");
-  const pokeData = countBy("poke_bowl");
-  const ideaData = [
-    { name: "Yes", value: responses.filter((r) => r.has_app_idea).length },
-    { name: "No", value: responses.filter((r) => !r.has_app_idea).length },
-  ];
-  const COLORS = ["hsl(var(--primary))", "hsl(var(--accent))", "hsl(var(--secondary))", "hsl(var(--muted-foreground))", "hsl(var(--destructive))"];
-
-  const ChartCard = ({ title, data }: { title: string; data: { name: string; value: number }[] }) => (
-    <Card>
-      <CardHeader><CardTitle className="text-base">{title}</CardTitle></CardHeader>
-      <CardContent>
-        <ResponsiveContainer width="100%" height={220}>
-          <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 8 }}>
-            <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} />
-            <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
-            <Tooltip />
-            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-              {data.map((_, i) => (<Cell key={i} fill={COLORS[i % COLORS.length]} />))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </CardContent>
-    </Card>
-  );
-
   return (
     <div className="space-y-6">
       <Card>
@@ -153,15 +113,6 @@ const MasterclassJune30SurveyAdmin = () => {
           </CardContent>
         )}
       </Card>
-
-      {responses.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ChartCard title="AI Coding Experience" data={aiData} />
-          <ChartCard title="Lovable Experience" data={lovableData} />
-          <ChartCard title="Has App Idea" data={ideaData} />
-          <ChartCard title="Poke Bowl" data={pokeData} />
-        </div>
-      )}
 
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
