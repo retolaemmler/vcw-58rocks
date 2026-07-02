@@ -38,10 +38,10 @@ const en = {
     masterclass: {
       badge: "Most Popular",
       title: "Masterclass",
-      description: "Join one of the upcoming workshops (6–10 people).",
-      date: "Tue. 30.6.2026 from 9:00 - 17:00",
+      description: "Join an intimate evening session (6–10 people). Includes a pizza break and free Lovable credits.",
+      date: "Tue. 30.6.2026 from 17:00 - 21:00",
       dateNote: "Subscribe to newsletter for upcoming dates",
-      location: "Novu Campus, Zurich",
+      location: "Zurich (location tbd)",
       capacity: "6–10 people",
       cta: "Get your Ticket",
     },

@@ -38,10 +38,10 @@ const de = {
     masterclass: {
       badge: "Am beliebtesten",
       title: "Masterclass",
-      description: "Nimm an einem der kommenden Workshops teil (6–10 Personen).",
-      date: "Di. 30.6.2026 von 9:00 - 17:00 Uhr",
+      description: "Nimm an einer kompakten Abend-Session teil (6–10 Personen). Inklusive Pizzapause und gratis Lovable-Credits.",
+      date: "Di. 30.6.2026 von 17:00 - 21:00 Uhr",
       dateNote: "Newsletter für kommende Termine abonnieren",
-      location: "Novu Campus, Zürich",
+      location: "Zürich (Ort tbd)",
       capacity: "6–10 Personen",
       cta: "Ticket sichern",
     },
