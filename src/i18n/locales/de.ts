@@ -80,6 +80,8 @@ const de = {
     titlePost: " in Kürze",
     morning: "",
     afternoon: "",
+    teamMorning: "☀️ Vormittag",
+    teamAfternoon: "🌙 Nachmittag",
     items: {
       welcome: { title: "Willkommen & Intro", description: "Kickoff, Vorstellung und Überblick über den Abend." },
       session1: { title: "Workshop-Session", description: "Hands-on App-Building in kleinen Teams mit Expert:innen-Support." },
@@ -89,6 +91,16 @@ const de = {
       presentations: { title: "Pizza & Präsentationen", description: "Pizza, Präsentationen deiner Apps und Feedback bis 21:00 Uhr." },
       future: { title: "Die Zukunft von Vibe Coding", description: "Wohin entwickelt sich KI-gestütztes Coding als Nächstes?" },
       qa: { title: "Q&A + 🍺 Bier", description: "Offene Diskussion, Networking und ein wohlverdientes Bier." },
+      team: {
+        welcome: { title: "Willkommen & Intro", description: "Kickoff, Vorstellung und Überblick über den Tag." },
+        session1: { title: "Workshop-Session #1", description: "Hands-on App-Building in kleinen Teams mit Expert:innen-Support." },
+        lunch: { title: "🍕 Mittagspause", description: "Aufladen bei Pizza und Austausch mit anderen Teilnehmenden." },
+        nextLevel: { title: "Next Level Vibe Coding", description: "APIs, Backend-Integration und fortgeschrittene Techniken." },
+        session2: { title: "Workshop-Session #2", description: "Weiterbauen — bring deine App aufs nächste Level." },
+        presentations: { title: "Präsentationen & Feedback", description: "Präsentiere deine App, lerne von anderen Teams und erhalte Feedback." },
+        future: { title: "Die Zukunft von Vibe Coding", description: "Wohin entwickelt sich KI-gestütztes Coding als Nächstes?" },
+        qa: { title: "Q&A + 🍺 Bier", description: "Offene Diskussion, Networking und ein wohlverdientes Bier." },
+      },
     },
   },
   audience: {

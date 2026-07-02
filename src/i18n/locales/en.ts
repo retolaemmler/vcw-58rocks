@@ -80,6 +80,8 @@ const en = {
     titlePost: " in a Nutshell",
     morning: "🌙 Evening",
     afternoon: "🌙 Wrap-up",
+    teamMorning: "☀️ Morning",
+    teamAfternoon: "🌙 Afternoon",
     items: {
       welcome: { title: "Welcome & Intro", description: "Kickoff, introductions, and overview of the evening ahead." },
       session1: { title: "Workshop Session", description: "Hands-on app building in small teams with expert guidance." },
@@ -89,6 +91,16 @@ const en = {
       presentations: { title: "Pizza & Presentation", description: "Enjoy pizza, present your apps, and get feedback until 21:00." },
       future: { title: "Future of Vibe Coding", description: "Where is AI-assisted development heading next?" },
       qa: { title: "Q&A + 🍺 Beer", description: "Open discussion, networking, and a well-deserved drink." },
+      team: {
+        welcome: { title: "Welcome & Intro", description: "Kickoff, introductions, and overview of the day ahead." },
+        session1: { title: "Workshop Session #1", description: "Hands-on app building in small teams with expert guidance." },
+        lunch: { title: "🍕 Lunch Break", description: "Recharge with pizza and connect with fellow participants." },
+        nextLevel: { title: "Next Level Vibe Coding", description: "APIs, backend integration, and advanced techniques." },
+        session2: { title: "Workshop Session #2", description: "Continue building — push your app to the next level." },
+        presentations: { title: "Presentations & Feedback", description: "Present your apps, learn from other teams, and get feedback." },
+        future: { title: "Future of Vibe Coding", description: "Where is AI-assisted development heading next?" },
+        qa: { title: "Q&A + 🍺 Beer", description: "Open discussion, networking, and a well-deserved drink." },
+      },
     },
   },
   audience: {

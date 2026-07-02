@@ -1,9 +1,23 @@
 import { useTranslation } from "react-i18next";
 
-const agendaKeys = [
+const eveningKeys = [
   { time: "17:00", key: "welcome" },
   { time: "17:30", key: "session1" },
   { time: "20:00", key: "presentations" },
+];
+
+const fullDayMorningKeys = [
+  { time: "09:00", key: "team.welcome" },
+  { time: "10:00", key: "team.session1" },
+  { time: "12:00", key: "team.lunch" },
+];
+
+const fullDayAfternoonKeys = [
+  { time: "13:00", key: "team.nextLevel" },
+  { time: "13:30", key: "team.session2" },
+  { time: "15:30", key: "team.presentations" },
+  { time: "16:15", key: "team.future" },
+  { time: "16:30", key: "team.qa" },
 ];
 
 interface AgendaItemProps {
@@ -28,32 +42,75 @@ const AgendaItem = ({ time, title, description, isLast }: AgendaItemProps) => (
   </div>
 );
 
-const AgendaSection = () => {
+interface AgendaSectionProps {
+  activeTab?: "you" | "company";
+}
+
+const AgendaSection = ({ activeTab = "you" }: AgendaSectionProps) => {
   const { t } = useTranslation();
+  const isCompany = activeTab === "company";
+
   return (
     <section id="agenda" className="py-20 px-4 bg-background">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-14">
           {t("agenda.titlePre")}<span className="gradient-text">{t("agenda.titleHighlight")}</span>{t("agenda.titlePost")}
         </h2>
-        <div className="max-w-2xl mx-auto">
-          {t("agenda.morning") && (
-            <h3 className="font-display font-bold text-xl mb-6 text-center">
-              {t("agenda.morning")}
-            </h3>
-          )}
-          <div>
-            {agendaKeys.map((item, i) => (
-              <AgendaItem
-                key={item.time}
-                time={item.time}
-                title={t(`agenda.items.${item.key}.title`)}
-                description={t(`agenda.items.${item.key}.description`)}
-                isLast={i === agendaKeys.length - 1}
-              />
-            ))}
+        {isCompany ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <div>
+              <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
+                {t("agenda.teamMorning")}
+              </h3>
+              <div>
+                {fullDayMorningKeys.map((item, i) => (
+                  <AgendaItem
+                    key={item.time}
+                    time={item.time}
+                    title={t(`agenda.items.${item.key}.title`)}
+                    description={t(`agenda.items.${item.key}.description`)}
+                    isLast={i === fullDayMorningKeys.length - 1}
+                  />
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
+                {t("agenda.teamAfternoon")}
+              </h3>
+              <div>
+                {fullDayAfternoonKeys.map((item, i) => (
+                  <AgendaItem
+                    key={item.time}
+                    time={item.time}
+                    title={t(`agenda.items.${item.key}.title`)}
+                    description={t(`agenda.items.${item.key}.description`)}
+                    isLast={i === fullDayAfternoonKeys.length - 1}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="max-w-2xl mx-auto">
+            {t("agenda.morning") && (
+              <h3 className="font-display font-bold text-xl mb-6 text-center">
+                {t("agenda.morning")}
+              </h3>
+            )}
+            <div>
+              {eveningKeys.map((item, i) => (
+                <AgendaItem
+                  key={item.time}
+                  time={item.time}
+                  title={t(`agenda.items.${item.key}.title`)}
+                  description={t(`agenda.items.${item.key}.description`)}
+                  isLast={i === eveningKeys.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
