@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 const morningKeys = [
   { time: "17:00", key: "welcome" },
-  { time: "17:15", key: "session1" },
+  { time: "17:30", key: "session1" },
 ];
 
 const afternoonKeys = [
