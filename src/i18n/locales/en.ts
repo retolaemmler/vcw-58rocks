@@ -149,10 +149,10 @@ const en = {
   pricing: {
     titleHighlight: "Pricing",
     titlePost: " & Tickets",
-    intro: "Full-day workshop — Base price",
+    intro: "Evening session — Base price",
     tiers: {
-      early: { name: "Early Bird", discount: "25% off" },
-      regular: { name: "Regular", discount: "15% off" },
+      early: { name: "Early Bird", discount: "28% off" },
+      regular: { name: "Regular", discount: "14% off" },
       late: { name: "Late Bird", discount: "Base price" },
     },
     bestDeal: "Best Deal",

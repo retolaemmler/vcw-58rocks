@@ -149,10 +149,10 @@ const de = {
   pricing: {
     titleHighlight: "Preise",
     titlePost: " & Tickets",
-    intro: "Ganztägiger Workshop — Grundpreis",
+    intro: "Abend-Session — Grundpreis",
     tiers: {
-      early: { name: "Early Bird", discount: "25% Rabatt" },
-      regular: { name: "Regular", discount: "15% Rabatt" },
+      early: { name: "Early Bird", discount: "28% Rabatt" },
+      regular: { name: "Regular", discount: "14% Rabatt" },
       late: { name: "Late Bird", discount: "Grundpreis" },
     },
     bestDeal: "Bestes Angebot",

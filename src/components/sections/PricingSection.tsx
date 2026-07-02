@@ -29,7 +29,7 @@ const PricingSection = () => {
           <span className="gradient-text">{t("pricing.titleHighlight")}</span>{t("pricing.titlePost")}
         </h2>
         <p className="text-muted-foreground mb-12">
-          {t("pricing.intro")} <span className="font-semibold text-foreground">CHF 799</span>
+          {t("pricing.intro")} <span className="font-semibold text-foreground">CHF 349</span>
         </p>
 
         <div className="grid sm:grid-cols-3 gap-6 mb-10">
