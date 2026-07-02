@@ -1,11 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-const morningKeys = [
+const agendaKeys = [
   { time: "17:00", key: "welcome" },
   { time: "17:30", key: "session1" },
-];
-
-const afternoonKeys = [
   { time: "20:00", key: "presentations" },
 ];
 
