@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Calendar, MapPin, ExternalLink, Users, Mail, Check, Download } from "lucide-react";
+import { Sparkles, Calendar, MapPin, Users, Mail, Check, Download } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
 import flyerPdf from "@/assets/Vibe_Coding_Workshop.pdf.asset.json";
 import WaitlistSignup from "@/components/NewsletterSignup";
@@ -90,15 +90,9 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <MapPin className="w-4 h-4 text-accent shrink-0" />
-                  <a
-                    href="https://maps.app.goo.gl/DgThKo1tHm5i4bsK6"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium hover:text-accent transition-colors inline-flex items-center gap-1"
-                  >
+                  <span className="text-sm font-medium">
                     {t("hero.masterclass.location")}
-                    <ExternalLink className="w-3 h-3 opacity-60" />
-                  </a>
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Users className="w-4 h-4 text-accent shrink-0" />
