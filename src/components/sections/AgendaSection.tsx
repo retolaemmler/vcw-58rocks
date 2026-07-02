@@ -42,9 +42,11 @@ const AgendaSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {/* Morning */}
           <div>
-            <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
-              {t("agenda.morning")}
-            </h3>
+            {t("agenda.morning") && (
+              <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
+                {t("agenda.morning")}
+              </h3>
+            )}
             <div>
               {morningKeys.map((item, i) => (
                 <AgendaItem
@@ -59,9 +61,11 @@ const AgendaSection = () => {
           </div>
           {/* Afternoon */}
           <div>
-            <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
-              {t("agenda.afternoon")}
-            </h3>
+            {t("agenda.afternoon") && (
+              <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
+                {t("agenda.afternoon")}
+              </h3>
+            )}
             <div>
               {afternoonKeys.map((item, i) => (
                 <AgendaItem
