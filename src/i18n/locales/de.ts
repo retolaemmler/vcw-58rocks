@@ -38,11 +38,11 @@ const de = {
     masterclass: {
       badge: "Am beliebtesten",
       title: "Masterclass",
-      description: "Nimm an einer kompakten Abend-Session teil (6–10 Personen). Inklusive Pizzapause und gratis Lovable-Credits.",
-      date: "Di. 30.6.2026 von 17:00 - 21:00 Uhr",
+      description: "Nimm an einer Abend-Session teil (10–20 Personen). Inklusive Pizzapause und gratis Lovable-Credits.",
+      date: "Di. 15.9.2026 von 17:00 - 21:00 Uhr",
       dateNote: "Newsletter für kommende Termine abonnieren",
       location: "Zürich (Ort tbd)",
-      capacity: "6–10 Personen",
+      capacity: "10–20 Personen",
       cta: "Ticket sichern",
     },
     company: {
