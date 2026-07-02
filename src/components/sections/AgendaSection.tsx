@@ -36,44 +36,22 @@ const AgendaSection = () => {
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-14">
           {t("agenda.titlePre")}<span className="gradient-text">{t("agenda.titleHighlight")}</span>{t("agenda.titlePost")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {/* Morning */}
+        <div className="max-w-2xl mx-auto">
+          {t("agenda.morning") && (
+            <h3 className="font-display font-bold text-xl mb-6 text-center">
+              {t("agenda.morning")}
+            </h3>
+          )}
           <div>
-            {t("agenda.morning") && (
-              <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
-                {t("agenda.morning")}
-              </h3>
-            )}
-            <div>
-              {morningKeys.map((item, i) => (
-                <AgendaItem
-                  key={item.time}
-                  time={item.time}
-                  title={t(`agenda.items.${item.key}.title`)}
-                  description={t(`agenda.items.${item.key}.description`)}
-                  isLast={i === morningKeys.length - 1}
-                />
-              ))}
-            </div>
-          </div>
-          {/* Afternoon */}
-          <div>
-            {t("agenda.afternoon") && (
-              <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
-                {t("agenda.afternoon")}
-              </h3>
-            )}
-            <div>
-              {afternoonKeys.map((item, i) => (
-                <AgendaItem
-                  key={item.time}
-                  time={item.time}
-                  title={t(`agenda.items.${item.key}.title`)}
-                  description={t(`agenda.items.${item.key}.description`)}
-                  isLast={i === afternoonKeys.length - 1}
-                />
-              ))}
-            </div>
+            {agendaKeys.map((item, i) => (
+              <AgendaItem
+                key={item.time}
+                time={item.time}
+                title={t(`agenda.items.${item.key}.title`)}
+                description={t(`agenda.items.${item.key}.description`)}
+                isLast={i === agendaKeys.length - 1}
+              />
+            ))}
           </div>
         </div>
       </div>
