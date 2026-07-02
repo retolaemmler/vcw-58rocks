@@ -1,17 +1,12 @@
 import { useTranslation } from "react-i18next";
 
 const morningKeys = [
-  { time: "09:00", key: "welcome" },
-  { time: "10:00", key: "session1" },
-  { time: "12:00", key: "lunch" },
+  { time: "17:00", key: "welcome" },
+  { time: "17:15", key: "session1" },
 ];
 
 const afternoonKeys = [
-  { time: "13:00", key: "nextLevel" },
-  { time: "13:30", key: "session2" },
-  { time: "15:30", key: "presentations" },
-  { time: "16:15", key: "future" },
-  { time: "16:30", key: "qa" },
+  { time: "20:00", key: "presentations" },
 ];
 
 interface AgendaItemProps {
