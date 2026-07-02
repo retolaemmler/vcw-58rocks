@@ -26,7 +26,7 @@ const de = {
   hero: {
     title: "Vibe Code Workshop",
     subtitle: "Baue eine Web-App an einem Tag",
-    descriptionBefore: "Ein halb- oder ganztägiger Hands-on-Workshop, in dem du von der Idee zur funktionierenden Web-App kommst. Wir nutzen ",
+    descriptionBefore: "Ein halb- oder ganztägiger Hands-on-Workshop. Von der Idee zur funktionierenden Web-App. Wir nutzen ",
     descriptionAfter: " — die Plattform, die natürliche Sprache in funktionierenden Code verwandelt. Keine Programmiererfahrung nötig.",
     tabs: {
       you: "Für dich",
