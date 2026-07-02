@@ -61,9 +61,11 @@ const AgendaSection = () => {
           </div>
           {/* Afternoon */}
           <div>
-            <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
-              {t("agenda.afternoon")}
-            </h3>
+            {t("agenda.afternoon") && (
+              <h3 className="font-display font-bold text-xl mb-6 text-center md:text-left">
+                {t("agenda.afternoon")}
+              </h3>
+            )}
             <div>
               {afternoonKeys.map((item, i) => (
                 <AgendaItem
