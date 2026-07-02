@@ -40,7 +40,7 @@ const de = {
       title: "Masterclass",
       description: "Nimm an einer Abend-Session teil (10–20 Personen). Inklusive Pizzapause und gratis Lovable-Credits.",
       date: "Di. 15.9.2026 von 17:00 - 21:00 Uhr",
-      dateNote: "Newsletter für kommende Termine abonnieren",
+      dateNote: "Newsletter für zukünftige Termine abonnieren",
       location: "Zürich (Ort tbd)",
       capacity: "10–20 Personen",
       cta: "Ticket sichern",
