@@ -77,8 +77,8 @@ const de = {
     titlePre: "Der ",
     titleHighlight: "Workshop-Ablauf",
     titlePost: " in Kürze",
-    morning: "🌙 Abend",
-    afternoon: "🌙 Ausklang",
+    morning: "",
+    afternoon: "",
     items: {
       welcome: { title: "Willkommen & Intro", description: "Kickoff, Vorstellung und Überblick über den Abend." },
       session1: { title: "Workshop-Session", description: "Hands-on App-Building in kleinen Teams mit Expert:innen-Support." },
