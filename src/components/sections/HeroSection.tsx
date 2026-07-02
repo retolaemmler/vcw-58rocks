@@ -128,6 +128,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
                   "hero.company.topic1",
                   "hero.company.topic2",
                   "hero.company.topic3",
+                  "hero.company.topic4",
                 ].map((key) => (
                   <div key={key} className="flex items-start gap-3 text-muted-foreground">
                     <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
