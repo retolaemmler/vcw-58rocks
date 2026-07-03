@@ -25,14 +25,26 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   const isGerman = i18n.language === "de";
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-4 pt-28 pb-8">
+    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-28 pb-8 transition-colors duration-700 ${activeTab === "you" ? "dark bg-night" : "bg-day"}`}>
       {/* Background blobs */}
-      <div className="absolute top-20 -left-32 w-72 h-72 rounded-full bg-teal/10 blur-3xl animate-blob" />
-      <div className="absolute top-40 -right-32 w-80 h-80 rounded-full bg-purple/10 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
-      <div className="absolute -bottom-20 left-1/3 w-96 h-96 rounded-full bg-blue/8 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
+      {activeTab === "you" ? (
+        <>
+          <div className="absolute top-20 -left-32 w-72 h-72 rounded-full bg-night-blob-1/25 blur-3xl animate-blob" />
+          <div className="absolute top-40 -right-32 w-80 h-80 rounded-full bg-night-blob-2/25 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
+          <div className="absolute -bottom-20 left-1/3 w-96 h-96 rounded-full bg-night-blob-3/25 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
+          <div className="absolute top-24 right-12 w-20 h-20 rounded-full bg-gradient-to-br from-muted-foreground/20 to-transparent blur-md opacity-30" />
+        </>
+      ) : (
+        <>
+          <div className="absolute top-20 -left-32 w-72 h-72 rounded-full bg-day-blob-1/30 blur-3xl animate-blob" />
+          <div className="absolute top-40 -right-32 w-80 h-80 rounded-full bg-day-blob-2/30 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
+          <div className="absolute -bottom-20 left-1/3 w-96 h-96 rounded-full bg-day-blob-3/30 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
+          <div className="absolute top-24 left-12 w-24 h-24 rounded-full bg-gradient-to-br from-day-blob-1/40 to-transparent blur-2xl opacity-50" />
+        </>
+      )}
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 text-foreground">
           {t("hero.title")}
           <span className="block gradient-text mt-2">{t("hero.subtitle")}</span>
         </h1>
@@ -79,7 +91,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
           {activeTab === "you" ? (
             <div className="relative flex flex-col p-6 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
               <div className="mb-6">
-                <h3 className="font-display text-2xl font-bold mb-2">{t("hero.masterclass.title")}</h3>
+                <h3 className="font-display text-2xl font-bold mb-2 text-foreground">{t("hero.masterclass.title")}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.masterclass.description")}</p>
               </div>
 
@@ -119,7 +131,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
           ) : (
             <div className="relative flex flex-col p-6 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
               <div className="mb-6">
-                <h3 className="font-display text-2xl font-bold mb-2">{t("hero.company.title")}</h3>
+                <h3 className="font-display text-2xl font-bold mb-2 text-foreground">{t("hero.company.title")}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.company.description")}</p>
               </div>
 

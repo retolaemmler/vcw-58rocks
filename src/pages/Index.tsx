@@ -21,7 +21,7 @@ const Index = ({ initialTab = "you" }: IndexProps) => {
 
   return (
     <main className="min-h-screen">
-      <Navbar />
+      <Navbar activeTab={activeTab} />
       <HeroSection activeTab={activeTab} setActiveTab={setActiveTab} />
       <TrustedBySection isVisible={activeTab === "company"} />
       <WhySection />

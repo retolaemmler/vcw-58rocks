@@ -17,7 +17,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle, Bell } from "lucide-react";
 
-const Navbar = () => {
+interface NavbarProps {
+  activeTab?: "you" | "company";
+}
+
+const Navbar = ({ activeTab }: NavbarProps) => {
   const { t, i18n } = useTranslation();
   const navLinks = [
     { label: t("nav.what"), id: "why" },
@@ -81,6 +85,8 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        activeTab === "you" ? "dark" : ""
+      } ${
         scrolled
           ? "bg-background/90 backdrop-blur-md shadow-sm border-b border-border/50"
           : "bg-transparent"
