@@ -44,7 +44,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
       )}
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 text-foreground">
           {t("hero.title")}
           <span className="block gradient-text mt-2">{t("hero.subtitle")}</span>
         </h1>
@@ -91,7 +91,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
           {activeTab === "you" ? (
             <div className="relative flex flex-col p-6 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
               <div className="mb-6">
-                <h3 className="font-display text-2xl font-bold mb-2">{t("hero.masterclass.title")}</h3>
+                <h3 className="font-display text-2xl font-bold mb-2 text-foreground">{t("hero.masterclass.title")}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.masterclass.description")}</p>
               </div>
 
@@ -131,7 +131,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
           ) : (
             <div className="relative flex flex-col p-6 rounded-3xl border-2 border-purple/20 bg-card shadow-xl shadow-purple/5 transition-transform hover:-translate-y-1">
               <div className="mb-6">
-                <h3 className="font-display text-2xl font-bold mb-2">{t("hero.company.title")}</h3>
+                <h3 className="font-display text-2xl font-bold mb-2 text-foreground">{t("hero.company.title")}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.company.description")}</p>
               </div>
 
