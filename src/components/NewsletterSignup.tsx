@@ -103,9 +103,6 @@ const AVAILABLE_DATES = [
           className={`h-9 text-sm ${isDark ? "bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40" : ""}`}
         />
         <div className="pt-2 text-left">
-          <p className={`text-xs font-medium mb-1 ${isDark ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
-            Which date(s) would work for you?
-          </p>
           <p className={`text-xs italic mb-2 ${isDark ? "text-primary-foreground/60" : "text-muted-foreground/80"}`}>
             Non-binding — no commitment required.
           </p>

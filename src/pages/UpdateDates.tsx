@@ -165,9 +165,6 @@ const UpdateDates = () => {
               </div>
 
               <div className="pt-2">
-                <p className="text-sm font-medium mb-1">
-                  Which date(s) would work for you?
-                </p>
                 <p className="text-xs italic text-muted-foreground/80 mb-3">
                   Non-binding — no commitment required.
                 </p>
