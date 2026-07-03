@@ -3,35 +3,20 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar, CheckCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/sections/FooterSection";
 
-const AVAILABLE_DATES = [
-  { value: "2026-05-28", label: "Thu, 28 May 2026" },
-  { value: "2026-06-11", label: "Thu, 11 June 2026" },
-  { value: "2026-06-23", label: "Tue, 23 June 2026" },
-  { value: "2026-06-30", label: "Tue, 30 June 2026" },
-];
-
 const UpdateDates = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
-  const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [prefilled, setPrefilled] = useState(false);
   const lastLookupRef = useRef<string>("");
   const { toast } = useToast();
-
-  const toggleDate = (value: string) => {
-    setSelectedDates((prev) =>
-      prev.includes(value) ? prev.filter((d) => d !== value) : [...prev, value]
-    );
-  };
 
   // Look up existing signup by email and prefill the form
   useEffect(() => {
@@ -69,7 +54,6 @@ const UpdateDates = () => {
         email: email.trim().toLowerCase(),
         name: name.trim(),
         company: company.trim(),
-        preferred_dates: selectedDates,
       },
     });
 
@@ -161,30 +145,6 @@ const UpdateDates = () => {
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                   />
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <p className="text-xs italic text-muted-foreground/80 mb-3">
-                  Non-binding — no commitment required.
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {AVAILABLE_DATES.map((d) => (
-                    <label
-                      key={d.value}
-                      className={`flex items-center gap-2 rounded-md border px-3 py-2.5 cursor-pointer text-sm transition-colors ${
-                        selectedDates.includes(d.value)
-                          ? "bg-primary/10 border-primary/40"
-                          : "border-border hover:bg-muted"
-                      }`}
-                    >
-                      <Checkbox
-                        checked={selectedDates.includes(d.value)}
-                        onCheckedChange={() => toggleDate(d.value)}
-                      />
-                      <span>{d.label}</span>
-                    </label>
-                  ))}
                 </div>
               </div>
 
