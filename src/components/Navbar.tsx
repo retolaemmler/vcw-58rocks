@@ -17,7 +17,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle, Bell } from "lucide-react";
 
-const Navbar = () => {
+interface NavbarProps {
+  activeTab?: "you" | "company";
+}
+
+const Navbar = ({ activeTab }: NavbarProps) => {
   const { t, i18n } = useTranslation();
   const navLinks = [
     { label: t("nav.what"), id: "why" },
