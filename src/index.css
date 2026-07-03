@@ -41,16 +41,6 @@
     --blue: 217 91% 60%;
     --section-alt: 210 20% 98%;
 
-    --night-bg: 220 30% 14%;
-    --night-bg-end: 220 30% 18%;
-    --night-blob-1: 262 60% 35%;
-    --night-blob-2: 217 60% 30%;
-    --night-blob-3: 270 50% 25%;
-    --day-bg: 45 70% 96%;
-    --day-bg-end: 40 70% 92%;
-    --day-blob-1: 35 90% 70%;
-    --day-blob-2: 195 80% 80%;
-    --day-blob-3: 25 85% 75%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -116,11 +106,5 @@
   }
   .gradient-bg-subtle {
     background: linear-gradient(135deg, hsl(var(--teal) / 0.08), hsl(var(--purple) / 0.08), hsl(var(--blue) / 0.08));
-  }
-  .bg-night {
-    background: linear-gradient(180deg, hsl(var(--night-bg)) 0%, hsl(var(--night-bg-end)) 100%);
-  }
-  .bg-day {
-    background: linear-gradient(180deg, hsl(var(--day-bg)) 0%, hsl(var(--day-bg-end)) 100%);
   }
 }
