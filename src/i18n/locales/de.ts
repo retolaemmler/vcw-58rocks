@@ -12,7 +12,6 @@ const de = {
     title: "Abonniere unseren Newsletter",
     description: "Erhalte Updates zu kommenden Workshops und News.",
     success: "Du bist dabei — wir halten dich auf dem Laufenden!",
-    informTitle: "Informiere mich über weitere kommende Termine",
     emailPlaceholder: "E-Mail *",
     namePlaceholder: "Name",
     companyPlaceholder: "Firma",
