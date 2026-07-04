@@ -12,7 +12,6 @@ const en = {
     title: "Subscribe to our Newsletter",
     description: "Get updates about upcoming workshops and news.",
     success: "You're on the list — we'll keep you posted!",
-    informTitle: "Inform me about other upcoming dates",
     emailPlaceholder: "Email *",
     namePlaceholder: "Name",
     companyPlaceholder: "Company",

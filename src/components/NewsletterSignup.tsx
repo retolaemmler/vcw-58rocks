@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bell, Loader2, CheckCircle } from "lucide-react";
+import { Loader2, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface NewsletterSignupProps {
@@ -11,7 +10,6 @@ interface NewsletterSignupProps {
 }
 
  const WaitlistSignup = ({ variant = "light" }: NewsletterSignupProps) => {
-  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
@@ -59,12 +57,6 @@ interface NewsletterSignupProps {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <div className="flex items-center gap-2 justify-center mb-3">
-        <Bell className={`w-4 h-4 ${isDark ? "text-primary-foreground/70" : "text-primary"}`} />
-        <p className={`text-sm font-medium ${isDark ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
-          {t("newsletter.informTitle")}
-        </p>
-      </div>
       <form onSubmit={handleSubmit} className="space-y-2">
         <div className="flex flex-col sm:flex-row gap-2">
           <Input
