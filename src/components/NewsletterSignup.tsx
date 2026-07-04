@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ interface NewsletterSignupProps {
 }
 
  const WaitlistSignup = ({ variant = "light" }: NewsletterSignupProps) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
@@ -60,7 +62,7 @@ interface NewsletterSignupProps {
       <div className="flex items-center gap-2 justify-center mb-3">
         <Bell className={`w-4 h-4 ${isDark ? "text-primary-foreground/70" : "text-primary"}`} />
         <p className={`text-sm font-medium ${isDark ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
-          Inform me about other upcoming dates
+          {t("newsletter.informTitle")}
         </p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-2">
