@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin, Users, Mail, Check, Download } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
-import flyerPdf from "@/assets/Vibe_Coding_Workshop.pdf.asset.json";
+import flyerPdf from "@/assets/Vibe_Coding_Workshop_Flyer.pdf.asset.json";
 import WaitlistSignup from "@/components/NewsletterSignup";
 import {
   Dialog,
@@ -20,9 +20,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   const [open, setOpen] = useState(false);
-  const { t, i18n } = useTranslation();
-
-  const isGerman = i18n.language === "de";
+  const { t } = useTranslation();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-28 pb-8 bg-background">
@@ -142,16 +140,14 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
                   {t("hero.company.cta")}
                 </a>
               </Button>
-              {isGerman && (
-                <a
+              <a
                   href={flyerPdf.url}
                   download
                   className="inline-flex items-center justify-center gap-1.5 mt-4 text-sm text-primary hover:text-primary/80 transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   {t("hero.company.flyer")}
-                </a>
-              )}
+              </a>
             </div>
           )}
         </div>
