@@ -28,6 +28,8 @@ import NewsletterAdmin from "@/components/admin/NewsletterAdmin";
 import RaiffeisenSurveyAdmin from "@/components/admin/RaiffeisenSurveyAdmin";
 import RaiffeisenFeedbackAdmin from "@/components/admin/RaiffeisenFeedbackAdmin";
 import RaiffeisenDashboard from "@/components/admin/RaiffeisenDashboard";
+import ZugerbergSurveyAdmin from "@/components/admin/ZugerbergSurveyAdmin";
+import ZugerbergFeedbackAdmin from "@/components/admin/ZugerbergFeedbackAdmin";
 import MasterclassJune30SurveyAdmin from "@/components/admin/MasterclassJune30SurveyAdmin";
 import type { Session } from "@supabase/supabase-js";
 
@@ -327,6 +329,8 @@ const Admin = () => {
                     <SelectItem value="feedback">Masterclass Feedback</SelectItem>
                     <SelectItem value="raiffeisen">Raiffeisen Prep Survey</SelectItem>
                     <SelectItem value="raiffeisen-feedback">Raiffeisen Feedback</SelectItem>
+                    <SelectItem value="zugerberg">Zugerberg Prep Survey</SelectItem>
+                    <SelectItem value="zugerberg-feedback">Zugerberg Feedback</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -335,6 +339,8 @@ const Admin = () => {
               {surveyTab === "feedback" && <FeedbackAdmin />}
               {surveyTab === "raiffeisen" && <RaiffeisenSurveyAdmin />}
               {surveyTab === "raiffeisen-feedback" && <RaiffeisenFeedbackAdmin />}
+              {surveyTab === "zugerberg" && <ZugerbergSurveyAdmin />}
+              {surveyTab === "zugerberg-feedback" && <ZugerbergFeedbackAdmin />}
             </div>
           </TabsContent>
 
