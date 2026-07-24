@@ -17,6 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, LogOut, DollarSign, ShoppingCart, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/vcw-logo.png";
@@ -314,30 +315,27 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="survey">
-            <Tabs value={surveyTab} onValueChange={setSurveyTab} className="space-y-4">
-              <TabsList>
-                <TabsTrigger value="prep">Edition 1 Prep Survey</TabsTrigger>
-                <TabsTrigger value="masterclass-june30">Edition 2 Prep Survey</TabsTrigger>
-                <TabsTrigger value="feedback">Masterclass Feedback</TabsTrigger>
-                <TabsTrigger value="raiffeisen">Raiffeisen Prep Survey</TabsTrigger>
-                <TabsTrigger value="raiffeisen-feedback">Raiffeisen Feedback</TabsTrigger>
-              </TabsList>
-              <TabsContent value="prep">
-                <SurveyAdmin />
-              </TabsContent>
-              <TabsContent value="masterclass-june30">
-                <MasterclassJune30SurveyAdmin />
-              </TabsContent>
-              <TabsContent value="raiffeisen">
-                <RaiffeisenSurveyAdmin />
-              </TabsContent>
-              <TabsContent value="raiffeisen-feedback">
-                <RaiffeisenFeedbackAdmin />
-              </TabsContent>
-              <TabsContent value="feedback">
-                <FeedbackAdmin />
-              </TabsContent>
-            </Tabs>
+            <div className="space-y-4">
+              <div className="max-w-xs">
+                <Select value={surveyTab} onValueChange={setSurveyTab}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a survey" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="prep">Edition 1 Prep Survey</SelectItem>
+                    <SelectItem value="masterclass-june30">Edition 2 Prep Survey</SelectItem>
+                    <SelectItem value="feedback">Masterclass Feedback</SelectItem>
+                    <SelectItem value="raiffeisen">Raiffeisen Prep Survey</SelectItem>
+                    <SelectItem value="raiffeisen-feedback">Raiffeisen Feedback</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              {surveyTab === "prep" && <SurveyAdmin />}
+              {surveyTab === "masterclass-june30" && <MasterclassJune30SurveyAdmin />}
+              {surveyTab === "feedback" && <FeedbackAdmin />}
+              {surveyTab === "raiffeisen" && <RaiffeisenSurveyAdmin />}
+              {surveyTab === "raiffeisen-feedback" && <RaiffeisenFeedbackAdmin />}
+            </div>
           </TabsContent>
 
           <TabsContent value="newsletter">
