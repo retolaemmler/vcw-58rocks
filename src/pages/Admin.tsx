@@ -322,8 +322,8 @@ const Admin = () => {
                     <SelectValue placeholder="Select a survey" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="prep">Edition 1 Prep Survey</SelectItem>
-                    <SelectItem value="masterclass-june30">Edition 2 Prep Survey</SelectItem>
+                    <SelectItem value="prep">16.4.26 Masterclass Prep Survey</SelectItem>
+                    <SelectItem value="masterclass-june30">30.6.26 Masterclass Prep Survey</SelectItem>
                     <SelectItem value="feedback">Masterclass Feedback</SelectItem>
                     <SelectItem value="raiffeisen">Raiffeisen Prep Survey</SelectItem>
                     <SelectItem value="raiffeisen-feedback">Raiffeisen Feedback</SelectItem>
