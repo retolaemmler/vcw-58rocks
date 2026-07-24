@@ -162,8 +162,8 @@ const FeedbackAdmin = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Editions</SelectItem>
-                <SelectItem value="edition1">Edition 1</SelectItem>
-                <SelectItem value="edition2">Edition 2</SelectItem>
+                <SelectItem value="edition1">Edition 1 - 16.4.26</SelectItem>
+                <SelectItem value="edition2">Edition 2 - 30.6.26</SelectItem>
               </SelectContent>
             </Select>
           </CardContent>

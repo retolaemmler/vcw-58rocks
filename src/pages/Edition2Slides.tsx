@@ -11,7 +11,7 @@ const Edition2Slides = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="text-center space-y-3">
-        <h1 className="font-display text-2xl font-semibold">Opening Edition 2 slides…</h1>
+        <h1 className="font-display text-2xl font-semibold">Opening Edition 2 - 30.6.26 slides…</h1>
         <p className="text-muted-foreground">
           If you are not redirected,{" "}
           <a href={SLIDES_URL} className="text-primary underline">

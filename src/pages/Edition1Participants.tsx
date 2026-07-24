@@ -116,7 +116,7 @@ const Edition1Participants = () => {
           Connect with other participants
         </h1>
         <p className="text-muted-foreground mb-10">
-          Meet the builders joining Vibe Code Workshop Edition 1.
+          Meet the builders joining Vibe Code Workshop Edition 1 - 16.4.26.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
