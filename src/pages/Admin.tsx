@@ -220,7 +220,7 @@ const Admin = () => {
 
         <Tabs value={mainTab} onValueChange={setMainTab} className="space-y-6">
           <TabsList>
-            <TabsTrigger value="orders">Orders</TabsTrigger>
+            <TabsTrigger value="orders">Masterclass Ticket Orders</TabsTrigger>
             <TabsTrigger value="survey">Surveys</TabsTrigger>
             <TabsTrigger value="newsletter">Waitlist</TabsTrigger>
           </TabsList>
