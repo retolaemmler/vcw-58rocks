@@ -255,7 +255,7 @@ const ZugerbergSurvey = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>📧 Deine private E-Mail (bitte nicht diese von Zugerberg)</FormLabel>
+                        <FormLabel>📧 Deine E-Mail</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" placeholder="deine@email.com" />
                         </FormControl>
@@ -269,7 +269,7 @@ const ZugerbergSurvey = () => {
                   control={form.control}
                   name="attendance_day"
                   render={({ field }) => {
-                    const ATTENDANCE_OPTIONS = ["Freitag, 29. Mai", "Montag, 1. Juni", "Weiss ich noch nicht"];
+                    const ATTENDANCE_OPTIONS = ["Donnerstag, 20. August", "Dienstag, 8. September", "Weiss ich noch nicht"];
                     return (
                       <FormItem>
                         <FormLabel className="text-base">📅 An welchem Tag nimmst du teil?</FormLabel>
