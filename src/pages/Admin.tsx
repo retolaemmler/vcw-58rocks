@@ -229,7 +229,7 @@ const Admin = () => {
             <Tabs value={ordersBatchTab} onValueChange={setOrdersBatchTab} className="mb-6">
               <TabsList>
                 <TabsTrigger value="workshop1">Edition 1 - 16.4.26</TabsTrigger>
-                <TabsTrigger value="workshop2">Workshop 2 (June 30)</TabsTrigger>
+                <TabsTrigger value="workshop2">Edition 2 - 30.6.26</TabsTrigger>
                 <TabsTrigger value="all">All</TabsTrigger>
               </TabsList>
             </Tabs>
