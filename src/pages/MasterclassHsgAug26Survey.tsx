@@ -471,32 +471,6 @@ const MasterclassHsgAug26Survey = () => {
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="poke_bowl"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base">🍱 Welche Poke Bowl darf's sein?</FormLabel>
-                      <FormControl>
-                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-wrap gap-4">
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="chicken" id="poke-chicken" />
-                            <Label htmlFor="poke-chicken">Chicken</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="tuna" id="poke-tuna" />
-                            <Label htmlFor="poke-tuna">Tuna</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="tofu" id="poke-tofu" />
-                            <Label htmlFor="poke-tofu">Tofu</Label>
-                          </div>
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
 
                 <FormField
                   control={form.control}
