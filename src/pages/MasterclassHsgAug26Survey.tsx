@@ -533,7 +533,6 @@ const MasterclassHsgAug26Survey = () => {
             </Form>
           </CardContent>
         </Card>
-        )}
       </div>
     </div>
   );
