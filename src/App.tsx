@@ -21,6 +21,7 @@ import RaiffeisenFeedback from "./pages/RaiffeisenFeedback";
 import ZugerbergSurvey from "./pages/ZugerbergSurvey";
 import ZugerbergFeedback from "./pages/ZugerbergFeedback";
 import MasterclassJune30Survey from "./pages/MasterclassJune30Survey";
+import MasterclassHsgAug26Survey from "./pages/MasterclassHsgAug26Survey";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -99,6 +100,7 @@ const App = () => (
             <Route path="zugerberg-prep" element={<ZugerbergSurvey />} />
             <Route path="zugerberg-feedback" element={<ZugerbergFeedback />} />
             <Route path="masterclass-june30-prep" element={<MasterclassJune30Survey />} />
+            <Route path="hsg-alumni-aug26-prep" element={<MasterclassHsgAug26Survey />} />
             <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
           </Route>
