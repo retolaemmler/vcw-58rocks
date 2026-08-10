@@ -227,17 +227,6 @@ const MasterclassHsgAug26Survey = () => {
           </p>
         </div>
 
-        {/* Welcome video */}
-        <div className="mb-8 rounded-xl overflow-hidden border border-border">
-          <iframe
-            className="w-full aspect-video"
-            src="https://www.youtube.com/embed/a0y5BMCnjp8"
-            title="Welcome video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-
         {!showForm ? (
           <div className="text-center pt-16">
             <Button
