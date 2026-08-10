@@ -31,6 +31,7 @@ import RaiffeisenDashboard from "@/components/admin/RaiffeisenDashboard";
 import ZugerbergSurveyAdmin from "@/components/admin/ZugerbergSurveyAdmin";
 import ZugerbergFeedbackAdmin from "@/components/admin/ZugerbergFeedbackAdmin";
 import MasterclassJune30SurveyAdmin from "@/components/admin/MasterclassJune30SurveyAdmin";
+import MasterclassHsgAug26SurveyAdmin from "@/components/admin/MasterclassHsgAug26SurveyAdmin";
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
@@ -326,6 +327,7 @@ const Admin = () => {
                   <SelectContent>
                     <SelectItem value="prep">16.4.26 Masterclass Prep Survey</SelectItem>
                     <SelectItem value="masterclass-june30">30.6.26 Masterclass Prep Survey</SelectItem>
+                    <SelectItem value="masterclass-hsg-aug26">26.8.26 HSG Alumni Masterclass Prep Survey</SelectItem>
                     <SelectItem value="feedback">Masterclass Feedback</SelectItem>
                     <SelectItem value="raiffeisen">Raiffeisen Prep Survey</SelectItem>
                     <SelectItem value="raiffeisen-feedback">Raiffeisen Feedback</SelectItem>
@@ -336,6 +338,7 @@ const Admin = () => {
               </div>
               {surveyTab === "prep" && <SurveyAdmin />}
               {surveyTab === "masterclass-june30" && <MasterclassJune30SurveyAdmin />}
+              {surveyTab === "masterclass-hsg-aug26" && <MasterclassHsgAug26SurveyAdmin />}
               {surveyTab === "feedback" && <FeedbackAdmin />}
               {surveyTab === "raiffeisen" && <RaiffeisenSurveyAdmin />}
               {surveyTab === "raiffeisen-feedback" && <RaiffeisenFeedbackAdmin />}
