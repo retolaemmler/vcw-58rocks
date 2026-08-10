@@ -219,7 +219,7 @@ const MasterclassHsgAug26Survey = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <img src={logo} alt="Vibe Code Workshop" className="h-12 w-12" />
-            <h1 className="font-display text-3xl sm:text-4xl font-bold">Vibe Code Masterclass</h1>
+            <h1 className="font-display text-3xl sm:text-4xl font-bold">HSG Alumni Vibe Code Masterclass</h1>
           </div>
           <h2 className="font-display text-xl font-semibold">Bereit machen für den 26. August 🚀</h2>
           <p className="text-muted-foreground mt-2">
