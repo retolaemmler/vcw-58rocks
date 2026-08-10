@@ -86,7 +86,7 @@ const MasterclassHsgAug26Survey = () => {
   const token = searchParams.get("token") || DEFAULT_TOKEN;
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
-  const [showForm, setShowForm] = useState(false);
+  
   const [submitting, setSubmitting] = useState(false);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [goalDetails, setGoalDetails] = useState("");
