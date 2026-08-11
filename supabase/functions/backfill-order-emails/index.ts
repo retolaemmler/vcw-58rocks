@@ -1,5 +1,28 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { customerEmailHtml } from "../stripe-webhook/index.ts";
+function customerEmailHtml(displayName: string, amountFormatted: string) {
+  return `
+    <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
+      <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 40px 30px; text-align: center;">
+        <h1 style="color: #ffffff; font-size: 28px; margin: 0;">Vibe Code Workshop</h1>
+        <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Evening</p>
+      </div>
+      <div style="padding: 30px;">
+        <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${displayName} \u{1F44B}</p>
+        <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.</p>
+        <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 24px 0;">
+          <h2 style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 12px;">Event Details</h2>
+          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">\u{1F4C5} Tuesday, 15 September 2026 &middot; 17:00 &ndash; 21:00</p>
+          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">\u{1F4CD} Zurich, Switzerland (exact location TBD)</p>
+          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">\u{1F355} Pizza break included &middot; free Lovable credits</p>
+          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">\u{1F4B0} CHF ${amountFormatted} paid</p>
+        </div>
+        <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">We'll send you more details as the event gets closer. See you there! \u{1F680}</p>
+      </div>
+      <div style="background: hsl(210, 20%, 97%); padding: 20px 30px; text-align: center;">
+        <p style="color: hsl(220, 10%, 46%); font-size: 12px; margin: 0;">Vibe Code Workshop &middot; Zurich, Switzerland</p>
+      </div>
+    </div>`;
+}
 
 const ics = [
   "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Vibe Code Workshop//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
