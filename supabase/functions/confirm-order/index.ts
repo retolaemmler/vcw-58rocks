@@ -148,7 +148,7 @@ Deno.serve(async (req) => {
                 </p>
                 <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 24px 0;">
                   <h2 style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 12px;">Event Details</h2>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Tuesday, 30 June 2026 · 9:00 – 17:00</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Tuesday, 15 September 2026 · 17:00 – 21:00</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📍 Zurich, Switzerland (exact location TBD)</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 CHF ${amountFormatted} paid</p>
                 </div>
