@@ -104,13 +104,13 @@ Deno.serve(async (req) => {
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
         "BEGIN:VEVENT",
-        "DTSTART:20260630T070000Z",
-        "DTEND:20260630T150000Z",
-        "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Day",
-        "DESCRIPTION:Full-day hands-on bootcamp. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
+        "DTSTART:20260915T150000Z",
+        "DTEND:20260915T190000Z",
+        "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Evening",
+        "DESCRIPTION:Evening hands-on masterclass. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
         "LOCATION:Zurich\\, Switzerland (exact location TBD)",
         "STATUS:CONFIRMED",
-        "UID:vibe-code-workshop-2026-06-30@vibecodeworkshop.ch",
+        "UID:vibe-code-workshop-2026-09-15@vibecodeworkshop.ch",
         "END:VEVENT",
         "END:VCALENDAR",
       ].join("\r\n");
@@ -139,7 +139,7 @@ Deno.serve(async (req) => {
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
               <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 40px 30px; text-align: center;">
                 <h1 style="color: #ffffff; font-size: 28px; margin: 0;">Vibe Code Workshop</h1>
-                <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Day</p>
+                <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Evening</p>
               </div>
               <div style="padding: 30px;">
                 <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${displayName} 👋</p>
@@ -148,7 +148,7 @@ Deno.serve(async (req) => {
                 </p>
                 <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 24px 0;">
                   <h2 style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 12px;">Event Details</h2>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Tuesday, 30 June 2026 · 9:00 – 17:00</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Tuesday, 15 September 2026 · 17:00 – 21:00</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📍 Zurich, Switzerland (exact location TBD)</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 CHF ${amountFormatted} paid</p>
                 </div>
