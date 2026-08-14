@@ -5,7 +5,31 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, stripe-signature",
 };
 
-const EDITION = "2026-09-15";
+const APP_TAG = "vibe-code-workshop";
+
+// Our Stripe account is shared with other apps. Only sessions carrying our own
+// metadata tag are processed here.
+async function resolveOurMetadata(session: Record<string, any>) {
+  const direct = session.metadata ?? {};
+  if (direct.app) return direct;
+
+  // Payment Link sessions: fall back to the link's metadata.
+  const linkId = typeof session.payment_link === "string"
+    ? session.payment_link
+    : session.payment_link?.id;
+  const key = Deno.env.get("STRIPE_SECRET_KEY");
+  if (!linkId || !key) return direct;
+
+  const res = await fetch(`https://api.stripe.com/v1/payment_links/${linkId}`, {
+    headers: { Authorization: `Bearer ${key}` },
+  });
+  if (!res.ok) {
+    console.error("Failed to fetch payment link metadata:", await res.text());
+    return direct;
+  }
+  const link = await res.json();
+  return { ...(link.metadata ?? {}), ...direct };
+}
 
 async function verifyStripeSignature(payload: string, sigHeader: string, secret: string) {
   const parts = Object.fromEntries(
