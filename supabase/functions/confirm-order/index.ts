@@ -6,6 +6,29 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+const APP_TAG = "vibe-code-workshop";
+
+// The Stripe account is shared with other apps — only handle our own sessions.
+async function resolveOurMetadata(session: Record<string, any>, key: string) {
+  const direct = session.metadata ?? {};
+  if (direct.app) return direct;
+
+  const linkId = typeof session.payment_link === "string"
+    ? session.payment_link
+    : session.payment_link?.id;
+  if (!linkId) return direct;
+
+  const res = await fetch(`https://api.stripe.com/v1/payment_links/${linkId}`, {
+    headers: { Authorization: `Bearer ${key}` },
+  });
+  if (!res.ok) {
+    console.error("Failed to fetch payment link metadata:", await res.text());
+    return direct;
+  }
+  const link = await res.json();
+  return { ...(link.metadata ?? {}), ...direct };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -54,6 +77,16 @@ Deno.serve(async (req) => {
       );
     }
 
+    const metadata = await resolveOurMetadata(session, STRIPE_SECRET_KEY);
+    if (metadata.app !== APP_TAG) {
+      console.log("Ignoring session from another app:", session.id, metadata.app ?? "(no app tag)");
+      return new Response(
+        JSON.stringify({ error: "Session does not belong to this app" }),
+        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    const edition: string | null = metadata.edition ?? null;
+
     // Save order to database (upsert to handle page refreshes)
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -83,6 +116,7 @@ Deno.serve(async (req) => {
         amount_total: session.amount_total,
         currency: session.currency ?? "chf",
         status: "completed",
+        edition,
       });
 
       if (dbError) {

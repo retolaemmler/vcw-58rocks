@@ -5,7 +5,31 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, stripe-signature",
 };
 
-const EDITION = "2026-09-15";
+const APP_TAG = "vibe-code-workshop";
+
+// Our Stripe account is shared with other apps. Only sessions carrying our own
+// metadata tag are processed here.
+async function resolveOurMetadata(session: Record<string, any>) {
+  const direct = session.metadata ?? {};
+  if (direct.app) return direct;
+
+  // Payment Link sessions: fall back to the link's metadata.
+  const linkId = typeof session.payment_link === "string"
+    ? session.payment_link
+    : session.payment_link?.id;
+  const key = Deno.env.get("STRIPE_SECRET_KEY");
+  if (!linkId || !key) return direct;
+
+  const res = await fetch(`https://api.stripe.com/v1/payment_links/${linkId}`, {
+    headers: { Authorization: `Bearer ${key}` },
+  });
+  if (!res.ok) {
+    console.error("Failed to fetch payment link metadata:", await res.text());
+    return direct;
+  }
+  const link = await res.json();
+  return { ...(link.metadata ?? {}), ...direct };
+}
 
 async function verifyStripeSignature(payload: string, sigHeader: string, secret: string) {
   const parts = Object.fromEntries(
@@ -123,6 +147,17 @@ Deno.serve(async (req) => {
       });
     }
 
+    const metadata = await resolveOurMetadata(session);
+    if (metadata.app !== APP_TAG) {
+      console.log("Ignoring session from another app:", session.id, metadata.app ?? "(no app tag)");
+      return new Response(JSON.stringify({ received: true, ignored: true }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const edition: string | null = metadata.edition ?? null;
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
@@ -154,7 +189,7 @@ Deno.serve(async (req) => {
       amount_total: session.amount_total,
       currency: session.currency ?? "chf",
       status: "completed",
-      edition: EDITION,
+      edition,
     });
     if (dbError) console.error("Database insert error:", dbError);
 
@@ -187,7 +222,7 @@ Deno.serve(async (req) => {
               <p><strong>Name:</strong> ${fullName ?? "N/A"}</p>
               <p><strong>Email:</strong> ${customerEmail}</p>
               <p><strong>Amount:</strong> CHF ${amountFormatted}</p>
-              <p><strong>Edition:</strong> 15 September 2026</p>
+              ${edition ? `<p><strong>Edition:</strong> ${edition}</p>` : ""}
             </div>`,
         }),
       });

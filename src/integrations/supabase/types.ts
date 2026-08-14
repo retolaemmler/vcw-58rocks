@@ -157,7 +157,7 @@ export type Database = {
           currency: string
           customer_email: string
           customer_name: string | null
-          edition: string
+          edition: string | null
           free_vcf_ticket: string
           id: string
           status: string
@@ -172,7 +172,7 @@ export type Database = {
           currency?: string
           customer_email: string
           customer_name?: string | null
-          edition?: string
+          edition?: string | null
           free_vcf_ticket?: string
           id?: string
           status?: string
@@ -187,7 +187,7 @@ export type Database = {
           currency?: string
           customer_email?: string
           customer_name?: string | null
-          edition?: string
+          edition?: string | null
           free_vcf_ticket?: string
           id?: string
           status?: string
