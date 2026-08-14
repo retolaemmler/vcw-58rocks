@@ -147,6 +147,17 @@ Deno.serve(async (req) => {
       });
     }
 
+    const metadata = await resolveOurMetadata(session);
+    if (metadata.app !== APP_TAG) {
+      console.log("Ignoring session from another app:", session.id, metadata.app ?? "(no app tag)");
+      return new Response(JSON.stringify({ received: true, ignored: true }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const edition: string | null = metadata.edition ?? null;
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
@@ -178,7 +189,7 @@ Deno.serve(async (req) => {
       amount_total: session.amount_total,
       currency: session.currency ?? "chf",
       status: "completed",
-      edition: EDITION,
+      edition,
     });
     if (dbError) console.error("Database insert error:", dbError);
 
@@ -211,7 +222,7 @@ Deno.serve(async (req) => {
               <p><strong>Name:</strong> ${fullName ?? "N/A"}</p>
               <p><strong>Email:</strong> ${customerEmail}</p>
               <p><strong>Amount:</strong> CHF ${amountFormatted}</p>
-              <p><strong>Edition:</strong> 15 September 2026</p>
+              ${edition ? `<p><strong>Edition:</strong> ${edition}</p>` : ""}
             </div>`,
         }),
       });
