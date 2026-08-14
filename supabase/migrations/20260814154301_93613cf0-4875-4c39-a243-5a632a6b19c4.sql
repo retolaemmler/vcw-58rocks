@@ -1,0 +1,2 @@
+ALTER TABLE public.orders ALTER COLUMN edition DROP DEFAULT;
+ALTER TABLE public.orders ALTER COLUMN edition DROP NOT NULL;
