@@ -2,10 +2,6 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Loader2, ChevronLeft, ChevronRight, Maximize } from "lucide-react";
-import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell,
-} from "recharts";
-
 interface SurveyResponse {
   id: string;
   ai_coding_experience: string | null;
@@ -77,12 +73,15 @@ const SlideTitle = ({ children, kicker }: { children: React.ReactNode; kicker?: 
 );
 
 const RankingBars = ({
-  data, color, max,
-}: { data: { name: string; value: number }[]; color: string; max: number }) => (
+  data, color, max, labelWidth = 620, fontSize = 34,
+}: { data: { name: string; value: number }[]; color: string; max: number; labelWidth?: number; fontSize?: number }) => (
   <div className="flex flex-col gap-6">
     {data.map((d) => (
       <div key={d.name} className="flex items-center gap-8">
-        <div className="w-[620px] text-[34px] leading-tight text-right shrink-0">{d.name}</div>
+        <div
+          className="leading-tight text-right shrink-0"
+          style={{ width: labelWidth, fontSize }}
+        >{d.name}</div>
         <div className="flex-1 flex items-center gap-6">
           <div
             className="h-[46px] rounded-r-lg"
@@ -99,26 +98,6 @@ const Stat = ({ value, label, color }: { value: string; label: string; color: st
   <div className="flex-1 rounded-3xl border-2 border-border bg-muted/40 px-12 py-14">
     <p className="text-[128px] leading-none font-bold font-display" style={{ color }}>{value}</p>
     <p className="text-[32px] mt-6 text-muted-foreground leading-snug">{label}</p>
-  </div>
-);
-
-const ChartBox = ({ title, data, color }: { title: string; data: { name: string; value: number }[]; color: string }) => (
-  <div className="flex-1 flex flex-col">
-    <h3 className="text-[36px] font-bold mb-6">{title}</h3>
-    <div className="flex-1">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 60 }}>
-          <CartesianGrid strokeDasharray="3 3" opacity={0.25} vertical={false} />
-          <XAxis dataKey="name" fontSize={20} interval={0} tickMargin={12} height={90}
-            tick={{ width: 220 }} angle={-12} textAnchor="end" />
-          <YAxis allowDecimals={false} fontSize={22} />
-          <Tooltip />
-          <Bar dataKey="value" radius={[8, 8, 0, 0]}>
-            {data.map((_, i) => <Cell key={i} fill={color} />)}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
   </div>
 );
 
@@ -167,8 +146,14 @@ const ZugerbergSlides = () => {
   const day2 = rows.filter((r) => r.attendance_day === DAY_2).length;
   const withIdea = data.filter((r) => r.has_app_idea).length;
 
-  const aiData = useMemo(() => simpleCount(data, "ai_coding_experience"), [data]);
-  const lovableData = useMemo(() => simpleCount(data, "lovable_experience"), [data]);
+  const aiData = useMemo(
+    () => simpleCount(data, "ai_coding_experience").slice(0, 5).map((d) => ({ ...d, name: shorten(d.name, 42) })),
+    [data],
+  );
+  const lovableData = useMemo(
+    () => simpleCount(data, "lovable_experience").slice(0, 5).map((d) => ({ ...d, name: shorten(d.name, 42) })),
+    [data],
+  );
   const goals = useMemo(() => splitCount(data, "workshop_goals").slice(0, 6), [data]);
   const success = useMemo(() => splitCount(data, "success_criteria").slice(0, 6), [data]);
   const blocks = useMemo(() => splitCount(data, "building_blocks").slice(0, 8), [data]);
@@ -219,9 +204,15 @@ const ZugerbergSlides = () => {
     /* 3 — Erfahrung */
     <Slide key="exp">
       <SlideTitle kicker="Erfahrungslevel">Wo ihr heute steht</SlideTitle>
-      <div className="flex-1 flex gap-20 min-h-0">
-        <ChartBox title="AI Coding Erfahrung" data={aiData} color={TEAL} />
-        <ChartBox title="Lovable Erfahrung" data={lovableData} color={VIOLET} />
+      <div className="flex-1 flex gap-24 min-h-0">
+        <div className="flex-1">
+          <h3 className="text-[36px] font-bold mb-10">AI Coding Erfahrung</h3>
+          <RankingBars data={aiData} color={TEAL} max={aiData[0]?.value ?? 1} labelWidth={330} fontSize={26} />
+        </div>
+        <div className="flex-1">
+          <h3 className="text-[36px] font-bold mb-10">Lovable Erfahrung</h3>
+          <RankingBars data={lovableData} color={VIOLET} max={lovableData[0]?.value ?? 1} labelWidth={330} fontSize={26} />
+        </div>
       </div>
       <p className="text-[34px] mt-10 text-muted-foreground">
         {beginners} von {total} haben AI Coding noch nie ausprobiert — genau dafür ist heute da.
