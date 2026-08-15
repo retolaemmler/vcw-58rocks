@@ -293,14 +293,14 @@ const ZugerbergSlides = () => {
     /* 6 — Ideen */
     <Slide key="ideas">
       <SlideTitle kicker="Anonymisiert">Eure App-Ideen</SlideTitle>
-      <div className="grid grid-cols-2 gap-10 flex-1 content-start">
+      <div className="grid grid-cols-2 gap-10 flex-1 content-start overflow-hidden">
         {ideas.map((t, i) => (
-          <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-12">
-            <p className="text-[30px] leading-snug">„{t}“</p>
+          <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-10">
+            <p className="text-[28px] leading-snug">„{t}“</p>
           </div>
         ))}
       </div>
-      <p className="text-[32px] text-muted-foreground mt-8">
+      <p className="text-[30px] text-muted-foreground mt-8 shrink-0">
         {total - withIdea} von {total} starten noch ohne fixe Idee — wir finden sie gemeinsam.
       </p>
     </Slide>,
