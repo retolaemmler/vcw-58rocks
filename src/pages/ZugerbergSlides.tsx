@@ -307,7 +307,7 @@ const ZugerbergSlides = () => {
 
     /* 7 — Building Blocks */
     <Slide key="blocks">
-      <SlideTitle kicker="Technische Bausteine">Was ihr bauen wollt</SlideTitle>
+      <SlideTitle kicker="Technische Bausteine">Bausteine, die ihr verwenden möchtet</SlideTitle>
       <div className="flex-1 flex items-center">
         <div className="w-full">
           <RankingBars data={blocks} color={CYAN} max={blocks[0]?.value ?? 1} />
