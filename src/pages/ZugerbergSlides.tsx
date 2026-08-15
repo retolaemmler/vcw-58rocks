@@ -212,7 +212,7 @@ const ZugerbergSlides = () => {
     () =>
       data
         .filter((r) => r.has_app_idea && r.app_idea_description?.trim())
-        .map((r) => shorten(r.app_idea_description!.replace(/\s+/g, " ").trim()))
+        .map((r) => shorten(r.app_idea_description!.replace(/\s+/g, " ").trim(), 170))
         .slice(0, 4),
     [data],
   );
