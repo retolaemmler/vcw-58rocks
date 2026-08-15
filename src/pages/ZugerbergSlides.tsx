@@ -317,13 +317,19 @@ const ZugerbergSlides = () => {
               key={d}
               size="sm"
               variant={dayFilter === d ? "default" : "outline"}
+              className={dayFilter === d ? "" : "bg-transparent text-white border-white/40 hover:bg-white/10 hover:text-white"}
               onClick={() => { setDayFilter(d); setIndex(0); }}
             >
               {d === "all" ? "Alle" : d}
             </Button>
           ))}
         </div>
-        <Button size="sm" variant="outline" onClick={() => document.documentElement.requestFullscreen?.()}>
+        <Button
+          size="sm"
+          variant="outline"
+          className="bg-transparent text-white border-white/40 hover:bg-white/10 hover:text-white"
+          onClick={() => document.documentElement.requestFullscreen?.()}
+        >
           <Maximize className="w-4 h-4 mr-1" /> Vollbild
         </Button>
       </div>
@@ -338,11 +344,11 @@ const ZugerbergSlides = () => {
       </div>
 
       <div className="flex items-center justify-center gap-6 py-3 text-white/70 shrink-0">
-        <Button size="icon" variant="outline" onClick={() => go(-1)} disabled={index === 0}>
+        <Button size="icon" variant="outline" className="bg-transparent text-white border-white/40 hover:bg-white/10 hover:text-white" onClick={() => go(-1)} disabled={index === 0}>
           <ChevronLeft className="w-4 h-4" />
         </Button>
         <span className="tabular-nums text-sm">{index + 1} / {count}</span>
-        <Button size="icon" variant="outline" onClick={() => go(1)} disabled={index === count - 1}>
+        <Button size="icon" variant="outline" className="bg-transparent text-white border-white/40 hover:bg-white/10 hover:text-white" onClick={() => go(1)} disabled={index === count - 1}>
           <ChevronRight className="w-4 h-4" />
         </Button>
       </div>
