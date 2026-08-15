@@ -308,6 +308,16 @@ const ZugerbergSlides = () => {
     );
   }
 
+  if (rows.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background px-6 text-center">
+        <p className="text-lg text-muted-foreground max-w-md">
+          Keine Survey-Daten geladen. Bitte zuerst im Admin-Bereich anmelden und diese Seite erneut öffnen.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="h-screen w-screen bg-neutral-900 flex flex-col overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2 text-white/80 text-sm shrink-0">
