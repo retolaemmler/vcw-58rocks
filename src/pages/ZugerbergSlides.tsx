@@ -22,31 +22,82 @@ const TEAL = "hsl(var(--primary))";
 const VIOLET = "#8b5cf6";
 const CYAN = "#06b6d4";
 
-const splitCount = (rows: SurveyResponse[], key: keyof SurveyResponse) => {
-  const map = new Map<string, number>();
-  rows.forEach((r) => {
-    const raw = (r[key] as string | null) ?? "";
-    raw
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean)
-      .forEach((v) => map.set(v, (map.get(v) ?? 0) + 1));
-  });
-  return Array.from(map.entries())
+const AI_OPTIONS = [
+  "Noch nie ausprobiert",
+  "Ein bisschen herumgespielt, nichts Ernsthaftes",
+  "Schon eine App gebaut und veröffentlicht",
+];
+const LOVABLE_OPTIONS = [
+  "Davon gehört",
+  "Eine Demo gesehen",
+  "Ein wenig damit experimentiert",
+  "Etwas Echtes damit gebaut",
+];
+const GOAL_CHIPS = [
+  "Meine erste App bauen",
+  "Eine Idee schnell prototypisieren",
+  "Verstehen, was möglich ist",
+  "Mit anderen Builders vernetzen",
+  "Spass haben 🎉",
+];
+const SUCCESS_CHIPS = [
+  "Mit einer funktionierenden App nach Hause gehen",
+  "Lovable selbständig nutzen können",
+  "Klare Roadmap für mein Projekt",
+  "Neue Kontakte geknüpft",
+  "Neues Mindset zum Coden",
+];
+const BLOCK_CHIPS = [
+  "E-Mail",
+  "Zahlungen (z.B. Stripe)",
+  "Benutzer-Login",
+  "CRM (z.B. HubSpot)",
+  "Buchhaltung (z.B. Bexio)",
+  "Datenbank / Speicher",
+  "Datei-Uploads",
+  "Karten / Standort",
+  "Kalender",
+  "API-Integrationen",
+  "KI-Funktionen (z.B. OpenAI)",
+];
+
+const sortDesc = (map: Map<string, number>) =>
+  Array.from(map.entries())
     .map(([name, value]) => ({ name, value }))
     .sort((a, b) => b.value - a.value);
+
+/** Counts multi-select answers by matching known chip options first,
+ *  so option labels containing commas stay intact. */
+const splitCount = (rows: SurveyResponse[], key: keyof SurveyResponse, chips: string[]) => {
+  const map = new Map<string, number>();
+  rows.forEach((r) => {
+    let raw = ((r[key] as string | null) ?? "").trim();
+    if (!raw) return;
+    chips.forEach((chip) => {
+      if (raw.includes(chip)) {
+        map.set(chip, (map.get(chip) ?? 0) + 1);
+        raw = raw.split(chip).join(" | ");
+      }
+    });
+    raw
+      .split(/[|,;\n]/)
+      .map((s) => s.trim().replace(/^[-–•]\s*/, ""))
+      .filter((s) => s.length > 3)
+      .forEach((v) => map.set(v, (map.get(v) ?? 0) + 1));
+  });
+  return sortDesc(map);
 };
 
-const simpleCount = (rows: SurveyResponse[], key: keyof SurveyResponse) => {
+/** Single-choice answers may carry free-text details after the chip; group by chip. */
+const simpleCount = (rows: SurveyResponse[], key: keyof SurveyResponse, options: string[]) => {
   const map = new Map<string, number>();
   rows.forEach((r) => {
     const v = ((r[key] as string | null) ?? "").trim();
     if (!v) return;
-    map.set(v, (map.get(v) ?? 0) + 1);
+    const chip = options.find((o) => v.startsWith(o)) ?? v;
+    map.set(chip, (map.get(chip) ?? 0) + 1);
   });
-  return Array.from(map.entries())
-    .map(([name, value]) => ({ name, value }))
-    .sort((a, b) => b.value - a.value);
+  return sortDesc(map);
 };
 
 const shorten = (s: string, n = 260) => (s.length > n ? `${s.slice(0, n).trimEnd()}…` : s);
@@ -147,16 +198,16 @@ const ZugerbergSlides = () => {
   const withIdea = data.filter((r) => r.has_app_idea).length;
 
   const aiData = useMemo(
-    () => simpleCount(data, "ai_coding_experience").slice(0, 5).map((d) => ({ ...d, name: shorten(d.name, 42) })),
+    () => simpleCount(data, "ai_coding_experience", AI_OPTIONS).slice(0, 5).map((d) => ({ ...d, name: shorten(d.name, 42) })),
     [data],
   );
   const lovableData = useMemo(
-    () => simpleCount(data, "lovable_experience").slice(0, 5).map((d) => ({ ...d, name: shorten(d.name, 42) })),
+    () => simpleCount(data, "lovable_experience", LOVABLE_OPTIONS).slice(0, 5).map((d) => ({ ...d, name: shorten(d.name, 42) })),
     [data],
   );
-  const goals = useMemo(() => splitCount(data, "workshop_goals").slice(0, 6), [data]);
-  const success = useMemo(() => splitCount(data, "success_criteria").slice(0, 6), [data]);
-  const blocks = useMemo(() => splitCount(data, "building_blocks").slice(0, 8), [data]);
+  const goals = useMemo(() => splitCount(data, "workshop_goals", GOAL_CHIPS).slice(0, 6), [data]);
+  const success = useMemo(() => splitCount(data, "success_criteria", SUCCESS_CHIPS).slice(0, 6), [data]);
+  const blocks = useMemo(() => splitCount(data, "building_blocks", BLOCK_CHIPS).slice(0, 8), [data]);
   const ideas = useMemo(
     () =>
       data
