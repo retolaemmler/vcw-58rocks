@@ -226,35 +226,38 @@ const ZugerbergSlides = () => {
     <Slide dark key="title">
       <div className="flex-1 flex flex-col justify-center">
         <p className="text-[26px] tracking-[0.22em] uppercase text-[#4fd1c5] font-semibold mb-10">
-          Zugerberg Finanz × Vibe Code Workshop
+          Briefing für Zugerberg Finanz
         </p>
-        <h1 className="text-[128px] leading-[1.02] font-bold font-display tracking-tight max-w-[1500px]">
-          Willkommen im Vibe Coding Workshop
+        <h1 className="text-[112px] leading-[1.02] font-bold font-display tracking-tight max-w-[1500px]">
+          Vibe Coding Workshop — Standortbestimmung vor der Durchführung
         </h1>
         <p className="text-[40px] mt-12 text-white/70">
-          {dayFilter === "all" ? `${DAY_1} & ${DAY_2}` : dayFilter} · {total} Teilnehmende
+          {dayFilter === "all" ? `${DAY_1} & ${DAY_2}` : dayFilter} · {total} Antworten aus dem Prep Survey
         </p>
       </div>
-      <p className="text-[24px] text-white/50">Basierend auf euren Antworten aus dem Prep Survey</p>
+      <p className="text-[24px] text-white/50">Auswertung der Teilnehmenden-Befragung · Stand heute</p>
     </Slide>,
 
-    /* 2 — Wer ist im Raum */
+    /* 2 — Teilnehmende */
     <Slide key="room">
-      <SlideTitle kicker="Prep Survey">Wer ist im Raum?</SlideTitle>
+      <SlideTitle kicker="Ausgangslage">Wer nimmt teil?</SlideTitle>
       <div className="flex gap-10">
         <Stat value={String(total)} label="ausgefüllte Prep Surveys" color={TEAL} />
-        <Stat value={`${day1} / ${day2}`} label={`${DAY_1} / ${DAY_2}`} color={VIOLET} />
+        <Stat value={`${day1} / ${day2}`} label={`Verteilung ${DAY_1} / ${DAY_2}`} color={VIOLET} />
         <Stat
           value={total ? `${Math.round((withIdea / total) * 100)}%` : "—"}
-          label={`haben bereits eine konkrete App-Idee (${withIdea} von ${total})`}
+          label={`kommen mit einer konkreten App-Idee (${withIdea} von ${total})`}
           color={CYAN}
         />
       </div>
+      <p className="text-[32px] mt-12 text-muted-foreground">
+        Beide Durchführungen laufen mit identischem Setup und identischem Coaching-Team.
+      </p>
     </Slide>,
 
     /* 3 — Erfahrung */
     <Slide key="exp">
-      <SlideTitle kicker="Erfahrungslevel">Wo ihr heute steht</SlideTitle>
+      <SlideTitle kicker="Erfahrungslevel">Vorkenntnisse im Team</SlideTitle>
       <div className="flex-1 flex gap-24 min-h-0">
         <div className="flex-1">
           <h3 className="text-[36px] font-bold mb-10">AI Coding Erfahrung</h3>
@@ -266,13 +269,13 @@ const ZugerbergSlides = () => {
         </div>
       </div>
       <p className="text-[34px] mt-10 text-muted-foreground">
-        {beginners} von {total} haben AI Coding noch nie ausprobiert — genau dafür ist heute da.
+        {beginners} von {total} haben AI Coding noch nie ausprobiert — der Einstieg ist entsprechend niederschwellig.
       </p>
     </Slide>,
 
     /* 4 — Ziele */
     <Slide key="goals">
-      <SlideTitle kicker="Eure Antworten">Was ihr euch vornehmt</SlideTitle>
+      <SlideTitle kicker="Erwartungen der Teilnehmenden">Was sich das Team vornimmt</SlideTitle>
       <div className="flex-1 flex items-center">
         <div className="w-full">
           <RankingBars data={goals} color={TEAL} max={goals[0]?.value ?? 1} />
@@ -282,7 +285,7 @@ const ZugerbergSlides = () => {
 
     /* 5 — Erfolg */
     <Slide key="success">
-      <SlideTitle kicker="Eure Antworten">Woran wir Erfolg messen</SlideTitle>
+      <SlideTitle kicker="Erfolgskriterien">Woran der Workshop gemessen wird</SlideTitle>
       <div className="flex-1 flex items-center">
         <div className="w-full">
           <RankingBars data={success} color={VIOLET} max={success[0]?.value ?? 1} />
@@ -292,7 +295,7 @@ const ZugerbergSlides = () => {
 
     /* 6 — Ideen */
     <Slide key="ideas">
-      <SlideTitle kicker="Anonymisiert">Eure App-Ideen</SlideTitle>
+      <SlideTitle kicker="Anonymisierte Auszüge">Eingereichte App-Ideen</SlideTitle>
       <div className="grid grid-cols-2 gap-10 flex-1 content-start overflow-hidden">
         {ideas.map((t, i) => (
           <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-10">
@@ -301,13 +304,13 @@ const ZugerbergSlides = () => {
         ))}
       </div>
       <p className="text-[30px] text-muted-foreground mt-8 shrink-0">
-        {total - withIdea} von {total} starten noch ohne fixe Idee — wir finden sie gemeinsam.
+        {total - withIdea} von {total} kommen noch ohne fixe Idee — dafür ist ein geführter Ideation-Block eingeplant.
       </p>
     </Slide>,
 
     /* 7 — Building Blocks */
     <Slide key="blocks">
-      <SlideTitle kicker="Technische Bausteine">Bausteine, die ihr verwenden möchtet</SlideTitle>
+      <SlideTitle kicker="Technische Bausteine">Bausteine, die das Team nutzen möchte</SlideTitle>
       <div className="flex-1 flex items-center">
         <div className="w-full">
           <RankingBars data={blocks} color={CYAN} max={blocks[0]?.value ?? 1} />
@@ -315,18 +318,50 @@ const ZugerbergSlides = () => {
       </div>
     </Slide>,
 
-    /* 8 — Los geht's */
-    <Slide dark key="go">
-      <div className="flex-1 flex flex-col justify-center">
-        <h2 className="text-[112px] leading-[1.05] font-bold font-display tracking-tight">Los geht's</h2>
-        <div className="mt-16 space-y-8 text-[40px] text-white/80">
-          <p>1 — Idee schärfen</p>
-          <p>2 — Bauen mit Lovable</p>
-          <p>3 — Testen &amp; verfeinern</p>
-          <p>4 — Zeigen, was ihr gebaut habt</p>
+    /* 8 — Ableitungen */
+    <Slide key="implications">
+      <SlideTitle kicker="Unsere Ableitungen">Was das für die Durchführung bedeutet</SlideTitle>
+      <div className="grid grid-cols-2 gap-8 flex-1 content-start">
+        <div className="rounded-3xl border-2 border-border bg-muted/40 p-9">
+          <p className="text-[30px] leading-snug">
+            <strong>Einstieg ohne Vorwissen.</strong> Start auf Beginner ausgelegt, Erfahrene erhalten optionale
+            Zusatzaufgaben.
+          </p>
+        </div>
+        <div className="rounded-3xl border-2 border-border bg-muted/40 p-9">
+          <p className="text-[30px] leading-snug">
+            <strong>Ideation vorgeschaltet.</strong> Teilnehmende ohne Idee kommen zeitgleich mit allen anderen ins
+            Bauen.
+          </p>
+        </div>
+        <div className="rounded-3xl border-2 border-border bg-muted/40 p-9">
+          <p className="text-[30px] leading-snug">
+            <strong>Fokus auf gefragte Bausteine.</strong> Demos und Vorlagen richten sich nach den meistgenannten
+            Integrationen.
+          </p>
+        </div>
+        <div className="rounded-3xl border-2 border-border bg-muted/40 p-9">
+          <p className="text-[30px] leading-snug">
+            <strong>Betreuung.</strong> 2–3 Coaches vor Ort sichern individuelle Unterstützung an beiden Tagen.
+          </p>
         </div>
       </div>
-      <p className="text-[30px] text-[#4fd1c5]">Am Ende des Tages hat jede und jeder eine laufende App.</p>
+    </Slide>,
+
+    /* 9 — Ablauf & offene Punkte */
+    <Slide dark key="go">
+      <div className="flex-1 flex flex-col justify-center">
+        <h2 className="text-[96px] leading-[1.05] font-bold font-display tracking-tight">Ablauf &amp; nächste Schritte</h2>
+        <div className="mt-14 space-y-7 text-[38px] text-white/80">
+          <p>1 — Kickoff &amp; Ideation</p>
+          <p>2 — Bauen mit Lovable, begleitet durch die Coaches</p>
+          <p>3 — Testen &amp; verfeinern</p>
+          <p>4 — Abschlussrunde: jede Person zeigt ihre App</p>
+        </div>
+      </div>
+      <p className="text-[30px] text-[#4fd1c5]">
+        Offen für die Abstimmung: Raum &amp; Technik, Verpflegung, Foto- und Kommunikationsfreigabe.
+      </p>
     </Slide>,
   ];
 
