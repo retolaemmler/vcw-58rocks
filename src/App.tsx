@@ -20,6 +20,7 @@ import RaiffeisenSurvey from "./pages/RaiffeisenSurvey";
 import RaiffeisenFeedback from "./pages/RaiffeisenFeedback";
 import ZugerbergSurvey from "./pages/ZugerbergSurvey";
 import ZugerbergFeedback from "./pages/ZugerbergFeedback";
+import ZugerbergSlides from "./pages/ZugerbergSlides";
 import MasterclassJune30Survey from "./pages/MasterclassJune30Survey";
 import NotFound from "./pages/NotFound";
 
@@ -98,6 +99,7 @@ const App = () => (
             <Route path="raiffeisen-feedback" element={<RaiffeisenFeedback />} />
             <Route path="zugerberg-prep" element={<ZugerbergSurvey />} />
             <Route path="zugerberg-feedback" element={<ZugerbergFeedback />} />
+            <Route path="zugerberg/slides" element={<ZugerbergSlides />} />
             <Route path="masterclass-june30-prep" element={<MasterclassJune30Survey />} />
             <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
