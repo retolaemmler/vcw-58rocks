@@ -100,6 +100,7 @@ const App = () => (
             <Route path="zugerberg-prep" element={<ZugerbergSurvey />} />
             <Route path="zugerberg-feedback" element={<ZugerbergFeedback />} />
             <Route path="zugerberg/slides" element={<ZugerbergSlides />} />
+            <Route path="zugerberg/slides/:token" element={<ZugerbergSlides />} />
             <Route path="masterclass-june30-prep" element={<MasterclassJune30Survey />} />
             <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
