@@ -187,10 +187,7 @@ const ZugerbergSlides = () => {
     return () => window.removeEventListener("resize", fit);
   }, [loading]);
 
-  const data = useMemo(
-    () => (dayFilter === "all" ? rows : rows.filter((r) => r.attendance_day === dayFilter)),
-    [rows, dayFilter],
-  );
+  const data = rows;
 
   const total = data.length;
   const day1 = rows.filter((r) => r.attendance_day === DAY_1).length;
