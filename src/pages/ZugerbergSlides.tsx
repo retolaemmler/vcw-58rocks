@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Loader2, ChevronLeft, ChevronRight, Maximize } from "lucide-react";
@@ -15,6 +16,7 @@ interface SurveyResponse {
 }
 
 const KIND = "zugerberg_prep";
+const SLIDES_TOKEN = "zf-2026-brief-7k4m9x";
 const DAY_1 = "Donnerstag, 20. August";
 const DAY_2 = "Dienstag, 8. September";
 
