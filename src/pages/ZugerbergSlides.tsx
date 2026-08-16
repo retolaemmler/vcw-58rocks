@@ -214,7 +214,7 @@ const ZugerbergSlides = () => {
         .filter((r) => r.has_app_idea && r.app_idea_description?.trim())
         .map((r) => r.app_idea_description!.replace(/\s+/g, " ").trim())
         .filter((s) => !EXCLUDE_IDEAS.some((e) => s.toLowerCase().startsWith(e)))
-        .map((s) => shorten(s, 220)),
+        .map((s) => shorten(s, 180)),
     [data],
   );
 
@@ -286,14 +286,14 @@ const ZugerbergSlides = () => {
     /* 6 — Ideen */
     <Slide key="ideas">
       <SlideTitle kicker="Anonymisierte Auszüge">Eingereichte App-Ideen</SlideTitle>
-      <div className="grid grid-cols-2 gap-8 flex-1 min-h-0 content-start overflow-hidden">
+      <div className="grid grid-cols-2 grid-rows-3 gap-5 flex-1 min-h-0">
         {ideas.map((t, i) => (
-          <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-8">
-            <p className="text-[28px] leading-snug">„{t}“</p>
+          <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-6 flex flex-col justify-center overflow-hidden">
+            <p className="text-[25px] leading-snug">„{t}“</p>
           </div>
         ))}
       </div>
-      <p className="text-[30px] text-muted-foreground mt-6 shrink-0">
+      <p className="text-[28px] text-muted-foreground mt-5 shrink-0">
         {total - withIdea} von {total} kommen noch ohne fixe Idee — dafür ist ein geführter Ideation-Block eingeplant.
       </p>
     </Slide>,
