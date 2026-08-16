@@ -287,14 +287,14 @@ const ZugerbergSlides = () => {
     /* 6 — Ideen */
     <Slide key="ideas">
       <SlideTitle kicker="Anonymisierte Auszüge">Eingereichte App-Ideen</SlideTitle>
-      <div className="grid grid-cols-2 grid-rows-3 gap-5 flex-1 min-h-0">
+      <div className="grid grid-cols-2 gap-8 flex-1 min-h-0 content-start">
         {ideas.map((t, i) => (
-          <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-6 flex flex-col justify-center overflow-hidden">
-            <p className="text-[25px] leading-snug">„{t}“</p>
+          <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-8 flex flex-col justify-center overflow-hidden">
+            <p className="text-[28px] leading-snug">„{t}“</p>
           </div>
         ))}
       </div>
-      <p className="text-[28px] text-muted-foreground mt-5 shrink-0">
+      <p className="text-[30px] text-muted-foreground mt-6 shrink-0">
         {total - withIdea} von {total} kommen noch ohne fixe Idee — dafür ist ein geführter Ideation-Block eingeplant.
       </p>
     </Slide>,
