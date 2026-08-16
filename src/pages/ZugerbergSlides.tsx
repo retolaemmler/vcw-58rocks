@@ -251,22 +251,6 @@ const ZugerbergSlides = () => {
       <p className="text-[24px] text-white/50">Auswertung der Teilnehmenden-Befragung · Stand heute</p>
     </Slide>,
 
-    /* 2 — Teilnehmende */
-    <Slide key="room">
-      <SlideTitle kicker="Ausgangslage">Wer nimmt teil?</SlideTitle>
-      <div className="flex gap-10">
-        <Stat value={String(total)} label="ausgefüllte Prep Surveys" color={TEAL} />
-        <Stat value={`${day1} / ${day2}`} label={`Verteilung ${DAY_1} / ${DAY_2}`} color={VIOLET} />
-        <Stat
-          value={total ? `${Math.round((withIdea / total) * 100)}%` : "—"}
-          label={`kommen mit einer konkreten App-Idee (${withIdea} von ${total})`}
-          color={CYAN}
-        />
-      </div>
-      <p className="text-[32px] mt-12 text-muted-foreground">
-        Beide Durchführungen laufen mit identischem Setup und identischem Coaching-Team.
-      </p>
-    </Slide>,
 
     /* 3 — Erfahrung */
     <Slide key="exp">
