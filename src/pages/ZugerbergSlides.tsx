@@ -353,7 +353,7 @@ const ZugerbergSlides = () => {
             Wir freuen uns auf euch!
           </h2>
           <p className="text-[40px] mt-8 text-white/70">
-            Reto, Remy & Valentin
+            Reto, Valentin & Remy
           </p>
         </div>
         <img
