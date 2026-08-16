@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import zugerbergLogo from "@/assets/zugerberg_logo.svg.asset.json";
+import coachesPhoto from "@/assets/coaches-team.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { Loader2, ChevronLeft, ChevronRight, Maximize } from "lucide-react";
 interface SurveyResponse {
@@ -344,20 +345,20 @@ const ZugerbergSlides = () => {
       </div>
     </Slide>,
 
-    /* 9 — Ablauf & offene Punkte */
-    <Slide dark key="go">
-      <div className="flex-1 flex flex-col justify-center">
-        <h2 className="text-[96px] leading-[1.05] font-bold font-display tracking-tight">Ablauf &amp; nächste Schritte</h2>
-        <div className="mt-14 space-y-7 text-[38px] text-white/80">
-          <p>1 — Kickoff &amp; Ideation</p>
-          <p>2 — Bauen mit Lovable, begleitet durch die Coaches</p>
-          <p>3 — Testen &amp; verfeinern</p>
-          <p>4 — Abschlussrunde: jede Person zeigt ihre App</p>
+    /* 9 — Abschluss */
+    <Slide dark key="outro">
+      <div className="flex-1 flex items-center gap-20 min-h-0">
+        <div className="flex-1">
+          <h2 className="text-[104px] leading-[1.02] font-bold font-display tracking-tight">
+            Wir freuen uns auf euch!
+          </h2>
         </div>
+        <img
+          src={coachesPhoto.url}
+          alt="Die drei Coaches des Vibe Coding Workshops"
+          className="h-full w-[780px] object-cover rounded-3xl shadow-2xl"
+        />
       </div>
-      <p className="text-[30px] text-[#4fd1c5]">
-        Offen für die Abstimmung: Raum &amp; Technik, Verpflegung, Foto- und Kommunikationsfreigabe.
-      </p>
     </Slide>,
   ];
 
