@@ -158,7 +158,7 @@ const ZugerbergSlides = () => {
   const [rows, setRows] = useState<SurveyResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
-  const [dayFilter, setDayFilter] = useState<"all" | typeof DAY_1 | typeof DAY_2>("all");
+  
   const [scale, setScale] = useState(1);
   const stageRef = useRef<HTMLDivElement>(null);
 
