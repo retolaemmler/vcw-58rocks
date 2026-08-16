@@ -395,7 +395,7 @@ const ZugerbergSlides = () => {
   }
 
   return (
-    <div className="h-screen w-screen bg-neutral-900 flex flex-col overflow-hidden">
+    <div className="h-screen w-screen flex flex-col overflow-hidden bg-gradient-to-br from-[#0d1b2a] via-[#102a43] to-[#1b3a5b]">
       {!unlocked && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-neutral-900/70 backdrop-blur-md px-6">
           <form
