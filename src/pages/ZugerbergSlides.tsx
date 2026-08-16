@@ -169,7 +169,6 @@ const ZugerbergSlides = () => {
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!unlocked) return;
     (async () => {
       const { data: token } = await supabase
         .from("survey_tokens").select("id").eq("kind", KIND).limit(1).maybeSingle();
@@ -181,7 +180,7 @@ const ZugerbergSlides = () => {
       }
       setLoading(false);
     })();
-  }, [unlocked]);
+  }, []);
 
   useLayoutEffect(() => {
     const fit = () => {
@@ -363,7 +362,10 @@ const ZugerbergSlides = () => {
   ];
 
   const count = slides.length;
-  const go = useCallback((d: number) => setIndex((i) => Math.min(Math.max(i + d, 0), count - 1)), [count]);
+  const go = useCallback((d: number) => {
+    if (!unlocked) return;
+    setIndex((i) => Math.min(Math.max(i + d, 0), count - 1));
+  }, [count, unlocked]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -373,37 +375,6 @@ const ZugerbergSlides = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [go]);
-
-  if (!unlocked) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-900 px-6">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (pw === "zugerbergvibe") {
-              sessionStorage.setItem("zf_slides_ok", "1");
-              setUnlocked(true);
-            } else {
-              setPwError(true);
-            }
-          }}
-          className="w-full max-w-sm space-y-4 text-center"
-        >
-          <h1 className="text-2xl font-semibold text-white">Geschützte Slides</h1>
-          <input
-            type="password"
-            value={pw}
-            onChange={(e) => { setPw(e.target.value); setPwError(false); }}
-            placeholder="Passwort"
-            autoFocus
-            className="w-full rounded-md bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-white/50"
-          />
-          {pwError && <p className="text-sm text-red-400">Falsches Passwort</p>}
-          <Button type="submit" className="w-full">Öffnen</Button>
-        </form>
-      </div>
-    );
-  }
 
   if (loading) {
     return (
@@ -425,6 +396,34 @@ const ZugerbergSlides = () => {
 
   return (
     <div className="h-screen w-screen bg-neutral-900 flex flex-col overflow-hidden">
+      {!unlocked && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-neutral-900/70 backdrop-blur-md px-6">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (pw === "zugerbergvibe") {
+                sessionStorage.setItem("zf_slides_ok", "1");
+                setUnlocked(true);
+              } else {
+                setPwError(true);
+              }
+            }}
+            className="w-full max-w-sm space-y-4 rounded-2xl border border-white/15 bg-neutral-900/90 p-8 text-center shadow-2xl"
+          >
+            <h1 className="text-xl font-semibold text-white">Geschützte Slides</h1>
+            <input
+              type="password"
+              value={pw}
+              onChange={(e) => { setPw(e.target.value); setPwError(false); }}
+              placeholder="Passwort"
+              autoFocus
+              className="w-full rounded-md border border-white/20 bg-white/10 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-white/50"
+            />
+            {pwError && <p className="text-sm text-red-400">Falsches Passwort</p>}
+            <Button type="submit" className="w-full">Öffnen</Button>
+          </form>
+        </div>
+      )}
       <div className="flex items-center justify-end px-4 py-2 text-white/80 text-sm shrink-0">
         <Button
           size="sm"
