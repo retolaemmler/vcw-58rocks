@@ -400,20 +400,7 @@ const ZugerbergSlides = () => {
 
   return (
     <div className="h-screen w-screen bg-neutral-900 flex flex-col overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 text-white/80 text-sm shrink-0">
-        <div className="flex gap-2">
-          {(["all", DAY_1, DAY_2] as const).map((d) => (
-            <Button
-              key={d}
-              size="sm"
-              variant={dayFilter === d ? "default" : "outline"}
-              className={dayFilter === d ? "" : "bg-transparent text-white border-white/40 hover:bg-white/10 hover:text-white"}
-              onClick={() => { setDayFilter(d); setIndex(0); }}
-            >
-              {d === "all" ? "Alle" : d}
-            </Button>
-          ))}
-        </div>
+      <div className="flex items-center justify-end px-4 py-2 text-white/80 text-sm shrink-0">
         <Button
           size="sm"
           variant="outline"
