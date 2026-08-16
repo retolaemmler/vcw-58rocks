@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import zugerbergLogo from "@/assets/zugerberg_logo.svg.asset.json";
 import { Button } from "@/components/ui/button";
 import { Loader2, ChevronLeft, ChevronRight, Maximize } from "lucide-react";
 interface SurveyResponse {
