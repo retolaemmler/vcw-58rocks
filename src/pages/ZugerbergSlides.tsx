@@ -159,11 +159,17 @@ const ZugerbergSlides = () => {
   const [rows, setRows] = useState<SurveyResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
+  const [unlocked, setUnlocked] = useState(
+    () => typeof window !== "undefined" && sessionStorage.getItem("zf_slides_ok") === "1"
+  );
+  const [pw, setPw] = useState("");
+  const [pwError, setPwError] = useState(false);
   
   const [scale, setScale] = useState(1);
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!unlocked) return;
     (async () => {
       const { data: token } = await supabase
         .from("survey_tokens").select("id").eq("kind", KIND).limit(1).maybeSingle();
@@ -175,7 +181,7 @@ const ZugerbergSlides = () => {
       }
       setLoading(false);
     })();
-  }, []);
+  }, [unlocked]);
 
   useLayoutEffect(() => {
     const fit = () => {
@@ -367,6 +373,37 @@ const ZugerbergSlides = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [go]);
+
+  if (!unlocked) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-neutral-900 px-6">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (pw === "zugerbergvibe") {
+              sessionStorage.setItem("zf_slides_ok", "1");
+              setUnlocked(true);
+            } else {
+              setPwError(true);
+            }
+          }}
+          className="w-full max-w-sm space-y-4 text-center"
+        >
+          <h1 className="text-2xl font-semibold text-white">Geschützte Slides</h1>
+          <input
+            type="password"
+            value={pw}
+            onChange={(e) => { setPw(e.target.value); setPwError(false); }}
+            placeholder="Passwort"
+            autoFocus
+            className="w-full rounded-md bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-white/50"
+          />
+          {pwError && <p className="text-sm text-red-400">Falsches Passwort</p>}
+          <Button type="submit" className="w-full">Öffnen</Button>
+        </form>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
