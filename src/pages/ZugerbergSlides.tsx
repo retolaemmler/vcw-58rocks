@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import zugerbergLogo from "@/assets/zugerberg_logo.svg.asset.json";
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,6 @@ interface SurveyResponse {
 }
 
 const KIND = "zugerberg_prep";
-const SLIDES_TOKEN = "zf-2026-brief-7k4m9x";
 const DAY_1 = "Donnerstag, 20. August";
 const DAY_2 = "Dienstag, 8. September";
 
@@ -158,9 +156,6 @@ const Stat = ({ value, label, color }: { value: string; label: string; color: st
 /* ---------- page ---------- */
 
 const ZugerbergSlides = () => {
-  const { token: pathToken } = useParams();
-  const [searchParams] = useSearchParams();
-  const authorized = (pathToken ?? searchParams.get("token")) === SLIDES_TOKEN;
   const [rows, setRows] = useState<SurveyResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
@@ -169,10 +164,6 @@ const ZugerbergSlides = () => {
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!authorized) {
-      setLoading(false);
-      return;
-    }
     (async () => {
       const { data: token } = await supabase
         .from("survey_tokens").select("id").eq("kind", KIND).limit(1).maybeSingle();
@@ -184,7 +175,7 @@ const ZugerbergSlides = () => {
       }
       setLoading(false);
     })();
-  }, [authorized]);
+  }, []);
 
   useLayoutEffect(() => {
     const fit = () => {
@@ -394,16 +385,6 @@ const ZugerbergSlides = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [go]);
-
-  if (!authorized) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background px-6 text-center">
-        <p className="text-lg text-muted-foreground max-w-md">
-          Ungültiger oder fehlender Zugangslink.
-        </p>
-      </div>
-    );
-  }
 
   if (loading) {
     return (
