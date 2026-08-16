@@ -157,6 +157,9 @@ const Stat = ({ value, label, color }: { value: string; label: string; color: st
 /* ---------- page ---------- */
 
 const ZugerbergSlides = () => {
+  const { token: pathToken } = useParams();
+  const [searchParams] = useSearchParams();
+  const authorized = (pathToken ?? searchParams.get("token")) === SLIDES_TOKEN;
   const [rows, setRows] = useState<SurveyResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
@@ -165,6 +168,10 @@ const ZugerbergSlides = () => {
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!authorized) {
+      setLoading(false);
+      return;
+    }
     (async () => {
       const { data: token } = await supabase
         .from("survey_tokens").select("id").eq("kind", KIND).limit(1).maybeSingle();
@@ -176,7 +183,7 @@ const ZugerbergSlides = () => {
       }
       setLoading(false);
     })();
-  }, []);
+  }, [authorized]);
 
   useLayoutEffect(() => {
     const fit = () => {
