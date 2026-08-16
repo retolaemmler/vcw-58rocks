@@ -389,6 +389,16 @@ const ZugerbergSlides = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [go]);
 
+  if (!authorized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background px-6 text-center">
+        <p className="text-lg text-muted-foreground max-w-md">
+          Ungültiger oder fehlender Zugangslink.
+        </p>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
