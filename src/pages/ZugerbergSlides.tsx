@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import zugerbergLogo from "@/assets/zugerberg_logo.svg.asset.json";
 import { Button } from "@/components/ui/button";
 import { Loader2, ChevronLeft, ChevronRight, Maximize } from "lucide-react";
 interface SurveyResponse {
@@ -243,6 +244,11 @@ const ZugerbergSlides = () => {
   const slides: React.ReactNode[] = [
     /* 1 — Titel */
     <Slide dark key="title">
+      <img
+        src={zugerbergLogo.url}
+        alt="Zugerberg Finanz"
+        className="h-[52px] w-auto self-start brightness-0 invert opacity-90"
+      />
       <div className="flex-1 flex flex-col justify-center">
         <p className="text-[26px] tracking-[0.22em] uppercase text-[#4fd1c5] font-semibold mb-10">
           Briefing für Zugerberg Finanz
