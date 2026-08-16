@@ -214,7 +214,7 @@ const ZugerbergSlides = () => {
         .filter((r) => r.has_app_idea && r.app_idea_description?.trim())
         .map((r) => r.app_idea_description!.replace(/\s+/g, " ").trim())
         .filter((s) => !EXCLUDE_IDEAS.some((e) => s.toLowerCase().startsWith(e)))
-        .map((s) => shorten(s, 220)),
+        .map((s) => shorten(s, 180)),
     [data],
   );
 
