@@ -206,12 +206,14 @@ const ZugerbergSlides = () => {
   const goals = useMemo(() => splitCount(data, "workshop_goals", GOAL_CHIPS).slice(0, 6), [data]);
   const success = useMemo(() => splitCount(data, "success_criteria", SUCCESS_CHIPS).slice(0, 6), [data]);
   const blocks = useMemo(() => splitCount(data, "building_blocks", BLOCK_CHIPS).slice(0, 8), [data]);
-  // All submitted ideas, shown with equal weight.
+  // All submitted ideas, shown with equal weight. Exclude low-quality/multi-list drafts.
+  const EXCLUDE_IDEAS = ["drei unterschiedliche ideen"];
   const ideas = useMemo(
     () =>
       data
         .filter((r) => r.has_app_idea && r.app_idea_description?.trim())
         .map((r) => r.app_idea_description!.replace(/\s+/g, " ").trim())
+        .filter((s) => !EXCLUDE_IDEAS.some((e) => s.toLowerCase().startsWith(e)))
         .map((s) => shorten(s, 220)),
     [data],
   );
