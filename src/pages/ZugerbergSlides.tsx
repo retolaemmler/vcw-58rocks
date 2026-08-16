@@ -242,7 +242,7 @@ const ZugerbergSlides = () => {
           Vibe Coding Workshop — Standortbestimmung vor der Durchführung
         </h1>
         <p className="text-[40px] mt-12 text-white/70">
-          {dayFilter === "all" ? `${DAY_1} & ${DAY_2}` : dayFilter} · {total} Antworten aus dem Prep Survey
+          {DAY_1} & {DAY_2} · {total} Antworten aus dem Prep Survey
         </p>
       </div>
       <p className="text-[24px] text-white/50">Auswertung der Teilnehmenden-Befragung · Stand heute</p>
