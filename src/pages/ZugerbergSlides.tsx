@@ -209,8 +209,7 @@ const ZugerbergSlides = () => {
   // Feature the richer, multi-idea responses first so the slide leads with
   // a concrete example (e.g. the RACI / Cyber-Schulung quote) instead of a
   // short one-liner. Longer, multi-idea answers stay legible.
-  const FEATURE_IDEA =
-    "drei Unterschiedliche Ideen - eine gamifizierte online Cyber Schulung entwerfen. - RACI Matrizen aus Weisungen extrahieren und über alle Weisungen hinweg zusammenfügen. -…";
+  const FEATURE_MATCH = "marketingunterlagen";
   const ideas = useMemo(
     () => {
       const cleaned = data
@@ -218,12 +217,12 @@ const ZugerbergSlides = () => {
         .map((r) => r.app_idea_description!.replace(/\s+/g, " ").trim());
       // Surface the feature example first if present, then the rest by length.
       const normalized = (s: string) => s.replace(/\u00ad/g, "").replace(/\s+/g, " ").trim();
-      const hasFeature = cleaned.some((s) => s.toLowerCase().includes("raci"));
+      const feature = cleaned.find((s) => s.toLowerCase().includes(FEATURE_MATCH));
       const rest = cleaned
-        .filter((s) => !s.toLowerCase().includes("raci"))
+        .filter((s) => !s.toLowerCase().includes(FEATURE_MATCH))
         .sort((a, b) => b.length - a.length)
         .map((s) => shorten(s, 200));
-      return hasFeature ? [shorten(FEATURE_IDEA, 320), ...rest.slice(0, 3)] : rest.slice(0, 4);
+      return feature ? [shorten(feature, 320), ...rest.slice(0, 3)] : rest.slice(0, 4);
     },
     [data],
   );
