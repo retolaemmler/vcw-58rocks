@@ -338,7 +338,7 @@ const ZugerbergSlides = () => {
         </div>
         <div className="rounded-3xl border-2 border-border bg-muted/40 p-9">
           <p className="text-[30px] leading-snug">
-            <strong>Betreuung.</strong> 2–3 Coaches vor Ort sichern individuelle Unterstützung an beiden Tagen.
+            <strong>Betreuung.</strong> 3 Coaches vor Ort sichern individuelle Unterstützung an beiden Tagen.
           </p>
         </div>
       </div>
