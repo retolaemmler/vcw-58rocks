@@ -110,6 +110,12 @@ const Navbar = ({ activeTab }: NavbarProps) => {
               {link.label}
             </button>
           ))}
+          <button
+            onClick={() => navigate(`/${i18n.language || "en"}/admin`)}
+            className="text-sm font-medium transition-colors text-muted-foreground hover:text-foreground"
+          >
+            {t("nav.internal")}
+          </button>
           <LanguageSwitcher />
           <Button size="sm" onClick={() => setNewsletterOpen(true)}>
             <Bell className="w-4 h-4 mr-1" />
@@ -142,6 +148,12 @@ const Navbar = ({ activeTab }: NavbarProps) => {
               {link.label}
             </button>
           ))}
+          <button
+            onClick={() => navigate(`/${i18n.language || "en"}/admin`)}
+            className="block w-full text-left py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t("nav.internal")}
+          </button>
           <Button size="sm" className="mt-2 w-full" onClick={() => { setMobileOpen(false); setNewsletterOpen(true); }}>
             <Bell className="w-4 h-4 mr-1" />
             {t("nav.newsletter")}

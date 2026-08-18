@@ -7,6 +7,7 @@ const de = {
     coaches: "Coaches",
     tickets: "Tickets",
     newsletter: "Newsletter",
+    internal: "Intern",
   },
   newsletter: {
     title: "Abonniere unseren Newsletter",

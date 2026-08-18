@@ -7,6 +7,7 @@ const en = {
     coaches: "Coaches",
     tickets: "Tickets",
     newsletter: "Newsletter",
+    internal: "Internal",
   },
   newsletter: {
     title: "Subscribe to our Newsletter",
