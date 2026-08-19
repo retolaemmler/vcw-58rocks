@@ -160,25 +160,13 @@ const ZugerbergSlides = () => {
   const [rows, setRows] = useState<SurveyResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
-  const [unlocked, setUnlocked] = useState(
-    () => typeof window !== "undefined" && sessionStorage.getItem("zf_slides_ok") === "1"
-  );
-  const [pw, setPw] = useState("");
-  const [pwError, setPwError] = useState(false);
-  
   const [scale, setScale] = useState(1);
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     (async () => {
-      const { data: token } = await supabase
-        .from("survey_tokens").select("id").eq("kind", KIND).limit(1).maybeSingle();
-      if (token) {
-        const { data } = await supabase
-          .from("survey_responses").select("*").eq("token_id", token.id)
-          .order("created_at", { ascending: false });
-        if (data) setRows(data as unknown as SurveyResponse[]);
-      }
+      const { data } = await supabase.functions.invoke("zugerberg-slides-data");
+      if (data?.rows) setRows(data.rows as unknown as SurveyResponse[]);
       setLoading(false);
     })();
   }, []);
@@ -392,7 +380,7 @@ const ZugerbergSlides = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background px-6 text-center">
         <p className="text-lg text-muted-foreground max-w-md">
-          Keine Survey-Daten geladen. Bitte zuerst im Admin-Bereich anmelden und diese Seite erneut öffnen.
+          Keine Survey-Daten verfügbar.
         </p>
       </div>
     );
@@ -400,34 +388,6 @@ const ZugerbergSlides = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-hidden bg-gradient-to-br from-[#0d1b2a] via-[#102a43] to-[#1b3a5b]">
-      {!unlocked && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-[2px] px-6">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (pw === "zugerbergvibe") {
-                sessionStorage.setItem("zf_slides_ok", "1");
-                setUnlocked(true);
-              } else {
-                setPwError(true);
-              }
-            }}
-            className="w-full max-w-sm space-y-4 rounded-2xl border border-white/15 bg-neutral-900/90 p-8 text-center shadow-2xl"
-          >
-            <h1 className="text-xl font-semibold text-white">Geschützte Slides</h1>
-            <input
-              type="password"
-              value={pw}
-              onChange={(e) => { setPw(e.target.value); setPwError(false); }}
-              placeholder="Passwort"
-              autoFocus
-              className="w-full rounded-md border border-white/20 bg-white/10 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-white/50"
-            />
-            {pwError && <p className="text-sm text-red-400">Falsches Passwort</p>}
-            <Button type="submit" className="w-full">Öffnen</Button>
-          </form>
-        </div>
-      )}
       <div className="flex items-center justify-end px-4 py-2 text-white/80 text-sm shrink-0">
         <Button
           size="sm"
