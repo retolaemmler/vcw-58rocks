@@ -355,9 +355,8 @@ const ZugerbergSlides = () => {
 
   const count = slides.length;
   const go = useCallback((d: number) => {
-    if (!unlocked) return;
     setIndex((i) => Math.min(Math.max(i + d, 0), count - 1));
-  }, [count, unlocked]);
+  }, [count]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
