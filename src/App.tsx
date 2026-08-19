@@ -53,9 +53,14 @@ const LangLayout = () => {
       typeof navigator !== "undefined" ? navigator.language.toLowerCase() : "en";
     const candidate = (stored || browser || "en").toLowerCase();
     const target: Lang = candidate.startsWith("de") ? "de" : "en";
+    // Route-pattern placeholders like "/:lang/admin" (used by the preview page
+    // picker) must have the placeholder segment replaced, not kept.
+    const path = lang?.startsWith(":")
+      ? location.pathname.replace(/^\/:[^/]+/, "")
+      : location.pathname;
     return (
       <Navigate
-        to={`/${target}${location.pathname}${location.search}${location.hash}`}
+        to={`/${target}${path}${location.search}${location.hash}`}
         replace
       />
     );
