@@ -200,7 +200,7 @@ const ZugerbergSlides = () => {
   const goals = useMemo(() => splitCount(data, "workshop_goals", GOAL_CHIPS).slice(0, 6), [data]);
   const success = useMemo(() => splitCount(data, "success_criteria", SUCCESS_CHIPS).slice(0, 6), [data]);
   const blocks = useMemo(() => splitCount(data, "building_blocks", BLOCK_CHIPS).slice(0, 8), [data]);
-  // Top 4 submitted ideas, shown with equal weight. Exclude low-quality/multi-list drafts.
+  // All submitted ideas, shown with equal weight across several slides.
   const EXCLUDE_IDEAS = ["drei unterschiedliche ideen"];
   const ideas = useMemo(
     () =>
@@ -208,10 +208,15 @@ const ZugerbergSlides = () => {
         .filter((r) => r.has_app_idea && r.app_idea_description?.trim())
         .map((r) => r.app_idea_description!.replace(/\s+/g, " ").trim())
         .filter((s) => !EXCLUDE_IDEAS.some((e) => s.toLowerCase().startsWith(e)))
-        .slice(0, 4)
         .map((s) => shorten(s, 220)),
     [data],
   );
+
+  const ideaPages = useMemo(() => {
+    const pages: string[][] = [];
+    for (let i = 0; i < ideas.length; i += 4) pages.push(ideas.slice(i, i + 4));
+    return pages;
+  }, [ideas]);
 
   const beginners = data.filter((r) =>
     (r.ai_coding_experience ?? "").toLowerCase().startsWith("noch nie"),
@@ -278,20 +283,26 @@ const ZugerbergSlides = () => {
       </div>
     </Slide>,
 
-    /* 6 — Ideen */
-    <Slide key="ideas">
-      <SlideTitle kicker="Anonymisierte Auszüge">Eingereichte App-Ideen</SlideTitle>
-      <div className="grid grid-cols-2 gap-8 flex-1 min-h-0 content-start">
-        {ideas.map((t, i) => (
-          <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-8 flex flex-col justify-center overflow-hidden">
-            <p className="text-[28px] leading-snug">„{t}“</p>
-          </div>
-        ))}
-      </div>
-      <p className="text-[30px] text-muted-foreground mt-6 shrink-0">
-        {total - withIdea} von {total} kommen noch ohne fixe Idee — dafür ist ein geführter Ideation-Block eingeplant.
-      </p>
-    </Slide>,
+    /* 6 — Ideen (mehrere Folien) */
+    ...ideaPages.map((page, p) => (
+      <Slide key={`ideas-${p}`}>
+        <SlideTitle kicker="Anonymisierte Auszüge">
+          Eingereichte App-Ideen{ideaPages.length > 1 ? ` (${p + 1}/${ideaPages.length})` : ""}
+        </SlideTitle>
+        <div className="grid grid-cols-2 gap-8 flex-1 min-h-0 content-start">
+          {page.map((t, i) => (
+            <div key={i} className="rounded-3xl border-2 border-border bg-muted/40 p-8 flex flex-col justify-center overflow-hidden">
+              <p className="text-[28px] leading-snug">„{t}“</p>
+            </div>
+          ))}
+        </div>
+        {p === ideaPages.length - 1 && (
+          <p className="text-[30px] text-muted-foreground mt-6 shrink-0">
+            {total - withIdea} von {total} kommen noch ohne fixe Idee — dafür ist ein geführter Ideation-Block eingeplant.
+          </p>
+        )}
+      </Slide>
+    )),
 
     /* 7 — Building Blocks */
     <Slide key="blocks">
