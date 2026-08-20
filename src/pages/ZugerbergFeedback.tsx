@@ -314,11 +314,11 @@ const ZugerbergFeedback = () => {
                           <RadioGroup value={field.value} onValueChange={field.onChange} className="space-y-2">
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="day1" id="att-day1" />
-                              <Label htmlFor="att-day1" className="font-normal cursor-pointer">Freitag, 29.5.</Label>
+                              <Label htmlFor="att-day1" className="font-normal cursor-pointer">Donnerstag, 20. August</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="day2" id="att-day2" />
-                              <Label htmlFor="att-day2" className="font-normal cursor-pointer">Montag, 1.6.</Label>
+                              <Label htmlFor="att-day2" className="font-normal cursor-pointer">Dienstag, 8. September</Label>
                             </div>
                           </RadioGroup>
                         </FormControl>
