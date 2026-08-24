@@ -22,6 +22,8 @@ import ZugerbergSurvey from "./pages/ZugerbergSurvey";
 import ZugerbergFeedback from "./pages/ZugerbergFeedback";
 import ZugerbergSlides from "./pages/ZugerbergSlides";
 import MasterclassJune30Survey from "./pages/MasterclassJune30Survey";
+import MasterclassAug28Survey from "./pages/MasterclassAug28Survey";
+import MasterclassAug28Feedback from "./pages/MasterclassAug28Feedback";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
