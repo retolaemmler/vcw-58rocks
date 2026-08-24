@@ -72,13 +72,17 @@ const FeedbackAdmin = () => {
     const { data: tokensData } = await supabase
       .from("survey_tokens")
       .select("id, token, kind")
-      .in("kind", ["feedback", "feedback_de"]);
+      .in("kind", ["feedback", "feedback_de", "mc_aug28_feedback"]);
 
     if (tokensData) {
       setTokens(tokensData);
       const mainToken = tokensData.find(t => t.kind === "feedback");
       if (mainToken) {
         setFeedbackLink(`${window.location.origin}/feedback?token=${mainToken.token}`);
+      }
+      const aug28 = tokensData.find(t => t.kind === "mc_aug28_feedback");
+      if (aug28) {
+        setAug28Link(`${window.location.origin}/de/mc-aug28-feedback?token=${aug28.token}`);
       }
     }
 

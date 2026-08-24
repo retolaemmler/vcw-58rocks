@@ -32,7 +32,7 @@ import ZugerbergSurveyAdmin from "@/components/admin/ZugerbergSurveyAdmin";
 import ZugerbergFeedbackAdmin from "@/components/admin/ZugerbergFeedbackAdmin";
 import MasterclassJune30SurveyAdmin from "@/components/admin/MasterclassJune30SurveyAdmin";
 import MasterclassAug28SurveyAdmin from "@/components/admin/MasterclassAug28SurveyAdmin";
-import MasterclassAug28FeedbackAdmin from "@/components/admin/MasterclassAug28FeedbackAdmin";
+
 import type { Session } from "@supabase/supabase-js";
 
 interface Order {
@@ -338,7 +338,7 @@ const Admin = () => {
                     <SelectItem value="prep">16.4.26 Masterclass Prep Survey</SelectItem>
                     <SelectItem value="masterclass-june30">30.6.26 Masterclass Prep Survey</SelectItem>
                     <SelectItem value="mc-aug28">28.08.26 Masterclass Prep Survey</SelectItem>
-                    <SelectItem value="mc-aug28-feedback">28.08.26 Masterclass Feedback Survey</SelectItem>
+                    
                     <SelectItem value="feedback">Masterclass Feedback</SelectItem>
                     <SelectItem value="raiffeisen">Raiffeisen Prep Survey</SelectItem>
                     <SelectItem value="raiffeisen-feedback">Raiffeisen Feedback</SelectItem>
@@ -350,7 +350,7 @@ const Admin = () => {
               {surveyTab === "prep" && <SurveyAdmin />}
               {surveyTab === "masterclass-june30" && <MasterclassJune30SurveyAdmin />}
               {surveyTab === "mc-aug28" && <MasterclassAug28SurveyAdmin />}
-              {surveyTab === "mc-aug28-feedback" && <MasterclassAug28FeedbackAdmin />}
+              
               {surveyTab === "feedback" && <FeedbackAdmin />}
               {surveyTab === "raiffeisen" && <RaiffeisenSurveyAdmin />}
               {surveyTab === "raiffeisen-feedback" && <RaiffeisenFeedbackAdmin />}
