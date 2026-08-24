@@ -54,6 +54,7 @@ const avg = (vals: (number | null)[]) => {
 
 const FeedbackAdmin = () => {
   const [feedbackLink, setFeedbackLink] = useState<string | null>(null);
+  const [aug28Link, setAug28Link] = useState<string | null>(null);
   const [responses, setResponses] = useState<FeedbackResponse[]>([]);
   const [tokens, setTokens] = useState<{ id: string, kind: string }[]>([]);
   const [loading, setLoading] = useState(true);
