@@ -96,9 +96,11 @@ const FeedbackAdmin = () => {
     setLoading(false);
   };
 
+  const activeLink = editionFilter === "edition3" ? aug28Link : feedbackLink;
+
   const copyLink = () => {
-    if (!feedbackLink) return;
-    navigator.clipboard.writeText(feedbackLink);
+    if (!activeLink) return;
+    navigator.clipboard.writeText(activeLink);
     setCopied(true);
     toast({ title: "Copied!", description: "Feedback link copied to clipboard" });
     setTimeout(() => setCopied(false), 2000);
