@@ -178,14 +178,15 @@ const FeedbackAdmin = () => {
                 <SelectItem value="all">All Editions</SelectItem>
                 <SelectItem value="edition1">Edition 1 - 16.4.26</SelectItem>
                 <SelectItem value="edition2">Edition 2 - 30.6.26</SelectItem>
+                <SelectItem value="edition3">Edition 3 - 28.8.26</SelectItem>
               </SelectContent>
             </Select>
           </CardContent>
         </Card>
 
-        {feedbackLink && (
+        {activeLink && (
           <div className="flex items-center gap-2 bg-muted p-2 rounded-lg text-xs">
-            <code className="text-muted-foreground">{feedbackLink}</code>
+            <code className="text-muted-foreground">{activeLink}</code>
             <Button variant="ghost" size="icon" className="h-6 w-6" onClick={copyLink}>
               {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
             </Button>
