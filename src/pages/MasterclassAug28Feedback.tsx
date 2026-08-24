@@ -304,28 +304,8 @@ const MasterclassAug28Feedback = () => {
                     )}
                   />
 
-                  <FormField
-                    control={form.control}
-                    name="attendance_day"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base">📅 An welchem Workshop-Tag hast du teilgenommen?</FormLabel>
-                        <FormControl>
-                          <RadioGroup value={field.value} onValueChange={field.onChange} className="space-y-2">
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="day1" id="att-day1" />
-                              <Label htmlFor="att-day1" className="font-normal cursor-pointer">Donnerstag, 20. August</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="day2" id="att-day2" />
-                              <Label htmlFor="att-day2" className="font-normal cursor-pointer">Dienstag, 8. September</Label>
-                            </div>
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+
+
 
                   <FormField
                     control={form.control}
