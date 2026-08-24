@@ -19,7 +19,6 @@ import logo from "@/assets/vcw-logo.png";
 const feedbackSchema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
   participant_name: z.string().optional(),
-  attendance_day: z.enum(["day1", "day2"], { required_error: "Bitte wähle einen Workshop-Tag" }),
   nps_score: z.number({ required_error: "Bitte wähle einen Wert" }).min(0).max(10),
   overall_rating: z.number({ required_error: "Bitte bewerte den Workshop" }).min(1).max(5),
   rating_intro: z.number({ required_error: "Bitte bewerte diesen Abschnitt" }).min(1).max(5),
@@ -179,7 +178,6 @@ const MasterclassAug28Feedback = () => {
       token_id: tokenId,
       email: values.email?.trim().toLowerCase() || null,
       participant_name: values.participant_name?.trim() || null,
-      attendance_day: values.attendance_day,
       nps_score: values.nps_score ?? null,
       overall_rating: values.overall_rating ?? null,
       rating_intro: values.rating_intro ?? null,
