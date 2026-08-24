@@ -54,6 +54,7 @@ const avg = (vals: (number | null)[]) => {
 
 const FeedbackAdmin = () => {
   const [feedbackLink, setFeedbackLink] = useState<string | null>(null);
+  const [aug28Link, setAug28Link] = useState<string | null>(null);
   const [responses, setResponses] = useState<FeedbackResponse[]>([]);
   const [tokens, setTokens] = useState<{ id: string, kind: string }[]>([]);
   const [loading, setLoading] = useState(true);
@@ -72,13 +73,17 @@ const FeedbackAdmin = () => {
     const { data: tokensData } = await supabase
       .from("survey_tokens")
       .select("id, token, kind")
-      .in("kind", ["feedback", "feedback_de"]);
+      .in("kind", ["feedback", "feedback_de", "mc_aug28_feedback"]);
 
     if (tokensData) {
       setTokens(tokensData);
       const mainToken = tokensData.find(t => t.kind === "feedback");
       if (mainToken) {
         setFeedbackLink(`${window.location.origin}/feedback?token=${mainToken.token}`);
+      }
+      const aug28 = tokensData.find(t => t.kind === "mc_aug28_feedback");
+      if (aug28) {
+        setAug28Link(`${window.location.origin}/de/mc-aug28-feedback?token=${aug28.token}`);
       }
     }
 
@@ -91,9 +96,11 @@ const FeedbackAdmin = () => {
     setLoading(false);
   };
 
+  const activeLink = editionFilter === "edition3" ? aug28Link : feedbackLink;
+
   const copyLink = () => {
-    if (!feedbackLink) return;
-    navigator.clipboard.writeText(feedbackLink);
+    if (!activeLink) return;
+    navigator.clipboard.writeText(activeLink);
     setCopied(true);
     toast({ title: "Copied!", description: "Feedback link copied to clipboard" });
     setTimeout(() => setCopied(false), 2000);
@@ -112,21 +119,28 @@ const FeedbackAdmin = () => {
 
   // Filter — Edition 1 and Edition 2 both submit via the shared feedback/feedback_de
   // tokens; split them by date (Edition 2 = masterclass on 2026-06-30).
+  // Edition 3 (28.8.26) has its own token kind.
   const edition1TokenId = tokens.find(t => t.kind === "feedback")?.id;
   const edition2DeTokenId = tokens.find(t => t.kind === "feedback_de")?.id;
+  const edition3TokenId = tokens.find(t => t.kind === "mc_aug28_feedback")?.id;
   const EDITION2_CUTOFF = new Date("2026-06-01T00:00:00Z").getTime();
 
-  const isMasterclassResp = (r: FeedbackResponse) =>
+  const isSharedResp = (r: FeedbackResponse) =>
     r.token_id === edition1TokenId || r.token_id === edition2DeTokenId;
+  const isEdition3 = (r: FeedbackResponse) =>
+    !!edition3TokenId && r.token_id === edition3TokenId;
+  const isMasterclassResp = (r: FeedbackResponse) => isSharedResp(r) || isEdition3(r);
   const isEdition2 = (r: FeedbackResponse) =>
-    isMasterclassResp(r) && new Date(r.created_at).getTime() >= EDITION2_CUTOFF;
+    isSharedResp(r) && new Date(r.created_at).getTime() >= EDITION2_CUTOFF;
 
   const filteredResponses = responses.filter((r) => {
     if (!isMasterclassResp(r)) return false;
-    if (editionFilter === "edition1") return !isEdition2(r);
+    if (editionFilter === "edition1") return isSharedResp(r) && !isEdition2(r);
     if (editionFilter === "edition2") return isEdition2(r);
+    if (editionFilter === "edition3") return isEdition3(r);
     return true;
   });
+
 
   // Aggregates
   const avgOverall = avg(filteredResponses.map((r) => r.overall_rating));
@@ -164,14 +178,15 @@ const FeedbackAdmin = () => {
                 <SelectItem value="all">All Editions</SelectItem>
                 <SelectItem value="edition1">Edition 1 - 16.4.26</SelectItem>
                 <SelectItem value="edition2">Edition 2 - 30.6.26</SelectItem>
+                <SelectItem value="edition3">Edition 3 - 28.8.26</SelectItem>
               </SelectContent>
             </Select>
           </CardContent>
         </Card>
 
-        {feedbackLink && (
+        {activeLink && (
           <div className="flex items-center gap-2 bg-muted p-2 rounded-lg text-xs">
-            <code className="text-muted-foreground">{feedbackLink}</code>
+            <code className="text-muted-foreground">{activeLink}</code>
             <Button variant="ghost" size="icon" className="h-6 w-6" onClick={copyLink}>
               {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
             </Button>
