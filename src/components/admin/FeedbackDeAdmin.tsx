@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ShareQr from "@/components/admin/ShareQr";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -146,6 +147,7 @@ const FeedbackDeAdmin = () => {
                 {copied ? <ClipboardCheck className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               </Button>
             </div>
+            <ShareQr url={feedbackLink} />
           </CardContent>
         )}
       </Card>

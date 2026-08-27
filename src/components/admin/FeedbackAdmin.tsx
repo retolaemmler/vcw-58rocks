@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ShareQr from "@/components/admin/ShareQr";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -185,11 +186,14 @@ const FeedbackAdmin = () => {
         </Card>
 
         {activeLink && (
-          <div className="flex items-center gap-2 bg-muted p-2 rounded-lg text-xs">
-            <code className="text-muted-foreground">{activeLink}</code>
-            <Button variant="ghost" size="icon" className="h-6 w-6" onClick={copyLink}>
-              {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-            </Button>
+          <div className="bg-muted p-2 rounded-lg text-xs">
+            <div className="flex items-center gap-2">
+              <code className="text-muted-foreground">{activeLink}</code>
+              <Button variant="ghost" size="icon" className="h-6 w-6" onClick={copyLink}>
+                {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+              </Button>
+            </div>
+            <ShareQr url={activeLink} />
           </div>
         )}
       </div>
