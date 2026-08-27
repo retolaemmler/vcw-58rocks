@@ -111,6 +111,9 @@ const App = () => (
             <Route path="masterclass-june30-prep" element={<MasterclassJune30Survey />} />
             <Route path="mc-aug28-prep" element={<MasterclassAug28Survey />} />
             <Route path="mc-aug28-feedback" element={<MasterclassAug28Feedback />} />
+            <Route path="hsg-women-prep" element={<HsgWomenSurvey />} />
+            <Route path="hsg-women-feedback" element={<HsgWomenFeedback />} />
+
             <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
           </Route>
