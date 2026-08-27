@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ShareQr from "@/components/admin/ShareQr";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
