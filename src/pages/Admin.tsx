@@ -32,6 +32,8 @@ import ZugerbergSurveyAdmin from "@/components/admin/ZugerbergSurveyAdmin";
 import ZugerbergFeedbackAdmin from "@/components/admin/ZugerbergFeedbackAdmin";
 import MasterclassJune30SurveyAdmin from "@/components/admin/MasterclassJune30SurveyAdmin";
 import MasterclassAug28SurveyAdmin from "@/components/admin/MasterclassAug28SurveyAdmin";
+import HsgWomenSurveyAdmin from "@/components/admin/HsgWomenSurveyAdmin";
+import HsgWomenFeedbackAdmin from "@/components/admin/HsgWomenFeedbackAdmin";
 
 import type { Session } from "@supabase/supabase-js";
 
@@ -338,6 +340,8 @@ const Admin = () => {
                     <SelectItem value="prep">16.4.26 Masterclass Prep Survey</SelectItem>
                     <SelectItem value="masterclass-june30">30.6.26 Masterclass Prep Survey</SelectItem>
                     <SelectItem value="mc-aug28">28.08.26 Masterclass Prep Survey</SelectItem>
+                    <SelectItem value="hsg-women">26.8.26 HSG Women Masterclass Prep Survey</SelectItem>
+                    <SelectItem value="hsg-women-feedback">26.8.26 HSG Women Masterclass Feedback</SelectItem>
                     
                     <SelectItem value="feedback">Masterclass Feedback</SelectItem>
                     <SelectItem value="raiffeisen">Raiffeisen Prep Survey</SelectItem>
@@ -350,6 +354,8 @@ const Admin = () => {
               {surveyTab === "prep" && <SurveyAdmin />}
               {surveyTab === "masterclass-june30" && <MasterclassJune30SurveyAdmin />}
               {surveyTab === "mc-aug28" && <MasterclassAug28SurveyAdmin />}
+              {surveyTab === "hsg-women" && <HsgWomenSurveyAdmin />}
+              {surveyTab === "hsg-women-feedback" && <HsgWomenFeedbackAdmin />}
               
               {surveyTab === "feedback" && <FeedbackAdmin />}
               {surveyTab === "raiffeisen" && <RaiffeisenSurveyAdmin />}
