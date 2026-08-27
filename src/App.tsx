@@ -24,6 +24,9 @@ import ZugerbergSlides from "./pages/ZugerbergSlides";
 import MasterclassJune30Survey from "./pages/MasterclassJune30Survey";
 import MasterclassAug28Survey from "./pages/MasterclassAug28Survey";
 import MasterclassAug28Feedback from "./pages/MasterclassAug28Feedback";
+import HsgWomenSurvey from "./pages/HsgWomenSurvey";
+import HsgWomenFeedback from "./pages/HsgWomenFeedback";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
