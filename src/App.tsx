@@ -24,6 +24,9 @@ import ZugerbergSlides from "./pages/ZugerbergSlides";
 import MasterclassJune30Survey from "./pages/MasterclassJune30Survey";
 import MasterclassAug28Survey from "./pages/MasterclassAug28Survey";
 import MasterclassAug28Feedback from "./pages/MasterclassAug28Feedback";
+import HsgWomenSurvey from "./pages/HsgWomenSurvey";
+import HsgWomenFeedback from "./pages/HsgWomenFeedback";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -111,6 +114,9 @@ const App = () => (
             <Route path="masterclass-june30-prep" element={<MasterclassJune30Survey />} />
             <Route path="mc-aug28-prep" element={<MasterclassAug28Survey />} />
             <Route path="mc-aug28-feedback" element={<MasterclassAug28Feedback />} />
+            <Route path="hsg-women-prep" element={<HsgWomenSurvey />} />
+            <Route path="hsg-women-feedback" element={<HsgWomenFeedback />} />
+
             <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
           </Route>
