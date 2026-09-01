@@ -154,7 +154,7 @@ const en = {
     titleHighlight: "Workshop Coaches",
     intro: "Coaches with vast experiences and backgrounds in Product Management, User Experience, Software Engineering and Entrepreneurship.",
     roles: {
-      valentin: "Product Expert & Consultant",
+      valentin: "Entrepreneur",
       reto: "Entrepreneur & UX Expert",
       remy: "CTO Supertext",
     },
