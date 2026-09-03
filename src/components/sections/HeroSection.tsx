@@ -23,7 +23,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-28 pb-8 bg-background">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-32 pb-8 bg-background">
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 text-foreground">
           {t("hero.title")}
