@@ -33,6 +33,10 @@ const Navbar = ({ activeTab }: NavbarProps) => {
   ];
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bannerOpen, setBannerOpen] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return window.localStorage.getItem("vcw_banner_dismissed") !== "1";
+  });
   const [newsletterOpen, setNewsletterOpen] = useState(false);
   const [nlEmail, setNlEmail] = useState("");
   const [nlName, setNlName] = useState("");
