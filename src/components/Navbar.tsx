@@ -86,6 +86,11 @@ const Navbar = ({ activeTab }: NavbarProps) => {
     setNlLoading(false);
   };
 
+  const dismissBanner = () => {
+    setBannerOpen(false);
+    if (typeof window !== "undefined") window.localStorage.setItem("vcw_banner_dismissed", "1");
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -94,6 +99,28 @@ const Navbar = ({ activeTab }: NavbarProps) => {
           : "bg-transparent"
       }`}
     >
+      {bannerOpen && (
+        <div className="w-full gradient-bg text-white">
+          <div className="max-w-6xl mx-auto px-4 h-10 flex items-center justify-center gap-2 text-center">
+            <a
+              href={t("banner.link")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium hover:underline underline-offset-4 flex items-center gap-1.5"
+            >
+              {t("banner.text")}
+              <span aria-hidden="true">{t("banner.cta")}</span>
+            </a>
+            <button
+              onClick={dismissBanner}
+              aria-label="Dismiss banner"
+              className="ml-2 text-white/80 hover:text-white transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <button onClick={() => {
           const isHome = /^\/(en|de)\/?$/.test(location.pathname) || location.pathname === "/";
