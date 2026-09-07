@@ -101,12 +101,12 @@ const Navbar = ({ activeTab }: NavbarProps) => {
     >
       {bannerOpen && (
         <div className="w-full gradient-bg text-white">
-          <div className="max-w-6xl mx-auto px-4 h-10 flex items-center justify-center gap-2 text-center">
+          <div className="max-w-6xl mx-auto px-4 py-2 min-h-10 flex items-center justify-center gap-2 text-center">
             <a
               href={t("banner.link")}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium hover:underline underline-offset-4 flex items-center gap-1.5"
+              className="text-xs sm:text-sm font-medium hover:underline underline-offset-4 flex items-center gap-1.5 leading-snug"
             >
               {t("banner.text")}
               <span aria-hidden="true">{t("banner.cta")}</span>
@@ -114,7 +114,7 @@ const Navbar = ({ activeTab }: NavbarProps) => {
             <button
               onClick={dismissBanner}
               aria-label="Dismiss banner"
-              className="ml-2 text-white/80 hover:text-white transition-colors"
+              className="ml-2 shrink-0 text-white/80 hover:text-white transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
