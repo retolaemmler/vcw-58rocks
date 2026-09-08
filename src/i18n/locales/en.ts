@@ -1,6 +1,6 @@
 const en = {
   banner: {
-    text: "Can't make it to the next workshop? Join us in Basel for Vibe Code Fest on Oct. 24",
+    text: "Join us in Basel for Vibe Code Fest on Oct. 24",
     cta: "→",
     link: "https://www.vibecodefest.ch",
   },
