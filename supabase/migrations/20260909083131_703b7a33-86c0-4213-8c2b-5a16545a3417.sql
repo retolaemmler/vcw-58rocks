@@ -1,0 +1,1 @@
+INSERT INTO public.survey_tokens (kind) VALUES ('mc_sep15_prep');
