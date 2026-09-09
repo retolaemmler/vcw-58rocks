@@ -47,7 +47,7 @@ const en = {
       description: "Join an evening session (10–20 people). Includes a pizza break and free Lovable credits.",
       date: "Tue. 15.9.2026 from 17:00 - 21:00",
       dateNote: "Subscribe to newsletter for upcoming dates",
-      location: "Zurich (location tbd)",
+      location: "Headquarter, Stockerstrasse 33, 8002 Zürich",
       capacity: "10–20 people",
       cta: "Get your Ticket",
     },
