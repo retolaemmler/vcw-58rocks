@@ -24,6 +24,7 @@ import ZugerbergSlides from "./pages/ZugerbergSlides";
 import MasterclassJune30Survey from "./pages/MasterclassJune30Survey";
 import MasterclassAug28Survey from "./pages/MasterclassAug28Survey";
 import MasterclassAug28Feedback from "./pages/MasterclassAug28Feedback";
+import MasterclassSep15Survey from "./pages/MasterclassSep15Survey";
 import HsgWomenSurvey from "./pages/HsgWomenSurvey";
 import HsgWomenFeedback from "./pages/HsgWomenFeedback";
 
@@ -114,6 +115,7 @@ const App = () => (
             <Route path="masterclass-june30-prep" element={<MasterclassJune30Survey />} />
             <Route path="mc-aug28-prep" element={<MasterclassAug28Survey />} />
             <Route path="mc-aug28-feedback" element={<MasterclassAug28Feedback />} />
+            <Route path="mc-sep15-prep" element={<MasterclassSep15Survey />} />
             <Route path="hsg-women-prep" element={<HsgWomenSurvey />} />
             <Route path="hsg-women-feedback" element={<HsgWomenFeedback />} />
 
