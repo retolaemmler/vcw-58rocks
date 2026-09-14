@@ -35,6 +35,7 @@ import MasterclassAug28SurveyAdmin from "@/components/admin/MasterclassAug28Surv
 import MasterclassSep15SurveyAdmin from "@/components/admin/MasterclassSep15SurveyAdmin";
 import HsgWomenSurveyAdmin from "@/components/admin/HsgWomenSurveyAdmin";
 import HsgWomenFeedbackAdmin from "@/components/admin/HsgWomenFeedbackAdmin";
+import MasterclassEveningFeedbackAdmin from "@/components/admin/MasterclassEveningFeedbackAdmin";
 
 import type { Session } from "@supabase/supabase-js";
 
@@ -346,6 +347,7 @@ const Admin = () => {
                     <SelectItem value="hsg-women-feedback">26.8.26 HSG Women Masterclass Feedback</SelectItem>
                     
                     <SelectItem value="feedback">Masterclass Feedback</SelectItem>
+                    <SelectItem value="mc-evening-feedback">Masterclass Evening Feedback</SelectItem>
                     <SelectItem value="raiffeisen">Raiffeisen Prep Survey</SelectItem>
                     <SelectItem value="raiffeisen-feedback">Raiffeisen Feedback</SelectItem>
                     <SelectItem value="zugerberg">Zugerberg Prep Survey</SelectItem>
@@ -361,6 +363,7 @@ const Admin = () => {
               {surveyTab === "hsg-women-feedback" && <HsgWomenFeedbackAdmin />}
               
               {surveyTab === "feedback" && <FeedbackAdmin />}
+              {surveyTab === "mc-evening-feedback" && <MasterclassEveningFeedbackAdmin />}
               {surveyTab === "raiffeisen" && <RaiffeisenSurveyAdmin />}
               {surveyTab === "raiffeisen-feedback" && <RaiffeisenFeedbackAdmin />}
               {surveyTab === "zugerberg" && <ZugerbergSurveyAdmin />}

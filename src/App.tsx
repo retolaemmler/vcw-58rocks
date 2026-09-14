@@ -27,6 +27,8 @@ import MasterclassAug28Feedback from "./pages/MasterclassAug28Feedback";
 import MasterclassSep15Survey from "./pages/MasterclassSep15Survey";
 import HsgWomenSurvey from "./pages/HsgWomenSurvey";
 import HsgWomenFeedback from "./pages/HsgWomenFeedback";
+import MasterclassEveningFeedback from "./pages/MasterclassEveningFeedback";
+import MasterclassEveningFeedbackDe from "./pages/MasterclassEveningFeedbackDe";
 
 import NotFound from "./pages/NotFound";
 
@@ -38,6 +40,11 @@ type Lang = (typeof SUPPORTED_LANGS)[number];
 const FeedbackByLang = () => {
   const { lang } = useParams<{ lang: string }>();
   return lang === "de" ? <FeedbackDe /> : <Feedback />;
+};
+
+const EveningFeedbackByLang = () => {
+  const { lang } = useParams<{ lang: string }>();
+  return lang === "de" ? <MasterclassEveningFeedbackDe /> : <MasterclassEveningFeedback />;
 };
 
 const LangLayout = () => {
@@ -118,6 +125,7 @@ const App = () => (
             <Route path="mc-sep15-prep" element={<MasterclassSep15Survey />} />
             <Route path="hsg-women-prep" element={<HsgWomenSurvey />} />
             <Route path="hsg-women-feedback" element={<HsgWomenFeedback />} />
+            <Route path="mc-evening-feedback" element={<EveningFeedbackByLang />} />
 
             <Route path="team" element={<Index initialTab="company" />} />
             <Route path="*" element={<NotFound />} />
