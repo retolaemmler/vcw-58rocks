@@ -47,10 +47,10 @@ const avg = (vals: (number | null)[]) => {
 };
 
 const MasterclassEveningFeedbackAdmin = () => {
-  const [links, setLinks] = useState<{ en: string | null; de: string | null }>({ en: null, de: null });
+  const [link, setLink] = useState<string | null>(null);
   const [responses, setResponses] = useState<FeedbackResponse[]>([]);
   const [loading, setLoading] = useState(true);
-  const [copied, setCopied] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -60,16 +60,11 @@ const MasterclassEveningFeedbackAdmin = () => {
       const { data: tokensData } = await supabase
         .from("survey_tokens")
         .select("id, token, kind")
-        .in("kind", ["mc_evening_feedback", "mc_evening_feedback_de"]);
+        .eq("kind", "mc_evening_feedback");
 
       const ids: string[] = [];
-      if (tokensData) {
-        const en = tokensData.find((t) => t.kind === "mc_evening_feedback");
-        const de = tokensData.find((t) => t.kind === "mc_evening_feedback_de");
-        setLinks({
-          en: en ? `${window.location.origin}/en/mc-evening-feedback?token=${en.token}` : null,
-          de: de ? `${window.location.origin}/de/mc-evening-feedback?token=${de.token}` : null,
-        });
+      if (tokensData?.length) {
+        setLink(`${window.location.origin}/mc-evening-feedback?token=${tokensData[0].token}`);
         tokensData.forEach((t) => ids.push(t.id));
       }
 
@@ -86,11 +81,12 @@ const MasterclassEveningFeedbackAdmin = () => {
     load();
   }, []);
 
-  const copyLink = (url: string, key: string) => {
-    navigator.clipboard.writeText(url);
-    setCopied(key);
+  const copyLink = () => {
+    if (!link) return;
+    navigator.clipboard.writeText(link);
+    setCopied(true);
     toast({ title: "Copied!", description: "Feedback link copied to clipboard" });
-    setTimeout(() => setCopied(null), 2000);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const deleteResponse = async (id: string) => {
@@ -121,22 +117,18 @@ const MasterclassEveningFeedbackAdmin = () => {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {(["en", "de"] as const).map((l) =>
-          links[l] ? (
-            <div key={l} className="bg-muted p-2 rounded-lg text-xs">
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="uppercase">{l}</Badge>
-                <code className="text-muted-foreground break-all">{links[l]}</code>
-                <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={() => copyLink(links[l]!, l)}>
-                  {copied === l ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                </Button>
-              </div>
-              <ShareQr url={links[l]!} />
-            </div>
-          ) : null
-        )}
-      </div>
+      {link && (
+        <div className="bg-muted p-2 rounded-lg text-xs inline-block">
+          <div className="flex items-center gap-2">
+            <code className="text-muted-foreground break-all">{link}</code>
+            <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={copyLink}>
+              {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+            </Button>
+          </div>
+          <p className="text-muted-foreground mt-1">Language is chosen automatically (EN/DE), switchable on the page.</p>
+          <ShareQr url={link} />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>

@@ -108,7 +108,7 @@ const AGENDA_SECTIONS: { key: keyof FeedbackFormValues; label: string }[] = [
 
 const MasterclassEveningFeedbackDe = () => {
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token") || "c8a3d1e7-62b4-4c4e-8f31-7d9a5b2e0c14";
+  const token = searchParams.get("token") || "b4f6b2a4-5b0f-4f2f-9a9a-1a2f9c7d5e01";
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [pageState, setPageState] = useState<"loading" | "invalid" | "form" | "submitted">("loading");
   const [showForm, setShowForm] = useState(false);
