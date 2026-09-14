@@ -47,10 +47,10 @@ const avg = (vals: (number | null)[]) => {
 };
 
 const MasterclassEveningFeedbackAdmin = () => {
-  const [links, setLinks] = useState<{ en: string | null; de: string | null }>({ en: null, de: null });
+  const [link, setLink] = useState<string | null>(null);
   const [responses, setResponses] = useState<FeedbackResponse[]>([]);
   const [loading, setLoading] = useState(true);
-  const [copied, setCopied] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -60,16 +60,11 @@ const MasterclassEveningFeedbackAdmin = () => {
       const { data: tokensData } = await supabase
         .from("survey_tokens")
         .select("id, token, kind")
-        .in("kind", ["mc_evening_feedback", "mc_evening_feedback_de"]);
+        .eq("kind", "mc_evening_feedback");
 
       const ids: string[] = [];
-      if (tokensData) {
-        const en = tokensData.find((t) => t.kind === "mc_evening_feedback");
-        const de = tokensData.find((t) => t.kind === "mc_evening_feedback_de");
-        setLinks({
-          en: en ? `${window.location.origin}/en/mc-evening-feedback?token=${en.token}` : null,
-          de: de ? `${window.location.origin}/de/mc-evening-feedback?token=${de.token}` : null,
-        });
+      if (tokensData?.length) {
+        setLink(`${window.location.origin}/mc-evening-feedback?token=${tokensData[0].token}`);
         tokensData.forEach((t) => ids.push(t.id));
       }
 
