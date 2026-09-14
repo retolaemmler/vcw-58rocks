@@ -81,11 +81,12 @@ const MasterclassEveningFeedbackAdmin = () => {
     load();
   }, []);
 
-  const copyLink = (url: string, key: string) => {
-    navigator.clipboard.writeText(url);
-    setCopied(key);
+  const copyLink = () => {
+    if (!link) return;
+    navigator.clipboard.writeText(link);
+    setCopied(true);
     toast({ title: "Copied!", description: "Feedback link copied to clipboard" });
-    setTimeout(() => setCopied(null), 2000);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const deleteResponse = async (id: string) => {
@@ -116,22 +117,18 @@ const MasterclassEveningFeedbackAdmin = () => {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {(["en", "de"] as const).map((l) =>
-          links[l] ? (
-            <div key={l} className="bg-muted p-2 rounded-lg text-xs">
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="uppercase">{l}</Badge>
-                <code className="text-muted-foreground break-all">{links[l]}</code>
-                <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={() => copyLink(links[l]!, l)}>
-                  {copied === l ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                </Button>
-              </div>
-              <ShareQr url={links[l]!} />
-            </div>
-          ) : null
-        )}
-      </div>
+      {link && (
+        <div className="bg-muted p-2 rounded-lg text-xs inline-block">
+          <div className="flex items-center gap-2">
+            <code className="text-muted-foreground break-all">{link}</code>
+            <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={copyLink}>
+              {copied ? <ClipboardCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+            </Button>
+          </div>
+          <p className="text-muted-foreground mt-1">Language is chosen automatically (EN/DE), switchable on the page.</p>
+          <ShareQr url={link} />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>
