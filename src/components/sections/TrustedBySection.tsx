@@ -3,6 +3,8 @@ import raiffeisenLogo from "@/assets/raiffeisen-logo.png.asset.json";
 import trekksoftLogo from "@/assets/trekksoft-logo.png.asset.json";
 import humaticaLogo from "@/assets/humatica-logo.png.asset.json";
 import startupsLogo from "@/assets/startups-logo.svg.asset.json";
+import zugerbergLogo from "@/assets/zugerberg_logo.svg.asset.json";
+import bischoffLogo from "@/assets/bischoff-logo.svg";
 
 interface TrustedBySectionProps {
   isVisible: boolean;
@@ -13,6 +15,8 @@ const logos = [
   { src: trekksoftLogo.url, alt: "TrekkSoft" },
   { src: humaticaLogo.url, alt: "Humatica", className: "scale-[2.1]" },
   { src: startupsLogo.url, alt: "Startups.ch" },
+  { src: zugerbergLogo.url, alt: "Zugerberg Finanz", className: "scale-[1.3]" },
+  { src: bischoffLogo, alt: "Bischoff AG", className: "scale-[0.85]" },
 ];
 
 const TrustedBySection = ({ isVisible }: TrustedBySectionProps) => {
