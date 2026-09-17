@@ -120,8 +120,15 @@ Deno.serve(async (req) => {
       });
 
       if (dbError) {
-        console.error("Database insert error:", dbError);
-        throw new Error(`Failed to save order: ${dbError.message}`);
+        // Unique violation: the Stripe webhook inserted this order concurrently.
+        // The order exists and its email was sent there — treat as already handled.
+        if ((dbError as { code?: string }).code === "23505") {
+          console.log("Order already inserted by webhook, skipping:", session.id);
+          isNewOrder = false;
+        } else {
+          console.error("Database insert error:", dbError);
+          throw new Error(`Failed to save order: ${dbError.message}`);
+        }
       }
     }
 
