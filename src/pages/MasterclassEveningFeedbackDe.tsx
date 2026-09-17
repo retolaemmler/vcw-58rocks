@@ -121,7 +121,7 @@ const MasterclassEveningFeedbackDe = () => {
     setGeneratingTestimonial(true);
     try {
       const { data, error } = await supabase.functions.invoke("generate-testimonial", {
-        body: { email: email || null, token },
+        body: { email: email || null, token, language: "de" },
       });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
