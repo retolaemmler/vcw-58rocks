@@ -16,7 +16,7 @@ interface IndexProps {
   initialTab?: "you" | "company";
 }
 
-const Index = ({ initialTab = "you" }: IndexProps) => {
+const Index = ({ initialTab = "company" }: IndexProps) => {
   const [activeTab, setActiveTab] = useState<"you" | "company">(initialTab);
 
   return (
