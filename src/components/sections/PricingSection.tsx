@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/dialog";
 
 const tierDefs = [
-  { key: "early", price: "249", highlight: true, soldOut: false },
-  { key: "regular", price: "299", highlight: false, soldOut: false },
-  { key: "late", price: "349", highlight: false, soldOut: false },
+  { key: "early", price: "299", highlight: true, soldOut: false },
+  { key: "regular", price: "349", highlight: false, soldOut: false },
+  { key: "late", price: "399", highlight: false, soldOut: false },
 ];
 
 const PricingSection = () => {
@@ -29,7 +29,7 @@ const PricingSection = () => {
           <span className="gradient-text">{t("pricing.titleHighlight")}</span>{t("pricing.titlePost")}
         </h2>
         <p className="text-muted-foreground mb-12">
-          {t("pricing.intro")} <span className="font-semibold text-foreground">CHF 349</span>
+          {t("pricing.intro")} <span className="font-semibold text-foreground">CHF 399</span>
         </p>
 
         <div className="grid sm:grid-cols-3 gap-6 mb-10">
