@@ -8,9 +8,9 @@ import remyImg from "@/assets/Remy.jpeg";
 import coachesTeamImg from "@/assets/coaches-team.jpg.asset.json";
 
 const coaches = [
-  { name: "Valentin Binnendijk", roleKey: "valentin", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
   { name: "Reto Lämmler", roleKey: "reto", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: true },
   { name: "Remy Blaettler", roleKey: "remy", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
+  { name: "Valentin Binnendijk", roleKey: "valentin", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
 ];
 
 const HostsSection = () => {
