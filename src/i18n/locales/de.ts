@@ -179,6 +179,7 @@ const de = {
     perPerson: "pro Person",
     cta: "Jetzt Ticket kaufen",
     limited: "Begrenzte Anzahl Tickets verfügbar.",
+    includes: "Inklusive Pizza, Getränken und unbegrenzten Lovable Credits für den Abend.",
   },
   footer: {
     links: "Links",

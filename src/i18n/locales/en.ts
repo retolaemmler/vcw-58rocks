@@ -179,6 +179,7 @@ const en = {
     perPerson: "per person",
     cta: "Buy Ticket Now",
     limited: "Limited tickets available.",
+    includes: "Includes Pizza, Beverages and unlimited Lovable Credits for the evening.",
   },
   footer: {
     links: "Links",
