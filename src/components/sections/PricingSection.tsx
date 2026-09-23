@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/dialog";
 
 const tierDefs = [
-  { key: "early", price: "249", highlight: true, soldOut: false },
-  { key: "regular", price: "299", highlight: false, soldOut: false },
-  { key: "late", price: "349", highlight: false, soldOut: false },
+  { key: "early", price: "299", highlight: true, soldOut: false },
+  { key: "regular", price: "349", highlight: false, soldOut: false },
+  { key: "late", price: "399", highlight: false, soldOut: false },
 ];
 
 const PricingSection = () => {
