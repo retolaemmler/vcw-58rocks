@@ -170,8 +170,8 @@ const de = {
     titlePost: " & Tickets",
     intro: "Abend-Session — Grundpreis",
     tiers: {
-      early: { name: "Early Bird", discount: "28% Rabatt" },
-      regular: { name: "Regular", discount: "14% Rabatt" },
+      early: { name: "Early Bird", discount: "25% Rabatt" },
+      regular: { name: "Regular", discount: "13% Rabatt" },
       late: { name: "Late Bird", discount: "Grundpreis" },
     },
     bestDeal: "Bestes Angebot",
