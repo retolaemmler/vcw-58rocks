@@ -63,7 +63,7 @@ const Admin = () => {
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [mainTab, setMainTab] = usePersistedTab("admin.mainTab", "orders");
   const [surveyTab, setSurveyTab] = usePersistedTab("admin.surveyTab", "prep");
-  const [ordersBatchTab, setOrdersBatchTab] = usePersistedTab("admin.ordersBatchTab", "workshop2");
+  const [ordersBatchTab, setOrdersBatchTab] = usePersistedTab("admin.ordersBatchTab", "workshop4");
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -137,17 +137,20 @@ const Admin = () => {
 
   const BATCH1_END = new Date("2026-04-16T00:00:00Z").getTime();
   const BATCH2_END = new Date("2026-06-30T23:59:59Z").getTime();
+  const BATCH3_END = new Date("2026-09-15T23:59:59Z").getTime();
   const editionOf = (o: Order) => {
     if (o.edition) return o.edition;
     const t = new Date(o.created_at).getTime();
     if (t < BATCH1_END) return "2026-04-16";
     if (t < BATCH2_END) return "2026-06-30";
-    return "2026-09-15";
+    if (t < BATCH3_END) return "2026-09-15";
+    return "2026-11-11";
   };
   const filteredOrders = orders.filter((o) => {
     if (ordersBatchTab === "workshop1") return editionOf(o) === "2026-04-16";
     if (ordersBatchTab === "workshop2") return editionOf(o) === "2026-06-30";
     if (ordersBatchTab === "workshop3") return editionOf(o) === "2026-09-15";
+    if (ordersBatchTab === "workshop4") return editionOf(o) === "2026-11-11";
     return true;
   });
   const totalRevenue = filteredOrders.reduce((sum, o) => sum + o.amount_total, 0) / 100;
@@ -245,6 +248,7 @@ const Admin = () => {
                 <TabsTrigger value="workshop1">Edition 1 - 16.4.26</TabsTrigger>
                 <TabsTrigger value="workshop2">Edition 2 - 30.6.26</TabsTrigger>
                 <TabsTrigger value="workshop3">Edition 3 - 15.9.26</TabsTrigger>
+                <TabsTrigger value="workshop4">Edition 4 - 11.11.26</TabsTrigger>
                 <TabsTrigger value="all">All</TabsTrigger>
               </TabsList>
             </Tabs>

@@ -83,14 +83,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <MapPin className="w-4 h-4 text-accent shrink-0" />
-                  <a
-                    href="https://maps.app.goo.gl/rCPVSQEon1JxQxj58"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-primary hover:underline underline-offset-4"
-                  >
-                    {t("hero.masterclass.location")}
-                  </a>
+                  <span className="text-sm font-medium">{t("hero.masterclass.location")}</span>
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Users className="w-4 h-4 text-accent shrink-0" />
