@@ -74,6 +74,7 @@ const PricingSection = () => {
           )}
         </div>
 
+        <p className="text-sm text-muted-foreground mb-8 max-w-xl mx-auto">{t("pricing.includes")}</p>
 
         <div className="flex flex-col items-center gap-4">
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
