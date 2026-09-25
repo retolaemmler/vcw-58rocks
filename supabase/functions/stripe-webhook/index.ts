@@ -214,7 +214,7 @@ Deno.serve(async (req) => {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${RESEND_API_KEY}` },
         body: JSON.stringify({
           from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
-          to: ["reto@58rocks.com", "remy.blaettler@gmail.com"],
+          to: ["rlaemmler@gmail.com", "remy.blaettler@gmail.com"],
           subject: `🎟️ New Ticket Sold – ${customerEmail}`,
           html: `
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto;">
