@@ -47,7 +47,7 @@ const en = {
       description: "Join an evening session (10–20 people). Includes a pizza break and free Lovable credits.",
       date: "Wed. 11.11.2026 from 17:00 - 21:00",
       dateNote: "Subscribe to newsletter for upcoming dates",
-      location: "Zürich (location to be announced)",
+      location: "Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich",
       capacity: "10–20 people",
       cta: "Get your Ticket",
     },
