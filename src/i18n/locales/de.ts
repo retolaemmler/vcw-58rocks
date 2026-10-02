@@ -47,7 +47,7 @@ const de = {
       description: "Nimm an einer Abend-Session teil (10–20 Personen). Inklusive Pizzapause und gratis Lovable-Credits.",
       date: "Mi. 11.11.2026 von 17:00 - 21:00 Uhr",
       dateNote: "Newsletter für zukünftige Termine abonnieren",
-      location: "Zürich (Ort wird noch bekannt gegeben)",
+      location: "Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich",
       capacity: "10–20 Personen",
       cta: "Ticket sichern",
     },
