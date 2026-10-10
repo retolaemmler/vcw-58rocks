@@ -297,6 +297,10 @@ export type Database = {
     }
     Functions: {
       is_admin_email: { Args: never; Returns: boolean }
+      is_valid_survey_token_id: {
+        Args: { _token_id: string }
+        Returns: boolean
+      }
       validate_survey_token: {
         Args: { _token: string }
         Returns: {
