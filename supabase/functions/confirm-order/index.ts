@@ -30,6 +30,7 @@ function foldIcsLine(line: string) {
     .join("\r\n");
 }
 
+// The Stripe account is shared with other apps — only handle our own sessions.
 async function resolveOurMetadata(session: Record<string, any>, key: string) {
   const direct = session.metadata ?? {};
   if (direct.app) return direct;
