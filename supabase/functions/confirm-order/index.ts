@@ -8,7 +8,28 @@ const corsHeaders = {
 
 const APP_TAG = "vibe-code-workshop";
 
-// The Stripe account is shared with other apps — only handle our own sessions.
+// Escape text values per RFC 5545 §3.3.11 (commas, semicolons, backslashes)
+function escapeIcsText(value: string) {
+  return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,");
+}
+
+// Fold content lines longer than 75 octets (RFC 5545 §3.1), splitting only
+// at UTF-8 character boundaries so multibyte characters stay intact.
+function foldIcsLine(line: string) {
+  const bytes = new TextEncoder().encode(line);
+  const chunks: Uint8Array[] = [];
+  let start = 0;
+  while (start < bytes.length) {
+    let end = Math.min(start + 75, bytes.length);
+    while (end < bytes.length && (bytes[end] & 0xc0) === 0x80) end--;
+    chunks.push(bytes.subarray(start, end));
+    start = end;
+  }
+  return chunks
+    .map((c, i) => (i === 0 ? "" : " ") + new TextDecoder().decode(c))
+    .join("\r\n");
+}
+
 async function resolveOurMetadata(session: Record<string, any>, key: string) {
   const direct = session.metadata ?? {};
   if (direct.app) return direct;
