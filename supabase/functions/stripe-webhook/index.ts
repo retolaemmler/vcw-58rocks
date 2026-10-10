@@ -178,7 +178,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    const edition: string | null = metadata.edition ?? null;
+    // Edition 4 (11.11.26) is the default for any order without edition metadata
+    const edition: string | null = metadata.edition ?? "2026-11-11";
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
