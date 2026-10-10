@@ -149,12 +149,12 @@ Deno.serve(async (req) => {
         "DTEND:20261111T200000Z",
         "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Evening",
         "DESCRIPTION:Evening hands-on masterclass. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
-        "LOCATION:Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich, Switzerland",
+        `LOCATION:${escapeIcsText("Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich, Switzerland")}`,
         "STATUS:CONFIRMED",
         "UID:vibe-code-workshop-2026-11-11@vibecodeworkshop.ch",
         "END:VEVENT",
         "END:VCALENDAR",
-      ].join("\r\n");
+      ].map(foldIcsLine).join("\r\n");
 
       const icsBase64 = btoa(String.fromCharCode(...new TextEncoder().encode(icsContent)));
 
