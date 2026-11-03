@@ -1,9 +1,4 @@
 const de = {
-  banner: {
-    text: "Komm zum Vibe Code Fest am 24. Oktober in Basel",
-    cta: "→",
-    link: "https://www.vibecodefest.ch",
-  },
   nav: {
     what: "Was",
     schedule: "Programm",
