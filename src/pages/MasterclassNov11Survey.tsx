@@ -217,7 +217,7 @@ const MasterclassNov11Survey = () => {
           </div>
           <h2 className="font-display text-xl font-semibold">Bereit machen für den Workshop! 🚀</h2>
           <p className="text-muted-foreground mt-2">
-            Kurze Vorbereitungs-Umfrage — dauert etwa 3 Minuten. Antworten antippen oder selbst eintippen.
+            Kurze Vorbereitungs-Umfrage — dauert etwa 3 Minuten.
           </p>
         </div>
 
