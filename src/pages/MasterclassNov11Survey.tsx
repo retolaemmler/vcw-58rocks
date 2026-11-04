@@ -226,7 +226,7 @@ const MasterclassNov11Survey = () => {
             <img
               src={workshopPortrait.url}
               alt="Die Workshop-Hosts Reto und Remy vor dem Workshop-Screen"
-              className="w-full scale-110 object-cover"
+              className="w-full scale-[1.2] object-cover"
             />
           </div>
         </div>
