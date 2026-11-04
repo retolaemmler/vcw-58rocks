@@ -137,6 +137,12 @@ const MasterclassNov11Survey = () => {
     form.setValue("building_blocks", chips && blockDetails ? `${chips}; ${blockDetails}` : chips || blockDetails, { shouldValidate: true });
   }, [selectedBlocks, blockDetails]);
 
+  useEffect(() => {
+    if (!showForm) return;
+    const el = document.querySelector<HTMLInputElement>('input[type="email"]');
+    el?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [showForm]);
+
   const onSubmit = async (values: SurveyFormValues) => {
     if (!tokenId) return;
     setSubmitting(true);
