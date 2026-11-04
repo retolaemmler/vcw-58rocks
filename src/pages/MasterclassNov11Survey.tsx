@@ -16,6 +16,7 @@ import { Loader2, CheckCircle2, AlertCircle, Sparkles, X } from "lucide-react";
 
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/vcw-logo.png";
+import workshopPortrait from "@/assets/workshop-portrait.png.asset.json";
 
 const surveySchema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
@@ -220,13 +221,11 @@ const MasterclassNov11Survey = () => {
           </p>
         </div>
 
-        <div className="mb-8 rounded-xl overflow-hidden border border-border">
-          <iframe
-            className="w-full aspect-video"
-            src="https://www.youtube.com/embed/a0y5BMCnjp8"
-            title="Willkommensvideo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+        <div className="mb-8 flex justify-center">
+          <img
+            src={workshopPortrait.url}
+            alt="Die Workshop-Hosts Reto und Remy vor dem Workshop-Screen"
+            className="w-full max-w-md rounded-xl border border-border object-cover shadow-sm"
           />
         </div>
 
