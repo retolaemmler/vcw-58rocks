@@ -221,16 +221,18 @@ const MasterclassNov11Survey = () => {
           </p>
         </div>
 
-        <div className="mb-8 flex justify-center">
-          <img
-            src={workshopPortrait.url}
-            alt="Die Workshop-Hosts Reto und Remy vor dem Workshop-Screen"
-            className="w-full max-w-md rounded-xl border border-border object-cover shadow-sm"
-          />
+        <div className="mb-3 flex justify-center">
+          <div className="w-full max-w-md overflow-hidden rounded-xl border border-border shadow-sm">
+            <img
+              src={workshopPortrait.url}
+              alt="Die Workshop-Hosts Reto und Remy vor dem Workshop-Screen"
+              className="w-full scale-[1.2] object-cover"
+            />
+          </div>
         </div>
 
         {!showForm ? (
-          <div className="text-center pt-16">
+          <div className="text-center pt-3">
             <Button
               size="lg"
               className="gradient-bg text-white font-semibold text-lg px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
