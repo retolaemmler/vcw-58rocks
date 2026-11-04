@@ -253,7 +253,7 @@ const MasterclassNov11Survey = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>📧 Deine E-Mail</FormLabel>
+                        <FormLabel>Deine E-Mail</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" placeholder="deine@email.com" />
                         </FormControl>
@@ -271,7 +271,7 @@ const MasterclassNov11Survey = () => {
                     const detailsValue = chipValue && field.value ? field.value.slice(chipValue.length).replace(/^;\s*/, "") : (AI_EXPERIENCE_OPTIONS.includes(field.value || "") ? "" : field.value || "");
                     return (
                       <FormItem>
-                        <FormLabel className="text-base">🤖 Hast du vor diesem Workshop schon eine Website mit KI-Tools gebaut?</FormLabel>
+                        <FormLabel className="text-base">Hast du vor diesem Workshop schon eine Website mit KI-Tools gebaut?</FormLabel>
                         <div className="space-y-3">
                           <ChipSelect
                             options={AI_EXPERIENCE_OPTIONS}
@@ -310,7 +310,7 @@ const MasterclassNov11Survey = () => {
                     const detailsValue = chipValue && field.value ? field.value.slice(chipValue.length).replace(/^;\s*/, "") : (LOVABLE_EXPERIENCE_OPTIONS.includes(field.value || "") ? "" : field.value || "");
                     return (
                       <FormItem>
-                        <FormLabel className="text-base">💜 Was sind deine Erfahrungen mit Lovable.dev?</FormLabel>
+                        <FormLabel className="text-base">Was sind deine Erfahrungen mit Lovable.dev?</FormLabel>
                         <div className="space-y-3">
                           <ChipSelect
                             options={LOVABLE_EXPERIENCE_OPTIONS}
@@ -346,7 +346,7 @@ const MasterclassNov11Survey = () => {
                   name="workshop_goals"
                   render={() => (
                     <FormItem>
-                      <FormLabel className="text-base">🎯 Was möchtest du aus diesem Workshop mitnehmen?</FormLabel>
+                      <FormLabel className="text-base">Was möchtest du aus diesem Workshop mitnehmen?</FormLabel>
                       <p className="text-sm text-muted-foreground">Wähle so viele wie du möchtest, oder ergänze deine eigenen</p>
                       <div className="space-y-3">
                         <ChipSelect options={GOAL_CHIPS} selected={selectedGoals} onChange={setSelectedGoals} />
@@ -370,7 +370,7 @@ const MasterclassNov11Survey = () => {
                   name="success_criteria"
                   render={() => (
                     <FormItem>
-                      <FormLabel className="text-base">🏆 Wann wäre dieser Tag für dich ein voller Erfolg?</FormLabel>
+                      <FormLabel className="text-base">Wann wäre dieser Tag für dich ein voller Erfolg?</FormLabel>
                       <p className="text-sm text-muted-foreground">Und was wäre eher enttäuschend?</p>
                       <div className="space-y-3">
                         <ChipSelect options={SUCCESS_CHIPS} selected={selectedSuccess} onChange={setSelectedSuccess} />
@@ -394,7 +394,7 @@ const MasterclassNov11Survey = () => {
                   name="has_app_idea"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base">💡 Hast du schon eine App-Idee?</FormLabel>
+                      <FormLabel className="text-base">Hast du schon eine App-Idee?</FormLabel>
                       <FormControl>
                         <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4">
                           <div className="flex items-center space-x-2">
@@ -419,7 +419,7 @@ const MasterclassNov11Survey = () => {
                       name="app_idea_description"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base">📝 Erzähl uns davon! Was soll die App tun?</FormLabel>
+                          <FormLabel className="text-base">Erzähl uns davon! Was soll die App tun?</FormLabel>
                           <FormControl>
                           <div className="flex items-start gap-1">
                             <div className="relative flex-1">
@@ -465,7 +465,7 @@ const MasterclassNov11Survey = () => {
                   name="building_blocks"
                   render={() => (
                     <FormItem>
-                      <FormLabel className="text-base">🔗 Möchtest du deine Web-App mit anderen Systemen integrieren?</FormLabel>
+                      <FormLabel className="text-base">Möchtest du deine Web-App mit anderen Systemen integrieren?</FormLabel>
                       <p className="text-sm text-muted-foreground">Tippe alles an, was zutrifft — hilft uns, Beispiele vorzubereiten</p>
                       <div className="space-y-3">
                         <ChipSelect options={BUILDING_BLOCK_CHIPS} selected={selectedBlocks} onChange={setSelectedBlocks} />
@@ -489,7 +489,7 @@ const MasterclassNov11Survey = () => {
                   name="anything_else"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base">💬 Sonst noch etwas, das wir wissen sollten?</FormLabel>
+                      <FormLabel className="text-base">Sonst noch etwas, das wir wissen sollten?</FormLabel>
                       <FormControl>
                           <div className="flex items-start gap-1">
                             <div className="relative flex-1">
