@@ -37,12 +37,12 @@ const PostIt = ({ row, index }: { row: IdeaRow; index: number }) => {
 
   return (
     <div
-      className="relative break-inside-avoid mb-8 transition-transform duration-200 hover:scale-[1.03] hover:rotate-0 hover:z-10"
+      className="relative transition-transform duration-200 hover:scale-[1.03] hover:rotate-0 hover:z-10"
       style={{ transform: `rotate(${rotate}deg)` }}
     >
       {/* tape strip */}
       <div
-        className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-7 rounded-sm z-10"
+        className="absolute -top-3 left-1/2 w-24 h-7 rounded-sm z-10"
         style={{ background: color.tape, transform: `translateX(-50%) rotate(${-rotate * 1.6}deg)` }}
       />
       <div
@@ -112,7 +112,7 @@ const MasterclassNov11Ideas = () => {
             <p className="text-sm text-muted-foreground mb-8">
               {ideas.length} {ideas.length === 1 ? "Idee" : "Ideen"} auf der Pinnwand
             </p>
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-start">
               {ideas.map((row, i) => (
                 <PostIt key={row.id} row={row} index={i} />
               ))}
