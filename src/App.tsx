@@ -26,6 +26,7 @@ import MasterclassAug28Survey from "./pages/MasterclassAug28Survey";
 import MasterclassAug28Feedback from "./pages/MasterclassAug28Feedback";
 import MasterclassSep15Survey from "./pages/MasterclassSep15Survey";
 import MasterclassNov11Survey from "./pages/MasterclassNov11Survey";
+import MasterclassNov11Ideas from "./pages/MasterclassNov11Ideas";
 import HsgWomenSurvey from "./pages/HsgWomenSurvey";
 import HsgWomenFeedback from "./pages/HsgWomenFeedback";
 import MasterclassEveningFeedback from "./pages/MasterclassEveningFeedback";
@@ -125,6 +126,7 @@ const App = () => (
             <Route path="mc-aug28-feedback" element={<MasterclassAug28Feedback />} />
             <Route path="mc-sep15-prep" element={<MasterclassSep15Survey />} />
             <Route path="mc-nov11-prep" element={<MasterclassNov11Survey />} />
+            <Route path="mc-nov11/ideas" element={<MasterclassNov11Ideas />} />
             <Route path="hsg-women-prep" element={<HsgWomenSurvey />} />
             <Route path="hsg-women-feedback" element={<HsgWomenFeedback />} />
             <Route path="mc-evening-feedback" element={<EveningFeedbackByLang />} />
