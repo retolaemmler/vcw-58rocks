@@ -12,6 +12,7 @@ import Survey from "./pages/Survey";
 import Feedback from "./pages/Feedback";
 import FeedbackDe from "./pages/FeedbackDe";
 import Edition2Slides from "./pages/Edition2Slides";
+import WorkshopSlides from "./pages/WorkshopSlides";
 import IdeaGenerator from "./pages/IdeaGenerator";
 import Edition1Participants from "./pages/Edition1Participants";
 import Edition2Participants from "./pages/Edition2Participants";
@@ -101,6 +102,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/slides" element={<WorkshopSlides />} />
           <Route path="/:lang" element={<LangLayout />}>
             <Route index element={<Index />} />
             <Route path="confirmation" element={<Confirmation />} />
@@ -112,6 +114,7 @@ const App = () => (
             <Route path="ideas" element={<IdeaGenerator />} />
             <Route path="edition1/participants" element={<Edition1Participants />} />
             <Route path="edition2/slides" element={<Edition2Slides />} />
+            <Route path="slides" element={<WorkshopSlides />} />
             <Route path="edition2/participants" element={<Edition2Participants />} />
             <Route path="dates" element={<UpdateDates />} />
             <Route path="raiffeisen-prep" element={<RaiffeisenSurvey />} />

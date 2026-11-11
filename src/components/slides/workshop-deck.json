@@ -1,0 +1,451 @@
+[
+  {
+    "number": 1,
+    "images": [
+      {
+        "file": "slide-01-0.png"
+      },
+      {
+        "file": "slide-01-4.png"
+      }
+    ],
+    "texts": [
+      "Vibe Code Workshop",
+      "Build a real web app in one evening.\nBy just using natural language and AI.\n\nWhy this matters for you\nFaster experimentation of ideas\nLower dependency on IT teams\nFrom idea → prototype in hours, not months"
+    ],
+    "notes": "",
+    "title": "Vibe Code Workshop"
+  },
+  {
+    "number": 2,
+    "images": [],
+    "texts": [
+      "Schedule",
+      "17:00",
+      "Welcome & Intro",
+      "Introductions, intro to vibe coding, Lovable setup & tips",
+      "17:30",
+      "Workshop Session #1",
+      "Start working on your app with continuous coaching",
+      "19:00",
+      "🍕 Pizza Break",
+      "Refuel and chat with fellow participants",
+      "19:30",
+      "Next Level Vibe Coding",
+      "APIs, emails, payments, backend, login, security",
+      "19:45",
+      "Workshop Session #2",
+      "Continue building & polish your app",
+      "20:30",
+      "Presentations & Feedback",
+      "Present your app to the others and give feedback",
+      "21:00",
+      "End 🍺",
+      "Wrap up & celebrate"
+    ],
+    "notes": "",
+    "title": "Schedule"
+  },
+  {
+    "number": 3,
+    "images": [
+      {
+        "file": "slide-03-2.jpg"
+      },
+      {
+        "file": "slide-03-4.png"
+      }
+    ],
+    "texts": [
+      "Reto Lämmler\nEntrepreneur & UX Expert",
+      "Coaches",
+      "Remy Blaettler\nFounder & AI practitioner",
+      "Co-Organisator Vibe Code Fest\nCo-Founder TestingTime \nB.S. Computer Science \n& MAS in User Experience",
+      "Co-Organisator Vibe Code Fest\nCo-Founder Supertext\nM.S. Computer Engineering"
+    ],
+    "notes": "",
+    "title": "Coaches"
+  },
+  {
+    "number": 4,
+    "images": [
+      {
+        "file": "slide-04-2.png"
+      }
+    ],
+    "texts": [
+      "All your App Ideas are feasible!"
+    ],
+    "notes": "",
+    "title": "All your App Ideas are feasible!"
+  },
+  {
+    "number": 5,
+    "images": [
+      {
+        "file": "slide-05-1.png"
+      },
+      {
+        "file": "slide-05-2.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Meet the cohort"
+  },
+  {
+    "number": 6,
+    "images": [
+      {
+        "file": "slide-06-1.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "HR-Zeugnis-Assistent"
+  },
+  {
+    "number": 7,
+    "images": [
+      {
+        "file": "slide-07-1.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Sharing Goods App"
+  },
+  {
+    "number": 8,
+    "images": [
+      {
+        "file": "slide-08-1.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "CEO-Dashboard"
+  },
+  {
+    "number": 9,
+    "images": [
+      {
+        "file": "slide-09-1.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Marketing Monitoring"
+  },
+  {
+    "number": 10,
+    "images": [
+      {
+        "file": "slide-10-1.png"
+      },
+      {
+        "file": "slide-10-2.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Buchhaltung & Spesen"
+  },
+  {
+    "number": 11,
+    "images": [
+      {
+        "file": "slide-11-1.png"
+      },
+      {
+        "file": "slide-11-2.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Sales Dashboard"
+  },
+  {
+    "number": 12,
+    "images": [
+      {
+        "file": "slide-12-1.png"
+      },
+      {
+        "file": "slide-12-2.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Lead-Bewirtschaftung"
+  },
+  {
+    "number": 13,
+    "images": [
+      {
+        "file": "slide-13-1.png"
+      },
+      {
+        "file": "slide-13-3.png"
+      },
+      {
+        "file": "slide-13-4.png"
+      },
+      {
+        "file": "slide-13-6.png"
+      },
+      {
+        "file": "slide-13-7.png"
+      }
+    ],
+    "texts": [
+      "What’s with all the Hype?",
+      "Andrej Karpathy\nOpenAI Co-Founder \nAI Lead Tesla\nAnthropic"
+    ],
+    "notes": "",
+    "title": "What’s with all the Hype?"
+  },
+  {
+    "number": 14,
+    "images": [
+      {
+        "file": "slide-14-2.png"
+      }
+    ],
+    "texts": [
+      "What is Vibe Coding?",
+      "You describe your idea in plain language \n— AI builds a working app.\n\nNo syntax. No setup. No waiting for developers.\nDescribe the idea and context\nAI generates a real, usable application\nYou improve it by talking to the system"
+    ],
+    "notes": "",
+    "title": "What is Vibe Coding?"
+  },
+  {
+    "number": 15,
+    "images": [
+      {
+        "file": "slide-15-2.png"
+      }
+    ],
+    "texts": [
+      "Vibe Code Workshop was entirely vibe coded",
+      "Lovable features used:\nEmail for confirmation\nDatabase for orders and participants\nStripe for payment\nOpenAI for Idea Generator\nGoogle Authentication\nDomain connect"
+    ],
+    "notes": "Remy\nhttps://people-blossom-app.lovable.app\n",
+    "title": "Vibe Code Workshop was entirely vibe coded"
+  },
+  {
+    "number": 16,
+    "images": [
+      {
+        "file": "slide-16-4.png"
+      },
+      {
+        "file": "slide-16-5.png"
+      }
+    ],
+    "texts": [
+      "Prompting",
+      "Prompt engineering isn't technical. It's about clearly explaining what you want.\n\nExample:\nTranslate the entire website into German. Add a language selector (EN, DE) to the navigation. Automatically select the browser's language; the fallback is English.",
+      "This formula to write a good prompt:\nRole + Action + The Vibe\n\nRole: \"You are a senior UI designer...\"\nAction: \"Build a pricing table...\"\nThe Vibe: \"...that looks like a restaurant menu. Use serif fonts and paper textures.\""
+    ],
+    "notes": "Remy\n\n\nYou are a micro SaaS strategist with expertise in lean startup methodology and product validation. I want to build a micro SaaS business and need a complete roadmap from idea to first paying customer, based on skills outline in my resume.\n\nMy situation:\n[REVIEW MY RESUME]: all you know about me ………\n[INTERESTS]: what you know from me plus ………\n[CONSTRAINTS]: what you know from me and …….\n\nPhase 1 - Idea Generation & Validation:\n- Analyze my skills/interests intersection for 5 high-potential micro SaaS opportunities\n- For each idea, provide: target market size, competition analysis, revenue potential ($1K-$50K MRR range)\n- Create validation experiments I can run in 48 hours with $50 budget\n- Include specific metrics that indicate \"go/no-go\" for each idea\n\nPhase 2 - MVP Planning:\n- Choose the highest-scoring idea and break down into minimum viable features\n- Provide no-code/low-code tools recommendations for rapid development\n- Create 2-week sprint plan with daily milestones\n- Design pricing strategy based on successful micro SaaS benchmarks\n\nPhase 3 - Launch Strategy:\n- Identify exact channels where my target customers spend time\n- Create content marketing calendar for first 30 days\n- Generate customer acquisition experiments with projected costs\n- Set realistic revenue milestones for months 1-6\n\nFormat your response as actionable sections with specific tools, timelines, and success metrics.\"\n",
+    "title": "Prompting"
+  },
+  {
+    "number": 17,
+    "images": [
+      {
+        "file": "slide-17-2.png"
+      }
+    ],
+    "texts": [
+      "Let’s setup Lovable together"
+    ],
+    "notes": "Remy\n\nhttps://people-blossom-app.lovable.app\n\nhttps://docs.lovable.dev/tips-tricks/best-practice#10-bonus-tips\n",
+    "title": "Let’s setup Lovable together"
+  },
+  {
+    "number": 18,
+    "images": [
+      {
+        "file": "slide-18-2.png"
+      },
+      {
+        "file": "slide-18-4.png"
+      }
+    ],
+    "texts": [
+      "⇨ Switch to the Vibe Code Workshop Workspace",
+      "Accept Lovables Invite"
+    ],
+    "notes": "",
+    "title": "Accept Lovable’s Invite"
+  },
+  {
+    "number": 19,
+    "images": [
+      {
+        "file": "slide-19-1.png"
+      }
+    ],
+    "texts": [
+      "Demo App\n\n\nPrompt:\n\nErstelle eine web app, mit welcher die workshop teilnehmer ihre 2 favoriten pizzen aus Margherita, Funghi, Prosciutto e funghi, Piccante und Salame wählen können. Benutze http://www.dieci.ch für die Bilder. Erstelle dazu ein QR code, um auf die App zu kommen. Zeige ein Dashboard mit dem Resultat. Verlinke das Abstimmungsformular, der QR Code und Resultat über eine Navigation. Stelle sicher, die App ist mobile freundlich."
+    ],
+    "notes": "",
+    "title": "Demo App"
+  },
+  {
+    "number": 20,
+    "images": [
+      {
+        "file": "slide-20-2.jpg"
+      }
+    ],
+    "texts": [
+      "Let the magic start!",
+      "Open Lovable\nSelect Plan mode\nConnect your design system\nEnter your app idea\nGet started and let Lovable guide you\n\n\nTips:\nBuild the first version without login.\nMetaphor: Building a house"
+    ],
+    "notes": "Remy\n\nhttps://people-blossom-app.lovable.app\n\nhttps://docs.lovable.dev/tips-tricks/best-practice#10-bonus-tips\n",
+    "title": "Let the magic start!"
+  },
+  {
+    "number": 21,
+    "images": [
+      {
+        "file": "slide-21-0.jpg"
+      }
+    ],
+    "texts": [
+      "Stuck?",
+      "No worries!\nExplain the issue again, like you would to a coworker\n\nPrompt:\nNow, let’s build this step by step\nI am frustrated!\n\nOr just start over…"
+    ],
+    "notes": "https://people-blossom-app.lovable.app\n\n",
+    "title": "Stuck?"
+  },
+  {
+    "number": 22,
+    "images": [
+      {
+        "file": "slide-22-0.jpg"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Next Level Vibe Coding"
+  },
+  {
+    "number": 23,
+    "images": [
+      {
+        "file": "slide-23-2.png"
+      }
+    ],
+    "texts": [
+      "Tipps & Tricks",
+      "Visual edits\nUndo / History\nDesktop vs. tablet vs. mobile view\nEnable login / sign-up\nSend emails\nAI features"
+    ],
+    "notes": "",
+    "title": "Tips & Tricks"
+  },
+  {
+    "number": 24,
+    "images": [
+      {
+        "file": "slide-24-3.png"
+      }
+    ],
+    "texts": [
+      "Publish App",
+      "How to publish your app for others to use?\nPublish your app\nAlways: A Lovable subdomain\nOptional: Connect your own custom domain or buy one through Lovable\nPreview vs. published version\nUnpublish your app later"
+    ],
+    "notes": "",
+    "title": "Publish App"
+  },
+  {
+    "number": 25,
+    "images": [
+      {
+        "file": "slide-25-0.png"
+      },
+      {
+        "file": "slide-25-1.png"
+      },
+      {
+        "file": "slide-25-5.png"
+      },
+      {
+        "file": "slide-25-8.png"
+      }
+    ],
+    "texts": [
+      "After Workshop: Transfer Project"
+    ],
+    "notes": "",
+    "title": "After Workshop: Transfer Project"
+  },
+  {
+    "number": 26,
+    "images": [
+      {
+        "file": "slide-26-0.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Keep building"
+  },
+  {
+    "number": 27,
+    "images": [],
+    "texts": [
+      "Schedule",
+      "17:00",
+      "Welcome & Intro",
+      "Introductions, intro to vibe coding, Lovable setup & tips",
+      "17:30",
+      "Workshop Session #1",
+      "Start working on your app with continuous coaching",
+      "19:00",
+      "🍕 Pizza Break",
+      "Refuel and chat with fellow participants",
+      "19:30",
+      "Next Level Vibe Coding",
+      "APIs, emails, payments, backend, login, security",
+      "19:45",
+      "Workshop Session #2",
+      "Continue building & polish your app",
+      "20:30",
+      "Presentations & Feedback",
+      "Present your app to the others and give feedback",
+      "21:00",
+      "End 🍺",
+      "Wrap up & celebrate"
+    ],
+    "notes": "",
+    "title": "Schedule"
+  },
+  {
+    "number": 28,
+    "images": [
+      {
+        "file": "slide-28-2.png"
+      }
+    ],
+    "texts": [
+      "Please give us Feedback"
+    ],
+    "notes": "",
+    "title": "Please give us Feedback"
+  },
+  {
+    "number": 29,
+    "images": [
+      {
+        "file": "slide-29-0.png"
+      }
+    ],
+    "texts": [],
+    "notes": "",
+    "title": "Thank you!"
+  }
+]
