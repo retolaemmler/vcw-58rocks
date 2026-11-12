@@ -107,8 +107,8 @@ Deno.serve(async (req) => {
         { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-    // Edition 4 (11.11.26) is the default for any order without edition metadata
-    const edition: string | null = metadata.edition ?? "2026-11-11";
+    // Edition 5 (27.1.27) is the default for any order without edition metadata
+    const edition: string | null = metadata.edition ?? "2027-01-27";
 
     // Save order to database (upsert to handle page refreshes)
     const supabase = createClient(
@@ -168,13 +168,13 @@ Deno.serve(async (req) => {
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
         "BEGIN:VEVENT",
-        "DTSTART:20261111T160000Z",
-        "DTEND:20261111T200000Z",
+        "DTSTART:20270127T160000Z",
+        "DTEND:20270127T200000Z",
         "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Evening",
         "DESCRIPTION:Evening hands-on masterclass. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
         `LOCATION:${escapeIcsText("Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich, Switzerland")}`,
         "STATUS:CONFIRMED",
-        "UID:vibe-code-workshop-2026-11-11@vibecodeworkshop.ch",
+        "UID:vibe-code-workshop-2027-01-27@vibecodeworkshop.ch",
         "END:VEVENT",
         "END:VCALENDAR",
       ].map(foldIcsLine).join("\r\n");
@@ -212,7 +212,7 @@ Deno.serve(async (req) => {
                 </p>
                 <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 24px 0;">
                   <h2 style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 12px;">Event Details</h2>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Wednesday, 11 November 2026 · 17:00 – 21:00</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Wednesday, 27 January 2027 · 17:00 – 21:00</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📍 Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 CHF ${amountFormatted} paid</p>
                 </div>
