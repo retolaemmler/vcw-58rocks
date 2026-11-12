@@ -172,7 +172,7 @@ Deno.serve(async (req) => {
         "DTEND:20270127T200000Z",
         "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Evening",
         "DESCRIPTION:Evening hands-on masterclass. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
-        `LOCATION:${escapeIcsText("Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich, Switzerland")}`,
+        `LOCATION:${escapeIcsText("Zürich – TBD")}`,
         "STATUS:CONFIRMED",
         "UID:vibe-code-workshop-2027-01-27@vibecodeworkshop.ch",
         "END:VEVENT",
@@ -213,7 +213,7 @@ Deno.serve(async (req) => {
                 <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 24px 0;">
                   <h2 style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 12px;">Event Details</h2>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Wednesday, 27 January 2027 · 17:00 – 21:00</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📍 Headquarters – The Elegant, Beethovenstrasse 48, 8002 Zürich</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📍 Zürich – TBD</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 CHF ${amountFormatted} paid</p>
                 </div>
                 <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
