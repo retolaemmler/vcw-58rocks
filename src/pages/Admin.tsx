@@ -64,7 +64,7 @@ const Admin = () => {
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [mainTab, setMainTab] = usePersistedTab("admin.mainTab", "orders");
   const [surveyTab, setSurveyTab] = usePersistedTab("admin.surveyTab", "prep");
-  const [ordersBatchTab, setOrdersBatchTab] = usePersistedTab("admin.ordersBatchTab", "workshop4");
+  const [ordersBatchTab, setOrdersBatchTab] = usePersistedTab("admin.ordersBatchTab", "workshop5");
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -152,6 +152,7 @@ const Admin = () => {
     if (ordersBatchTab === "workshop2") return editionOf(o) === "2026-06-30";
     if (ordersBatchTab === "workshop3") return editionOf(o) === "2026-09-15";
     if (ordersBatchTab === "workshop4") return editionOf(o) === "2026-11-11";
+    if (ordersBatchTab === "workshop5") return editionOf(o) === "2027-01-27";
     return true;
   });
   const totalRevenue = filteredOrders.reduce((sum, o) => sum + o.amount_total, 0) / 100;
@@ -250,6 +251,7 @@ const Admin = () => {
                 <TabsTrigger value="workshop2">Edition 2 - 30.6.26</TabsTrigger>
                 <TabsTrigger value="workshop3">Edition 3 - 15.9.26</TabsTrigger>
                 <TabsTrigger value="workshop4">Edition 4 - 11.11.26</TabsTrigger>
+                <TabsTrigger value="workshop5">Edition 5 - 27.1.27</TabsTrigger>
                 <TabsTrigger value="all">All</TabsTrigger>
               </TabsList>
             </Tabs>
