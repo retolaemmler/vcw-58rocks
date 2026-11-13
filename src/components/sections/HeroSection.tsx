@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Calendar, MapPin, Users, Mail, Check, Download } from "lucide-react";
 import lovableLogo from "@/assets/lovable-logo.png";
+import expertBadge from "@/assets/lovable-expert-2026.png.asset.json";
 import flyerPdf from "@/assets/Vibe_Coding_Workshop_Flyer.pdf.asset.json";
 import WaitlistSignup from "@/components/NewsletterSignup";
 import {
@@ -25,6 +26,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-24 pb-8 bg-background">
       <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <img src={expertBadge.url} alt="Lovable Expert 2026" className="h-14 sm:h-16 w-auto mx-auto mb-6" />
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 text-foreground">
           {t("hero.title")}
           <span className="block gradient-text mt-2">{t("hero.subtitle")}</span>
