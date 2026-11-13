@@ -8,7 +8,7 @@ import coachesTeamImg from "@/assets/coaches-duo-2.png.asset.json";
 
 const coaches = [
   { name: "Reto Lämmler", roleKey: "reto", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: true },
-  { name: "Remy Blaettler", roleKey: "remy", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
+  { name: "Remy Blaettler", roleKey: "remy", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: true },
 ];
 
 const HostsSection = () => {
