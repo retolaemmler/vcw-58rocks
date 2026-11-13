@@ -95,8 +95,8 @@ const Navbar = ({ activeTab }: NavbarProps) => {
           const isHome = /^\/(en|de)\/?$/.test(location.pathname) || location.pathname === "/";
           if (!isHome) navigate(`/${i18n.language || "en"}`);
           else window.scrollTo({ top: 0, behavior: "smooth" });
-        }} className="flex items-center">
-          <img src={logo} alt="Logo" className="h-12 w-12" />
+        }} className="flex items-center shrink-0">
+          <img src={logo} alt="Logo" className="h-12 w-12 shrink-0" />
         </button>
 
         {/* Desktop */}
