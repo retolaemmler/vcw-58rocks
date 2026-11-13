@@ -158,7 +158,7 @@ const en = {
       reto: "Entrepreneur & UX Expert",
       remy: "CTO Supertext",
     },
-    ambassador: "Official Lovable Ambassador",
+    ambassador: "Official Lovable Expert",
   },
   pricing: {
     titleHighlight: "Pricing",
