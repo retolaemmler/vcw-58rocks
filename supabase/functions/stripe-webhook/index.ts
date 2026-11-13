@@ -61,6 +61,10 @@ async function verifyStripeSignature(payload: string, sigHeader: string, secret:
 }
 
 // Escape text values per RFC 5545 §3.3.11 (commas, semicolons, backslashes)
+function escapeHtml(v: unknown): string {
+  return String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
 function escapeIcsText(value: string) {
   return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,");
 }
@@ -110,7 +114,7 @@ export function customerEmailHtml(displayName: string, amountFormatted: string) 
         <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Evening</p>
       </div>
       <div style="padding: 30px;">
-        <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${displayName} 👋</p>
+        <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${escapeHtml(displayName)} 👋</p>
         <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
           Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.
         </p>
@@ -242,8 +246,8 @@ Deno.serve(async (req) => {
           html: `
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto;">
               <h2>🎟️ New Ticket Sold</h2>
-              <p><strong>Name:</strong> ${fullName ?? "N/A"}</p>
-              <p><strong>Email:</strong> ${customerEmail}</p>
+              <p><strong>Name:</strong> ${escapeHtml(fullName ?? "N/A")}</p>
+              <p><strong>Email:</strong> ${escapeHtml(customerEmail)}</p>
               <p><strong>Amount:</strong> CHF ${amountFormatted}</p>
               ${edition ? `<p><strong>Edition:</strong> ${edition}</p>` : ""}
             </div>`,

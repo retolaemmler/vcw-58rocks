@@ -39,7 +39,7 @@ serve(async (req) => {
       .select("id")
       .eq("token", token)
       .maybeSingle();
-    if (!tokenRow) {
+    if (!tokenRow || !hasEmail || email.length > 320) {
       return new Response(JSON.stringify({ error: "Invalid token" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -81,6 +81,14 @@ serve(async (req) => {
       survey = surveyRes.data;
       if (orderRes.error) console.error("Order lookup error:", orderRes.error);
       if (surveyRes.error) console.error("Survey lookup error:", surveyRes.error);
+    }
+
+    // Only known participants (ticket holder or survey respondent) may use the AI generator
+    if (!order && !survey) {
+      return new Response(JSON.stringify({ error: "Unknown participant" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     // Strip URLs from a string so we never echo a link in the testimonial
@@ -161,6 +169,7 @@ Rules:
           },
         ],
         temperature: 0.9,
+        max_tokens: 200,
       }),
     });
 

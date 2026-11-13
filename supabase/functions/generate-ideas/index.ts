@@ -56,7 +56,14 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { prompt, type, ideaSummary } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const type = body?.type;
+    const prompt = typeof body?.prompt === "string" ? body.prompt.trim() : "";
+    const ideaSummary = typeof body?.ideaSummary === "string" ? body.ideaSummary.trim() : "";
+    const bad = (msg: string) => new Response(JSON.stringify({ error: msg }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    if (type !== "ideas" && type !== "expand") return bad("Invalid type");
+    if (type === "ideas" && (prompt.length < 3 || prompt.length > 1000)) return bad("Prompt must be 3-1000 characters");
+    if (type === "expand" && (ideaSummary.length < 3 || ideaSummary.length > 1500)) return bad("Idea summary must be 3-1500 characters");
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
@@ -69,6 +76,7 @@ Deno.serve(async (req) => {
         },
         body: JSON.stringify({
           model: "google/gemini-3-flash-preview",
+          max_tokens: 1500,
           messages: [
             {
               role: "system",
@@ -137,6 +145,7 @@ Deno.serve(async (req) => {
         },
         body: JSON.stringify({
           model: "google/gemini-3-flash-preview",
+          max_tokens: 1500,
           messages: [
             {
               role: "system",

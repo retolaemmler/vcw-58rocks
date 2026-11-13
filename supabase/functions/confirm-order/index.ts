@@ -9,6 +9,10 @@ const corsHeaders = {
 const APP_TAG = "vibe-code-workshop";
 
 // Escape text values per RFC 5545 §3.3.11 (commas, semicolons, backslashes)
+function escapeHtml(v: unknown): string {
+  return String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
 function escapeIcsText(value: string) {
   return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,");
 }
@@ -206,7 +210,7 @@ Deno.serve(async (req) => {
                 <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Evening</p>
               </div>
               <div style="padding: 30px;">
-                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${displayName} 👋</p>
+                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${escapeHtml(displayName)} 👋</p>
                 <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
                   Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.
                 </p>
@@ -232,7 +236,7 @@ Deno.serve(async (req) => {
         const emailError = await emailRes.text();
         console.error("Resend API error (customer):", emailError);
       } else {
-        console.log(`Confirmation email sent to ${customerEmail}`);
+        console.log("Confirmation email sent for session:", session.id);
       }
 
       // Send notification to organizer
@@ -254,9 +258,9 @@ Deno.serve(async (req) => {
               <div style="padding: 30px;">
                 <p style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 16px;"><strong>New order received:</strong></p>
                 <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 0 0 16px;">
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📧 <strong>Email:</strong> ${customerEmail}</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">🏢 <strong>Company:</strong> ${customerCompanyName ?? "N/A"}</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">👤 <strong>Contact:</strong> ${contactName ?? "N/A"}</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📧 <strong>Email:</strong> ${escapeHtml(customerEmail)}</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">🏢 <strong>Company:</strong> ${escapeHtml(customerCompanyName ?? "N/A")}</p>
+                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">👤 <strong>Contact:</strong> ${escapeHtml(contactName ?? "N/A")}</p>
                   <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 <strong>Amount:</strong> CHF ${amountFormatted}</p>
                 </div>
               </div>

@@ -23,8 +23,8 @@ Deno.serve(async (req) => {
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
     const action = typeof body.action === "string" ? body.action : "update";
     const datesInput = Array.isArray(body.preferred_dates) ? body.preferred_dates : [];
-    const name = typeof body.name === "string" ? body.name.trim() : "";
-    const company = typeof body.company === "string" ? body.company.trim() : "";
+    const name = typeof body.name === "string" ? body.name.trim().slice(0, 200) : "";
+    const company = typeof body.company === "string" ? body.company.trim().slice(0, 200) : "";
 
     if (!email || !email.includes("@")) {
       return new Response(
@@ -69,7 +69,7 @@ Deno.serve(async (req) => {
     // Find existing signup by email
     const { data: existing, error: lookupErr } = await supabase
       .from("newsletter_signups")
-      .select("id, name, company")
+      .select("id, name, company, preferred_dates")
       .eq("email", email)
       .maybeSingle();
 
@@ -84,10 +84,15 @@ Deno.serve(async (req) => {
     if (existing) {
       const { error: updateErr } = await supabase
         .from("newsletter_signups")
+        // Anonymous callers cannot prove ownership of the email, so existing
+        // signups are only ever extended: dates are merged (never removed) and
+        // name/company are only filled when currently empty.
         .update({
-          preferred_dates: preferred_dates.length ? preferred_dates : null,
-          name: name || existing.name,
-          company: company || existing.company,
+          preferred_dates: Array.from(new Set([...(existing.preferred_dates ?? []), ...preferred_dates])).filter((d) => ALLOWED_DATES.has(d)).length
+            ? Array.from(new Set([...(existing.preferred_dates ?? []), ...preferred_dates]))
+            : null,
+          name: existing.name || name || null,
+          company: existing.company || company || null,
         })
         .eq("id", existing.id);
 
