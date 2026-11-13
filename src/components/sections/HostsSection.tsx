@@ -4,7 +4,7 @@ import { Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
-import coachesTeamImg from "@/assets/coaches-team.jpg.asset.json";
+import coachesTeamImg from "@/assets/coaches-duo.png.asset.json";
 
 const coaches = [
   { name: "Reto Lämmler", roleKey: "reto", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: true },
@@ -24,9 +24,9 @@ const HostsSection = () => {
         <div className="max-w-5xl mx-auto mb-12 rounded-2xl overflow-hidden shadow-md border border-border/50">
           <img
             src={coachesTeamImg.url}
-            alt="Valentin Binnendijk, Reto Lämmler and Remy Blaettler at a Vibe Code Workshop"
+            alt="Reto Lämmler and Remy Blaettler at a Vibe Code Workshop"
             loading="lazy"
-            className="w-full aspect-[16/8] object-cover object-[center_20%]"
+            className="w-full aspect-[16/8] object-cover object-[center_30%]"
           />
         </div>
 
