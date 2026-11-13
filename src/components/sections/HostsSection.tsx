@@ -4,7 +4,7 @@ import { Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
-import coachesTeamImg from "@/assets/coaches-duo.png.asset.json";
+import coachesTeamImg from "@/assets/coaches-duo-2.png.asset.json";
 
 const coaches = [
   { name: "Reto Lämmler", roleKey: "reto", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: true },
