@@ -2,7 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import valentinImg from "@/assets/Valentin.jpeg";
 import retoImg from "@/assets/Reto.jpeg";
 import remyImg from "@/assets/Remy.jpeg";
 import coachesTeamImg from "@/assets/coaches-team.jpg.asset.json";
@@ -10,7 +9,6 @@ import coachesTeamImg from "@/assets/coaches-team.jpg.asset.json";
 const coaches = [
   { name: "Reto Lämmler", roleKey: "reto", initials: "RL", image: retoImg, linkedin: "https://www.linkedin.com/in/rlaemmler/", ambassador: true },
   { name: "Remy Blaettler", roleKey: "remy", initials: "RB", image: remyImg, linkedin: "https://www.linkedin.com/in/remyblaettler/", ambassador: false },
-  { name: "Valentin Binnendijk", roleKey: "valentin", initials: "VB", image: valentinImg, linkedin: "https://www.linkedin.com/in/valentinbinnendijk/", ambassador: true },
 ];
 
 const HostsSection = () => {
@@ -32,7 +30,7 @@ const HostsSection = () => {
           />
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
           {coaches.map((host) => (
             <div
               key={host.name}
