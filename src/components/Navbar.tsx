@@ -100,7 +100,7 @@ const Navbar = ({ activeTab }: NavbarProps) => {
         </button>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -124,7 +124,7 @@ const Navbar = ({ activeTab }: NavbarProps) => {
         </div>
 
         {/* Mobile toggle */}
-        <div className="md:hidden flex items-center gap-1">
+        <div className="lg:hidden flex items-center gap-1">
           <LanguageSwitcher />
           <button
             className="p-2 text-foreground"
@@ -138,7 +138,7 @@ const Navbar = ({ activeTab }: NavbarProps) => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border/50 px-4 pb-4">
+        <div className="lg:hidden bg-background/95 backdrop-blur-md border-b border-border/50 px-4 pb-4">
           {navLinks.map((link) => (
             <button
               key={link.id}
