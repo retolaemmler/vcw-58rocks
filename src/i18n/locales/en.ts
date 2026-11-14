@@ -39,7 +39,7 @@ const en = {
     masterclass: {
       badge: "Most Popular",
       title: "Masterclass",
-      description: "Join an evening session (7–12 people). Includes a pizza break and free Lovable credits.",
+      description: "Join an evening session. Includes a pizza break and free Lovable credits.",
       date: "Wed. 27.1.2027 from 17:00 - 21:00",
       dateNote: "Subscribe to newsletter for upcoming dates",
       location: "Zürich (TBD)",
