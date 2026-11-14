@@ -15,7 +15,7 @@ import logo from "@/assets/vcw-logo.png";
 
 const schema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
-  nps_score: z.number({ required_error: "Bitte auswählen" }).min(0).max(10),
+  nps_score: z.number({ error: "Bitte auswählen" }).min(0).max(10),
   best_part: z.string().optional(),
 });
 

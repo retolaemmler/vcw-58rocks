@@ -17,10 +17,10 @@ import logo from "@/assets/vcw-logo.png";
 
 const surveySchema = z.object({
   email: z.string().trim().email({ message: "Bitte gib eine gültige E-Mail-Adresse ein" }),
-  ai_coding_experience: z.enum(["yes", "no"], { required_error: "Bitte auswählen" }),
+  ai_coding_experience: z.enum(["yes", "no"], { error: "Bitte auswählen" }),
   lovable_experience: z.string().optional(),
   workshop_goals: z.string().optional(),
-  has_app_idea: z.enum(["yes", "no"], { required_error: "Bitte auswählen" }),
+  has_app_idea: z.enum(["yes", "no"], { error: "Bitte auswählen" }),
   app_idea_description: z.string().optional(),
 });
 
