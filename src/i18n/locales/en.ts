@@ -43,7 +43,7 @@ const en = {
       date: "Wed. 27.1.2027 from 17:00 - 21:00",
       dateNote: "Subscribe to newsletter for upcoming dates",
       location: "Zürich (TBD)",
-      capacity: "10–20 people",
+      capacity: "6–12 people",
       cta: "Get your Ticket",
     },
     company: {
