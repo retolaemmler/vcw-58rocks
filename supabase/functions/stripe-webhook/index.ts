@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { sendTicketEmails, CALENDAR_BUCKET, CALENDAR_PATH } from "../_shared/ticket-emails.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -60,87 +61,11 @@ async function verifyStripeSignature(payload: string, sigHeader: string, secret:
   return age < 300;
 }
 
-// Escape text values per RFC 5545 §3.3.11 (commas, semicolons, backslashes)
-function escapeHtml(v: unknown): string {
-  return String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
-
-function escapeIcsText(value: string) {
-  return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,");
-}
-
-// Fold content lines longer than 75 octets (RFC 5545 §3.1), splitting only
-// at UTF-8 character boundaries so multibyte characters stay intact.
-function foldIcsLine(line: string) {
-  const bytes = new TextEncoder().encode(line);
-  const chunks: Uint8Array[] = [];
-  let start = 0;
-  while (start < bytes.length) {
-    let end = Math.min(start + 75, bytes.length);
-    while (end < bytes.length && (bytes[end] & 0xc0) === 0x80) end--;
-    chunks.push(bytes.subarray(start, end));
-    start = end;
-  }
-  return chunks
-    .map((c, i) => (i === 0 ? "" : " ") + new TextDecoder().decode(c))
-    .join("\r\n");
-}
-
-function buildIcs() {
-  return [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Vibe Code Workshop//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
-    "BEGIN:VEVENT",
-    "DTSTART:20270127T160000Z",
-    "DTEND:20270127T200000Z",
-    "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Evening",
-    "DESCRIPTION:Evening hands-on masterclass. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
-    `LOCATION:${escapeIcsText("Zürich – TBD")}`,
-    "STATUS:CONFIRMED",
-    "UID:vibe-code-workshop-2027-01-27@vibecodeworkshop.ch",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].map(foldIcsLine).join("\r\n");
-}
-
-export function customerEmailHtml(displayName: string, amountFormatted: string) {
-  return `
-    <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
-      <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 40px 30px; text-align: center;">
-        <h1 style="color: #ffffff; font-size: 28px; margin: 0;">Vibe Code Workshop</h1>
-        <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Evening</p>
-      </div>
-      <div style="padding: 30px;">
-        <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${escapeHtml(displayName)} 👋</p>
-        <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
-          Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.
-        </p>
-        <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 24px 0;">
-          <h2 style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 12px;">Event Details</h2>
-          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Wednesday, 27 January 2027 · 17:00 – 21:00</p>
-          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📍 Zürich – TBD</p>
-          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">🍕 Pizza break included · free Lovable credits</p>
-          <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 CHF ${amountFormatted} paid</p>
-        </div>
-        <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
-          We'll send you more details as the event gets closer. See you there! 🚀
-        </p>
-      </div>
-      <div style="background: hsl(210, 20%, 97%); padding: 20px 30px; text-align: center;">
-        <p style="color: hsl(220, 10%, 46%); font-size: 12px; margin: 0;">Vibe Code Workshop · Zurich, Switzerland</p>
-      </div>
-    </div>`;
-}
-
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
   const WEBHOOK_SECRET = Deno.env.get("STRIPE_WEBHOOK_SECRET");
 
   const payload = await req.text();
@@ -185,10 +110,10 @@ Deno.serve(async (req) => {
     // Edition 5 (27.1.27) is the default for any order without edition metadata
     const edition: string | null = metadata.edition ?? "2027-01-27";
 
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-    );
+    const backendUrl = Deno.env.get('SUPABASE_URL');
+    const backendKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    if (!backendUrl || !backendKey) throw new Error('Server configuration error');
+    const supabase = createClient(backendUrl, backendKey);
 
     const customerEmail = session.customer_details?.email ?? session.customer_email;
     const fullName = session.customer_details?.name ?? null;
@@ -201,14 +126,7 @@ Deno.serve(async (req) => {
       .eq("stripe_session_id", session.id)
       .maybeSingle();
 
-    if (existingOrder) {
-      console.log("Order already recorded, skipping:", session.id);
-      return new Response(JSON.stringify({ received: true, duplicate: true }), {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
+    if (!existingOrder) {
     const { error: dbError } = await supabase.from("orders").insert({
       stripe_session_id: session.id,
       customer_email: customerEmail,
@@ -218,42 +136,16 @@ Deno.serve(async (req) => {
       status: "completed",
       edition,
     });
-    if (dbError) console.error("Database insert error:", dbError);
+      if (dbError && dbError.code !== "23505") throw new Error(`Failed to save order: ${dbError.message}`);
+    }
 
-    if (RESEND_API_KEY && customerEmail) {
-      const icsBase64 = btoa(String.fromCharCode(...new TextEncoder().encode(buildIcs())));
-
-      const emailRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${RESEND_API_KEY}` },
-        body: JSON.stringify({
-          from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
-          to: [customerEmail],
-          subject: "🎉 Your Vibe Code Workshop Ticket is Confirmed!",
-          attachments: [{ filename: "vibe-code-workshop.ics", content: icsBase64, type: "text/calendar" }],
-          html: customerEmailHtml(displayName, amountFormatted),
-        }),
-      });
-      if (!emailRes.ok) console.error("Resend error (customer):", await emailRes.text());
-
-      const notifyRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${RESEND_API_KEY}` },
-        body: JSON.stringify({
-          from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
-          to: ["rlaemmler@gmail.com", "remy.blaettler@gmail.com"],
-          subject: `🎟️ New Ticket Sold – ${customerEmail}`,
-          html: `
-            <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <h2>🎟️ New Ticket Sold</h2>
-              <p><strong>Name:</strong> ${escapeHtml(fullName ?? "N/A")}</p>
-              <p><strong>Email:</strong> ${escapeHtml(customerEmail)}</p>
-              <p><strong>Amount:</strong> CHF ${amountFormatted}</p>
-              ${edition ? `<p><strong>Edition:</strong> ${edition}</p>` : ""}
-            </div>`,
-        }),
-      });
-      if (!notifyRes.ok) console.error("Resend error (organizer):", await notifyRes.text());
+    if (customerEmail) {
+      const { data: calendar, error: calendarError } = await supabase.storage
+        .from(CALENDAR_BUCKET).createSignedUrl(CALENDAR_PATH, 365 * 24 * 60 * 60, { download: "vibe-code-workshop.ics" });
+      if (calendarError || !calendar?.signedUrl) throw new Error("Could not create calendar download link");
+      await sendTicketEmails({ sessionId: session.id, email: customerEmail, name: displayName,
+        company: session.customer_details?.business_name ?? undefined,
+        amount: amountFormatted, edition: edition ?? "2027-01-27", calendarUrl: calendar.signedUrl });
     }
 
     return new Response(JSON.stringify({ received: true }), {

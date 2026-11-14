@@ -1,4 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { sendTicketEmails, CALENDAR_BUCKET, CALENDAR_PATH } from "../_shared/ticket-emails.ts";
+import { sendTemplateEmail } from "../_shared/transactional-email-templates/send-email.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -7,32 +9,6 @@ const corsHeaders = {
 };
 
 const APP_TAG = "vibe-code-workshop";
-
-// Escape text values per RFC 5545 §3.3.11 (commas, semicolons, backslashes)
-function escapeHtml(v: unknown): string {
-  return String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
-
-function escapeIcsText(value: string) {
-  return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,");
-}
-
-// Fold content lines longer than 75 octets (RFC 5545 §3.1), splitting only
-// at UTF-8 character boundaries so multibyte characters stay intact.
-function foldIcsLine(line: string) {
-  const bytes = new TextEncoder().encode(line);
-  const chunks: Uint8Array[] = [];
-  let start = 0;
-  while (start < bytes.length) {
-    let end = Math.min(start + 75, bytes.length);
-    while (end < bytes.length && (bytes[end] & 0xc0) === 0x80) end--;
-    chunks.push(bytes.subarray(start, end));
-    start = end;
-  }
-  return chunks
-    .map((c, i) => (i === 0 ? "" : " ") + new TextDecoder().decode(c))
-    .join("\r\n");
-}
 
 // The Stripe account is shared with other apps — only handle our own sessions.
 async function resolveOurMetadata(session: Record<string, any>, key: string) {
@@ -61,20 +37,35 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { session_id } = await req.json();
+    const backendUrl = Deno.env.get('SUPABASE_URL');
+    const backendKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    if (!backendUrl || !backendKey) throw new Error('Server configuration error');
+    const { session_id, test_confirmation } = await req.json();
 
-    if (!session_id) {
+    // Server-authorized diagnostic: fixed template and fixed recipient, no order insertion.
+    if (test_confirmation === true) {
+      const key = Deno.env.get('LOVABLE_API_KEY');
+      if (!key || req.headers.get('Authorization') !== `Bearer ${key}`) {
+        return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
+      const client = createClient(backendUrl, backendKey);
+      const { data: calendar, error } = await client.storage.from(CALENDAR_BUCKET)
+        .createSignedUrl(CALENDAR_PATH, 365 * 24 * 60 * 60, { download: 'vibe-code-workshop.ics' });
+      if (error || !calendar?.signedUrl) throw new Error('Could not create calendar download link');
+      const result = await sendTemplateEmail('ticket-confirmation', 'rlaemmler@gmail.com', {
+        templateData: { name: 'Reto', amount: '299.00', isTest: true, calendarUrl: calendar.signedUrl },
+        idempotencyKey: 'ticket-confirmation-test-lovable-20261114',
+      });
+      return new Response(JSON.stringify(result), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+
+    if (typeof session_id !== 'string' || !/^cs_[a-zA-Z0-9_]+$/.test(session_id) || session_id.length > 255) {
       throw new Error("Missing session_id");
     }
 
     const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY");
     if (!STRIPE_SECRET_KEY) {
       throw new Error("STRIPE_SECRET_KEY is not configured");
-    }
-
-    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-    if (!RESEND_API_KEY) {
-      throw new Error("RESEND_API_KEY is not configured");
     }
 
     // Fetch checkout session from Stripe API
@@ -115,10 +106,7 @@ Deno.serve(async (req) => {
     const edition: string | null = metadata.edition ?? "2027-01-27";
 
     // Save order to database (upsert to handle page refreshes)
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
+    const supabase = createClient(backendUrl, backendKey);
 
     const customerEmail = session.customer_details?.email ?? session.customer_email;
     const customerCompanyName = session.customer_details?.business_name ?? session.customer_details?.name ?? null;
@@ -131,10 +119,8 @@ Deno.serve(async (req) => {
       .eq("stripe_session_id", session.id)
       .maybeSingle();
 
-    let isNewOrder = false;
 
     if (!existingOrder) {
-      isNewOrder = true;
       const { error: dbError } = await supabase.from("orders").insert({
         stripe_session_id: session.id,
         customer_email: customerEmail,
@@ -151,7 +137,7 @@ Deno.serve(async (req) => {
         // The order exists and its email was sent there — treat as already handled.
         if ((dbError as { code?: string }).code === "23505") {
           console.log("Order already inserted by webhook, skipping:", session.id);
-          isNewOrder = false;
+          // The managed sender deduplicates this event across both triggers.
         } else {
           console.error("Database insert error:", dbError);
           throw new Error(`Failed to save order: ${dbError.message}`);
@@ -159,122 +145,17 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Only send email for new orders (not on page refresh)
-    if (isNewOrder && customerEmail) {
-      const amountFormatted = (session.amount_total / 100).toFixed(2);
-      const displayName = contactFirstName ?? "there";
-
-      // Generate ICS calendar invite
-      const icsContent = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//Vibe Code Workshop//EN",
-        "CALSCALE:GREGORIAN",
-        "METHOD:PUBLISH",
-        "BEGIN:VEVENT",
-        "DTSTART:20270127T160000Z",
-        "DTEND:20270127T200000Z",
-        "SUMMARY:Vibe Code Workshop - Build a Real Web App in One Evening",
-        "DESCRIPTION:Evening hands-on masterclass. Build a real app using AI-powered tools.\\nMore details: https://vibecodeworkshop.ch",
-        `LOCATION:${escapeIcsText("Zürich – TBD")}`,
-        "STATUS:CONFIRMED",
-        "UID:vibe-code-workshop-2027-01-27@vibecodeworkshop.ch",
-        "END:VEVENT",
-        "END:VCALENDAR",
-      ].map(foldIcsLine).join("\r\n");
-
-      const icsBase64 = btoa(String.fromCharCode(...new TextEncoder().encode(icsContent)));
-
-      // Send confirmation to customer
-      const emailRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
-          to: [customerEmail],
-          subject: "🎉 Your Vibe Code Workshop Ticket is Reserved!",
-          attachments: [
-            {
-              filename: "vibe-code-workshop.ics",
-              content: icsBase64,
-              type: "text/calendar",
-            },
-          ],
-          html: `
-            <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
-              <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 40px 30px; text-align: center;">
-                <h1 style="color: #ffffff; font-size: 28px; margin: 0;">Vibe Code Workshop</h1>
-                <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-top: 8px;">Build a Real Web App in One Evening</p>
-              </div>
-              <div style="padding: 30px;">
-                <p style="font-size: 18px; color: hsl(220, 20%, 10%);">Dear ${escapeHtml(displayName)} 👋</p>
-                <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
-                  Thank you for securing your spot! Your ticket for the Vibe Code Workshop has been confirmed.
-                </p>
-                <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 24px 0;">
-                  <h2 style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 12px;">Event Details</h2>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📅 Wednesday, 27 January 2027 · 17:00 – 21:00</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📍 Zürich – TBD</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 CHF ${amountFormatted} paid</p>
-                </div>
-                <p style="color: hsl(220, 10%, 46%); line-height: 1.6;">
-                  We'll send you more details as the event gets closer. See you there! 🚀
-                </p>
-              </div>
-              <div style="background: hsl(210, 20%, 97%); padding: 20px 30px; text-align: center;">
-                <p style="color: hsl(220, 10%, 46%); font-size: 12px; margin: 0;">Vibe Code Workshop · Zurich, Switzerland</p>
-              </div>
-            </div>
-          `,
-        }),
+    // Managed idempotency prevents duplicate sends on refresh or webhook races.
+    // Retry existing orders as well, so an earlier send failure can recover.
+    if (customerEmail) {
+      const { data: calendar, error: calendarError } = await supabase.storage
+        .from(CALENDAR_BUCKET).createSignedUrl(CALENDAR_PATH, 365 * 24 * 60 * 60, { download: "vibe-code-workshop.ics" });
+      if (calendarError || !calendar?.signedUrl) throw new Error("Could not create calendar download link");
+      await sendTicketEmails({
+        sessionId: session.id, email: customerEmail, name: contactFirstName ?? "there",
+        company: customerCompanyName ?? undefined, amount: (session.amount_total / 100).toFixed(2),
+        edition: edition ?? "2027-01-27", calendarUrl: calendar.signedUrl,
       });
-
-      if (!emailRes.ok) {
-        const emailError = await emailRes.text();
-        console.error("Resend API error (customer):", emailError);
-      } else {
-        console.log("Confirmation email sent for session:", session.id);
-      }
-
-      // Send notification to organizer
-      const notifyRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: "Vibe Code Workshop <hello@vibecodeworkshop.ch>",
-          to: ["rlaemmler@gmail.com", "remy.blaettler@gmail.com"],
-          subject: `🎟️ New Ticket Sold – ${customerEmail}`,
-          html: `
-            <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden;">
-              <div style="background: linear-gradient(135deg, hsl(174, 72%, 40%), hsl(262, 80%, 55%)); padding: 30px; text-align: center;">
-                <h1 style="color: #ffffff; font-size: 24px; margin: 0;">🎟️ New Ticket Sold!</h1>
-              </div>
-              <div style="padding: 30px;">
-                <p style="font-size: 16px; color: hsl(220, 20%, 10%); margin: 0 0 16px;"><strong>New order received:</strong></p>
-                <div style="background: hsl(210, 20%, 97%); border-radius: 12px; padding: 20px; margin: 0 0 16px;">
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">📧 <strong>Email:</strong> ${escapeHtml(customerEmail)}</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">🏢 <strong>Company:</strong> ${escapeHtml(customerCompanyName ?? "N/A")}</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">👤 <strong>Contact:</strong> ${escapeHtml(contactName ?? "N/A")}</p>
-                  <p style="margin: 6px 0; color: hsl(220, 10%, 46%);">💰 <strong>Amount:</strong> CHF ${amountFormatted}</p>
-                </div>
-              </div>
-            </div>
-          `,
-        }),
-      });
-
-      if (!notifyRes.ok) {
-        const notifyError = await notifyRes.text();
-        console.error("Resend API error (organizer notification):", notifyError);
-      } else {
-        console.log("Organizer notification sent to hello@vibecodeworkshop.ch");
-      }
     }
 
     return new Response(
