@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet, useLocation, useParams } from "@/lib/router-compat";
 import Feedback from "@/pages/Feedback";
@@ -28,17 +29,25 @@ export const EveningFeedbackByLang = () => {
   return lang === "de" ? <MasterclassEveningFeedbackDe /> : <MasterclassEveningFeedback />;
 };
 
+const useLayoutEffectSafe = typeof window === "undefined" ? () => {} : useLayoutEffect;
+
 export const LangLayout = () => {
   const { lang } = useParams<{ lang: string }>();
   const { i18n } = useTranslation();
   const location = useLocation();
+  const mounted = useRef(false);
 
-  if (isLang(lang)) {
-    // Set the language before children render (resources are bundled, so this is
-    // synchronous) so server-rendered and hydrated text match the URL language.
-    if (i18n.language !== lang) void i18n.changeLanguage(lang);
-    return <Outlet />;
-  }
+  // First render (server render and hydration): set the language before children
+  // render (resources are bundled, so this is synchronous) so server and client
+  // text match the URL. Later switches happen in an effect to avoid updating
+  // other components mid-render.
+  if (!mounted.current && isLang(lang) && i18n.language !== lang) void i18n.changeLanguage(lang);
+  useLayoutEffectSafe(() => {
+    mounted.current = true;
+    if (isLang(lang) && i18n.language !== lang) void i18n.changeLanguage(lang);
+  }, [lang, i18n]);
+
+  if (isLang(lang)) return <Outlet />;
 
   // Not a language prefix — treat as a normal path and redirect to detected lang.
   // Route-pattern placeholders like "/:lang/admin" (used by the preview page
