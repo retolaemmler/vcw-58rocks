@@ -58,7 +58,7 @@ const AudienceSection = ({ activeTab = "you" }: { activeTab?: "you" | "company" 
                 <Badge
                   key={a.key}
                   variant="secondary"
-                  className="px-4 py-2.5 text-sm font-medium bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
+                  className="px-4 py-2.5 text-sm font-medium bg-card border border-border/50 shadow-xs hover:shadow-md transition-shadow cursor-default"
                 >
                   <a.icon className="w-4 h-4 mr-2 text-primary" />
                   {t(`audience.items.${a.key}`)}
@@ -79,7 +79,7 @@ const AudienceSection = ({ activeTab = "you" }: { activeTab?: "you" | "company" 
                   <Badge
                     key={industry.key}
                     variant="secondary"
-                    className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-sm hover:shadow-md transition-shadow cursor-default"
+                    className="px-4 py-2.5 text-sm font-semibold bg-card border border-border/50 shadow-xs hover:shadow-md transition-shadow cursor-default"
                   >
                     <Icon className="w-4 h-4 mr-2 text-primary" />
                     {t(`audience.industries.${industry.key}`)}

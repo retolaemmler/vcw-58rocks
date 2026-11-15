@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { validateSurveyEmail } from "@/lib/validate-survey-email.functions";
+import { invokeServerFn } from "@/lib/legacy-handler";
 import ShareQr from "@/components/admin/ShareQr";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -95,7 +97,7 @@ const RaiffeisenFeedbackAdmin = () => {
 
   const generateLink = async () => {
     setGenerating(true);
-    const { data, error } = await supabase.functions.invoke("validate-survey-email", {
+    const { data, error } = await invokeServerFn(validateSurveyEmail, {
       body: { action: "create-token", kind: KIND },
     });
     if (error) {
@@ -163,7 +165,7 @@ const RaiffeisenFeedbackAdmin = () => {
         {feedbackLink && (
           <CardContent>
             <div className="flex items-center gap-2">
-              <code className="flex-1 bg-muted p-3 rounded text-sm break-all">{feedbackLink}</code>
+              <code className="flex-1 bg-muted p-3 rounded-sm text-sm break-all">{feedbackLink}</code>
               <Button variant="outline" size="icon" onClick={copyLink}>
                 {copied ? <ClipboardCheck className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               </Button>
@@ -308,7 +310,7 @@ const RaiffeisenFeedbackAdmin = () => {
                             <div><strong>Gesamt:</strong> {r.overall_rating ?? "—"} / 5 · <strong>NPS:</strong> {r.nps_score ?? "—"}</div>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                               {SECTION_RATINGS.map((s) => (
-                                <div key={s.key} className="bg-background rounded p-2 border border-border">
+                                <div key={s.key} className="bg-background rounded-sm p-2 border border-border">
                                   <div className="text-xs text-muted-foreground">{s.label}</div>
                                   <div className="font-medium">{(r[s.key] as number | null) ?? "—"}</div>
                                 </div>

@@ -1,0 +1,12 @@
+{"functions": [
+  {"name": "generate-ideas", "classification": "internal-only", "signal": "called from src/pages/IdeaGenerator.tsx", "outcome": "migrated"},
+  {"name": "generate-testimonial", "classification": "internal-only", "signal": "called from 7 feedback pages; deno std serve() only", "outcome": "migrated"},
+  {"name": "update-waitlist-dates", "classification": "internal-only", "signal": "called from src/pages/UpdateDates.tsx", "outcome": "migrated"},
+  {"name": "validate-survey-email", "classification": "internal-only", "signal": "called from 8 admin survey views", "outcome": "migrated"},
+  {"name": "zugerberg-slides-data", "classification": "internal-only", "signal": "called from src/pages/ZugerbergSlides.tsx", "outcome": "migrated"},
+  {"name": "elevenlabs-scribe-token", "classification": "internal-only", "signal": "called from src/components/MicrophoneButton.tsx", "outcome": "migrated"},
+  {"name": "confirm-order", "classification": "Deno-only dependency", "signal": "imports shared npm:/React Email ticket-email helper also used by stripe-webhook (shared idempotent send path)", "outcome": "left"},
+  {"name": "stripe-webhook", "classification": "webhook receiver", "signal": "verifies stripe-signature header", "outcome": "left"},
+  {"name": "auth-email-hook", "classification": "webhook receiver", "signal": "auth email hook called by the auth service; npm: email-js", "outcome": "left"},
+  {"name": "preview-transactional-email", "classification": "unknown", "signal": "no internal call sites; used by email tooling", "outcome": "left"}
+]}

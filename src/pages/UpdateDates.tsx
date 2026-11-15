@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { updateWaitlistDates } from "@/lib/update-waitlist-dates.functions";
+import { invokeServerFn } from "@/lib/legacy-handler";
+import { Link } from "@/lib/router-compat";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,7 +32,7 @@ const UpdateDates = () => {
 
     const handle = setTimeout(async () => {
       lastLookupRef.current = trimmed;
-       const { data, error } = await supabase.functions.invoke("update-waitlist-dates", {
+       const { data, error } = await invokeServerFn(updateWaitlistDates, {
          body: { action: "lookup", email: trimmed },
        });
       if (error || !data?.found) {
@@ -49,7 +51,7 @@ const UpdateDates = () => {
     if (!email.trim()) return;
 
     setLoading(true);
-    const { data, error } = await supabase.functions.invoke("update-waitlist-dates", {
+    const { data, error } = await invokeServerFn(updateWaitlistDates, {
       body: {
         email: email.trim().toLowerCase(),
         name: name.trim(),

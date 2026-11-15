@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "@/lib/router-compat";
 import { useTranslation } from "react-i18next";
 import logo from "@/assets/vcw-logo.png";
 import { Button } from "@/components/ui/button";
@@ -86,7 +86,7 @@ const Navbar = ({ activeTab }: NavbarProps) => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/90 backdrop-blur-md shadow-sm border-b border-border/50"
+          ? "bg-background/90 backdrop-blur-md shadow-xs border-b border-border/50"
           : "bg-transparent"
       }`}
     >

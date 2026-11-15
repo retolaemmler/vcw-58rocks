@@ -155,7 +155,7 @@ const MasterclassJune30SurveyAdmin = () => {
         {surveyLink && (
           <CardContent>
             <div className="flex items-center gap-2">
-              <code className="flex-1 bg-muted p-3 rounded text-sm break-all">{surveyLink}</code>
+              <code className="flex-1 bg-muted p-3 rounded-sm text-sm break-all">{surveyLink}</code>
               <Button variant="outline" size="icon" onClick={copyLink}>
                 {copied ? <ClipboardCheck className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               </Button>

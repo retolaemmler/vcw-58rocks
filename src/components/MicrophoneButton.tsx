@@ -1,4 +1,6 @@
 import { useCallback, forwardRef } from "react";
+import { elevenlabsScribeToken } from "@/lib/elevenlabs-scribe-token.functions";
+import { invokeServerFn } from "@/lib/legacy-handler";
 import { useScribe } from "@elevenlabs/react";
 import { Mic, MicOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,8 +33,7 @@ const MicrophoneButton = forwardRef<HTMLButtonElement, MicrophoneButtonProps>(
       }
 
       try {
-        const { data, error } = await supabase.functions.invoke(
-          "elevenlabs-scribe-token"
+        const { data, error } = await invokeServerFn(elevenlabsScribeToken
         );
 
         if (error || !data?.token) {

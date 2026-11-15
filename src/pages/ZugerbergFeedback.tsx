@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { generateTestimonial } from "@/lib/generate-testimonial.functions";
+import { invokeServerFn } from "@/lib/legacy-handler";
+import { useSearchParams } from "@/lib/router-compat";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -47,7 +49,7 @@ const StarRating = ({
   onChange,
   max = 5,
 }: {
-  value?: number;
+  value?: number | undefined;
   onChange: (v: number) => void;
   max?: number;
 }) => (
@@ -61,7 +63,7 @@ const StarRating = ({
           onClick={() => onChange(n)}
           className={`w-9 h-9 rounded-full border text-sm font-semibold transition-all ${
             selected
-              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              ? "bg-primary text-primary-foreground border-primary shadow-xs"
               : "bg-background text-foreground border-border hover:border-primary/50 hover:bg-primary/5"
           }`}
           aria-label={`${n} Stern${n > 1 ? "e" : ""}`}
@@ -77,7 +79,7 @@ const NpsRating = ({
   value,
   onChange,
 }: {
-  value?: number;
+  value?: number | undefined;
   onChange: (v: number) => void;
 }) => (
   <div className="flex flex-wrap gap-1.5">
@@ -90,7 +92,7 @@ const NpsRating = ({
           onClick={() => onChange(n)}
           className={`w-9 h-9 rounded-md border text-sm font-semibold transition-all ${
             selected
-              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              ? "bg-primary text-primary-foreground border-primary shadow-xs"
               : "bg-background text-foreground border-border hover:border-primary/50 hover:bg-primary/5"
           }`}
         >
@@ -126,7 +128,7 @@ const ZugerbergFeedback = () => {
     const email = form.getValues("email")?.trim();
     setGeneratingTestimonial(true);
     try {
-      const { data, error } = await supabase.functions.invoke("generate-testimonial", {
+      const { data, error } = await invokeServerFn(generateTestimonial, {
         body: { email: email || null, token, language: "de" },
       });
       if (error) throw error;

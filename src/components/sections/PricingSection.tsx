@@ -36,7 +36,7 @@ const PricingSection = () => {
           {tierDefs.map((tier) =>
           <div
             key={tier.key}
-            className={`relative rounded-xl p-6 border shadow-sm transition-all ${
+            className={`relative rounded-xl p-6 border shadow-xs transition-all ${
             tier.soldOut
             ? "bg-muted/50 border-border/30 opacity-60"
             : tier.highlight

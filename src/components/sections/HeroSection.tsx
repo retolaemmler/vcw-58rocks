@@ -47,7 +47,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
             onClick={() => setActiveTab("you")}
             className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
               activeTab === "you"
-                ? "bg-card text-foreground shadow-sm"
+                ? "bg-card text-foreground shadow-xs"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -58,12 +58,12 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
             onClick={() => setActiveTab("company")}
             className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
               activeTab === "company"
-                ? "bg-card text-foreground shadow-sm"
+                ? "bg-card text-foreground shadow-xs"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {t("hero.tabs.company")}
-            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-destructive text-destructive-foreground leading-none">
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded-sm text-[10px] font-bold bg-destructive text-destructive-foreground leading-none">
               New
             </span>
           </button>
@@ -78,7 +78,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.masterclass.description")}</p>
               </div>
 
-              <div className="flex-grow space-y-3 mb-8">
+              <div className="grow space-y-3 mb-8">
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Calendar className="w-4 h-4 text-accent shrink-0" />
                   <span className="text-sm font-medium">{t("hero.masterclass.date")}</span>
@@ -123,7 +123,7 @@ const HeroSection = ({ activeTab, setActiveTab }: HeroSectionProps) => {
                 <p className="text-muted-foreground text-sm leading-relaxed">{t("hero.company.description")}</p>
               </div>
 
-              <div className="flex-grow space-y-3 mb-8">
+              <div className="grow space-y-3 mb-8">
                 {[
                   "hero.company.topic1",
                   "hero.company.topic2",

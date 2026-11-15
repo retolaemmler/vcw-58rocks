@@ -6,7 +6,7 @@ describe('ticket email delivery', () => {
   it('sends the confirmation to the purchaser only', async () => {
     const send = vi.fn().mockResolvedValue({ sent: true })
     await dispatchTicketEmails(order, send)
-    expect(send.mock.calls[0].slice(0, 2)).toEqual(['ticket-confirmation', 'buyer@example.com'])
+    expect(send.mock.calls[0]?.slice(0, 2)).toEqual(['ticket-confirmation', 'buyer@example.com'])
   })
   it('notifies Reto and Remy, not Valentin', async () => {
     const send = vi.fn().mockResolvedValue({ sent: true })

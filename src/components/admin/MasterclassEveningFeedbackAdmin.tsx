@@ -63,7 +63,7 @@ const MasterclassEveningFeedbackAdmin = () => {
         .eq("kind", "mc_evening_feedback");
 
       const ids: string[] = [];
-      if (tokensData?.length) {
+      if (tokensData?.[0]) {
         setLink(`${window.location.origin}/mc-evening-feedback?token=${tokensData[0].token}`);
         tokensData.forEach((t) => ids.push(t.id));
       }
@@ -246,7 +246,7 @@ const MasterclassEveningFeedbackAdmin = () => {
                             <div><strong>Email:</strong> {r.email || "—"}</div>
                             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                               {SECTION_RATINGS.map((s) => (
-                                <div key={s.key} className="bg-background rounded p-2 border border-border">
+                                <div key={s.key} className="bg-background rounded-sm p-2 border border-border">
                                   <div className="text-xs text-muted-foreground">{s.label}</div>
                                   <div className="font-medium">{(r[s.key] as number | null) ?? "—"}</div>
                                 </div>

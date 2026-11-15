@@ -109,7 +109,7 @@ const TestimonialsSection = () => {
           {testimonials.map((t) => (
             <article
               key={t.slug}
-              className="group relative bg-background border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group relative bg-background border border-border rounded-2xl p-6 shadow-xs hover:shadow-md transition-shadow"
             >
               <Quote className="w-7 h-7 text-primary/30 mb-3" />
               <p className="text-foreground leading-relaxed mb-5">

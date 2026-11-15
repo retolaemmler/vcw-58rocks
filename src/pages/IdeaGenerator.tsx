@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { generateIdeas as generateIdeasFn } from "@/lib/generate-ideas.functions";
+import { invokeServerFn } from "@/lib/legacy-handler";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,7 +34,7 @@ export default function IdeaGenerator() {
     setIdeas([]);
 
     try {
-      const { data, error } = await supabase.functions.invoke("generate-ideas", {
+      const { data, error } = await invokeServerFn(generateIdeasFn, {
         body: { prompt: text, type: "ideas" },
       });
 
@@ -53,12 +55,13 @@ export default function IdeaGenerator() {
 
   const expandIdea = async (index: number) => {
     const idea = ideas[index];
+    if (!idea) return;
     setIdeas((prev) =>
       prev.map((item, i) => (i === index ? { ...item, isExpanding: true } : item))
     );
 
     try {
-      const { data, error } = await supabase.functions.invoke("generate-ideas", {
+      const { data, error } = await invokeServerFn(generateIdeasFn, {
         body: {
           type: "expand",
           ideaSummary: `${idea.title}: ${idea.summary} (Target user: ${idea.targetUser})`,

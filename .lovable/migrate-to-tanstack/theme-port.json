@@ -1,0 +1,19 @@
+{
+  "customizations": [
+    { "token": "color palette (:root/.dark HSL values: teal primary, purple accent)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--teal", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--purple", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--blue", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--section-alt", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "font-sans (Inter)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "font-display (Space Grotesk)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "container (center, 2rem, 1400px)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-fade-up", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-blob", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "gradient-text", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "gradient-bg", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "gradient-bg-subtle", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "html scroll-behavior smooth", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "workshop slide deck stylesheet (--slide-* tokens and .workshop-* classes)", "source": "src/index.css", "reappliedIn": "src/styles.css" }
+  ]
+}

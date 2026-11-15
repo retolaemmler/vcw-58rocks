@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@/lib/router-compat";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -144,7 +144,7 @@ const HsgWomenFeedback = () => {
                               onClick={() => field.onChange(n)}
                               className={`w-10 h-10 rounded-lg text-sm font-medium border transition-all ${
                                 nps === n
-                                  ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                                  ? "bg-primary text-primary-foreground border-primary shadow-xs"
                                   : "bg-background text-foreground border-border hover:border-primary/50 hover:bg-primary/5"
                               }`}
                             >

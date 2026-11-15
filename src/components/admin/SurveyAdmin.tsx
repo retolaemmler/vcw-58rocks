@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { validateSurveyEmail } from "@/lib/validate-survey-email.functions";
+import { invokeServerFn } from "@/lib/legacy-handler";
 import ShareQr from "@/components/admin/ShareQr";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -104,7 +106,7 @@ const SurveyAdmin = () => {
     }
 
     // Create token via edge function (uses service role)
-    const { data, error } = await supabase.functions.invoke("validate-survey-email", {
+    const { data, error } = await invokeServerFn(validateSurveyEmail, {
       body: { action: "create-token" },
     });
 
@@ -186,7 +188,7 @@ const SurveyAdmin = () => {
         {surveyLink && (
           <CardContent>
             <div className="flex items-center gap-2">
-              <code className="flex-1 bg-muted p-3 rounded text-sm break-all">{surveyLink}</code>
+              <code className="flex-1 bg-muted p-3 rounded-sm text-sm break-all">{surveyLink}</code>
               <Button variant="outline" size="icon" onClick={copyLink}>
                 {copied ? <ClipboardCheck className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               </Button>

@@ -38,7 +38,7 @@ const ShareQr = ({ url, filename = "qr-code" }: { url: string; filename?: string
 
   return (
     <div className="flex items-center gap-3 mt-3">
-      <img src={dataUrl} alt="QR code for survey link" className="w-32 h-32 rounded border border-border bg-white" />
+      <img src={dataUrl} alt="QR code for survey link" className="w-32 h-32 rounded-sm border border-border bg-white" />
       <div className="flex flex-col gap-2">
         <Button variant="outline" size="sm" onClick={copyPng}>
           {copied ? <ClipboardCheck className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}

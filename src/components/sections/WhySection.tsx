@@ -1,5 +1,5 @@
 import { BarChart3, Zap, Wrench, Sparkles, Globe, FileText, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +27,7 @@ const WhySection = () => {
           {exampleKeys.map((v) => (
             <div
               key={v.key}
-              className="bg-card rounded-xl p-6 shadow-sm border border-border/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+              className="bg-card rounded-xl p-6 shadow-xs border border-border/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-lg gradient-bg-subtle flex items-center justify-center mb-4">
                 <v.icon className="w-6 h-6 text-primary" />

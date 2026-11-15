@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@/lib/router-compat";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -64,7 +64,7 @@ const ChipSelect = ({
           }}
           className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
             isSelected
-              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              ? "bg-primary text-primary-foreground border-primary shadow-xs"
               : "bg-background text-foreground border-border hover:border-primary/50 hover:bg-primary/5"
           }`}
         >

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@/lib/router-compat";
 import { ChevronLeft, ChevronRight, Grid2X2, Maximize, Minimize, NotebookPen, Printer, Home, PanelLeftClose, PanelLeftOpen, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScaledSlide } from "@/components/slides/SlideLayout";
@@ -30,7 +30,7 @@ export default function WorkshopSlides() {
     return () => { c.close(); channel.current = null; };
   }, [setParams]);
   useEffect(() => {
-    document.title = `${index + 1}/29 — ${workshopDeck[index].title}`;
+    document.title = `${index + 1}/29 — ${workshopDeck[index]?.title ?? ""}`;
   }, [index]);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
@@ -52,7 +52,7 @@ export default function WorkshopSlides() {
     Promise.all(Array.from(document.images).map(img => img.decode().catch(() => {}))).then(() => { if (!cancelled) window.print(); });
     return () => { cancelled = true; };
   }, [print]);
-  const note = notes[index] ?? workshopDeck[index].notes;
+  const note = notes[index] ?? workshopDeck[index]?.notes ?? "";
   if (print) return <div className="workshop-print">{workshopDeck.map((_, i) => <WorkshopSlide index={i} key={i} />)}</div>;
   return <div className={`workshop-editor ${fullscreen ? "workshop-presenting" : ""}`}>
     {!fullscreen && <header className="workshop-toolbar"><a href="/" title="Back to website" className="flex items-center gap-3"><img src="/vcw-logo.png" alt="VCW" className="w-9 h-9" /><Home className="h-4 w-4 text-muted-foreground" /></a><div className="workshop-document-label"><strong className="font-display">Vibe Code Workshop</strong><span className="text-xs text-muted-foreground">11 November 2026</span></div><div className="ml-auto flex items-center gap-2">
@@ -66,7 +66,7 @@ export default function WorkshopSlides() {
     <div className="workshop-workspace">
       {sidebar && !fullscreen && !presenter && <aside className="workshop-sidebar" aria-label="Slide thumbnails">{workshopDeck.map((slide, i) => <Button key={i} variant="outline" className={`workshop-thumbnail ${index === i ? "workshop-thumbnail-selected" : ""}`} onClick={() => { goTo(i); setGrid(false); }} aria-label={`Open slide ${i + 1}: ${slide.title}`}><div className="workshop-thumbnail-image"><ScaledSlide><WorkshopSlide index={i} /></ScaledSlide></div><span>{String(i + 1).padStart(2, "0")}<span className="truncate">{slide.title}</span></span></Button>)}</aside>}
       <main className="workshop-canvas-area">
-        {grid ? <div className="workshop-overview">{workshopDeck.map((slide, i) => <Button variant="outline" key={i} className="workshop-overview-item" onClick={() => { goTo(i); setGrid(false); }} aria-label={`Go to slide ${i + 1}`}><div className="workshop-thumbnail-image"><ScaledSlide><WorkshopSlide index={i} /></ScaledSlide></div><span>{i + 1}. {slide.title}</span></Button>)}</div> : <div className="workshop-canvas" onTouchStart={e => { touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }} onTouchEnd={e => { const start = touch.current; if (!start) return; const dx = e.changedTouches[0].clientX - start.x; const dy = e.changedTouches[0].clientY - start.y; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) goTo(index + (dx < 0 ? 1 : -1)); touch.current = null; }}><ScaledSlide><WorkshopSlide index={index} /></ScaledSlide></div>}
+        {grid ? <div className="workshop-overview">{workshopDeck.map((slide, i) => <Button variant="outline" key={i} className="workshop-overview-item" onClick={() => { goTo(i); setGrid(false); }} aria-label={`Go to slide ${i + 1}`}><div className="workshop-thumbnail-image"><ScaledSlide><WorkshopSlide index={i} /></ScaledSlide></div><span>{i + 1}. {slide.title}</span></Button>)}</div> : <div className="workshop-canvas" onTouchStart={e => { touch.current = { x: e.touches[0]!.clientX, y: e.touches[0]!.clientY }; }} onTouchEnd={e => { const start = touch.current; if (!start) return; const dx = e.changedTouches[0]!.clientX - start.x; const dy = e.changedTouches[0]!.clientY - start.y; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) goTo(index + (dx < 0 ? 1 : -1)); touch.current = null; }}><ScaledSlide><WorkshopSlide index={index} /></ScaledSlide></div>}
         {presenter && <div className="workshop-presenter-panel"><div className="workshop-next"><ScaledSlide><WorkshopSlide index={Math.min(index + 1, 28)} /></ScaledSlide></div><div><span className="font-display text-xl tabular-nums">{Math.floor(seconds / 60).toString().padStart(2, "0")}:{(seconds % 60).toString().padStart(2, "0")}</span><p className="whitespace-pre-wrap mt-4">{note}</p></div></div>}
         {notesOpen && !fullscreen && <section className="workshop-notes"><label htmlFor="speaker-notes" className="text-xs font-semibold text-muted-foreground">Speaker notes</label><textarea id="speaker-notes" value={note} onChange={e => { const value = { ...notes, [index]: e.target.value }; setNotes(value); localStorage.setItem("vcw-workshop-notes", JSON.stringify(value)); }} /></section>}
       </main>

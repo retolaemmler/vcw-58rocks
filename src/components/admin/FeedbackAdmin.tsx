@@ -336,7 +336,7 @@ const FeedbackAdmin = () => {
                             <div><strong>Overall:</strong> {r.overall_rating ?? "—"} / 5 · <strong>NPS:</strong> {r.nps_score ?? "—"}</div>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                               {SECTION_RATINGS.map((s) => (
-                                <div key={s.key} className="bg-background rounded p-2 border border-border">
+                                <div key={s.key} className="bg-background rounded-sm p-2 border border-border">
                                   <div className="text-xs text-muted-foreground">{s.label}</div>
                                   <div className="font-medium">{(r[s.key] as number | null) ?? "—"}</div>
                                 </div>

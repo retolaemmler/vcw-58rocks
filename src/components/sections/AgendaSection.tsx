@@ -35,7 +35,7 @@ const AgendaItem = ({ time, title, description, isLast }: AgendaItemProps) => (
       </div>
       {!isLast && <div className="w-0.5 flex-1 bg-gradient-to-b from-primary/40 to-primary/10 mt-1" />}
     </div>
-    <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex-1 group-hover:shadow-md transition-shadow mb-3">
+    <div className="bg-card rounded-xl p-4 border border-border/50 shadow-xs flex-1 group-hover:shadow-md transition-shadow mb-3">
       <h3 className="font-display font-semibold text-base sm:text-lg mb-1">{title}</h3>
       <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
     </div>

@@ -19,7 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, LogOut, DollarSign, ShoppingCart, Bell } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import logo from "@/assets/vcw-logo.png";
 import SurveyAdmin from "@/components/admin/SurveyAdmin";
 import FeedbackAdmin from "@/components/admin/FeedbackAdmin";
@@ -159,7 +159,7 @@ const Admin = () => {
   const totalOrders = filteredOrders.length;
 
   const NavBar = ({ children }: { children?: React.ReactNode }) => (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-sm border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-xs border-b border-border/50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center">
           <img src={logo} alt="Logo" className="h-12 w-12" />

@@ -35,7 +35,7 @@ export function WorkshopSlide({ index }: { index: number }) {
     const copy: Record<number, { intro?: string; items?: string[]; quote?: string }> = {
       14: {intro: "You describe your idea in plain language — AI builds a working app.", items: ["No syntax. No setup. No waiting for developers.", "Describe the idea and context", "AI generates a real, usable application", "You improve it by talking to the system"]},
       15: {intro: "Lovable features used", items: ["Email for confirmation", "Database for orders and participants", "Stripe for payment", "OpenAI for Idea Generator", "Google Authentication", "Domain connect"]},
-      19: {intro: "Prompt", quote: slide.texts[0].split("Prompt:")[1]?.trim()},
+      19: {intro: "Prompt", quote: slide.texts[0]?.split("Prompt:")[1]?.trim() ?? ""},
       20: {items: ["Open Lovable", "Select Plan mode", "Connect your design system", "Enter your app idea", "Get started and let Lovable guide you"], quote: "Build the first version without login.\nMetaphor: Building a house"},
       21: {intro: "No worries! Explain the issue again, like you would to a coworker.", quote: "Now, let’s build this step by step.\nI am frustrated!", items: ["Or just start over…"]},
       23: {items: ["Visual edits", "Undo / History", "Desktop vs. tablet vs. mobile view", "Enable login / sign-up", "Send emails", "AI features"]},

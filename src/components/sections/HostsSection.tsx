@@ -34,7 +34,7 @@ const HostsSection = () => {
           {coaches.map((host) => (
             <div
               key={host.name}
-              className="bg-card rounded-xl p-8 border border-border/50 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+              className="bg-card rounded-xl p-8 border border-border/50 shadow-xs hover:shadow-md transition-all hover:-translate-y-1"
             >
               <Avatar className="w-20 h-20 mx-auto mb-5">
                 <AvatarImage src={host.image} alt={host.name} className="object-cover" />

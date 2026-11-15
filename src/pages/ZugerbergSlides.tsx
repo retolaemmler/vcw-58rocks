@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { zugerbergSlidesData } from "@/lib/zugerberg-slides-data.functions";
+import { invokeServerFn } from "@/lib/legacy-handler";
 import { supabase } from "@/integrations/supabase/client";
 import zugerbergLogo from "@/assets/zugerberg_logo.svg.asset.json";
 import coachesPhoto from "@/assets/coaches-team.png.asset.json";
@@ -165,7 +167,7 @@ const ZugerbergSlides = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase.functions.invoke("zugerberg-slides-data");
+      const { data } = await invokeServerFn(zugerbergSlidesData);
       if (data?.rows) setRows(data.rows as unknown as SurveyResponse[]);
       setLoading(false);
     })();
