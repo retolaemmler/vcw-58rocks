@@ -11,3 +11,8 @@
 # Paid-ticket confirmation
 - [x] Keep saved, paid tickets confirmed when calendar or email delivery fails.
 - [x] Verify delivery-failure regressions and the thank-you page (simulated failures; no live purchase).
+
+# Failure screen
+- [x] Check every page for the cause of the "This page didn't load" screen; none reproduced.
+- [x] Give the failure screen a full page reload option so it is never a dead end.
+- [x] Restore checkout links opening in the same browser window.

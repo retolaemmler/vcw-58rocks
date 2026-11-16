@@ -82,10 +82,7 @@ const PricingSection = () => {
               size="lg"
               className="gradient-bg text-white font-semibold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
               asChild>
-              <a
-                href="https://buy.stripe.com/aFa3cvg0tfW55qk5tCfIs0n"
-                target="_blank"
-                rel="noopener noreferrer">
+              <a href="https://buy.stripe.com/aFa3cvg0tfW55qk5tCfIs0n">
                 <Sparkles className="w-5 h-5 mr-2" />
                 {t("pricing.cta")}
               </a>
