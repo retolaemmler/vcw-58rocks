@@ -17,7 +17,7 @@ import { useMemo, useCallback, useEffect, useRef, forwardRef, type ComponentProp
 // ---------- shared URL parsing ----------
 
 function parseTo(to: string): { pathname: string; search: Record<string, string> | undefined; hash: string | undefined } {
-  const [beforeHash, hashStr] = (to ?? "").split("#");
+  const [beforeHash = "", hashStr] = (to ?? "").split("#");
   const qi = (beforeHash ?? "").indexOf("?");
   const pathname = qi < 0 ? (beforeHash ?? "") : beforeHash.slice(0, qi);
   const searchStr = qi < 0 ? "" : beforeHash.slice(qi + 1).replace(/^\?+/, "");
