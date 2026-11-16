@@ -18,7 +18,9 @@ import { useMemo, useCallback, useEffect, useRef, forwardRef, type ComponentProp
 
 function parseTo(to: string): { pathname: string; search: Record<string, string> | undefined; hash: string | undefined } {
   const [beforeHash, hashStr] = (to ?? "").split("#");
-  const [pathname, searchStr] = (beforeHash ?? "").split("?");
+  const qi = (beforeHash ?? "").indexOf("?");
+  const pathname = qi < 0 ? (beforeHash ?? "") : beforeHash.slice(0, qi);
+  const searchStr = qi < 0 ? "" : beforeHash.slice(qi + 1).replace(/^\?+/, "");
   return {
     // react-router keeps the current path for search-only ("?a=1") and
     // hash-only ("#section") targets; TanStack's "." means current route.
@@ -63,8 +65,8 @@ export function useLocation() {
   return useMemo(
     () => ({
       pathname: loc.pathname,
-      search: loc.searchStr ? `?${loc.searchStr}` : "",
-      hash: loc.hash ?? "",
+      search: loc.searchStr ? (loc.searchStr.startsWith("?") ? loc.searchStr : `?${loc.searchStr}`) : "",
+      hash: loc.hash ? (loc.hash.startsWith("#") ? loc.hash : `#${loc.hash}`) : "",
       state: (loc.state ?? null) as unknown,
       key: loc.pathname + (loc.searchStr ?? ""),
     }),

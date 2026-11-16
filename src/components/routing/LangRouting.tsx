@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import { Navigate, Outlet, useLocation, useParams } from "@/lib/router-compat";
 import Feedback from "@/pages/Feedback";
 import FeedbackDe from "@/pages/FeedbackDe";
@@ -33,7 +33,6 @@ const useLayoutEffectSafe = typeof window === "undefined" ? () => {} : useLayout
 
 export const LangLayout = () => {
   const { lang } = useParams<{ lang: string }>();
-  const { i18n } = useTranslation();
   const location = useLocation();
   const mounted = useRef(false);
 
@@ -41,11 +40,11 @@ export const LangLayout = () => {
   // render (resources are bundled, so this is synchronous) so server and client
   // text match the URL. Later switches happen in an effect to avoid updating
   // other components mid-render.
-  if (!mounted.current && isLang(lang) && i18n.language !== lang) void i18n.changeLanguage(lang);
+  if (!mounted.current && isLang(lang) && i18n.language !== lang && typeof i18n.changeLanguage === "function") void i18n.changeLanguage(lang);
   useLayoutEffectSafe(() => {
     mounted.current = true;
-    if (isLang(lang) && i18n.language !== lang) void i18n.changeLanguage(lang);
-  }, [lang, i18n]);
+    if (isLang(lang) && i18n.language !== lang && typeof i18n.changeLanguage === "function") void i18n.changeLanguage(lang);
+  }, [lang]);
 
   if (isLang(lang)) return <Outlet />;
 
