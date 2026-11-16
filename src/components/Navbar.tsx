@@ -26,9 +26,9 @@ const Navbar = ({ activeTab }: NavbarProps) => {
   const navLinks = [
     { label: t("nav.what"), id: "why" },
     { label: t("nav.schedule"), id: "agenda" },
+    { label: t("nav.coaches"), id: "coaches" },
     { label: t("nav.participants"), id: "audience" },
     { label: t("nav.requirements"), id: "requirements" },
-    { label: t("nav.coaches"), id: "coaches" },
     { label: t("nav.tickets"), id: "pricing" },
   ];
   const [scrolled, setScrolled] = useState(false);
