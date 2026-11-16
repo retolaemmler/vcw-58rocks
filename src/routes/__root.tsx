@@ -22,7 +22,7 @@ import "@/i18n";
 const CSP =
   "default-src 'self'; script-src 'self' 'unsafe-inline' https://api.vibehunt.me https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.vibehunt.me https://api.stripe.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://buy.stripe.com https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self' https://buy.stripe.com; frame-ancestors 'self'; upgrade-insecure-requests";
 
-const TITLE = "Vibe Code Workshop — Build a Real Web App in One Day";
+const TITLE = "Vibe Code Workshop — Build a Real Web App in One Evening";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
