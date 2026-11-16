@@ -35,13 +35,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "A full-day hands-on bootcamp in Switzerland where you'll build a real app using Lovable.dev. No coding experience required. April 16, 2026.",
+          "An evening hands-on bootcamp in Switzerland where you'll build a real app using Lovable.dev. No coding experience required. Wednesday, January 27, 2027, 17:00–21:00 in Zürich.",
       },
       { name: "author", content: "Pedalix GmbH" },
       { property: "og:title", content: TITLE },
       {
         property: "og:description",
-        content: "A full-day hands-on bootcamp in Switzerland. Build a real app using Lovable.dev — no coding required.",
+        content:
+          "An evening hands-on bootcamp in Switzerland. Build a real app using Lovable.dev — no coding required. Wednesday, January 27, 2027, 17:00–21:00 in Zürich.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/vcw-logo.png" },
