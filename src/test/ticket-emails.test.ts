@@ -31,4 +31,10 @@ describe('ticket email delivery', () => {
     await expect(dispatchTicketEmails(order, send)).rejects.toThrow('domain_not_verified')
     expect(send).toHaveBeenCalledTimes(3)
   })
+  it('preserves organizer failures for webhook retries even when the buyer email succeeds', async () => {
+    const send = vi.fn().mockResolvedValueOnce({ sent: true })
+      .mockRejectedValueOnce(new Error('organizer_delivery_failed')).mockResolvedValue({ sent: true })
+    await expect(dispatchTicketEmails(order, send)).rejects.toThrow('organizer_delivery_failed')
+    expect(send).toHaveBeenCalledTimes(3)
+  })
 })

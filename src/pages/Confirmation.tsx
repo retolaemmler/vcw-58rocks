@@ -17,6 +17,7 @@ const Confirmation = () => {
   const [order, setOrder] = useState<OrderInfo | null>(null);
   const [loading, setLoading] = useState(!!sessionId);
   const [error, setError] = useState<string | null>(null);
+  const [emailDelivery, setEmailDelivery] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -29,6 +30,7 @@ const Confirmation = () => {
 
         if (fnError) throw fnError;
         if (data?.order) setOrder(data.order);
+        setEmailDelivery(data?.email_delivery ?? null);
       } catch (err: unknown) {
         console.error("Confirmation error:", err);
         setError("Could not verify your order. Please contact support.");
@@ -71,9 +73,11 @@ const Confirmation = () => {
 
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Your spot at the Vibe Code Workshop is reserved.
-              {order?.customer_email &&
+              {order?.customer_email && (
+            emailDelivery === "pending" ?
+            <> Your payment is confirmed, but email delivery is delayed.</> :
             <> A confirmation email has been sent to <span className="font-medium text-foreground">{order.customer_email}</span>.</>
-            }
+            )}
             </p>
 
             

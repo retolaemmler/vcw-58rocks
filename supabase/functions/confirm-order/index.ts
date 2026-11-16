@@ -147,20 +147,29 @@ Deno.serve(async (req) => {
 
     // Managed idempotency prevents duplicate sends on refresh or webhook races.
     // Retry existing orders as well, so an earlier send failure can recover.
+    // Delivery must never invalidate a paid order that has already been saved.
+    let emailDelivery: "sent" | "pending" | "not_requested" = "not_requested";
     if (customerEmail) {
-      const { data: calendar, error: calendarError } = await supabase.storage
-        .from(CALENDAR_BUCKET).createSignedUrl(CALENDAR_PATH, 365 * 24 * 60 * 60, { download: "vibe-code-workshop.ics" });
-      if (calendarError || !calendar?.signedUrl) throw new Error("Could not create calendar download link");
-      await sendTicketEmails({
-        sessionId: session.id, email: customerEmail, name: contactFirstName ?? "there",
-        company: customerCompanyName ?? undefined, amount: (session.amount_total / 100).toFixed(2),
-        edition: edition ?? "2027-01-27", calendarUrl: calendar.signedUrl,
-      });
+      try {
+        const { data: calendar, error: calendarError } = await supabase.storage
+          .from(CALENDAR_BUCKET).createSignedUrl(CALENDAR_PATH, 365 * 24 * 60 * 60, { download: "vibe-code-workshop.ics" });
+        if (calendarError || !calendar?.signedUrl) throw new Error("Could not create calendar download link");
+        await sendTicketEmails({
+          sessionId: session.id, email: customerEmail, name: contactFirstName ?? "there",
+          company: customerCompanyName ?? undefined, amount: (session.amount_total / 100).toFixed(2),
+          edition: edition ?? "2027-01-27", calendarUrl: calendar.signedUrl,
+        });
+        emailDelivery = "sent";
+      } catch (deliveryError: unknown) {
+        emailDelivery = "pending";
+        console.error("Ticket email delivery failed after order confirmation:", session.id, deliveryError);
+      }
     }
 
     return new Response(
       JSON.stringify({
         success: true,
+        email_delivery: emailDelivery,
         order: {
           customer_email: customerEmail,
           customer_name: customerCompanyName,

@@ -7,3 +7,7 @@
 - [x] Migrate buyer confirmations and both organizer notices to Lovable email.
 - [x] Replace calendar attachments with a calendar download link.
 - [x] Deploy, test sending to Reto, and verify send logs.
+
+# Paid-ticket confirmation
+- [x] Keep saved, paid tickets confirmed when calendar or email delivery fails.
+- [x] Verify delivery-failure regressions and the thank-you page (simulated failures; no live purchase).
